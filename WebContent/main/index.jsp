@@ -6,11 +6,23 @@
 <head>
     <meta charset="UTF-8" />
     <title>Hello JSP</title>
+    <!--css소스파일-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body>
-    <h1>Test</h1>
-    작업한 내역~~~
+    <div id="header">
+    	
+    </div>
+    <div id="banner">
+    	
+    </div>
+    
+    <div id="content"></div>
+    
+    <div id="footer">
+    	
+    </div>
 </body>
 
 </html>
