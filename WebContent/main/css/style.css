@@ -1,4 +1,14 @@
 @charset "UTF-8";
+/*webfont*/
+@font-face { /*나눔바른고딕 */
+	font-family: 'nbg';
+	src: url('../font/NanumBarunGothic.eot');
+	src: url('../font/NanumBarunGothic.eot?#iefix')
+		format('embedded-opentype'), url('../font/NanumBarunGothic.woff')
+		format('woff'), url('../font/NanumBarunGothic.ttf') format('truetype');
+	src: local(※), url('../font/NanumBarunGothic.woff') format('woff');
+}
+
 /*body*/
 body {
 	min-width: 800px;
@@ -11,11 +21,15 @@ body, * {
 		Helvetica;
 	font-size: 1em;
 	line-height: 1;
-	text-decoration: none;
 }
 
 div {
 	display: block;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: none;
 }
 
 /*header*/
@@ -25,21 +39,24 @@ div {
 	background: #f6f5ef;
 }
 
-.header_inner {
+#header .header_inner {
 	margin: 0 auto;
+	background: #f6f5ef;
 	position: relative;
 	height: 120px;
 	width: 1100px;
 }
 
-.logo {
+h1.logo {
 	position: absolute;
 	top: 22px;
+	left: 20px;
 	width: 75px;
 	height: 75px;
+	z-index: 20;
 }
 
-.logo a {
+h1.logo a {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -187,4 +204,39 @@ div {
 	height: 56px;
 	line-height: 20px;
 	padding-top: 10px;
+}
+
+/*contents :본문 전체 설정*/
+#contents {
+	width: 100%;
+	height: 300px;
+}
+
+/*플로팅 배너*/
+#contents .f_banner {
+	margin-left: 400px;
+	position: fixed;
+	left: auto;
+	right: 1%;
+	top: 138px;
+	z-index: 999;
+	width: 130px;
+}
+
+.f_banner .xmas {
+	display: block;
+	width: 100%;
+}
+
+.f_banner .plcc {
+	width: 108%;
+	margin-top: 8px;
+	margin-left: -2.3px;
+}
+
+/*contents :본문 내용 설정*/
+
+/*footer*/
+#footer {
+	padding: 32px 0 35px 0;
 }

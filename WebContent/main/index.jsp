@@ -18,7 +18,7 @@
 	<div id="header">
 		<div class="header_inner">
 			<h1 class="logo">
-				<a href="/" title="스타벅스 메인페이지">스타벅스 코리아</a>
+				<a href="#" title="스타벅스 메인페이지">스타벅스 코리아</a>
 			</h1>
 			<nav class="util_nav">
 				<ul>
@@ -372,8 +372,16 @@
 
 		<!-- 플로팅 배너 시작 -->
 		<div class="f_banner">
-			<div class="xmas"></div>
-			<div class="plcc"></div>
+			<div class="xmas">
+				<a href="#" title="자세히 보기" >
+					<img src="img/ssg_pop.png" alt="11월 25일 스타벅스 온라인 샵 런칭!"/>
+				</a>
+			</div>
+			<div class="plcc">
+				<a href="#" title="자세히 보기" >
+					<img src="img/plcc_badge.png" alt="스타벅스 현대카드"/>
+				</a>
+			</div>
 		</div>
 		<!-- 플로팅 배너 끝 -->
 
