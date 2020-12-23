@@ -32,6 +32,14 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	text-decoration: underline;
+}
+
+.en {
+	font-family: arial, HelveticaNeue, DroidSans, Sans-serif, Helvetica;
+}
+
 /*float마감*/
 .clear:after {
 	content: '';
@@ -43,8 +51,9 @@ a {
 /*header*/
 #header {
 	height: 120px;
-	position: relative;
+	position: fixed;
 	background: #f6f5ef;
+	z-index: 10;
 }
 
 #header .header_inner {
@@ -258,12 +267,12 @@ h1.logo a {
 	margin: 0 auto;
 }
 
-.up>ul {
+.sub_up>ul {
 	float: left;
 	width: 220px;
 }
 
-.down>ul {
+.sub_down>ul {
 	float: left;
 	width: 220px;
 	padding-top: 30px;
@@ -310,6 +319,10 @@ h1.logo a {
 	color: #999;
 }
 
+.gnb_sub_tx_inner h3 a img {
+	vertical-align: bottom;
+}
+
 .gnb_sub_tx_inner p {
 	color: #64a70b;
 	font-size: 12px;
@@ -317,8 +330,9 @@ h1.logo a {
 
 /*contents :본문 전체 설정*/
 #contents {
+	padding-top: 120px;
 	width: 100%;
-	height: 300px;
+	height: 50px;
 }
 
 /*플로팅 배너*/
@@ -348,4 +362,153 @@ h1.logo a {
 /*footer*/
 #footer {
 	padding: 32px 0 35px 0;
+	background: #2C2A29;
+	position: relative;
+	width: 100%;
+}
+
+.footer_menus {
+	width: 1100px;
+}
+
+.footer_menus_inner {
+	width: 600px;
+	margin: 0 auto;
+	background: url(../img/footer/footer_logo.png) right 8px no-repeat;
+}
+
+.menus_up>ul {
+	float: left;
+	width: 195px;
+}
+
+.menus_down>ul {
+	float: left;
+	width: 195px;
+	padding-top: 30px;
+}
+
+.footer_menus_inner a {
+	color: #fff;
+	font-size: 12px;
+	line-height: 24px;
+}
+
+.footer_menus_inner .footer_menu_ttl a {
+	font-size: 14px;
+	line-height: 40px;
+	color: #fff;
+}
+
+.footer_awards {
+	height: 80px;
+	margin-top: 40px;
+	background: #282828;
+	width: 100%;
+}
+
+.footer_awards_inner {
+	width: 1100px;
+	height: 80px;
+	background: #282828;
+	position: relative;
+	overflow: hidden;
+}
+
+.awards_slider_wrap {
+	width: 600px;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+
+.awards_slider .slick-next:before, .slick-prev:before {
+	display: none;
+}
+
+.slider_controller {
+	width: 600px;
+	margin: 0 auto;
+	height: 12px;
+	padding-top: 10px;
+	text-align: center;
+}
+
+.slider_controller a {
+	display: inline-block;
+	overflow: hidden;
+	text-indent: -20000px;
+}
+
+.slider_stop {
+	background: url(../img/footer/footer_award_play.png) 0 0 no-repeat;
+	height: 12px;
+	width: 9px;
+}
+
+.slider_start {
+	background: url(../img/footer/footer_award_play.png) -9px 0 no-repeat;
+	height: 12px;
+	width: 9px;
+}
+
+.copyright {
+	width: 1100px;
+}
+
+.copyright_inner ul, address {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.terms {
+	padding-top: 30px;
+}
+
+.terms li {
+	display: inline-block;
+	border-right: 1px solid #393939;
+	padding: 0 10px;
+}
+
+.terms li a {
+	color: #ccc;
+	font-size: 12px;
+}
+
+.link_btn {
+	padding-top: 17px;
+}
+
+.link_btn li {
+	background: none;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	display: inline-block;
+	margin: 0 3px;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+}
+
+.link_btn li a {
+	color: #fff;
+	font-size: 12px;
+}
+
+.copy {
+	padding: 25px 0 10px 0;
+}
+
+.copy li {
+	margin: 0 7px;
+	display: inline-block;
+	color: #999;
+	font-size: 12px;
+}
+
+.copy_en {
+	line-height: 40px;
+	color: #999;
+	font-size: 12px;
 }
