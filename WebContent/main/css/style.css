@@ -53,6 +53,7 @@ a:hover {
 	height: 120px;
 	position: fixed;
 	background: #f6f5ef;
+	width: 100%;
 	z-index: 10;
 }
 
@@ -369,6 +370,7 @@ h1.logo a {
 
 .footer_menus {
 	width: 1100px;
+	margin: 0 auto;
 }
 
 .footer_menus_inner {
@@ -413,6 +415,7 @@ h1.logo a {
 	background: #282828;
 	position: relative;
 	overflow: hidden;
+	margin: 0 auto;
 }
 
 .awards_slider_wrap {
@@ -453,6 +456,7 @@ h1.logo a {
 
 .copyright {
 	width: 1100px;
+	margin: 0 auto;
 }
 
 .copyright_inner ul, address {
