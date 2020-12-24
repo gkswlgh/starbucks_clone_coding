@@ -35,7 +35,8 @@
 				</ul>
 			</nav>
 			<p class="btn_search">
-				<a href="#"> <img src="img/icon_magnifier_black.png" alt="통합검색" />
+				<a href="#"> <img src="img/header/icon_magnifier_black.png"
+					alt="통합검색" />
 				</a> <label for="totalSearch">통합검색</label> <input type="text"
 					id="totalSearch" placeholder="통합검색" />
 			</p>
@@ -173,7 +174,7 @@
 								<div class="gnb_sub_tx_inner">
 									<h3>
 										<a href="#">나이트로 콜드 브루&nbsp;<img
-											src="img/icon_gnb_new.png"></a>
+											src="img/header/icon_gnb_new.png"></a>
 									</h3>
 									<p class="gnb_sub_ex_txt">나이트로 커피 정통의 물결치듯 흘러내리는 캐스케이딩과
 										부드러운 크림을 경험하세요.</p>
@@ -404,17 +405,95 @@
 		<!-- 플로팅 배너 시작 -->
 		<div class="f_banner">
 			<div class="xmas">
-				<a href="#" title="자세히 보기"> <img src="img/ssg_pop.png"
+				<a href="#" title="자세히 보기"> <img src="img/contents/ssg_pop.png"
 					alt="11월 25일 스타벅스 온라인 샵 런칭!" />
 				</a>
 			</div>
 			<div class="plcc">
-				<a href="#" title="자세히 보기"> <img src="img/plcc_badge.png"
-					alt="스타벅스 현대카드" />
+				<a href="#" title="자세히 보기"> <img
+					src="img/contents/plcc_badge.png" alt="스타벅스 현대카드" />
 				</a>
 			</div>
 		</div>
 		<!-- 플로팅 배너 끝 -->
+		
+		<!-- 메인비주얼 시작 -->
+		<div class="main_visual">
+			<div class="main_visual_inner">
+				<div class="main_visual_slogan">
+					<img src="img/contents/xmas/2020_xmas2_slogan.png"
+						alt="CARRY the MARRY" />
+				</div>
+				<div class="main_visual_set">
+					<div class="set_common set_01">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_popconrn.png" alt="토피 넛 팝콘 트리 프라푸치노" />
+					</div>
+					<div class="set_common set_02">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dolce.png" alt="시나몬 롤 돌체 라떼" />
+					</div>
+					<div class="set_common set_03">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark_blended.png" alt="다크 초콜릿 블렌디드" />
+					</div>
+					<div class="set_common set_04">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_panna.png" alt="크리스마스 콜드 브루 콘 파나" />
+					</div>
+					<div class="set_common set_05">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_relaxer.png" alt="캐모마일 릴렉서" />
+					</div>
+					<div class="set_common set_06">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark.png" alt="다크 초콜릿" />
+					</div>
+					<div class="set_common set_07">
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_nut.png" alt="토피 넛 라떼" />
+					</div>
+				</div>
+				<div class="slogan_btn">
+					<a href="#">자세히 보기</a>
+				</div>
+			</div>
+		</div>
+		<!-- 메인비주얼 끝 -->
+		
+		<!-- line notice 시작 -->
+		<div class="line_notice">
+			<div class="line_notice_left"></div>
+			<div class="line_notice_right"></div>
+			<div class="line_notice_bg">
+				<div class="line_notice_bgl">
+					<div class="line_notice_bgl_inner">
+						
+					</div>
+				</div>
+				<div class="line_notice_bgr">
+					<a href="#">
+						<p class="prom_ttl"></p>
+						<span class="prom_btn"><img src="" alt="" /></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- line notice 끝 -->
+		<!-- 프로모션 배너 시작 (덜만듬) -->
+		<div class="prom_banner">
+			<div class="prom_banner_slider">
+				
+			</div>
+		</div>
+		<!-- 프로모션 배너 끝 -->
+		
+		<!-- 스타벅스리워드 시작 (덜만듬) -->
+		<div class="s_rewards">
+			<div class="s_rewards_inner">
+				<div class="rewards_logo">
+					<img src="" alt="" />
+				</div>
+				<div class="rewards_conts">
+					<div class="conts_info"></div>
+					<div class="conts_gift"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 스타벅스리워드 끝 -->
 
 	</div>
 	<!-- 내용 끝 -->

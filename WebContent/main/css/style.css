@@ -30,10 +30,16 @@ div {
 a {
 	cursor: pointer;
 	text-decoration: none;
+	color: #666;
+	background: transparent;
 }
 
 a:hover {
 	text-decoration: underline;
+}
+
+img {
+	vertical-align: top;
 }
 
 .en {
@@ -79,7 +85,7 @@ h1.logo a {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	background-image: url(../img/logo.png);
+	background-image: url(../img/header/logo.png);
 	text-indent: -9999px;
 }
 
@@ -89,7 +95,7 @@ h1.logo a {
 	top: 15px;
 	width: 464px;
 	position: absolute;
-	background-image: url(../img/sdown_util_sep.png);
+	background-image: url(../img/header/sdown_util_sep.png);
 }
 
 .util_nav li {
@@ -301,18 +307,19 @@ h1.logo a {
 .gnb_sub_txbg {
 	display: inline-block;
 	padding: 5px 0 20px 0px;
-	background: url(../img/gnb_sub_txbg.jpg) repeat-x;
+	background: url(../img/header/gnb_sub_txbg.jpg) repeat-x;
 	width: 100%;
 }
 
 .gnb_sub_tx_inner {
 	width: 1100px;
+	padding-top: 15px;
 	margin: 0 auto;
 	background: url(../img/gnb_sub_txbg.jpg) repeat-x;
 }
 
 .gnb_sub_tx_inner h3 {
-	margin-top: 25px;
+	margin-top: 10px;
 }
 
 .gnb_sub_tx_inner h3 a {
@@ -333,7 +340,6 @@ h1.logo a {
 #contents {
 	padding-top: 120px;
 	width: 100%;
-	height: 50px;
 }
 
 /*플로팅 배너*/
@@ -359,6 +365,206 @@ h1.logo a {
 }
 
 /*contents :본문 내용 설정*/
+
+/* 메인비주얼 : CARRY the MERRY */
+.main_visual {
+	width: 100%;
+	height: 646px;
+	background: url(../img/contents/xmas/2020_xams2_bg.jpg) center no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.main_visual_inner {
+	padding-top: 55px;
+	box-sizing: border-box;
+	position: relative;
+	width: 1100px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.main_visual_slogan {
+	margin-left: 20px;
+	width: 363px;
+	opacity: 1;
+}
+
+.slogan_btn, .set_common {
+	position: absolute;
+	opacity: 1;
+}
+
+.set_common:after {
+	content: "";
+	position: absolute;
+	height: 78px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.set_common>a {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 99;
+}
+
+.set_common>img {
+	width: 100%;
+}
+
+.set_01 {
+	bottom: 17%;
+	left: 23%;
+	width: 224px;
+}
+
+.set_01:after {
+	top: 64%;
+	left: -81%;
+	width: 177px;
+	background-image: url(../img/contents/xmas/2020_xmas2_popconrn_tit.png);
+}
+
+.set_01>a {
+	left: 0;
+	width: 62%;
+}
+
+.set_02 {
+	bottom: 22%;
+	left: 43%;
+	width: 277px;
+}
+
+.set_02:after {
+	top: -35%;
+	left: 13%;
+	width: 135px;
+	background-image: url(../img/contents/xmas/2020_xmas2_dolce_tit.png);
+}
+
+.set_02>a {
+	left: 14%;
+	width: 45%;
+}
+
+.set_03 {
+	bottom: 29%;
+	left: 64%;
+	width: 233px;
+}
+
+.set_03:after {
+	top: -28%;
+	left: -5%;
+	width: 144px;
+	background-image:
+		url(../img/contents/xmas/2020_xmas2_dark_blended_tit.png);
+}
+
+.set_03>a {
+	left: 0;
+	width: 55%;
+}
+
+.set_04 {
+	bottom: 17%;
+	left: 81.3%;
+	width: 268px;
+}
+
+.set_04:after {
+	top: -27%;
+	left: 2%;
+	width: 194px;
+	background-image: url(../img/contents/xmas/2020_xmas2_panna_tit.png);
+}
+
+.set_04>a {
+	left: 16%;
+	width: 47%;
+}
+
+.set_05 {
+	bottom: 13%;
+	left: 32.1%;
+	width: 232px;
+}
+
+.set_05:after {
+	top: 104%;
+	left: -3%;
+	width: 173px;
+	background-image: url(../img/contents/xmas/2020_xmas2_relaxer_tit.png);
+}
+
+.set_05>a {
+	left: 4%;
+	width: 63%;
+}
+
+.set_06 {
+	bottom: 16%;
+	left: 55%;
+	width: 249px;
+}
+
+.set_06:after {
+	top: 92%;
+	left: 5%;
+	width: 144px;
+	background-image: url(../img/contents/xmas/2020_xmas2_dark_tit.png);
+}
+
+.set_06>a {
+	left: 9%;
+	width: 47%;
+}
+
+.set_07 {
+	bottom: 12%;
+	left: 73.8%;
+	width: 252px;
+}
+
+.set_07:after {
+	top: 100%;
+	left: 3%;
+	width: 146px;
+	background-image: url(../img/contents/xmas/2020_xmas2_nut_tit.png);
+}
+
+.set_07>a {
+	left: 4%;
+	width: 60%;
+}
+
+.slogan_btn {
+	box-sizing: border-box;
+	top: auto;
+	left: 12.5%;
+	width: 125px;
+	height: 38px;
+	line-height: 34px;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 15px;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	z-index: 5;
+}
+
+.slogan_btn a {
+	display: block;
+	width: 100%;
+	line-height: 34px;
+	height: 100%;
+	color: #fff;
+	transition: background-color .5s;
+	-webkit-transition: background-color .5s;
+}
 
 /*footer*/
 #footer {
