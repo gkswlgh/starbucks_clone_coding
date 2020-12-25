@@ -416,7 +416,7 @@
 			</div>
 		</div>
 		<!-- 플로팅 배너 끝 -->
-		
+
 		<!-- 메인비주얼 시작 -->
 		<div class="main_visual">
 			<div class="main_visual_inner">
@@ -426,25 +426,34 @@
 				</div>
 				<div class="main_visual_set">
 					<div class="set_common set_01">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_popconrn.png" alt="토피 넛 팝콘 트리 프라푸치노" />
+						<a href="#"></a> <img
+							src="img/contents/xmas/2020_xmas2_popconrn.png"
+							alt="토피 넛 팝콘 트리 프라푸치노" />
 					</div>
 					<div class="set_common set_02">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dolce.png" alt="시나몬 롤 돌체 라떼" />
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dolce.png"
+							alt="시나몬 롤 돌체 라떼" />
 					</div>
 					<div class="set_common set_03">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark_blended.png" alt="다크 초콜릿 블렌디드" />
+						<a href="#"></a> <img
+							src="img/contents/xmas/2020_xmas2_dark_blended.png"
+							alt="다크 초콜릿 블렌디드" />
 					</div>
 					<div class="set_common set_04">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_panna.png" alt="크리스마스 콜드 브루 콘 파나" />
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_panna.png"
+							alt="크리스마스 콜드 브루 콘 파나" />
 					</div>
 					<div class="set_common set_05">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_relaxer.png" alt="캐모마일 릴렉서" />
+						<a href="#"></a> <img
+							src="img/contents/xmas/2020_xmas2_relaxer.png" alt="캐모마일 릴렉서" />
 					</div>
 					<div class="set_common set_06">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark.png" alt="다크 초콜릿" />
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark.png"
+							alt="다크 초콜릿" />
 					</div>
 					<div class="set_common set_07">
-						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_nut.png" alt="토피 넛 라떼" />
+						<a href="#"></a> <img src="img/contents/xmas/2020_xmas2_nut.png"
+							alt="토피 넛 라떼" />
 					</div>
 				</div>
 				<div class="slogan_btn">
@@ -453,7 +462,7 @@
 			</div>
 		</div>
 		<!-- 메인비주얼 끝 -->
-		
+
 		<!-- line notice 시작 -->
 		<div class="line_notice">
 			<div class="line_notice_left"></div>
@@ -461,13 +470,26 @@
 			<div class="line_notice_bg">
 				<div class="line_notice_bgl">
 					<div class="line_notice_bgl_inner">
-						
+						<dl class="bgl_inner_l">
+							<dt class="notice_ttl">공지사항</dt>
+							<dd>
+								<ul class="news_result">
+									<li><a href="#">시스템 개선 및 점검 안내</a></li>
+									<li><a href="#">본인인증 시스템 작업 안내</a></li>
+									<li><a href="#">제휴사 서비스 점검으로 인한 My DT Pass - 소유주 인증 진행
+											불가</a></li>
+									<li><a href="#">SSG PAY 시스템 점검 안내</a></li>
+									<li><a href="#">삼성카드 시스템 점검에 따른 결제 일시 중단 안내</a></li>
+								</ul>
+							</dd>
+						</dl>
+						<span class="bgl_inner_r"><a href="#" title="공지사항 더보기">더보기</a></span>
 					</div>
 				</div>
 				<div class="line_notice_bgr">
-					<a href="#">
-						<p class="prom_ttl"></p>
-						<span class="prom_btn"><img src="" alt="" /></span>
+					<a href="#"> <span class="prom_ttl">스타벅스 프로모션</span> <span
+						class="prom_btn"><img src="img/contents/btn_prom_down.png"
+							alt="스타벅스 프로모션 펼쳐보기" role="button" /></span>
 					</a>
 				</div>
 			</div>
@@ -475,24 +497,50 @@
 		<!-- line notice 끝 -->
 		<!-- 프로모션 배너 시작 (덜만듬) -->
 		<div class="prom_banner">
-			<div class="prom_banner_slider">
-				
-			</div>
+			<div class="prom_banner_slider"></div>
 		</div>
 		<!-- 프로모션 배너 끝 -->
-		
-		<!-- 스타벅스리워드 시작 (덜만듬) -->
-		<div class="s_rewards">
-			<div class="s_rewards_inner">
+
+		<!-- 스타벅스리워드 시작 -->
+		<section class="s_rewards">
+			<div class="s_rewards_inner clear">
 				<div class="rewards_logo">
-					<img src="" alt="" />
+					<img src="img/contents/rewards-logo.png" alt="Starbucks Rewards" />
 				</div>
 				<div class="rewards_conts">
-					<div class="conts_info"></div>
-					<div class="conts_gift"></div>
+					<div class="conts_info">
+						<div class="conts_info_txt">
+							<h2>
+								스타벅스만의 특별한 혜택, <strong>스타벅스 리워드</strong>
+							</h2>
+							<p>
+								<strong>스타벅스 회원이세요?</strong> 로그인을 통해 나만의 리워드를 확인해보세요.
+							</p>
+
+							<p>
+								<strong>스타벅스 회원이 아니세요?</strong> 가입을 통해 리워드 혜택을 즐기세요.
+							</p>
+						</div>
+						<div class="rewards_btn_group">
+							<a href="#" class="rewards_btn_join">회원가입</a> <a href="#"
+								class="rewards_btn_login">로그인</a>
+						</div>
+					</div>
+					<div class="conts_gift">
+						<div class="conts_gift_txt">
+							<p>
+								회원 가입 후, 스타벅스 e-Gift Card를 <strong>"나에게 선물하기"로 구매하시고,
+									편리하게 등록하세요!</strong>
+							</p>
+							<p>카드를 등록하여 스타벅스 리워드 회원이 되신 후, 첫 구매를 하시면 무료 음료쿠폰을 드립니다!</p>
+						</div>
+						<div class="btn_egift">
+							<a href="#">e-Gift Card 선물하기</a>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 		<!-- 스타벅스리워드 끝 -->
 
 	</div>
