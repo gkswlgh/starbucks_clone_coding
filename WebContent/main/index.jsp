@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css"
 	href="css/style.css?time=<%=System.currentTimeMillis()%>" />
 
+
 </head>
 
 <body>
@@ -497,7 +498,16 @@
 		<!-- line notice 끝 -->
 		<!-- 프로모션 배너 시작 (덜만듬) -->
 		<div class="prom_banner">
-			<div class="prom_banner_slider"></div>
+			<div class="prom_banner_slider">
+				<div class="prom_slider_warp">
+					<ul class="prom_slider_list">
+						<li class="prom-slide">slide 1</li>
+						<li class="prom-slide">slide 2</li>
+						<li class="prom-slide">slide 3</li>
+						<li class="prom-slide">slide 4</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<!-- 프로모션 배너 끝 -->
 
@@ -542,6 +552,90 @@
 			</div>
 		</section>
 		<!-- 스타벅스리워드 끝 -->
+
+		<!-- 메인 빈 시작 -->
+		<section class="main_bean">
+			<div class="main_bean_inner">
+				<div class="bean_img_box">
+					<img src="img/contents/xmas/2020_xmas_bean.png" alt="크리스마스 블렌드" />
+				</div>
+				<div class="bean_txt_box">
+					<img src="img/contents/xmas/2020_xmas_bean_txt.png"
+						alt="크리스마스를 더욱 특별하게 만들어 줄 커피 크리스마스 블렌드" />
+					<div class="bean_detail_btn">
+						<a href="#">자세히 보기</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- 메인 빈 끝 -->
+
+		<!-- 리저브 시작 -->
+		<section class="reserve">
+			<div class="reserve_inner clear">
+				<div class="reserve_ttl">
+					<img src="img/contents/xmas/reserve_xmas_title.png"
+						alt="RESERVE THE MERRY" />
+				</div>
+				<div class="reserve_visual">
+					<img src="img/contents/xmas/reserve_xmas_beans.png" />
+				</div>
+				<div class="reserve_detail_btn">
+					<a href="#">자세히 보기</a>
+				</div>
+			</div>
+		</section>
+		<!-- 리저브 끝 -->
+
+		<!-- 메뉴 랩 시작 -->
+		<section class="menu_wrap">
+			<div class="menu_wrap_inner">
+				<div class="menu_wrap_txt01">PICK YOUR FAVORITE</div>
+				<div class="menu_wrap_txt02">다양한 메뉴를 스타벅스에서 즐겨보세요. 스타벅스만의 특별함을
+					경험할 수 있는 최상의 선택 음료, 스타벅스 커피와 완벽한 어울림을 자랑하는 푸드, 다양한 시도와 디자인으로 가치를
+					더하는 상품, 소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</div>
+				<div class="menu_wrap_img"></div>
+				<div class="menu_wrap_btn">
+					<a href="#">자세히 보기</a>
+				</div>
+			</div>
+		</section>
+		<!-- 메뉴 랩 끝 -->
+
+		<!-- 리저브 매거진 시작 -->
+		<section class="reserve_magazine">
+			<div class="reserve_magazine_inner">
+				<div class="magazine_left">
+					<img src="img/contents/reserve_visual_pc.png" />
+				</div>
+				<div class="magazine_right">
+					<img src="img/contents/reserve_text_pc.png"
+						alt="리저브가 선사하는 특별한 경험을 온라인 매거진으로 만나보세요" />
+				</div>
+			</div>
+			<div class="magazine_detail_btn">
+				<a href="#">EXPLORE OUR STORY</a>
+			</div>
+		</section>
+		<!-- 리저브 매거진 끝 -->
+
+		<!-- 매장 랩 시작 -->
+		<section class="store_wrap">
+			<div class="store_wrap_inner">
+				<div class="store_exp_img01"></div>
+				<div class="store_exp_img02"></div>
+				<div class="store_exp_img03"></div>
+				<div class="store_exp_img04"></div>
+				<div class="store_txt01">스타벅스를 가까이에서 경험해보세요. 고객님과 가장 가까이 있는
+					매장을 찾아보세요!</div>
+				<div class="store_txt02">차별화된 커피 경험을 누릴 수 있는 리저브 매장, 다양한 방법으로
+					편리하게 즐길 수 있는 드라이브 스루 매장, 함께해서 더 따뜻할수 있는 지역사회 소통 공간 커뮤니티 매장</div>
+				<div class="store_btn">
+					<a href="#">매장 찾기</a>
+				</div>
+			</div>
+		</section>
+		<!-- 매장 랩 끝 -->
 
 	</div>
 	<!-- 내용 끝 -->
@@ -657,6 +751,7 @@
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="js/header.js?time=<%=System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="js/slick.min.js"></script>
+	<script src="js/contents.js?time=<%=System.currentTimeMillis()%>"></script>
 	<script src="js/footer.js?time=<%=System.currentTimeMillis()%>"></script>
 </body>
 
