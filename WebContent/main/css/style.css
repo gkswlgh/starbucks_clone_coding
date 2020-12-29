@@ -386,12 +386,12 @@ h1.logo a {
 .main_visual_slogan {
 	margin-left: 20px;
 	width: 363px;
-	opacity: 1;
+	visibility: hidden;
 }
 
 .slogan_btn, .set_common {
 	position: absolute;
-	opacity: 1;
+	visibility: hidden;
 }
 
 .set_common:after {
@@ -658,7 +658,7 @@ h1.logo a {
 	color: #fff;
 	display: block;
 	height: 100%;
-	width: 100%;
+	width: 60%;
 	line-height: 24px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -700,7 +700,7 @@ h1.logo a {
 .line_notice_bgr a {
 	display: block;
 	height: 36px;
-	left: 11%;
+	right: 18%;
 	top: 13px;
 	width: 234px;
 	position: absolute;
@@ -740,7 +740,108 @@ h1.logo a {
 	border-top: 1px solid #f6f5ef;
 	position: relative;
 	width: 100%;
-	z-index: 10;
+	overflow: hidden;
+}
+
+.prom_banner_inner {
+	height: 553px;
+	margin-top: 39px;
+	margin-left: -550px;
+	width: 1100px;
+	left: 50%;
+	position: relative;
+	text-align: center;
+}
+
+.prom_slider {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+	max-width: 100%;
+}
+
+.prom_slider_inner {
+	width: auto;
+	position: relative;
+	height: 541px;
+}
+
+.prom_slider_list {
+	width: 819px;
+	position: relative;
+	margin: 0 auto;
+}
+
+.prom_slide {
+	width: 819px;
+	height: 553px;
+}
+
+.prom_inner_btn {
+	border: 2px solid #222;
+	border-radius: 3px;
+	width: 121px;
+	height: 34px;	
+	display: block;
+	margin-left: 350px;
+	position: absolute;
+	bottom: 14px;
+}
+
+.prom_inner_btn a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #222;
+	font-size: 14px;
+	line-height: 34px;
+	text-align: center;
+	-webkit-transition: background-color .7s, color .7s;
+	transition: background-color .7s, color .7s;
+}
+
+.slick-prev {
+	display: block;
+	background: url(../img/contents/arrow_left_on.png) center no-repeat;
+	width: 51px;
+	height: 51px;
+	text-indent: -20000px;
+	border: 2px solid #222;
+	border-radius: 27.5px;
+	transition: background-color .7s, color .7s;
+	-webkit-transition: background-color .7s, color .7s;
+	position: absolute;
+	left: -100px;
+}
+
+.slick-next {
+	display: block;
+	background: url(../img/contents/arrow_right_on.png) center no-repeat;
+	width: 51px;
+	height: 51px;
+	text-indent: -20000px;
+	border: 2px solid #222;
+	border-radius: 27.5px;
+	transition: background-color .7s, color .7s;
+	-webkit-transition: background-color .7s, color .7s;
+	position: absolute;
+	right: -100px;
+}
+
+.slick-dots {
+	margin-bottom: -10px;
+}
+
+.slick-dots li {
+	background: url(../img/contents/main_prom_off.png) center no-repeat;
+	
+}
+.slick-dots .slick-active {
+	background: url(../img/contents/main_prom_on.png) center no-repeat;
+}
+
+.slick-dots li button {
+    visibility: hidden;
 }
 
 /* 스타벅스리워드 */
@@ -873,7 +974,7 @@ h1.logo a {
 
 .main_bean_inner {
 	position: relative;
-	max-width: 1080px;
+	width: 1100px;
 	height: 573px;
 	margin: 0 auto;
 }
@@ -881,8 +982,9 @@ h1.logo a {
 .bean_img_box {
 	top: 12.22%;
 	opacity: 1;
-	left: -4%;
+	left: 0;
 	position: absolute;
+	visibility: hidden;
 }
 
 .bean_img_box img, .bean_txt_box img {
@@ -890,8 +992,9 @@ h1.logo a {
 }
 
 .bean_txt_box {
+	visibility: hidden;
 	opacity: 1;
-	right: 12%;
+	right: 10%;
 	top: 30.73%;
 	position: absolute;
 }
@@ -903,6 +1006,8 @@ h1.logo a {
 	text-align: center;
 	font-size: 14px;
 	z-index: 6;
+	border: 2px solid #555;
+	border-radius: 3px;
 }
 
 .bean_detail_btn a {
@@ -911,8 +1016,6 @@ h1.logo a {
 	height: 100%;
 	line-height: 34px;
 	color: #555;
-	border: 2px solid #555;
-	border-radius: 3px;
 	transition: background-color .7s, color .7s;
 	-webkit-transition: background-color .7s, color .7s;
 }
@@ -938,12 +1041,11 @@ h1.logo a {
 }
 
 .reserve_ttl {
-	padding-top: 150px;
-	padding-bottom: 120px;
-	padding-left: 15px;
+	padding: 130px 15px;
 	position: relative;
 	z-index: 5;
 	float: left;
+	visibility: hidden;
 }
 
 .reserve_ttl img {
@@ -955,6 +1057,7 @@ h1.logo a {
 	right: 0;
 	position: absolute;
 	top: 0;
+	visibility: hidden;
 }
 
 .reserve_detail_btn {
@@ -966,6 +1069,9 @@ h1.logo a {
 	text-align: center;
 	font-size: 14px;
 	z-index: 5;
+	visibility: hidden;
+	border: 2px solid rgb(183, 130, 101);
+	border-radius: 4px;
 }
 
 .reserve_detail_btn a {
@@ -973,11 +1079,7 @@ h1.logo a {
 	display: block;
 	width: 100%;
 	height: 100%;
-	line-height: 34px;
-	border-width: 2px;
-	border-style: solid;
-	border-color: rgb(183, 130, 101);
-	border-radius: 4px;
+	line-height: 38px;
 	color: rgb(183, 130, 101);
 	transition: background-color .7s, color .7s, border-color .7s;
 	-webkit-transition: background-color .7s, color .7s, border-color .7s;
@@ -1001,6 +1103,7 @@ h1.logo a {
 	z-index: 7;
 	width: 1100px;
 	height: 800px;
+	overflow: hidden;
 }
 
 .menu_wrap_txt01 {
@@ -1013,6 +1116,7 @@ h1.logo a {
 	top: 120px;
 	width: 258px;
 	z-index: 7;
+	visibility: hidden;
 }
 
 .menu_wrap_txt02 {
@@ -1025,6 +1129,7 @@ h1.logo a {
 	top: 370px;
 	width: 362px;
 	z-index: 7;
+	visibility: hidden;
 }
 
 .menu_wrap_img {
@@ -1106,12 +1211,14 @@ h1.logo a {
 	position: relative;
 	width: 38.5%;
 	padding-left: 3.5%;
+	z-index: 5;
 }
 
 .reserve_magazine_inner .magazine_right {
 	width: 45.6%;
 	margin-left: 6%;
 	padding-right: 3.5%;
+	visibility: hidden;
 }
 
 .reserve_magazine_inner .magazine_right img {
@@ -1129,18 +1236,17 @@ h1.logo a {
 	height: 17px;
 	padding: 8px 10px;
 	text-indent: -9999px;
+	margin-left: calc(50% - 30px);
+	visibility: hidden;
 	transition: background-color .8s;
 	-webkit-transition: background-color .8s;
-	margin-left: calc(50% - 30px);
 }
 
 .magazine_detail_btn a {
 	display: block;
 	width: 100%;
 	height: 100%;
-	background-image: url(../img/contents/btn_magazine_pc.png);
-	background-position: 0 0;
-	background-repeat: no-repeat;
+	background: url(../img/contents/btn_magazine_pc.png) 0 0 no-repeat;
 }
 
 /* 매장 랩 */
@@ -1160,6 +1266,10 @@ h1.logo a {
 	top: 0;
 	width: 1100px;
 	height: 400px;
+}
+
+.store_exp_img01, .store_exp_img02 {
+	visibility: hidden;
 }
 
 .store_exp_img01 {
@@ -1212,6 +1322,7 @@ h1.logo a {
 	top: 100px;
 	width: 385px;
 	z-index: 4;
+	visibility: hidden;
 }
 
 .store_txt02 {
@@ -1224,6 +1335,7 @@ h1.logo a {
 	top: 168px;
 	width: 366px;
 	z-index: 4;
+	visibility: hidden;
 }
 
 .store_btn {
@@ -1235,6 +1347,7 @@ h1.logo a {
 	top: 258px;
 	width: 121px;
 	z-index: 4;
+	visibility: hidden;
 }
 
 .store_btn a {
@@ -1325,18 +1438,19 @@ h1.logo a {
 }
 
 .slider_controller a {
-	display: inline-block;
 	overflow: hidden;
 	text-indent: -20000px;
+	display: inline-block;
+	margin: 3px;
 }
 
-.slider_stop {
+.slider_controller .slider_stop {
 	background: url(../img/footer/footer_award_play.png) 0 0 no-repeat;
 	height: 12px;
 	width: 9px;
 }
 
-.slider_start {
+.slider_controller .slider_start {
 	background: url(../img/footer/footer_award_play.png) -9px 0 no-repeat;
 	height: 12px;
 	width: 9px;

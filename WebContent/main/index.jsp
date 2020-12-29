@@ -11,9 +11,12 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <link rel="stylesheet" type="text/css" href="css/slick.css" />
 <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+<link rel="stylesheet" type="text/css" href="css/animate.css" />
 <link rel="stylesheet" type="text/css"
 	href="css/style.css?time=<%=System.currentTimeMillis()%>" />
-
+<!--모바일 아이콘-->
+<link rel="apple-touch-icon" href="img/header/logo.png" />
+<link rel="shortcut icon" href="img/header/logo.png" />
 
 </head>
 
@@ -489,7 +492,7 @@
 				</div>
 				<div class="line_notice_bgr">
 					<a href="#"> <span class="prom_ttl">스타벅스 프로모션</span> <span
-						class="prom_btn"><img src="img/contents/btn_prom_down.png"
+						class="prom_btn"><img class="open" src="img/contents/btn_prom_down.png"
 							alt="스타벅스 프로모션 펼쳐보기" role="button" /></span>
 					</a>
 				</div>
@@ -498,14 +501,36 @@
 		<!-- line notice 끝 -->
 		<!-- 프로모션 배너 시작 (덜만듬) -->
 		<div class="prom_banner">
-			<div class="prom_banner_slider">
-				<div class="prom_slider_warp">
-					<ul class="prom_slider_list">
-						<li class="prom-slide">slide 1</li>
-						<li class="prom-slide">slide 2</li>
-						<li class="prom-slide">slide 3</li>
-						<li class="prom-slide">slide 4</li>
-					</ul>
+			<div class="prom_banner_inner">
+				<div class="prom_slider">
+					<div class="prom_slider_inner">
+						<ul class="prom_slider_list">
+							<li class="prom_slide"><img
+								src="img/contents/banner/uX1xA2_20191227175905000.jpg"
+								alt="만원당 별 적립 이벤트" />
+								<div class="prom_inner_btn">
+									<a href="#">자세히 보기</a>
+								</div></li>
+							<li class="prom_slide"><img
+								src="img/contents/banner/Cw54A8_20201208085148123.jpg"
+								alt="크리스마스 2020" />
+								<div class="prom_inner_btn">
+									<a href="#">자세히 보기</a>
+								</div></li>
+							<li class="prom_slide"><img
+								src="img/contents/banner/1XNXWa_20201203142925287.jpg"
+								alt="크리스마스의 즐거움을 소중한 사람들과 함께하세요!" />
+								<div class="prom_inner_btn">
+									<a href="#">자세히 보기</a>
+								</div></li>
+							<li class="prom_slide"><img
+								src="img/contents/banner/ymrqGG_20201201000945683.jpg"
+								alt="스타벅스 현대카드, 5만원 이상 사용 시 별 100개 적립" />
+								<div class="prom_inner_btn">
+									<a href="#">자세히 보기</a>
+								</div></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -750,7 +775,8 @@
 	<!-- js소스파일:jQuery -->
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="js/header.js?time=<%=System.currentTimeMillis()%>"></script>
-	<script type="text/javascript" src="js/slick.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/jquery.animatecss.min.js"></script>
 	<script src="js/contents.js?time=<%=System.currentTimeMillis()%>"></script>
 	<script src="js/footer.js?time=<%=System.currentTimeMillis()%>"></script>
 </body>

@@ -9,4 +9,10 @@ $(document).ready(function() {
 		autoplay: true,
 		autoplaySpeed: 2000,
 	});
+	$(".slider_stop").on('click', function() {
+		$(".awards_slider").slick('slickPause');
+	});
+	$(".slider_start").on('click', function() {
+		$(".awards_slider").slick('slickPlay');
+	});
 });
