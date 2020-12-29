@@ -4,6 +4,20 @@
 
 $(document).ready(function() {
 	$(function() {
+		$(".slogan_btn a").hover(
+			function() {
+				$(".slogan_btn a").css({
+					color: '#fff',
+					background: 'rgb(0,112,66)'
+				});
+			},
+			function() {
+				$(".slogan_btn a").css({
+					color: '#fff',
+					background: 'transparent'
+				});
+			}
+		);
 		$(".bean_detail_btn a, .store_btn a").hover(
 			function() {
 				$(".bean_detail_btn a, .store_btn a").css({
