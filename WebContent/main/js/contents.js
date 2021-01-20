@@ -224,13 +224,14 @@ $(document).ready(function() {
 		e.preventDefault();
 		$(".prom_btn img").toggleClass('open close');
 		$(".prom_banner").slideToggle();
+
 	});
 	
 	$(".prom_btn .open").on('click', function() {
-		$(".prom_btn img").attr('src','img/contents/btn_prom_down.png');
+		$(".prom_btn img").attr('src','img/contents/btn_prom_up.png');
 	});
 	$(".prom_btn .close").on('click', function() {
-		$(".prom_btn img").attr('src','img/contents/btn_prom_up.png');
+		$(".prom_btn img").attr('src','img/contents/btn_prom_down.png');
 	});
 
 });
