@@ -22,8 +22,7 @@
 			<div class="login_inner">
 				<form id="login" action="" method="post">
 					<fieldset>
-						<legend class="hid">회원가입 이용약관 동의, 수집하는 개인정보의 항목, 개인정보의 수집
-							및 이용목적, 개인정보의 보유 및 이용기간 및 파기절차, 파기 방법에 관한 폼</legend>
+						<legend class="hid">로그인 폼</legend>
 						<strong class="login_ttl">로그인</strong>
 						<section class="login_form">
 							<p class="find_form_txt">
