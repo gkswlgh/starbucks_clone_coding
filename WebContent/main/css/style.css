@@ -781,7 +781,7 @@ h1.logo a {
 	border: 2px solid #222;
 	border-radius: 3px;
 	width: 121px;
-	height: 34px;	
+	height: 34px;
 	display: block;
 	margin-left: 350px;
 	position: absolute;
@@ -834,14 +834,14 @@ h1.logo a {
 
 .slick-dots li {
 	background: url(../img/contents/main_prom_off.png) center no-repeat;
-	
 }
+
 .slick-dots .slick-active {
 	background: url(../img/contents/main_prom_on.png) center no-repeat;
 }
 
 .slick-dots li button {
-    visibility: hidden;
+	visibility: hidden;
 }
 
 /* 스타벅스리워드 */
@@ -1519,9 +1519,7 @@ h1.logo a {
 	font-size: 12px;
 }
 
-
 /*login 로그인*/
-
 .login_bg_wrap {
 	background: url(../img/join/login_bg.jpg) center top no-repeat fixed
 		#0a0807;
@@ -1730,86 +1728,84 @@ input.mem2[type=checkbox]:checked+label, input.mem[type=checkbox]:active+label
 	border-right: 0;
 }
 
-
-
 /*아이디 찾기 found_id*/
-
 .find_mem_wrap {
-    max-width: 570px;
-    margin: 0 auto;
-    padding: 70px 0 50px;
+	max-width: 570px;
+	margin: 0 auto;
+	padding: 70px 0 50px;
 }
 
 .find_mem_ttl {
-    display: block;
-    font-size: 30px;
-    font-weight: normal;
-    margin-bottom: 30px;
-    text-align: center;
+	display: block;
+	font-size: 30px;
+	font-weight: normal;
+	margin-bottom: 30px;
+	text-align: center;
 }
 
 .find_mem_form {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    margin-bottom: 30px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-bottom: 30px;
 }
 
 .find_mem_result {
-    padding: 0px 20px 30px;
-    border-bottom: 1px solid #ddd;
+	padding: 0px 20px 30px;
+	border-bottom: 1px solid #ddd;
 }
 
 .find_mem_sally {
-    margin: 0 auto;
-    text-align: center;
-    padding: 30px 20px 0;
-    background: url(//image.istarbucks.co.kr/common/img/util/mem/icon_find_sally.png) 50% 100% no-repeat;
-    width: 205px;
-    height: 182px;
-    margin-bottom: 30px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 30px 20px 0;
+	background:
+		url(//image.istarbucks.co.kr/common/img/util/mem/icon_find_sally.png)
+		50% 100% no-repeat;
+	width: 205px;
+	height: 182px;
+	margin-bottom: 30px;
 }
 
 .mem_result_txt {
-    font-size: 18px;
-    color: #222;
-    text-align: center;
+	font-size: 18px;
+	color: #222;
+	text-align: center;
 }
 
 .mem_result_txt strong {
-    display: block;
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 20px;
+	display: block;
+	font-size: 24px;
+	font-weight: normal;
+	margin-bottom: 20px;
 }
 
 .result_txt_sub {
-    color: #666;
-    display: block;
-    line-height: 1.2;
+	color: #666;
+	display: block;
+	line-height: 1.2;
 }
 
 .find_mem {
-    border-bottom: 0px solid #ddd;
-    padding: 30px 20px;
-    margin-top: 30px;
-    font-size: 18px;
-    color: #222;
-    text-align: center;
+	border-bottom: 0px solid #ddd;
+	padding: 30px 20px;
+	margin-top: 30px;
+	font-size: 18px;
+	color: #222;
+	text-align: center;
 }
 
 .find_mem strong {
-    display: block;
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 20px;
+	display: block;
+	font-size: 24px;
+	font-weight: normal;
+	margin-bottom: 20px;
 }
 
 .find_mem:after {
-    clear: both;
-    content: "";
-    display: block;
+	clear: both;
+	content: "";
+	display: block;
 }
-
 
 .find_mem_input_box {
 	background: #fff;
@@ -1864,4 +1860,388 @@ input.mem2[type=checkbox]:checked+label, input.mem[type=checkbox]:active+label
 	font-size: 14px;
 	line-height: 1.4;
 	margin-top: 20px;
+}
+
+/*고객의 소리 customer_service*/
+#container {
+	width: 100%;
+}
+
+.sub_tit_wrap {
+	background: #231a11;
+	height: 178px;
+	position: relative;
+	width: 100%;
+}
+
+.sub_tit_bg {
+	background: url(../img/util/ms_sub_ttl_bg.jpg);
+	height: 178px;
+	left: 50%;
+	margin-left: -50%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.sub_tit_wrap div.sub_tit_inner {
+	height: 74px;
+	margin: 0 auto;
+	padding-top: 104px;
+	position: relative;
+	width: 100%;
+}
+
+.sub_tit_wrap h4 {
+	font: bold 36px Avenir, Arial, georgia;
+	color: #fefefe;
+	position: relative;
+	left: 20px;
+	width: 900px;
+}
+
+.sub_tit_wrap ul.smap {
+	position: absolute;
+	right: 20px;
+	top: 128px;
+}
+
+.sub_tit_wrap ul.smap li {
+	vertical-align: middle;
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	margin: 0 2.5px;
+}
+
+.sub_tit_wrap ul.smap a {
+	font: normal 12px Avenir, Arial, georgia;
+	color: #fff;
+}
+
+.cont {
+	width: 1000px;
+	margin: 30px auto;
+}
+
+.cont_inner {
+	width: 100%;
+	margin-left: -20px;
+	padding: 0 0 90px 0;
+}
+
+.cont form fieldset legend {
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	text-indent: -20000px;
+	width: 0;
+}
+
+.voc_top_bg {
+	margin-top: 50px;
+	margin: 0 auto;
+	width: 90%;
+	padding: 20px;
+	height: 162px;
+	position: relative;
+	background: url(../img/util/voc_top_bg.png);
+	width: 90%;
+}
+
+.voc_top_txt {
+	color: #444;
+	left: 30px;
+	position: absolute;
+	top: 30px;
+}
+
+.voc_top_txt strong {
+	color: #222;
+	font-size: 18px;
+}
+
+.voc_top_txt p {
+	font-size: 14px;
+	line-height: 20px;
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+.voc_top_txt span {
+	background: url(../img/util/csi/s_bot.png) 0 3px no-repeat;
+	font-size: 12px;
+	margin-top: 5px;
+	text-indent: 13px;
+	padding-left: 8px;
+}
+
+.btn_ask_list {
+	background: #e2c383;
+	border: 1px solid #bb9f65;
+	border-radius: 3px;
+	color: #222;
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	height: 28px;
+	line-height: 28px;
+	position: absolute;
+	left: 31px;
+	text-align: center;
+	top: 142px;
+	width: 131px;
+}
+
+.voc_input_tbl {
+	margin: 30px 30px 0 30px;
+}
+
+.voc_input_tbl p.must_input {
+	background: url(../img/util/bullet_star_red.gif) 0 0 no-repeat;
+	color: #666;
+	font-size: 12px;
+	margin-bottom: 10px;
+	text-indent: 13px;
+	width: 200px;
+	margin-left: auto;
+}
+
+.voc_input_tbl table {
+	border-top: 1px solid #333;
+	font-size: 14px;
+	width: 940px;
+}
+
+.voc_input_tbl table caption {
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	text-indent: -20000px;
+	width: 0;
+}
+
+.voc_input_tbl table tr th {
+	background: #f4f4f2;
+	color: #222;
+	line-height: 18px;
+	border-bottom: 1px solid #e0e0e0;
+	height: 25px;
+	padding: 9px 0 9px 20px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.voc_input_tbl table tr th img {
+	margin: 3px 0 0 5px;
+}
+
+.voc_input_tbl table tr td {
+	background: #fff;
+	color: #666;
+	border-bottom: 1px solid #e0e0e0;
+	height: 25px;
+	padding: 9px 0 9px 20px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.voc_input_tbl table tr td div.sel_wrap {
+	height: 28px;
+	width: 100%;
+}
+
+.cate_sel_wrap {
+	background: url(../img/util/sbox_arrow_down.png) 110px 10px no-repeat
+		#fff;
+	border-radius: 3px;
+	float: left;
+	height: 26px;
+	margin: 0 10px 0 0;
+	position: relative;
+	width: 128px;
+}
+
+.cate_sel_wrap label, .cate_sel_wrap2 label, .mail_sel_wrap label,
+	.phone_sel_wrap label, .addr_sel_wrap label, .store_sel_wrap label {
+	font-size: 12px;
+	font-weight: bold;
+	left: 5px;
+	position: absolute;
+	top: 8px;
+	opacity: 0;
+}
+
+.cate_sel_wrap select {
+	height: 26px;
+	width: 128px;
+}
+
+.mail_input {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	float: left;
+	height: 26px;
+	padding: 0;
+	width: 159px;
+}
+
+.mail_at, .cell_hyphen {
+	color: #444;
+	float: left;
+	font-size: 14px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	width: 20px;
+}
+
+.mail_sel_wrap {
+	float: left;
+	height: 26px;
+	line-height: 26px;
+	margin: 0 0 0 10px;
+	position: relative;
+	width: 159px;
+}
+
+.voc_input_tbl table tr td div.sel_wrap {
+	height: 28px;
+	width: 100%;
+}
+
+.phone_sel_wrap {
+	float: left;
+	height: 26px;
+	line-height: 26px;
+	margin: 0;
+	position: relative;
+	width: 60px;
+}
+
+.cellphone_input {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	float: left;
+	height: 26px;
+	padding: 0;
+	width: 72px;
+}
+
+.voc_input_tbl table tr td div.tbl_radio_wrap {
+	height: 13px;
+	position: relative;
+	width: 100%;
+}
+
+.voc_input_tbl table tr td div.tbl_radio_wrap input {
+	float: left;
+	height: 13px;
+	margin: 0 5px 0 0;
+	padding: 0;
+	width: 13px;
+}
+
+.voc_input_tbl table tr td div.tbl_radio_wrap label {
+	float: left;
+	color: #444;
+	line-height: 13px;
+	margin-right: 15px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.visit_txt {
+	color: #444;
+	float: left;
+	font-size: 14px;
+	height: 26px;
+	line-height: 26px;
+	text-align: left;
+	width: 56px;
+}
+
+.voc_input_tbl table .visit_input {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	height: 26px;
+	width: 300px;
+	float: left;
+	height: 26px;
+	line-height: 26px;
+	text-indent: 10px;
+}
+
+.voc_ttl_input1 {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	float: left;
+	height: 26px;
+	padding: 0;
+	width: 514px;
+}
+
+.voc_input_tbl table tr td textarea.textArea {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	height: 173px;
+	padding: 5px;
+	width: 502px;
+	resize: none;
+	font: 400 13.3333px Arial;
+}
+
+.voc_info_input_guide {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	float: left;
+	padding: 20px;
+	margin: 30px;
+	width: 940px;
+}
+
+.voc_info_input_guide ul {
+	margin-top: -5px;
+}
+
+.voc_info_input_guide ul li {
+	background: url(../img/util/bullet_grey.gif) 0 5px no-repeat;
+	color: #666;
+	float: left;
+	font-size: 14px;
+	line-height: 16px;
+	margin-top: 5px;
+	padding-left: 10px;
+	width: 100%;
+}
+
+.voc_info_input_btn1 {
+	float: right;
+	height: 30px;
+	margin: 30px 30px 0 0;
+	width: 143px;
+}
+
+.voc_info_input_btn1>a {
+	background: #e2c383;
+	border: 1px solid #bb9f65;
+	color: #222;
+	height: 28px;
+	line-height: 28px;
+	width: 141px;
+	border-radius: 3px;
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
 }
