@@ -13,7 +13,7 @@
 <!--login css소스파일-->
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <link rel="stylesheet" type="text/css"
-	href="css/join.css?time=<%=System.currentTimeMillis()%>" />
+	href="css/style.css?time=<%=System.currentTimeMillis()%>" />
 </head>
 
 <body>
