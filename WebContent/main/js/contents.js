@@ -165,23 +165,19 @@ $(document).ready(function() {
 		var sHeight = $(document).scrollTop();
 
 		if (wheel <= 0) { //scroll 내렸을 때
-			if (sHeight >= 0) {
+			if (sHeight > 0) {
 				//메인빈
-				$(".bean_img_box").animateCSS('fadeInLeft', { duration: 1500 });
-				$(".bean_txt_box").animateCSS('fadeInRight', { duration: 1500 });
-			}
-		}
-	});
-
-	$(window).on('mousewheel', function(e) {
-		var wheel = e.originalEvent.wheelDelta;
-		var sHeight = $(document).scrollTop();
-
-		if (wheel <= 0) { //scroll 내렸을 때
-			if (sHeight >= 0) {
+				$(".bean_img_box").stop().animateCSS('fadeInLeft', { duration: 1500 });
+				$(".bean_txt_box").stop().animateCSS('fadeInRight', { duration: 1500 });
+				
 				//메뉴랩
-				$(".menu_wrap_txt01").animateCSS('fadeInLeft', { duration: 2200 });
-				$(".menu_wrap_txt02").animateCSS('fadeInLeft', { duration: 2200 });
+				$(".menu_wrap_txt01").stop().animateCSS('fadeInLeft', { duration: 1600 });
+				$(".menu_wrap_txt02").stop().animateCSS('fadeInLeft', { duration: 1600 });
+			}
+		} else {
+			if (sHeight > 0) {
+				$(".menu_wrap_txt01").stop().animateCSS('fadeOutLeft', { duration: 1200 });
+				$(".menu_wrap_txt02").stop().animateCSS('fadeOutLeft', { duration: 1200 });
 			}
 		}
 	});
@@ -191,14 +187,14 @@ $(document).ready(function() {
 		var sHeight = $(document).scrollTop();
 
 		if (wheel <= 0) { //scroll 내렸을 때
-			if (sHeight >= 0) {
+			if (sHeight > 0) {
 				//리저브 매거진
-				$(".magazine_right").animateCSS('fadeInRight', { duration: 2200 });
-				$(".magazine_detail_btn").animateCSS('fadeInRight', { duration: 3200 });
+				$(".magazine_right").stop().animateCSS('fadeInRight', { duration: 2200 });
+				$(".magazine_detail_btn").stop().animateCSS('fadeInRight', { duration: 3200 });
 				//매장랩
-				$(".store_txt01").animateCSS('fadeInRight', { duration: 2000 });
-				$(".store_txt02").animateCSS('fadeInRight', { duration: 2900 });
-				$(".store_btn").animateCSS('fadeInRight', { duration: 3400 });
+				$(".store_txt01").stop().animateCSS('fadeInRight', { duration: 2000 });
+				$(".store_txt02").stop().animateCSS('fadeInRight', { duration: 2900 });
+				$(".store_btn").stop().animateCSS('fadeInRight', { duration: 3400 });
 			}
 		}
 	});
@@ -222,16 +218,16 @@ $(document).ready(function() {
 
 	$(".prom_btn").on('click', function(e) {
 		e.preventDefault();
-		$(".prom_btn img").toggleClass('open close');
-		$(".prom_banner").slideToggle();
+		var $btn = $("#prom_btn_toggle");
+		if ($btn.hasClass('open')) {
+			$btn.removeClass('open');
+			$btn.addClass('close');
+		} else {
+			$btn.removeClass('close');
+			$btn.addClass('open');
+		}
 
-	});
-	
-	$(".prom_btn .open").on('click', function() {
-		$(".prom_btn img").attr('src','img/contents/btn_prom_up.png');
-	});
-	$(".prom_btn .close").on('click', function() {
-		$(".prom_btn img").attr('src','img/contents/btn_prom_down.png');
+		$(".prom_banner").slideToggle(300);
 	});
 
 });

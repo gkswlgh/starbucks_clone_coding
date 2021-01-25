@@ -166,7 +166,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th>장소 <img
+										<th scope="row">장소 <img
 											src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif"
 											alt="필수입력" /></th>
 										<td>
@@ -190,7 +190,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th>제목 <img
+										<th scope="row">제목 <img
 											src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif"
 											alt="필수입력" /></th>
 										<td>
@@ -202,7 +202,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th>내용 <img
+										<th scope="row">내용 <img
 											src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif"
 											alt="필수입력" /></th>
 										<td><textarea class="textArea" name="DS_VOC_CN"

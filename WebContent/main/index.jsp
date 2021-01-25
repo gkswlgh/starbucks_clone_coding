@@ -59,7 +59,7 @@
 										<ul>
 											<li class="gnb_sub_ttl"><a href="#">나와 어울리는 커피</a></li>
 										</ul>
-										
+
 									</div>
 								</div>
 								<div class="gnb_sub_txbg">
@@ -71,6 +71,7 @@
 									</div>
 								</div>
 							</div>
+						</div>
 					</li>
 					<li class="gnb_nav02">
 						<h2>
@@ -125,8 +126,9 @@
 							<div class="gnb_sub_txbg">
 								<div class="gnb_sub_tx_inner">
 									<h3>
-										<p>나이트로 콜드 브루&nbsp;<img
-											src="img/header/icon_gnb_new.png"></p>
+										<p>
+											나이트로 콜드 브루&nbsp;<img src="img/header/icon_gnb_new.png">
+										</p>
 									</h3>
 									<p class="gnb_sub_ex_txt">나이트로 커피 정통의 물결치듯 흘러내리는 캐스케이딩과
 										부드러운 크림을 경험하세요.</p>
@@ -149,7 +151,7 @@
 											<li><a href="#">지역 검색</a></li>
 										</ul>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="gnb_sub_txbg">
@@ -172,13 +174,11 @@
 									<div class="sub_up clear">
 										<ul>
 											<li class="gnb_sub_ttl"><a href="#">스타벅스 카드</a></li>
-											<li><a href="#">스타벅스 카드 소개</a></li>
 											<li><a href="#">등록 및 조회</a></li>
 											<li><a href="#">충전 및 이용안내</a></li>
 										</ul>
 										<ul>
 											<li class="gnb_sub_ttl"><a href="#">스타벅스 e-Gift Card</a></li>
-											<li><a href="#">스타벅스 e-Gift Card 소개</a></li>
 											<li><a href="#">이용안내</a></li>
 											<li><a href="#">선물하기</a></li>
 										</ul>
@@ -192,51 +192,6 @@
 									</h3>
 									<p class="gnb_sub_ex_txt">카드 등록 후 리워드 서비스를 누리고 사용내역도
 										조회해보세요.</p>
-								</div>
-							</div>
-						</div>
-
-					</li>
-					<li class="gnb_nav06">
-						<h2>
-							<a href="#">WHAT'S NEW</a>
-						</h2>
-						<div class="gnb_sub_wrap">
-							<div class="gnb_sub">
-								<div class="gnb_sub_inner">
-									<div class="sub_up clear">
-										<ul>
-											<li class="gnb_sub_ttl"><a href="#">프로모션&amp;이벤트</a></li>
-											<li><a href="#">전체</a></li>
-											<li><a href="#">스타벅스 카드</a></li>
-											<li><a href="#">스타벅스 리워드</a></li>
-											<li><a href="#">온라인</a></li>
-											<li><a href="#">크리스마스 e-프리퀀시 증정품</a></li>
-										</ul>
-										<ul>
-											<li class="gnb_sub_ttl"><a href="#">새소식</a></li>
-											<li><a href="#">전체</a></li>
-											<li><a href="#">상품 출시</a></li>
-											<li><a href="#">스타벅스와 문화</a></li>
-											<li><a href="#">스타벅스 사회공헌</a></li>
-											<li><a href="#">스타벅스 카드출시</a></li>
-										</ul>
-										<ul>
-											<li class="gnb_sub_ttl"><a href="#">공지사항</a></li>
-										</ul>
-										<ul>
-											<li class="gnb_sub_ttl"><a href="#">월페이퍼</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="gnb_sub_txbg">
-								<div class="gnb_sub_tx_inner">
-									<h3>
-										<a href="#">월페이퍼</a>
-									</h3>
-									<p class="gnb_sub_ex_txt">매월 업데이트되는 월페이퍼(PC/Mobile)로 스타벅스를
-										더욱 가깝게 즐겨보세요!</p>
 								</div>
 							</div>
 						</div>
@@ -336,9 +291,8 @@
 				</div>
 				<div class="line_notice_bgr">
 					<a href="#"> <span class="prom_ttl">스타벅스 프로모션</span> <span
-						class="prom_btn"><img id="prom_btn_toggle" class="open"
-							src="img/contents/btn_prom_down.png" alt="스타벅스 프로모션 펼쳐보기"
-							role="button" /></span>
+						class="prom_btn"><span id="prom_btn_toggle" class="open" alt="스타벅스 프로모션 펼쳐보기"
+							role="button"></span></span>
 					</a>
 				</div>
 			</div>

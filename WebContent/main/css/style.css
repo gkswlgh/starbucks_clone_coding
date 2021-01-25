@@ -188,8 +188,10 @@ h1.logo a {
 }
 
 .gnb_nav_inner>ul {
-	float: right;
+	margin-left: 530px;
+	float: left;
 	display: block;
+	float: left;
 }
 
 .gnb_nav_inner>ul>li {
@@ -219,16 +221,8 @@ h1.logo a {
 	width: 79px;
 }
 
-.gnb_nav_inner>ul>li.gnb_nav04 {
-	width: 153px;
-}
-
 .gnb_nav_inner>ul>li.gnb_nav05 {
-	width: 225px;
-}
-
-.gnb_nav_inner>ul>li.gnb_nav06 {
-	width: 131px;
+	width: 175px;
 }
 
 .gnb_nav_inner li>h2>a {
@@ -247,6 +241,15 @@ h1.logo a {
 	.gnb_nav05 .gnb_sub_wrap, .gnb_nav06 .gnb_sub_wrap {
 	display: none;
 } */
+.gnb_sub_wrap.on {
+	display: block;
+	background: #2C2A29;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 66px;
+}
+
 .gnb_sub_wrap {
 	display: none;
 	background: #2C2A29;
@@ -719,17 +722,29 @@ h1.logo a {
 }
 
 .line_notice_bgr .prom_btn {
-	height: 35px;
-	width: 35px;
+	height: 36px;
+	width: 36px;
+	display: inline-block;
 	overflow: hidden;
 	position: absolute;
 	top: 0px;
 	right: 0px;
 }
 
-.prom_btn img {
-	width: 100%;
+.prom_btn>#prom_btn_toggle.open {
+	background:
+		url(https://image.istarbucks.co.kr/common/img/common/btn_prom_down.png);
+}
+
+.prom_btn>#prom_btn_toggle.close {
+	background:
+		url(//image.istarbucks.co.kr/common/img/common/btn_prom_up.png);
+}
+
+#prom_btn_toggle {
+	display: inline-block;
 	height: 100%;
+	width: 100%;
 }
 
 /* 프로모션 배너 */
@@ -1425,10 +1440,6 @@ h1.logo a {
 	padding-top: 10px;
 }
 
-.awards_slider .slick-next:before, .slick-prev:before {
-	display: none;
-}
-
 .slider_controller {
 	width: 600px;
 	margin: 0 auto;
@@ -1448,6 +1459,8 @@ h1.logo a {
 	background: url(../img/footer/footer_award_play.png) 0 0 no-repeat;
 	height: 12px;
 	width: 9px;
+	opacity: 0.4;
+	cursor: default;
 }
 
 .slider_controller .slider_start {
@@ -1812,6 +1825,10 @@ input.mem2[type=checkbox]:checked+label, input.mem[type=checkbox]:active+label
 	border-bottom: 1px solid #ddd;
 	padding: 20px 20px;
 	position: relative;
+}
+
+.find_mem_input_box br {
+	margin-top: 150px;
 }
 
 .find_mem_input_box:after {
@@ -2244,4 +2261,14 @@ input.mem2[type=checkbox]:checked+label, input.mem[type=checkbox]:active+label
 	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
+}
+
+/*sitemap 사이트 맵*/
+#sitemap table tr td {
+	padding: 40px 20px 10px 20px;
+}
+
+table td .sitemap {
+	width: 610px;
+	margin-bottom: 30px;
 }
