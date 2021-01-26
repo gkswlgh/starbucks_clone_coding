@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello JSP</title>
+    <!--login css소스파일-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css?time=<%=System.currentTimeMillis()%>" />
+</head>
+
+<body>
+    <div id="container">
+        <!-- 서브타이틀 -->
+        <header class="sub_tit_wrap">
+            <div class="sub_tit_bg">
+                <div class="sub_tit_inner">
+                    <h4>
+                        <img src="//image.istarbucks.co.kr/common/img/search/total_search_ttl.png" alt="통합 검색" />
+                    </h4>
+                    <ul class="smap">
+                        <li><a href="#"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">통합검색</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 서브타이틀 끝 -->
+        <!-- 내용 -->
+        <div class="wrapper">
+            <div class="inner">
+                <!-- 통합검색 입력 -->
+                <fieldset>
+                    <legend class="hid">통합검색 입력</legend>
+                    <div class="search_input_wrap">
+                        <strong>원하시는 검색어를 입력하신 후 검색 버튼을 클릭하세요.</strong>
+                        <div class="search_input">
+                            <input type="text" name="search" id="search" /> <a href="#" class="search_btn">검색</a>
+                        </div>
+                        <div class="search_btns">
+                            <ul>
+                                <li class="total_search_btn1"><a href="#" class="category_set_btn on">통합검색</a></li>
+                                <li class="total_search_btn2"><a href="#" class="category_set_btn">원두</a></li>
+                                <li class="total_search_btn3"><a href="#" class="category_set_btn">음료</a></li>
+                                <li class="total_search_btn4"><a href="#" class="category_set_btn">푸드</a></li>
+                                <li class="total_search_btn5"><a href="#" class="category_set_btn">상품</a></li>
+                                <li class="total_search_btn6"><a href="#" class="category_set_btn">매장</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </fieldset>
+                <p class="sch_no_result">검색 결과가 없습니다.</p>
+                <!-- 통합검색 입력 끝 -->
+                <!-- 커피 -->
+                <section class="contents_wrap card_search_result search_coffee">
+                    <header class="search_result_each_ttl">
+                        <h2>원두</h2>
+                        <a href="#">원두 더보기</a>
+                    </header>
+                    <ul class="search_coffee_wrap">
+                        <li>
+                            <figure>
+                                <img src="//image.istarbucks.co.kr//upload/store/skuimg/2015/08/[11019857]_20150809121431365.jpg" alt>
+                            </figure>
+                            <div class="card_search_result_txt">
+                                <header>
+                                    <h3 class="rt_title">
+                                        <span class="yellow_bg">콜롬비아</span>250g (Colombia 250g)
+                                    </h3>
+                                </header>
+                                <p class="card_search_result_cont rt_text">
+                                    견과류의 풍미를 간직한 부드럽고 균형 잡힌 커피
+                                </p>
+                                <p class="card_search_result_link">
+                                    <a href="#" class="en" target="_blank">
+                                        http://www.starbucks.co.kr/coffee/product_view.do?PRODUCT_CD=11019857
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="//image.istarbucks.co.kr//upload/store/skuimg/2015/08/[11019857]_20150809121431365.jpg" alt>
+                            </figure>
+                            <div class="card_search_result_txt">
+                                <header>
+                                    <h3 class="rt_title">
+                                        <span class="yellow_bg">콜롬비아</span>250g (Colombia 250g)
+                                    </h3>
+                                </header>
+                                <p class="card_search_result_cont rt_text">
+                                    견과류의 풍미를 간직한 부드럽고 균형 잡힌 커피
+                                </p>
+                                <p class="card_search_result_link">
+                                    <a href="#" class="en" target="_blank">
+                                        http://www.starbucks.co.kr/coffee/product_view.do?PRODUCT_CD=11019857
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 커피 끝 -->
+                <!-- 음료 -->
+                <section class="contents_wrap bev_search_result search_drink">
+                    <header class="search_result_each_ttl">
+                        <h2>음료</h2>
+                        <a href="#">음료 더보기</a>
+                    </header>
+                    <ul class="search_drink_wrap">
+                        <li>
+                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 음료 끝 -->
+                <!-- 푸드 -->
+                <section class="contents_wrap bev_search_result search_food">
+                    <header class="search_result_each_ttl">
+                        <h2>푸드</h2>
+                        <a href="#">푸드 더보기</a>
+                    </header>
+                    <ul class="search_food_wrap">
+                        <li>
+                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 푸드 끝 -->
+                <!-- 상품 -->
+                <section class="contents_wrap bev_search_result search_product">
+                    <header class="search_result_each_ttl">
+                        <h2>상품</h2>
+                        <a href="#">상품 더보기</a>
+                    </header>
+                    <ul class="search_product_wrap">
+                        <li>
+                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 상품 끝 -->
+                <!-- 매장 -->
+                <section class="contents_wrap bev_search_result search_store">
+                    <header class="search_result_each_ttl">
+                        <h2>매장</h2>
+                        <a href="#">매장 더보기</a>
+                    </header>
+                    <ul class="search_store_wrap">
+                        <li>
+                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 매장 끝 -->
+            </div>
+        </div>
+        <!-- 내용 끝 -->
+    </div>
+</body>
+
+</html>
