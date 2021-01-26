@@ -49,7 +49,7 @@
 						type="hidden" name="DS_CSTMR_EMAIL" id="DS_CSTMR_EMAIL" />
 					<!-- 테이블 -->
 					<div class="voc_input_tbl">
-						<table summary="사이트 맵을 정리한 테이블">
+						<table summary="사이트 맵을 정리한 테이블" class="sitemap">
 							<caption>스타벅스 코리아 사이트 맵입니다.</caption>
 							<colgroup>
 								<col width="200" />

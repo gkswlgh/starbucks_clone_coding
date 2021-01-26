@@ -2266,9 +2266,54 @@ input.mem2[type=checkbox]:checked+label, input.mem[type=checkbox]:active+label
 /*sitemap 사이트 맵*/
 #sitemap table tr td {
 	padding: 40px 20px 10px 20px;
+	border-bottom: 1px solid #ddd;
 }
 
-table td .sitemap {
-	width: 610px;
+#sitemap table.sitemap td ul.sitemap {
 	margin-bottom: 30px;
+}
+
+#sitemap table.sitemap td div.sitemap ul {
+	float: left;
+	width: 25%;
+}
+
+#sitemap table.sitemap td .sitemap ul li>a {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+}
+
+#sitemap table.sitemap td .sitemap ul li.sitemap_li_ttl {
+	margin-bottom: 15px;
+	width: 150px;
+}
+#sitemap table.sitemap td .sitemap ul li.sitemap_li_ttl>a {
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	margin-bottom: 15px;
+	line-height: 1.4;
+}
+
+#sitemap table td .sitemap {
+	width: 720px;
+	margin-bottom: 30px;
+}
+
+#sitemap table.sitemap th {
+	vertical-align: top;
+	padding: 40px 20px;
+	background: #f4f4f2;
+	border-bottom: 1px solid #ddd;
+	font-size: 16px;
+	color: #006633;
+	font-weight: bold;
+	text-align: left;
+	line-height: 1.4;
+	font-family: 'Arial';
+}
+
+#sitemap table.sitemap th a {
+	color: #006633;
 }
