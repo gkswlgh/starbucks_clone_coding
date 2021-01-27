@@ -2063,6 +2063,10 @@ input.mem[type=checkbox]:active+label {
     width: 100%;
 }
 
+.voc_input_tbl table tr td div.sel_wrap input {
+    text-indent: 7px;
+}
+
 .cate_sel_wrap {
     background: url(../img/util/sbox_arrow_down.png) 110px 10px no-repeat #fff;
     border-radius: 3px;
@@ -2507,6 +2511,24 @@ p.sch_no_result {
     display: block;
 }
 
+
+/* join_mem 회원가입*/
+
+.agree_checkbox {
+    float: right;
+}
+
+.agree_checkbox label {
+    margin-right: 20px;
+}
+
+#join_mem .sel_wrap input.w300 {
+    width: 300px;
+}
+
+#join_mem .sel_wrap input.w160 {
+    width: 160px;
+}
 
 
 /*공통*/
