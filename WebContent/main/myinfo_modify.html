@@ -17,43 +17,27 @@
                 <form action="#" id="join_mem" name="join_mem" class="join_input_frm" method="post" enctype="multipart/form-data">
                     <input type="hidden" value="0" id="store_cd" name="store_cd" />
                     <fieldset>
-                        <legend>회원가입 입력폼</legend>
+                        <legend>개인정보 확인 및 수정 입력 폼</legend>
                         <!-- 테이블 -->
                         <div class="voc_input_tbl">
                             <!-- 인삿말 -->
                             <div class="">
-                                <strong> Starbucks 회원가입 </strong>
+                                <strong> 개인정보 확인 및 수정 </strong>
                             </div>
                             <!-- 인삿말 끝 -->
                             <p class="must_input">표시 항목은 필수 입력 사항입니다.</p>
-                            <table summary="아이디, 비밀번호, 이름, 성별, 이메일 주소, 휴대전화, 생일">
-                                <caption>아이디, 비밀번호, 이름, 성별, 이메일 주소, 휴대전화, 생일에 대한 테이블</caption>
+                            <table summary="아이디, 이름, 성별, 이메일 주소, 휴대전화, 생일">
+                                <caption>아이디, 이름, 성별, 이메일 주소, 휴대전화, 생일에 대한 테이블</caption>
                                 <colgroup>
                                     <col width="180" />
                                     <col width="720" />
                                 </colgroup>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">아이디 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
+                                        <th scope="row">아이디 (변경 불가능)</th>
                                         <td>
                                             <div class="sel_wrap">
-                                                <input type="text" class="voc_ttl_input1 w300" id="DS_VOC_TITLE" name="DS_VOC_TITLE" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">비밀번호 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
-                                        <td>
-                                            <div class="sel_wrap">
-                                                <input type="password" class="voc_ttl_input1 w300" id="DS_VOC_TITLE" name="DS_VOC_TITLE" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">비밀번호 확인 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
-                                        <td>
-                                            <div class="sel_wrap">
-                                                <input type="password" class="voc_ttl_input1 w300" id="DS_VOC_TITLE" name="DS_VOC_TITLE" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
+                                                <input type="text" class="voc_ttl_input1 w300" id="DS_VOC_TITLE" name="DS_VOC_TITLE" value="회원 아이디" disabled />
                                             </div>
                                         </td>
                                     </tr>
@@ -137,20 +121,12 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="agree_checkbox clean">
-                                                <input id="agree1" name="agree" type="checkbox" /> <label for="agree1">개인 정보 ... 동의</label>
-                                                <input id="agree2" name="agree" type="checkbox" /> <label for="agree2">뭐시기 동의</label>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <!-- 테이블 끝 -->
                         <div class="voc_info_input_btn1">
-                            <a href="#none" onclick="자바스크립트함수(); return false;">회원 가입하기</a>
+                            <a href="#none" onclick="자바스크립트함수(); return false;">정보 수정하기</a>
                         </div>
                     </fieldset>
                 </form>
