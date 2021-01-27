@@ -239,8 +239,8 @@ h1.logo a {
 
 /* 서브메뉴 : 기본 display none */
 /* .gnb_nav02 .gnb_sub_wrap, .gnb_nav03 .gnb_sub_wrap, .gnb_nav04 .gnb_sub_wrap,
-	.gnb_nav05 .gnb_sub_wrap, .gnb_nav06 .gnb_sub_wrap {
-	display: none;
+    .gnb_nav05 .gnb_sub_wrap, .gnb_nav06 .gnb_sub_wrap {
+    display: none;
 } */
 .gnb_sub_wrap.on {
     display: block;
@@ -2891,12 +2891,13 @@ div.product_list>dl>dt .summary {
 
 div.product_list>dl>dd {
     margin-bottom: 40px;
-    width: auto;
-    padding: auto;
+    width: 100%;
 }
 
 div.product_list>dl>dd>ul {
-    width: 100%;
+    width: 840px;
+    margin: auto;
+    padding-top: 10px;
     position: relative;
     left: -10px;
     top: -10px;
@@ -2943,6 +2944,248 @@ div.product_list>dl>dd>ul li dd {
     white-space: nowrap;
 }
 
+#container h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f4f4f2;
+    border-radius: 3px;
+}
+
+table.coffeeInfo {
+    width: 100%;
+}
+
+table.coffeeInfo th {
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+    padding: 16px 0;
+    text-align: center;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+}
+
+table.coffeeInfo td {
+    font-size: 14px;
+    color: #666;
+    padding: 16px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+
+/*메뉴 상세 페이지*/
+
+.content02 {
+    width: 900px;
+    margin: 0 auto;
+    padding: 50px 0 90px 0;
+    position: relative;
+}
+
+div.product_view_wrap1 {
+    width: 900px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 40px;
+}
+
+div.product_view_pic {
+    width: 350px;
+    float: left;
+}
+
+div.product_view_pic div.product_big_pic {
+    position: relative;
+    width: 350px;
+    height: 370px;
+    margin-bottom: 8px;
+}
+
+div.product_view_pic div.product_big_pic img {
+    width: 100%;
+}
+
+div.product_view_pic ul {
+    width: 350px;
+}
+
+div.product_view_pic ul.product_thum li {
+    margin-right: 8px;
+    float: left;
+}
+
+#product_thum_wrap img {
+    width: 86px;
+}
+
+div.product_view_detail {
+    width: 510px;
+    float: right;
+    position: relative;
+}
+
+div.product_view_detail div.myAssignZone {
+    position: relative;
+}
+
+div.product_view_detail h4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    border-bottom: 2px solid #333;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+}
+
+div.product_view_detail h4 span {
+    font-size: 14px;
+    font-family: "Arial";
+    font-weight: normal;
+    color: #666;
+}
+
+div.product_view_detail p.t1 {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    min-height: 40px;
+}
+
+div.product_view_detail div.myDrink {
+    position: absolute;
+    right: 0;
+    top: 7px;
+}
+
+div.product_view_detail div.myDrink a {
+    display: block;
+    width: 111px;
+    height: 28px;
+    line-height: 28px;
+    background: #006633;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+}
+
+div.product_view_detail div.product_info_head {
+    height: 59px;
+    line-height: 59px;
+    position: relative;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+div.product_view_detail div.product_info_head p.tit {
+    font-size: 18px;
+    color: #222;
+    padding-left: 10px;
+    line-height: 59px;
+}
+
+div.product_view_detail div.product_select_wrap2 {
+    /* width: 375px; */
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    display: inline-block;
+}
+
+div.product_view_detail div.product_select_wrap2>div {
+    line-height: 59px;
+}
+
+div.product_view_detail div.product_select_wrap2>div {
+    float: left;
+}
+
+.selectTxt1,
+.selectTxt2 {
+    margin-right: 6px;
+    margin-top: -5px;
+    font-size: 16px;
+    color: #444;
+    font-family: "nbg";
+}
+
+div.product_info_content {
+    width: 100%;
+    background: url(//image.istarbucks.co.kr/common/img/menu/detail_bg.jpg) center 0 repeat-y;
+    margin: 20px 0;
+}
+
+div.product_info_content ul {
+    width: 50%;
+    float: left;
+}
+
+div.product_info_content li {
+    margin-bottom: 15px;
+    padding: 0 10px;
+    line-height: 1.6;
+}
+
+div.product_info_content dl {
+    width: 100%;
+    font-size: 14px;
+    color: #444;
+}
+
+div.product_info_content dl dt {
+    float: left;
+    width: 85%;
+}
+
+div.product_info_content dl dd {
+    float: right;
+    width: 15%;
+    text-align: right;
+}
+
+div.product_info_content dl:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+div.product_info_content:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+div.product_factor {
+    background: #f4f4f2;
+    padding: 13px 11px;
+    font-size: 14px;
+    color: #444;
+    border-radius: 3px;
+    position: relative;
+    margin-bottom: 23px;
+    line-height: 1.6;
+}
+
+div.product_view_wrap1:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+div.product_view_wrap2 {
+    width: 900px;
+    text-align: left;
+    padding-bottom: 85px;
+    color: #666;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
 
 /*공통*/
 .wrapper {
@@ -2981,6 +3224,11 @@ div.product_list>dl>dd>ul li dd {
 .mb40 {
     margin-bottom: 40px;
 }
+
+.mb60 {
+    margin-bottom: 60px;
+}
+
 
 .p0 {
     padding: 0;
