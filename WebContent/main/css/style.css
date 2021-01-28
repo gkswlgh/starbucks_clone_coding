@@ -4547,8 +4547,448 @@ div.egiftCard_btnZone p.btn_list a {
 }
 
 
+/*보유카드 목록*/
 
+.my_ms_card_list {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+    width: 100%;
+}
 
+.my_ms_card_list_inner {
+    float: left;
+    margin: 29px;
+    width: 94%;
+}
+
+.my_ms_card_list header {
+    border-bottom: 1px solid #eae9e6;
+    height: 38px;
+    width: 100%;
+    position: relative;
+}
+
+.my_ms_card_list header h5 {
+    color: #222;
+    float: left;
+    font-size: 18px;
+}
+
+.my_ms_card_list header h5 strong {
+    color: #006633;
+}
+
+.my_ms_card_list_inner header p.recent_card {
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    margin-left: 5px;
+    float: left;
+}
+
+.my_ms_card_list_cont {
+    padding: 30px 0 0 0;
+}
+
+.my_ms_card_list_ul li {
+    display: inline-table;
+    margin-bottom: 27px;
+    position: relative;
+    vertical-align: top;
+}
+
+.my_ms_card_list_cont figure {
+    width: 200px;
+    height: 122px;
+    float: left;
+}
+
+.my_ms_card_list_ul li .representative_icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
+    width: 35px;
+    height: 35px;
+    background: url(../img/util/representative_icon.png) 0 0 no-repeat;
+    background-size: 100% auto;
+}
+
+.representative_icon a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.my_ms_card_list_cont figure img {
+    width: 100%;
+    height: 100%;
+}
+
+.my_ms_card_list_info {
+    width: 167px;
+    float: left;
+    margin-left: 18px;
+    position: relative;
+}
+
+.my_ms_card_id,
+.my_ms_card_id_modify {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.my_ms_card_list_info .icon_pencil {
+    background: url(../img/util/icon_pencil.png);
+    display: inline-block;
+    height: 19px;
+    overflow: hidden;
+    margin: 0 0 -4px 8px;
+    text-indent: -20000px;
+    width: 19px;
+}
+
+.my_ms_card_list_info .my_ms_card_number {
+    color: #666;
+    font-size: 14px;
+    margin-top: 8px;
+    font-family: "Arial";
+}
+
+.my_ms_card_id,
+.my_ms_card_id_modify {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.my_ms_card_id_modify {
+    display: none;
+}
+
+.my_ms_card_id_modify input.my_nick_modify_input {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    padding: 0;
+    width: 133px;
+}
+
+.my_ms_card_id_modify a.my_nick_modify {
+    background: #fff;
+    border: 1px solid #222;
+    border-radius: 3px;
+    color: #222;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 10px;
+    width: 40px;
+}
+
+.my_ms_card_id_modify a.my_nick_cancel {
+    background: #666;
+    border: 1px solid #666;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 5px;
+    width: 40px;
+}
+
+.my_ms_card_list_info .my_ms_card_price {
+    font-weight: bold;
+    font-size: 16px;
+    height: 33px;
+    line-height: 33px;
+    margin-top: 10px;
+}
+
+.my_ms_card_list_info .my_ms_card_price strong {
+    font-size: 16px;
+}
+
+/*보유카드 - 상세페이지*/
+.my_ms_card_detail {
+    background: url(../img/util/card_wave_pattern.png) center bottom no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 410px;
+    width: 828px;
+}
+
+.my_ms_card_detail_inner {
+    float: left;
+    height: 307px;
+    margin: 29px 0 0 29px;
+    width: 770px;
+}
+
+.my_ms_card_detail header {
+    border-bottom: 1px solid #eae9e6;
+    height: 38px;
+    width: 770px;
+    position: relative;
+}
+
+.my_ms_card_detail header h5 {
+    color: #222;
+    float: left;
+    font-size: 18px;
+}
+
+.my_ms_card_detail header h5 strong {
+    color: #006633;
+}
+
+.my_ms_card_detail_cont {
+    height: 330px;
+    width: 770px;
+    overflow: hidden;
+    list-style: none;
+    position: relative;
+}
+
+.my_ms_card_detail_info {
+    color: #444;
+    height: auto;
+    left: 62px;
+    position: absolute;
+    top: 21px;
+    width: 328px;
+}
+
+.my_ms_card_detail_id,
+.my_ms_card_detail_id_modify {
+    color: #444;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.icon_pencil {
+    background: url(../img/util/icon_pencil.png);
+    display: inline-block;
+    height: 19px;
+    overflow: hidden;
+    margin-bottom: -4px;
+    text-indent: -20000px;
+    width: 19px;
+}
+
+.my_ms_card_detail_id,
+.my_ms_card_detail_id_modify {
+    color: #444;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.my_ms_card_detail_id_modify input.my_nick_modify_input {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    padding: 0;
+    width: 133px;
+}
+
+.my_ms_card_detail_id_modify a.my_nick_modify {
+    background: #fff;
+    border: 1px solid #222;
+    border-radius: 3px;
+    color: #222;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 10px;
+    width: 40px;
+}
+
+.my_ms_card_detail_id_modify a.my_nick_cancel {
+    background: #666;
+    border: 1px solid #666;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 5px;
+    width: 40px;
+}
+
+.my_ms_card_num {
+    color: #444;
+    font-size: 16px;
+    font-weight: bold;
+    height: 19px;
+    line-height: 19px;
+    margin-top: 5px;
+}
+
+.my_ms_card_detail_date {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 13px;
+}
+
+.my_ms_card_detail_price {
+    margin-top: 5px;
+}
+
+.my_ms_card_detail_price strong {
+    font-size: 26px;
+}
+
+.my_ms_card_btns_top {
+    height: 30px;
+    margin-top: 10px;
+}
+
+.my_ms_card_btns_top p {
+    border-radius: 3px;
+    float: left;
+}
+
+.my_ms_card_btns_top p a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 100%;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+.my_ms_card_btns_top p.my_ms_card_btn1 {
+    background: #222;
+    border: 1px solid #222;
+    height: 28px;
+    width: 113px;
+}
+
+.my_ms_card_btns_top p.my_ms_card_btn1 a {
+    color: #fff;
+}
+
+.my_ms_card_btns_top p.my_ms_card_btn2 {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+    height: 28px;
+    margin-left: 5px;
+    width: 113px;
+}
+
+.my_ms_card_btns_top p.my_ms_card_btn2 a {
+    color: #222;
+}
+
+.my_ms_card_btns_bottom {
+    height: 30px;
+    margin-top: 5px;
+}
+
+.my_ms_card_btns_bottom p {
+    border-radius: 3px;
+    float: left;
+}
+
+.my_ms_card_btns_bottom p a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 100%;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+.my_ms_card_btns_bottom p.my_ms_card_btn1 {
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 28px;
+    width: 113px;
+}
+
+.my_ms_card_btns_bottom p.my_ms_card_btn1 a,
+.my_ms_card_btns_bottom p.my_ms_card_btn2 a {
+    color: #222;
+}
+
+.my_ms_card_btns_bottom p.my_ms_card_btn2 {
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 28px;
+    margin-left: 5px;
+    width: 113px;
+}
+
+.my_ms_card_detail_cont figure {
+    height: 203px;
+    left: 365px;
+    position: absolute;
+    top: 55px;
+    width: 375px;
+}
+
+.my_ms_card_detail_cont .representative_icon {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+    z-index: 10;
+    width: 43px;
+    height: 53px;
+    background: url(../img/util/representative_icon.png) 0 0 no-repeat;
+    background-size: 100% auto;
+}
+
+.representative_icon a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.my_ms_card_detail_cont figure p {
+    height: 193px;
+    left: 30px;
+    position: absolute;
+    top: 0;
+    width: 317px;
+    display: block;
+    vertical-align: top;
+}
+
+.my_ms_card_detail_cont figure p img {
+    max-width: inherit;
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
 
 /*공통*/
 .wrapper {
@@ -4588,6 +5028,10 @@ div.egiftCard_btnZone p.btn_list a {
     color: #b7312c;
 }
 
+.t_0d5f34 {
+    color: #0d5f34;
+}
+
 .en {
     font-family: arial, HelveticaNeue, DroidSans, Sans-serif, Helvetica;
 }
@@ -4606,6 +5050,10 @@ div.egiftCard_btnZone p.btn_list a {
 
 .ma {
     margin: auto;
+}
+
+.mt20 {
+    margin-top: 20px;
 }
 
 .p0 {
