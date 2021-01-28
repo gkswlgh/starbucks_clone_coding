@@ -2021,6 +2021,11 @@ input.mem[type=checkbox]:active+label {
     width: 830px;
 }
 
+.voc_input_tbl table.w1000 {
+    width: 1030px;
+    margin: auto;
+}
+
 .voc_input_tbl table caption {
     font-size: 0;
     height: 0;
@@ -2076,18 +2081,41 @@ input.mem[type=checkbox]:active+label {
     width: 128px;
 }
 
+.cate_sel_wrap select {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 133px;
+}
+
+.cate_sel_wrap_l select {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 193px;
+}
+
 .cate_sel_wrap label,
+.cate_sel_wrap_l label,
 .cate_sel_wrap2 label,
 .mail_sel_wrap label,
 .phone_sel_wrap label,
 .addr_sel_wrap label,
 .store_sel_wrap label {
-    font-size: 12px;
-    font-weight: bold;
-    left: 5px;
-    position: absolute;
-    top: 8px;
-    opacity: 0;
+    display: none;
+}
+
+.mail_sel_wrap select {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 110px;
 }
 
 .cate_sel_wrap select {
@@ -2136,6 +2164,15 @@ input.mem[type=checkbox]:active+label {
     margin: 0;
     position: relative;
     width: 60px;
+}
+
+.phone_sel_wrap select {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 53px;
 }
 
 .cellphone_input {
@@ -2187,7 +2224,7 @@ input.mem[type=checkbox]:active+label {
     border: 1px solid #ddd;
     border-radius: 3px;
     height: 26px;
-    width: 300px;
+    width: 200px;
     float: left;
     height: 26px;
     line-height: 26px;
@@ -2200,7 +2237,7 @@ input.mem[type=checkbox]:active+label {
     float: left;
     height: 26px;
     padding: 0;
-    width: 514px;
+    width: 100%;
 }
 
 .voc_input_tbl table tr td textarea.textArea {
@@ -2209,7 +2246,7 @@ input.mem[type=checkbox]:active+label {
     border-radius: 3px;
     height: 173px;
     padding: 5px;
-    width: 502px;
+    width: 98%;
     resize: none;
     font: 400 13.3333px Arial;
 }
@@ -2531,6 +2568,24 @@ p.sch_no_result {
 
 #join_mem .sel_wrap input.w160 {
     width: 160px;
+}
+
+.gender_select_wrap select {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 63px;
+}
+
+.birthdate {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 133px;
 }
 
 
@@ -2947,7 +3002,7 @@ div.product_list>dl>dd>ul li dd {
     white-space: nowrap;
 }
 
-#container h3 {
+#container dl.product_view_tab>dd h3 {
     font-size: 18px;
     font-weight: bold;
     color: #222;
@@ -3714,6 +3769,15 @@ table.gift_info_tbl tr td div.pickdate span {
     margin-right: 10px;
 }
 
+table.gift_info_tbl tr td div.pickdate input {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 133px;
+}
+
 .gift_info_adding2 {
     color: #666;
     font-size: 14px;
@@ -3949,6 +4013,363 @@ table.payment_tb td.ltd span {
 }
 
 
+
+/*선물내역*/
+
+.my_card_pick_period {
+    background: #f4f4f2;
+    border-radius: 3px;
+    min-height: 60px;
+    margin-top: 30px;
+    width: 830px;
+}
+
+.my_card_pick_bg {
+    background: url(../img/util/my_card_pick_bg.gif) 0 0;
+    float: left;
+    height: 28px;
+    margin: 16px 0 0 30px;
+    width: 298px;
+}
+
+.my_card_pick_bg dt,
+.my_card_pick_bg dd,
+.my_card_pick_bg dd input,
+.my_card_pick_bg dd label {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.my_card_pick_bg dt {
+    color: #222;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    width: 48px;
+}
+
+.my_card_pick_bg dd {
+    color: #444;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    width: 230px;
+}
+
+.my_card_pick_bg dd input {
+    height: 13px;
+    margin: 8px 0 0 13px;
+    width: 13px;
+}
+
+.my_card_pick_bg dd label {
+    margin: 0 0 0 5px;
+    line-height: 30px;
+}
+
+.my_card_pick_date {
+    float: right;
+    height: 28px;
+    margin: 16px 30px 0 0;
+    width: 394px;
+}
+
+.my_card_pick_date dt,
+.my_card_pick_date dd,
+.my_card_pick_date dd input {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.my_card_pick_date dt {
+    color: #222;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    width: 48px;
+}
+
+.my_card_pick_date dd {
+    color: #444;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    width: 338px;
+}
+
+.my_card_pick_date dd input {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 133px;
+}
+
+.hyphen_bg {
+    background: url(../img/util/hyphen_bg.gif);
+    float: left;
+    height: 28px;
+    width: 16px;
+}
+
+.btn_pick_date {
+    float: right;
+    height: 28px;
+    width: 40px;
+}
+
+.btn_pick_date a {
+    background: #777;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+.my_card_date_refer {
+    font-size: 12px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.eGift_list_wrap {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.eGift_list_inner>li {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.eGift_list_z01 {
+    position: relative;
+}
+
+.eGift_list_z01 p.num {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 5%;
+    height: 16px;
+    text-align: center;
+    margin-top: -8px;
+}
+
+.eGift_list_ul {
+    width: 67%;
+    float: left;
+    margin-left: 5%;
+}
+
+.eGift_list_ul li:first-child {
+    border: none;
+}
+
+.eGift_list_ul li {
+    position: relative;
+    border-top: 1px solid #ddd;
+}
+
+.eGift_infor_wrap {
+    position: relative;
+    float: left;
+    padding: 10px;
+    width: 70%;
+    height: 100px;
+    border-left: 1px solid #ddd;
+}
+
+.eGift_infor_wrap .eGift_infor_inner {
+    padding-top: 6%;
+}
+
+.eGift_infor_wrap .eGift_infor_01 {
+    float: left;
+    width: 100%;
+}
+
+.eGift_infor_wrap p.eGift_card {
+    float: left;
+    max-width: 100px;
+}
+
+.eGift_infor_wrap p.eGift_card img {
+    width: 100%;
+}
+
+.eGift_infor_wrap .eGift_infor_01 .eGift_text {
+    float: right;
+    width: 70%;
+    padding-top: 10px;
+}
+
+.eGift_infor_wrap .eGift_infor_01 .eGift_text dt {
+    float: left;
+    color: #222;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.4;
+    width: 23%;
+}
+
+.eGift_infor_wrap .eGift_infor_01 .eGift_text dd {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    width: 77%;
+    overflow: hidden;
+    height: 20px;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.eGift_infor_wrap .eGift_infor_01 .eGift_text dd.last {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+}
+
+.eGift_infor_wrap02 {
+    position: relative;
+    float: left;
+    padding: 10px;
+    width: 22%;
+    height: 100px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.eGift_infor_wrap02 .eGift_infor_inner {
+    display: table;
+    height: 100%;
+    padding-top: 0;
+}
+
+.eGift_infor_wrap02 .eGift_infor_02 {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.eGift_infor_02 .eGift_text02 {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.eGift_infor_02 .eGift_text02 dt {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.eGift_infor_02 .eGift_text02 dd {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.eGift_infor_wrap03 {
+    float: left;
+    padding: 10px;
+    width: 25%;
+}
+
+.eGift_infor_wrap03 .eGift_infor_inner {
+    position: absolute;
+    right: 0;
+    top: 45%;
+    width: 27%;
+}
+
+.eGift_infor_wrap03 .eGift_infor_03 {
+    width: 100%;
+}
+
+.eGift_infor_03 .eGift_text03 {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.eGift_infor_03 .eGift_text03 dt {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.eGift_infor_03 .eGift_text03 dd {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.btn_eGift_z02 {
+    width: 78%;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.btn_eGift_z02 li {
+    float: left;
+    width: 40%;
+}
+
+.btn_eGift_z02 li.btn_eGift_b01 {
+    margin-right: 2%;
+}
+
+.btn_eGift_z02 li a {
+    background: #777;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+div.egiftCard_tbl_pagination {
+    height: 27px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+div.egiftCard_tbl_pagination ul.pager {
+    text-align: center;
+}
+
+div.egiftCard_tbl_pagination ul.pager li {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+div.egiftCard_tbl_pagination ul.pager li.active a {
+    font-weight: bold;
+    color: #0d5f34;
+    font-size: 14px;
+    border-bottom: 1px solid #0d5f34;
+}
+
+
+
+
+
 /*공통*/
 .wrapper {
     width: 100%;
@@ -4017,4 +4438,8 @@ table.payment_tb td.ltd span {
 
 .w1100 {
     width: 1100px;
+}
+
+.w1000 {
+    width: 1000px;
 }
