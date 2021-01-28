@@ -1926,13 +1926,12 @@ input.mem[type=checkbox]:active+label {
 }
 
 .cont {
-    width: 1000px;
+    width: 830px;
     margin: 30px auto;
 }
 
 .cont_inner {
     width: 100%;
-    margin-left: -20px;
     padding: 0 0 90px 0;
 }
 
@@ -2003,7 +2002,7 @@ input.mem[type=checkbox]:active+label {
 }
 
 .voc_input_tbl {
-    margin: 30px 30px 0 30px;
+    margin: 30px 0 0 0;
 }
 
 .voc_input_tbl p.must_input {
@@ -2019,7 +2018,7 @@ input.mem[type=checkbox]:active+label {
 .voc_input_tbl table {
     border-top: 1px solid #333;
     font-size: 14px;
-    width: 940px;
+    width: 830px;
 }
 
 .voc_input_tbl table caption {
@@ -2520,6 +2519,10 @@ p.sch_no_result {
 
 .agree_checkbox label {
     margin-right: 20px;
+}
+
+#join_mem .sel_wrap input.w350 {
+    width: 350px;
 }
 
 #join_mem .sel_wrap input.w300 {
@@ -3186,6 +3189,765 @@ div.product_view_wrap2 {
     font-size: 14px;
 }
 
+/*My 카드 - 보유카드목록페이지*/
+
+.my_card_status {
+    width: 830px;
+    margin: auto;
+}
+
+.my_card_status_ttl {
+    background: #7e786f;
+    border-radius: 3px 3px 0 0;
+    color: #fffefe;
+    height: 152px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.my_card_status_ttl strong {
+    float: left;
+    font-size: 24px;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.my_card_status_ttl p {
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.my_card_status_cont {
+    background: #f6f5ef;
+    border-radius: 0 0 3px 3px;
+    color: #444;
+    height: 292px;
+    text-align: center;
+    width: 100%;
+}
+
+.my_card_status_cont strong {
+    float: left;
+    font-size: 24px;
+    margin-top: 90px;
+    width: 100%;
+}
+
+.my_card_status_cont p {
+    float: left;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.my_card_status_cont span {
+    float: left;
+    height: 30px;
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.my_card_status_cont span a {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+    border-radius: 3px;
+    color: #222;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    left: 50%;
+    line-height: 28px;
+    margin-left: -53px;
+    position: absolute;
+    text-align: center;
+    width: 105px;
+}
+
+
+/*카드등록*/
+
+.mycard_info_input_tbl .sel_wrap span {
+    padding-left: 10px;
+}
+
+
+/*e-Gift 카드선물*/
+/*선물하기 - 1단계 */
+
+.gift_inner {
+    width: 1100px;
+    padding: 0;
+    position: relative;
+    margin: 0 auto;
+}
+
+.useguide_section,
+.card_gift_section,
+.card_gift_info_section {
+    margin: 0 auto;
+    position: relative;
+    width: 1100px;
+}
+
+.card_gift_info_section {
+    padding-bottom: 70px;
+}
+
+.card_gift_steps {
+    height: 70px;
+    width: 1100px;
+}
+
+.gift_bg_step1 {
+    background: url(../img/util/gift_bg_step1.jpg) no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 68px;
+    width: 1098px;
+}
+
+.gift_bg_step2 {
+    background: url(../img/util/gift_bg_step2.jpg) no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 68px;
+    width: 1098px;
+}
+
+.gift_bg_step3 {
+    background: url(../img/util/gift_bg_step3.jpg) no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 68px;
+    width: 1098px;
+}
+
+.gift_bg_step4 {
+    background: url(../img/util/gift_bg_step4.jpg) no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 68px;
+    width: 1098px;
+}
+
+.gift_step_each {
+    float: left;
+    height: 68px;
+    position: relative;
+    width: 25%;
+}
+
+.gift_step_each strong.icon_step_on {
+    color: #fff;
+    float: left;
+    font-size: 14px;
+    height: 24px;
+    left: 50%;
+    line-height: 24px;
+    position: absolute;
+    top: 50%;
+    font-weight: bold;
+}
+
+.gift_step_each strong.icon_step {
+    color: #666;
+    float: left;
+    font-size: 14px;
+    height: 24px;
+    left: 50%;
+    line-height: 24px;
+    position: absolute;
+    top: 50%;
+    font-weight: normal;
+}
+
+.gift_step_each strong.icon_step1 {
+    background: url(../img/util/icon_step1.png) 0 0 no-repeat;
+    margin: -12px 0 0 -10%;
+    text-indent: 35px;
+}
+
+.gift_step_each strong.icon_step1_on {
+    background: url(../img/util/icon_step1_on.png) 0 0 no-repeat;
+    margin: -12px 0 0 -15%;
+    text-indent: 35px;
+}
+
+.gift_step_each strong.icon_step2 {
+    background: url(../img/util/icon_step2.png) 0 0 no-repeat;
+    margin: -12px 0 0 -10%;
+    text-indent: 35px;
+}
+
+.gift_step_each strong.icon_step2_on {
+    background: url(../img/util/icon_step2_on.png) 0 0 no-repeat;
+    margin: -12px 0 0 -15%;
+    text-indent: 35px;
+}
+
+.gift_step_each strong.icon_step3 {
+    background: url(../img/util/icon_step3.png) 0 4px no-repeat;
+    margin: -12px 0 0 -10%;
+    text-indent: 30px;
+}
+
+.gift_step_each strong.icon_step3_on {
+    background: url(../img/util/icon_step3_on.png) 0 4px no-repeat;
+    margin: -12px 0 0 -15%;
+    text-indent: 30px;
+}
+
+.gift_step_each strong.icon_step4 {
+    background: url(../img/util/icon_step4.png) 0 3px no-repeat;
+    margin: -12px 0 0 -10%;
+    text-indent: 25px;
+}
+
+.gift_step_each strong.icon_step4_on {
+    background: url(../img/util/icon_step4_on.png) 0 3px no-repeat;
+    margin: -12px 0 0 -15%;
+    text-indent: 25px;
+}
+
+.gift_card_txt {
+    border-radius: 3px;
+    margin-top: 50px;
+    width: 1100px;
+}
+
+.gift_card_txt h5 {
+    font-weight: bold;
+    font-size: 18px;
+    color: #222;
+    text-align: center;
+    background: #f4f4f2;
+    padding: 25px 0;
+    margin-bottom: 50px;
+}
+
+.gift_card_tabs_wrap {
+    margin-top: 40px;
+    position: relative;
+}
+
+.m_select_bg {
+    display: none;
+}
+
+.gift_card_tabs_wrap h5 {
+    border-radius: 3px 3px 0 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 16%;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab1 {
+    left: 0;
+    z-index: 7;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab2 {
+    left: 16%;
+    z-index: 6;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab3 {
+    left: 32%;
+    z-index: 5;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab4 {
+    left: 48%;
+    z-index: 4;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab5 {
+    left: 64%;
+    z-index: 3;
+}
+
+.gift_card_tabs_wrap h5.gift_card_tab6 {
+    left: 80%;
+    z-index: 2;
+}
+
+.gift_card_tabs_wrap h5 a {
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    border-bottom: 1px solid #222;
+    border-radius: 3px 3px 0 0;
+    color: #555;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 100%;
+}
+
+.gift_card_tabs_wrap h5 a.on {
+    background: #fff;
+    border: 1px solid #222;
+    border-bottom: none;
+    color: #006633;
+    font-weight: bold;
+}
+
+.gift_card_tabs_wrap article {
+    padding: 70px 0;
+    display: none;
+}
+
+.gift_card_tabs_wrap article.on {
+    display: block;
+}
+
+.gift_card_tabs_wrap article p.gift_card_num {
+    background: url(../img/util/bullet_grey.gif) 0 5px no-repeat;
+    color: #666;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.gift_card_list_wrap {
+    display: inline-block;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.gift_card_list_wrap ul {
+    margin: -30px 0 0 -20px;
+}
+
+.gift_card_list_wrap ul li {
+    float: left;
+    height: 210px;
+    margin: 30px 0 0 20px;
+    position: relative;
+    width: 260px;
+}
+
+.gift_card_list_wrap ul li a {
+    color: #444;
+}
+
+.gift_card_list_wrap ul li img {
+    width: 100%;
+}
+
+.gift_card_list_wrap ul li span {
+    bottom: 0;
+    display: block;
+    font-size: 14px;
+    height: 30px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+/*선물하기 - 2단계 */
+
+.gift_info_tbl .sel_wrap input.w100 {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.gift_info_tbl .sel_wrap input {
+    text-indent: 8px;
+}
+
+table.gift_info_tbl {
+    width: 1100px;
+}
+
+table.gift_info_tbl tr td textarea {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #666;
+    font-size: 12px;
+    height: 160px;
+    line-height: 20px;
+    padding: 10px;
+    width: 830px;
+    resize: none;
+}
+
+table.gift_info_tbl tr td div.tbl_card_radio {
+    height: 13px;
+    width: 100%;
+}
+
+table.gift_info_tbl tr td div.tbl_card_radio input {
+    float: left;
+    height: 13px;
+    margin-right: 5px;
+    padding: 0;
+    width: 13px;
+}
+
+table.gift_info_tbl tr td div.tbl_card_radio label {
+    color: #666;
+    float: left;
+    font-size: 15px;
+    margin-right: 12px;
+}
+
+table.gift_info_tbl tbody tr:nth-child(2) {
+    height: 100px;
+}
+
+table.gift_info_tbl tbody tr:nth-child(2) td {
+    vertical-align: baseline;
+}
+
+table.gift_info_tbl tr td div.tbl_card_sending {
+    color: #444;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    margin-bottom: 5px;
+    width: 100%;
+    vertical-align: baseline;
+}
+
+.gift_info_adding {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.mail_sel_wrap {
+    width: 130px;
+}
+
+.sender_addel_btn {
+    background: #666;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    float: left;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    margin-left: 9px;
+    font-size: 12px;
+    text-align: center;
+    width: 42px;
+}
+
+.gift_card_visual {
+    background: url(../img/util/gift_wave_bg.png) left bottom no-repeat;
+    height: auto;
+    padding-bottom: 10px;
+}
+
+.gift_card_visual dl dd {
+    height: 41px;
+    line-height: 41px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #006633;
+}
+
+.gift_card_visual dl dt {
+    text-align: center;
+}
+
+.gift_card_visual dl dt img {
+    width: 300px;
+}
+
+table.gift_info_tbl {
+    border-top: 1px solid #333;
+    margin-top: 20px;
+    text-align: left;
+}
+
+table.gift_info_tbl caption {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+table.gift_info_tbl tr th {
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    color: #444;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 17px 20px;
+    vertical-align: middle;
+}
+
+table.gift_info_tbl tr td {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 17px 20px;
+    font-size: 14px;
+}
+
+table.gift_info_tbl tr td div.pickdate span {
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 10px;
+}
+
+.gift_info_adding2 {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.gift_info_adding2 li {
+    padding-left: 20px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    background: url(../img/util/list_style.png) 0 4px no-repeat;
+}
+
+.gift_info_adding2 span.gift_info_add_fb {
+    color: #006633;
+    font-weight: bold;
+}
+
+.gift_info_adding2 br {
+    display: block !important;
+}
+
+.gift_info_send_btns {
+    height: 45px;
+    margin-top: 40px;
+    width: 100%;
+    position: relative;
+}
+
+.gift_info_send_btns ul {
+    height: 45px;
+    width: 173px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gift_info_send_btns ul li {
+    float: left;
+}
+
+.gift_info_send_btns ul li a {
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 84px;
+}
+
+.gift_info_send_btns ul li.gift_info_send_btn1 a {
+    background: #666;
+}
+
+.gift_info_send_btns ul li.gift_info_send_btn2 {
+    margin-left: 5px;
+}
+
+.gift_info_send_btns ul li.gift_info_send_btn2 a {
+    background: #222;
+}
+
+
+/*선물하기 - 3단계*/
+.card_gift_payment dl {
+    width: 1100px;
+    margin-bottom: 50px;
+}
+
+.card_gift_payment dl dt {
+    width: 470px;
+    text-align: center;
+    float: left;
+}
+
+.card_gift_payment dl dd {
+    float: right;
+    width: 630px;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.card_gift_payment dl dt img {
+    width: 241px;
+}
+
+table.payment_tb {
+    width: 1100px;
+}
+
+table.payment_tb th.fth {
+    border-top: 1px solid #222;
+}
+
+table.payment_tb th {
+    background: #f4f4f2;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+    padding: 17px 0 17px 20px;
+    text-align: left;
+}
+
+table.payment_tb td {
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #666;
+    padding: 17px 0 17px 20px;
+    text-align: left;
+}
+
+table.payment_tb td.ftd {
+    border-top: 1px solid #222;
+}
+
+table.payment_tb td.ltd {
+    border-bottom: 1px solid #222;
+    text-align: right;
+    font-size: 16px;
+    color: #444;
+    padding-right: 20px;
+}
+
+table.payment_tb td.ltd span {
+    font-weight: bold;
+    color: #006633;
+}
+
+
+.gift_payment_btns,
+.gift_payment_done_btns {
+    float: left;
+    height: 45px;
+    margin-top: 40px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 80px;
+}
+
+.gift_payment_btns ul {
+    height: 45px;
+    width: 299px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gift_payment_btns ul li,
+.gift_payment_done_btns ul li {
+    float: left;
+    height: 45px;
+}
+
+.gift_payment_btns ul li.gift_payment_btn2 a {
+    background: #222;
+    width: 117px;
+}
+
+.gift_payment_btns ul li.gift_payment_btn3 a {
+    background: #222;
+    margin-left: 5px;
+    width: 88px;
+}
+
+.gift_payment_btns ul li.gift_payment_btn1 a {
+    background: #666;
+    margin-left: 5px;
+    width: 84px;
+}
+
+.gift_payment_btns ul li a,
+.gift_payment_done_btns ul li a {
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 100%;
+}
+
+/*선물하기 - 4단계*/
+.gift_pay_btns,
+.gift_pay_done_btns {
+    float: left;
+    height: 45px;
+    margin-top: 40px;
+    width: 100%;
+    position: relative;
+}
+
+.gift_pay_done_btns ul {
+    height: 45px;
+    width: 267px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gift_pay_btns ul li,
+.gift_pay_done_btns ul li {
+    float: left;
+    height: 45px;
+}
+
+.gift_pay_done_btns ul li.gift_pay_done_btn1 a {
+    background: #666;
+    width: 117px;
+}
+
+.gift_pay_btns ul li a,
+.gift_pay_done_btns ul li a {
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 100%;
+}
+
+.gift_pay_done_btns ul li.gift_pay_done_btn2 a {
+    background: #222;
+    margin-left: 5px;
+    width: 145px;
+}
+
 
 /*공통*/
 .wrapper {
@@ -3217,6 +3979,14 @@ div.product_view_wrap2 {
     color: #222222;
 }
 
+.cf66 {
+    color: #f66;
+}
+
+.t_b7312c {
+    color: #b7312c;
+}
+
 .en {
     font-family: arial, HelveticaNeue, DroidSans, Sans-serif, Helvetica;
 }
@@ -3229,6 +3999,13 @@ div.product_view_wrap2 {
     margin-bottom: 60px;
 }
 
+.m0 {
+    margin: 0;
+}
+
+.ma {
+    margin: auto;
+}
 
 .p0 {
     padding: 0;
@@ -3236,4 +4013,8 @@ div.product_view_wrap2 {
 
 .p20 {
     padding: 20px 0 20px 0;
+}
+
+.w1100 {
+    width: 1100px;
 }

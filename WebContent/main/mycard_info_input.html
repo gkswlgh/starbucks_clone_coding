@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello JSP</title>
+    <!--login css소스파일-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css?time=<%=System.currentTimeMillis()%>" />
+</head>
+
+<body>
+    <div id="container">
+        <!-- 서브타이틀 -->
+        <header class="sub_tit_wrap">
+            <div class="sub_tit_bg">
+                <div class="sub_tit_inner">
+                    <h4>
+                        <img src="//image.istarbucks.co.kr/common/img/util/reg_card_ttl.png" alt="카드 등록" />
+                    </h4>
+                    <ul class="smap">
+                        <li><a href="#"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">MyStarbucks</span></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">카드 등록</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 서브타이틀 끝 -->
+        <div class="cont">
+            <div class="cont_inner">
+                <form action="#" id="join_mem" name="join_mem" class="join_input_frm" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="0" id="store_cd" name="store_cd" />
+                    <fieldset>
+                        <legend>카드 등록 입력폼</legend>
+                        <!-- 테이블 -->
+                        <div class="voc_input_tbl mycard_info_input_tbl">
+                            <!-- 인삿말 -->
+                            <div class="">
+                                <strong> 스타벅스 카드 정보 입력 </strong>
+                            </div>
+                            <!-- 인삿말 끝 -->
+                            <p class="must_input">표시 항목은 필수 입력 사항입니다.</p>
+                            <table summary="아이디, 비밀번호, 이름, 성별, 이메일 주소, 휴대전화, 생일">
+                                <caption>아이디, 비밀번호, 이름, 성별, 이메일 주소, 휴대전화, 생일에 대한 테이블</caption>
+                                <colgroup>
+                                    <col width="180" />
+                                    <col width="720" />
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">카드명 </th>
+                                        <td>
+                                            <div class="sel_wrap">
+                                                <input type="text" class="voc_ttl_input1 w350" id="DS_VOC_TITLE" name="DS_VOC_TITLE" placeholder="카드명 최대 20자 (선택)" />
+                                                <span>* 카드명은 미입력 시 자동으로 부여됩니다.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">카드번호 (16자리) <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
+                                        <td>
+                                            <div class="sel_wrap">
+                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num" />
+                                                <p class="cell_hyphen">-</p>
+                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num" />
+                                                <p class="cell_hyphen">-</p>
+                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num" />
+                                                <p class="cell_hyphen">-</p>
+                                                <input type="text" class="cellphone_input" id="phone3" name="phone3" maxlength="4" ref="num" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">PIN 번호 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
+                                        <td>
+                                            <div class="sel_wrap">
+                                                <input type="text" class="voc_ttl_input1 w350" id="DS_VOC_TITLE" name="DS_VOC_TITLE" placeholder="PIN 번호 8자리 입력 (필수)" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="agree_checkbox clean">
+                                                <input id="agree1" name="agree" type="checkbox" /> <label for="agree1">스타벅스 카드 이용약관 동의 <a href="#" title="스타벅스 카드 이용약관 동의 보러가기"><span class="cf66">(필수)</span></a></label>
+                                                <input id="agree2" name="agree" type="checkbox" /> <label for="agree2">개인정보 수집, 이용 동의 <a href="#" title="개인정보 수집, 이용 동의 보러가기"><span class="cf66">(필수)</span></a></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 테이블 끝 -->
+                        <div class="voc_info_input_btn1">
+                            <a href="#none" onclick="자바스크립트함수(); return false;">카드 등록하기</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- 내용 끝 -->
+    </div>
+</body>
+
+</html>
