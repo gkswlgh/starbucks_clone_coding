@@ -4108,6 +4108,7 @@ table.payment_tb td.ltd span {
     float: left;
     height: 26px;
     width: 133px;
+    text-indent: 4px;
 }
 
 .hyphen_bg {
@@ -4364,6 +4365,185 @@ div.egiftCard_tbl_pagination ul.pager li.active a {
     color: #0d5f34;
     font-size: 14px;
     border-bottom: 1px solid #0d5f34;
+}
+
+/*선물내역 - 상세보기*/
+.egiftCard_view_wrap {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.egiftCard_view_wrap .ec_title2 {
+    background: #f4f4f2;
+    border-top: 1px solid #ddd;
+    height: 50px;
+}
+
+.egiftCard_view_wrap .ec_title p,
+.egiftCard_view_wrap .ec_title2 p {
+    padding: 0 40px;
+    height: 50px;
+    line-height: 50px;
+    color: #444;
+    font-size: 14px;
+}
+
+.ec_view_mid {
+    padding: 3%;
+    width: 94%;
+    overflow: hidden;
+    border-top: 1px solid #ddd;
+}
+
+.ec_view_mid p.img,
+.ec_view_mid2 p.img {
+    float: left;
+    max-width: 283px;
+    width: 40%;
+}
+
+.ec_view_mid p.img img,
+.ec_view_mid2 p.img img {
+    width: 100%;
+}
+
+.ec_view_mid .info_text,
+.ec_view_mid2 .info_text {
+    float: left;
+    margin-left: 40px;
+    width: 50%;
+    overflow: hidden;
+}
+
+.ec_view_mid .info_text .info_text_ul li,
+.ec_view_mid2 .info_text .info_text_ul li {
+    background: url(../img/util/list_blit.png) 0px 4px no-repeat;
+    font-size: 14px;
+    color: #666;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.ec_view_mid .info_text .ec_messege,
+.ec_view_mid2 .info_text .ec_messege {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    padding-top: 20px;
+    width: 90%;
+}
+
+.egiftCard_view_poin {
+    background: #f4f4f2;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.egiftCard_view_poin .text_list {
+    padding: 3%;
+    width: 94%;
+    overflow: hidden;
+}
+
+.egiftCard_view_poin .text_list li {
+    float: left;
+    background: url(../img/util/reward/list_blit.png) 0px 5px no-repeat;
+    font-size: 14px;
+    color: #666;
+    width: 260px;
+    margin-bottom: 10px;
+}
+
+.egiftCard_view_poin .text_list li strong {
+    font-size: 14px;
+    color: #666;
+    font-weight: bold;
+    padding-left: 3%;
+    display: block;
+    width: 27%;
+    float: left;
+}
+
+.egiftCard_view_poin .text_list li span {
+    display: block;
+    width: 70%;
+    float: right;
+}
+
+section.egiftCard_info_pick form fieldset legend {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+.ecinfo_list_wrap {
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.ecinfo_list_wrap>li {
+    float: left;
+    width: 50%;
+    border-bottom: 1px solid #ddd;
+}
+
+.ecinfo_list_wrap>li .ecinfo_list {
+    padding: 8% 4%;
+    background: #fff;
+    position: relative;
+}
+
+.ecinfo_list_wrap>li .ecinfo_list .ec_cardimg {
+    display: block;
+    margin-left: 10%;
+    width: 81px;
+}
+
+.ecinfo_list_wrap>li .ecinfo_list .ec_cardimg img {
+    vertical-align: top;
+    width: 100%;
+}
+
+.ecinfo_list_wrap>li .ecinfo_list ul {
+    position: absolute;
+    top: 22%;
+    left: 40%;
+}
+
+.ecinfo_list_wrap>li .ecinfo_list ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+div.egiftCard_btnZone p.btn_list {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+    border-radius: 3px;
+    float: right;
+    width: 60px;
+}
+
+div.egiftCard_btnZone p.btn_list a {
+    color: #222;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
 }
 
 

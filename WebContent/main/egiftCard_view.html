@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello JSP</title>
+    <!--login css소스파일-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css?time=<%=System.currentTimeMillis()%>" />
+</head>
+
+<body>
+    <div id="container">
+        <!-- 서브타이틀 -->
+        <header class="sub_tit_wrap">
+            <div class="sub_tit_bg">
+                <div class="sub_tit_inner">
+                    <h4>
+                        <img src="/img/util/ms_egift_ttl.png" alt="선물내역" />
+                    </h4>
+                    <ul class="smap">
+                        <li><a href="#"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">MyStarbucks</span></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">My 스타벅스 e-Gift Card</span></a></li>
+                        <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
+                        <li><a href="#"><span class="en">선물내역</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 서브타이틀 끝 -->
+        <!-- 내용 -->
+        <div class="cont">
+            <div class="cont_inner">
+                <!-- 선물내역보기 -->
+                <!-- 내역 상세 -->
+                <section class="egiftCard_view_wrap">
+                    <div class="ec_title2">
+                        <p>
+                            <strong>
+                                주문번호 :
+                                <span class="en">20210128732344457</span>
+                            </strong>
+                        </p>
+                    </div>
+                    <article class="ec_view_mid clear">
+                        <p class="img"><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="e-Gift 카드"></p>
+                        <div class="info_text">
+                            <ul class="info_text_ul">
+                                <li>
+                                    <strong>받는 사람 : </strong>
+                                    이름 [이메일]
+                                </li>
+                                <li>
+                                    <strong>단 &nbsp;&nbsp;&nbsp;&nbsp; 가 : </strong>
+                                    10,000원
+                                </li>
+                                <li>
+                                    <strong>선물 방법 : </strong>
+                                    E-Mail
+                                </li>
+                                <li>
+                                    <strong>주문 수량 : </strong>
+                                    1건
+                                </li>
+                                <li>
+                                    <strong>주문 금액 : </strong>
+                                    <span class="cf66">10,000원</span>
+                                </li>
+                            </ul>
+                            <p class="ec_message">나에게 선물</p>
+                        </div>
+                    </article>
+                </section>
+                <section class="egiftCard_view_poin">
+                    <ul class="text_list clear">
+                        <li class="list01 clear">
+                            <strong>결제 코드 : </strong>
+                            <span>2021012842342134</span>
+                        </li>
+                        <li class="list02 clear">
+                            <strong>결제 일시 : </strong>
+                            <span class="cf66">2021-01-28 21:31</span>
+                        </li>
+                        <li class="list03 clear">
+                            <strong>결제 수단 : </strong>
+                            <span>신용카드</span>
+                        </li>
+                        <li class="list04 clear">
+                            <strong>전송 시간 : </strong>
+                            <span>2021-01-28 21:31</span>
+                        </li>
+                        <li class="list05 clear">
+                            <strong>결제 금액 : </strong>
+                            <span>10,000원</span>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 내역 상세 끝 -->
+                <!-- 목록 -->
+                <section class="egiftCard_info_pick">
+                    <form method="post">
+                        <fieldset>
+                            <legend>my e-Gift 카드 사용 전송상태 재전송, 결제취소 선택 폼</legend>
+                            <ul class="ecinfo_list_wrap clear">
+                                <li>
+                                    <div class="ecinfo_list">
+                                        <span class="ec_cardimg">
+                                            <img src="https://image.istarbucks.co.kr/cardThumbImg/20201229/007764_thumb.png" alt="e-gift 카드">
+                                        </span>
+                                        <ul>
+                                            <li>이름 [이메일]</li>
+                                            <li>전송성공 [2021-01-28 21:31]</li>
+                                            <li>결제 취소 불가 / 재전송 1회 가능</li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="egiftCard_btnZone clear">
+                                <p class="btn_list">
+                                    <a href="#">목록</a>
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+                <!-- 목록 끝 -->
+                <!-- 선물내역보기 끝 -->
+            </div>
+        </div>
+        <!-- 내용 끝 -->
+    </div>
+</body>
+
+</html>
