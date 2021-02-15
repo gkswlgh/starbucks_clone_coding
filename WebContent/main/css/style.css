@@ -3245,6 +3245,89 @@ div.product_view_wrap2 {
     font-size: 14px;
 }
 
+/*메뉴 상세의 장바구니 버튼*/
+/*버튼들*/
+
+.product_cart {
+    float: right;
+}
+
+.product_cart p {
+    display: inline;
+    font-size: 16px;
+}
+
+.product_cart p:first-child {
+    padding-right: 25px;
+}
+
+.product_cart input {
+    height: 20px;
+}
+
+.product_cart label {
+    font-weight: bold;
+}
+
+.product_cart button {
+    height: 25px;
+    width: 37px;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #666;
+    color: #fff;
+}
+
+input#product_count_result {
+    width: 40px;
+}
+
+ul.product_cart_btns {
+    float: right;
+    height: 40px;
+    margin-top: 20px;
+    width: 420px;
+}
+
+ul.product_cart_btns li {
+    border-radius: 3px;
+    float: left;
+    height: 40px;
+    width: 200px;
+}
+
+ul.product_cart_btns li.product_cart_btn1 {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+}
+
+ul.product_cart_btns li.product_cart_btn2 {
+    background: #444;
+    border: 1px solid #444;
+    color: #fff;
+    margin-left: 5px;
+}
+
+ul.product_cart_btns li a {
+    display: block;
+    font-size: 14px;
+    height: 40px;
+    width: 200px;
+    line-height: 40px;
+    text-align: center;
+}
+
+ul.product_cart_btns li.product_cart_btn1 a {
+    font-weight: bold;
+    color: #222;
+}
+
+ul.product_cart_btns li.product_cart_btn2 a {
+    color: #fff;
+}
+
+
+
 /*My 카드 - 보유카드목록페이지*/
 
 .my_card_status {
