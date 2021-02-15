@@ -1953,7 +1953,8 @@ input.mem[type=checkbox]:active+label {
     padding: 20px;
     height: 162px;
     position: relative;
-    background: url(../img/util/voc_top_bg.png);
+    background: url(../img/util/my_suggestion_inquiry_bg.png) 97% bottom no-repeat,
+        url(../img/util/voc_top_bg.png);
     width: 90%;
 }
 
@@ -3622,7 +3623,7 @@ div.product_view_wrap2 {
     text-indent: 8px;
 }
 
-table.gift_info_tbl {
+.gift_info_tbl {
     width: 1100px;
 }
 
@@ -3656,14 +3657,6 @@ table.gift_info_tbl tr td div.tbl_card_radio label {
     float: left;
     font-size: 15px;
     margin-right: 12px;
-}
-
-table.gift_info_tbl tbody tr:nth-child(2) {
-    height: 100px;
-}
-
-table.gift_info_tbl tbody tr:nth-child(2) td {
-    vertical-align: baseline;
 }
 
 table.gift_info_tbl tr td div.tbl_card_sending {
@@ -4990,6 +4983,478 @@ div.egiftCard_btnZone p.btn_list a {
     margin: 0 auto;
 }
 
+
+/*mycard_charge 카드충전*/
+.card_charge_wrap {
+    position: relative;
+}
+
+/*일반-자동 탭*/
+.card_charge_wrap h5.card_charge_regular {
+    border-radius: 3px 0 0 3px;
+    left: 0;
+}
+
+.card_charge_wrap h5 {
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+.card_charge_wrap h5.card_charge_auto {
+    border-radius: 0 3px 3px 0;
+    left: 413px;
+}
+
+.card_charge_wrap h5 a {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #555;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    width: 413px;
+}
+
+.card_charge_wrap h5.card_charge_regular a {
+    border-radius: 3px 0 0 3px;
+}
+
+.card_charge_wrap h5.card_charge_auto a {
+    border-radius: 0 3px 3px 0;
+}
+
+.card_charge_wrap h5 a.on {
+    background: #006633;
+    border: 1px solid #006633;
+    color: #fff;
+}
+
+/*article*/
+.card_charge_wrap article {
+    padding-top: 70px;
+}
+
+.card_charge_wrap article table {
+    border-top: 1px solid #333;
+}
+
+.card_charge_wrap article table caption {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+.regular_charge.chargeWh tr th,
+.lowest_limit.chargeWh tr th {
+    width: 200px;
+}
+
+.regular_charge tr th,
+.lowest_limit tr th,
+.monthly_fixed tr th {
+    background: #f4f4f2;
+    color: #222;
+    line-height: 18px;
+}
+
+.regular_charge tr th,
+.regular_charge tr td,
+.lowest_limit tr th,
+.lowest_limit tr td,
+.monthly_fixed tr th,
+.monthly_fixed tr td {
+    font-size: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 25px;
+    padding: 9px 0 9px 20px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.regular_charge.chargeWh tr td,
+.lowest_limit.chargeWh tr td {
+    width: 630px;
+}
+
+.regular_charge tr td,
+.lowest_limit tr td,
+.monthly_fixed tr td {
+    background: #fff;
+    color: #666;
+}
+
+.card_charge_wrap article table tr td div.sel_wrap {
+    height: 28px;
+    position: relative;
+    width: 100%;
+}
+
+.user_sel_wrap {
+    float: left;
+    margin: 0;
+}
+
+.user_sel_wrap label {
+    display: none;
+}
+
+.user_sel_wrap select {
+    width: 240px;
+    height: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user_card_wrap {
+    display: table;
+    height: 125px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 590px;
+}
+
+.user_card_wrap figure {
+    float: left;
+    height: 125px;
+    margin-right: -93px;
+    width: 206px;
+    position: relative;
+}
+
+.representative_icon {
+    background: url(../img/util/representative_icon.png) 0 0 no-repeat;
+    background-size: 100% auto;
+    width: 25px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: -8px;
+}
+
+.user_card_wrap .representative_icon {
+    left: 5px;
+    top: 5px;
+}
+
+.representative_icon a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.user_card_wrap figure img {
+    width: 100%;
+}
+
+.user_card_wrap p {
+    display: table-cell;
+    vertical-align: middle;
+    float: right;
+    width: 364px;
+    line-height: 1.4;
+}
+
+.user_card_wrap p strong {
+    color: #444;
+    font-size: 16px;
+}
+
+.card_charge_wrap article table tr td div.sel_wrap p.charge_change span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card_charge_wrap article table tr td div.sel_wrap p.charge_change {
+    float: left;
+    line-height: 28px;
+    margin-left: 10px;
+}
+
+.charge_change {
+    font-size: 14px;
+    color: #444;
+}
+
+.charge_options {
+    display: block;
+    height: 30px;
+}
+
+.charge_options input {
+    vertical-align: middle;
+    margin-top: 8px;
+}
+
+.charge_options label {
+    line-height: 30px;
+}
+
+.charge_level_guide {
+    float: left;
+    line-height: 16px;
+    margin-top: 10px;
+    padding-left: 14px;
+}
+
+.gift_info_adding2 li {
+    color: #666;
+    line-height: 20px;
+}
+
+/*버튼들*/
+
+ul.charge_tbl_btns {
+    float: right;
+    height: 30px;
+    margin-top: 20px;
+    width: 185px;
+}
+
+ul.charge_tbl_btns li {
+    border-radius: 3px;
+    float: left;
+    height: 28px;
+    width: 83px;
+}
+
+ul.charge_tbl_btns li.charge_tbl_btn1 {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+}
+
+ul.charge_tbl_btns li.charge_tbl_btn2 {
+    background: #222;
+    border: 1px solid #222;
+    color: #fff;
+    margin-left: 5px;
+}
+
+ul.charge_tbl_btns li a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 83px;
+}
+
+ul.charge_tbl_btns li.charge_tbl_btn1 a {
+    color: #222;
+}
+
+ul.charge_tbl_btns li.charge_tbl_btn2 a {
+    color: #fff;
+}
+
+/*자동충전쪽 보충*/
+.autoReloadDay span.checkTxt {
+    display: block;
+    color: #777;
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 2px;
+    margin-left: -2px;
+}
+
+.charge_will {
+    background: #f4f4f2;
+    border-radius: 3px;
+    float: left;
+    font-size: 14px;
+    margin-top: 7px;
+    padding: 20px;
+}
+
+/*voclist 고객의소리 접수 목록*/
+section.my_suggestion_list {
+    position: relative;
+    padding-top: 30px;
+    margin: 0 auto;
+    width: 95%;
+}
+
+div.suggestion_list_inner dl.content_tabmenu {
+    position: relative;
+    padding-top: 40px;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab {
+    position: absolute;
+    top: 0;
+    z-index: 5;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab_03 {
+    left: 412px;
+    margin-left: 0px;
+    z-index: 5;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab_02 {
+    left: 206px;
+    z-index: 6;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab_01 {
+    z-index: 7;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab_first a {
+    display: block;
+    width: 206px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #444;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab a {
+    display: block;
+    width: 207px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #444;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab_first.on a,
+div.suggestion_list_inner dl.content_tabmenu dt.tab_first a:hover {
+    display: block;
+    width: 208px;
+    height: 40px;
+    line-height: 40px;
+    background: #006633;
+    color: #fff;
+    border: 0;
+}
+
+div.suggestion_list_inner dl.content_tabmenu dt.tab.on a,
+div.suggestion_list_inner dl.content_tabmenu dt.tab a:hover {
+    display: block;
+    width: 208px;
+    height: 40px;
+    line-height: 40px;
+    background: #006633;
+    color: #fff;
+    border: 0;
+}
+
+/*고객의소리테이블*/
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table.suggestion_use_info_tbl {
+    border-top: 1px solid #333;
+    font-size: 14px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+table.suggestion_use_info_tbl caption {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+table.suggestion_use_info_tbl thead tr th {
+    border-bottom: 1px solid #333;
+    color: #222;
+    height: 46px;
+    vertical-align: middle;
+}
+
+table.suggestion_use_info_tbl tbody tr td {
+    border-bottom: 1px solid #dbdbdb;
+    color: #666;
+    height: 46px;
+    padding: 7px 0;
+    vertical-align: middle;
+}
+
+table.suggestion_use_info_tbl tbody tr td.tr {
+    text-align: left;
+    padding: 7px 20px 7px 20px;
+}
+
+table.suggestion_use_info_tbl td p.icon_complete span {
+    background: #006633;
+    border-radius: 3px;
+    color: #fff;
+    text-align: center;
+    padding: 5px 15px 5px 15px;
+}
+
+
+/*고객의소리페이징*/
+div.suggestion_tbl_pagination {
+    height: 27px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+div.suggestion_tbl_pagination ul.pager {
+    text-align: center;
+}
+
+div.suggestion_tbl_pagination ul.pager li {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+ul.pager li a {
+    font-size: 12px;
+    color: #555;
+}
+
+ul.pager li.active a {
+    font-weight: bold;
+    color: #0d5f34;
+    border-bottom: 1px solid #0d5f34;
+}
+
+div.suggestion_tbl_pagination ul.pager li a {
+    font-size: 12px;
+    color: #555;
+}
+
+div.suggestion_tbl_pagination ul.pager li.active a {
+    font-weight: bold;
+    color: #0d5f34;
+    border-bottom: 1px solid #0d5f34;
+}
+
+
 /*공통*/
 .wrapper {
     width: 100%;
@@ -5032,6 +5497,10 @@ div.egiftCard_btnZone p.btn_list a {
     color: #0d5f34;
 }
 
+.t_006633 {
+    color: #006633;
+}
+
 .en {
     font-family: arial, HelveticaNeue, DroidSans, Sans-serif, Helvetica;
 }
@@ -5070,4 +5539,8 @@ div.egiftCard_btnZone p.btn_list a {
 
 .w1000 {
     width: 1000px;
+}
+
+.w830 {
+    width: 830px;
 }
