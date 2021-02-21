@@ -5538,6 +5538,216 @@ div.suggestion_tbl_pagination ul.pager li.active a {
 }
 
 
+/*고객의 소리 상세 페이지*/
+
+section.my_suggestion_view_top {
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 20px;
+}
+
+section.my_suggestion_view_top dl {
+    float: left;
+}
+
+section.my_suggestion_view_top dl dd.text {
+    float: left;
+    font-size: 14px;
+    color: #222;
+    font-weight: bold;
+}
+
+section.my_suggestion_view_file {
+    padding: 18px 20px 25px 20px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+article.view_file_info dl {
+    width: 75%;
+    float: left;
+    height: 20px;
+    box-sizing: border-box;
+}
+
+article.view_file_info dl dt {
+    float: left;
+    font-size: 12px;
+    color: #666;
+    width: unset;
+}
+
+article.view_file_info dl dt span {
+    color: #d6d6d6;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+article.view_file_info dl dd {
+    float: left;
+    width: 80%;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+article.view_file_info ul {
+    float: right;
+    height: 20px;
+}
+
+article.view_file_info ul li {
+    float: left;
+    padding-left: 10px;
+}
+
+p.date1 {
+    margin-bottom: 7px;
+    font-size: 12px;
+    color: #666;
+}
+
+section.text_info_wrap article.text_info_box {
+    padding: 30px 20px 30px 20px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+section.text_info_wrap {
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+}
+
+section.admin_text_info_wrap {
+    background: #f4f4f2;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+article.admin_text_info {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+article.admin_text_info dl.admin_info {
+    float: left;
+}
+
+article.admin_text_info dl.admin_info dt {
+    float: left;
+    font-size: 12px;
+    color: #222;
+    font-weight: bold;
+    background: url(../img/util/reward/list_blit.png) 0px center no-repeat;
+    padding: 0 5px 0 10px;
+}
+
+article.admin_text_info dl.admin_info dd {
+    float: left;
+    font-size: 12px;
+    color: #444;
+}
+
+article.admin_text_info_box {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+    padding-top: 20px;
+}
+
+div.suggestion_btnZone p.btn_list {
+    float: right;
+    border: 1px solid #bb9f65;
+    background: #e2c383;
+    border-radius: 3px;
+    width: 80px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+div.suggestion_btnZone p.btn_list a {
+    color: #222;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+/*주문 내역 - 전자영수증*/
+
+.my_card_pick_date2 {
+    margin: 0 30px;
+}
+
+.my_card_pick_date2 dl {
+    float: left;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 49%;
+}
+
+.my_card_pick_date2 dl dt {
+    color: #222;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.my_card_pick_date2 dl dt,
+.my_card_pick_date2 dl dd {
+    float: left;
+}
+
+.my_card_pick_date2 dl dd {
+    width: 70%;
+}
+
+.my_card_pick_date2 dl dd .select_box {
+    margin-left: 10px;
+    width: 100%;
+}
+
+div.select_box {
+    position: relative;
+}
+
+div.select_box label.value {
+    display: block;
+    margin: 0 10px 0 10px;
+    text-align: left;
+    height: 28px;
+    line-height: 28px;
+    text-indent: 4px;
+    font-size: 12px;
+    color: #444;
+    font-family: "nbg";
+    overflow: hidden;
+}
+
+div.select_box select {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    width: 100%;
+    padding: 0 10px 0 10px;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    height: 28px;
+    text-align: left;
+    line-height: 28px;
+    font-size: 12px;
+    color: #444;
+    background: #fff;
+    font-family: "nbg";
+}
+
+/*카드소개페이지*/
+
+
+
 /*공통*/
 .wrapper {
     width: 100%;
