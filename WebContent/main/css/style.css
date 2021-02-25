@@ -27,9 +27,14 @@ div {
 }
 
 a {
-    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
     text-decoration: none;
+    vertical-align: baseline;
+    color: #666;
     background: transparent;
+    cursor: pointer;
 }
 
 a:hover {
@@ -5745,6 +5750,168 @@ div.select_box select {
 }
 
 /*카드소개페이지*/
+.inner_card {
+    margin: 0 auto;
+    width: 1100px;
+    padding-bottom: 50px;
+}
+
+.scard_buy_section p.tit1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-top: 30px;
+    margin-bottom: 26px;
+}
+
+.scard_buy_section p.stit {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.scard_buy_section p.t1 {
+    font-size: 14px;
+    color: #006633;
+    margin-bottom: 14px;
+}
+
+.scard_buy_section ul.info li {
+    font-size: 14px;
+    color: #666;
+    padding-left: 10px;
+    margin-bottom: 8px;
+    background: url(../img/util/dot.jpg) 0 5px no-repeat;
+    line-height: 1.4;
+}
+
+.scard_buy_section div.sc_buy_wrap {
+    border: 1px solid #ddd;
+}
+
+div.sc_buy_wrap {
+    padding: 23px 30px;
+    border-radius: 3px;
+    margin-bottom: 40px;
+    background: url(../img/util/sc_buy_wrap_bg.png) 0 0 no-repeat;
+}
+
+div.sc_buy_wrap ul,
+div.sc_buy_wrap2 ul {
+    width: 1100px;
+}
+
+div.sc_buy_wrap li,
+div.sc_buy_wrap2 li {
+    float: left;
+    width: 336px;
+    margin-right: 30px;
+}
+
+div.sc_buy_wrap dl,
+div.sc_buy_wrap2 dl {
+    width: 336px;
+}
+
+div.sc_buy_wrap dt,
+div.sc_buy_wrap2 dt {
+    width: 116px;
+    float: left;
+}
+
+div.sc_buy_wrap dd,
+div.sc_buy_wrap2 dd {
+    width: 200px;
+    float: right;
+}
+
+div.sc_buy_wrap li p.p1,
+div.sc_buy_wrap2 li p.p1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+div.sc_buy_wrap li p.p2,
+div.sc_buy_wrap2 li p.p2 {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+div.sc_buy_wrap li p.p3,
+div.sc_buy_wrap2 li p.p3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #006633;
+    margin-bottom: 28px;
+    line-height: 1.4;
+    padding-top: 10px;
+}
+
+div.sc_buy_wrap li p.btn,
+div.sc_buy_wrap2 li p.btn {
+    width: 83px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #222;
+    border-radius: 3px;
+    background: #fff;
+    padding: 0;
+}
+
+div.sc_buy_wrap li p.btn a,
+div.sc_buy_wrap2 li p.btn a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #222;
+    text-align: center;
+}
+
+div.sc_buy_wrap li p.g_btn,
+div.sc_buy_wrap2 li p.g_btn {
+    width: 83px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #006633;
+    border-radius: 3px;
+    background: #006633;
+}
+
+div.sc_buy_wrap li p.g_btn a,
+div.sc_buy_wrap2 li p.g_btn a {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #fff;
+    text-align: center;
+}
+
+/*기프트카드소개*/
+
+div.sc_buy_wrap2 {
+    border-radius: 3px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+p.s_titl {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.egift_stit {
+    margin-bottom: 50px;
+    margin-left: 20px;
+}
 
 
 
@@ -5774,6 +5941,10 @@ div.select_box select {
     background: #ffef00;
 }
 
+.f_22 {
+    font-size: 18px;
+}
+
 .c222 {
     color: #222222;
 }
@@ -5796,6 +5967,10 @@ div.select_box select {
 
 .en {
     font-family: arial, HelveticaNeue, DroidSans, Sans-serif, Helvetica;
+}
+
+.mb20 {
+    margin-bottom: 20px;
 }
 
 .mb40 {
