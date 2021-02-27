@@ -5915,6 +5915,535 @@ p.s_titl {
 
 
 
+/*my starbucks 마이페이지*/
+
+.user_index {
+    background: url(../img/util/ms_user_info_bg.jpg);
+    width: 830px;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.user_index h5 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.mem {
+    font-weight: bold;
+}
+
+.user_stat_btns ul {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    margin-left: -10px;
+}
+
+.user_stat_btns ul li {
+    margin: 10px 0 0 10px;
+}
+
+.user_stat_btns ul li.btn_gray {
+    background: #777777;
+    border: 1px solid #777777;
+    width: 126px;
+    border-radius: 3px;
+    float: right;
+    height: 28px;
+}
+
+.user_stat_btns ul li.btn_black {
+    background: #222222;
+    border: 1px solid #222222;
+    width: 126px;
+    border-radius: 3px;
+    float: right;
+    height: 28px;
+}
+
+.user_stat_btns ul li.btn_black a,
+.user_stat_btns ul li.btn_gray a {
+    color: #ffffff;
+}
+
+.user_stat_btns ul li a {
+    color: #222;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 100%;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+.my_ms_card {
+    background: url(../img/util/card_wave_pattern.png) center bottom no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 288px;
+    margin-top: 40px;
+    width: 828px;
+}
+
+
+.my_ms_card p.recent_card {
+    color: #555;
+    float: left;
+    font-size: 12px;
+    line-height: 18px;
+    margin-left: 10px;
+}
+
+.my_ms_card figure {
+    height: 163px;
+    position: absolute;
+    top: 15px;
+    width: 264px;
+}
+
+.my_ms_card_price {
+    height: 33px;
+    line-height: 33px;
+    margin-top: 10px;
+}
+
+.my_ms_card_price strong {
+    font-size: 30px;
+}
+
+.my_ms_rank_head .my_ms_setBtn {
+    height: 26px;
+    display: inline-block;
+    font-size: 11px;
+    padding: 0 5px;
+    background: #fff;
+    border: 1px solid #222;
+    line-height: 26px;
+    border-radius: 3px;
+    margin-top: 4px;
+    margin-left: -5px;
+}
+
+.my_ms_rank {
+    background: #f4f4f1;
+    border-radius: 3px;
+    margin-top: 50px;
+    padding: 21px 30px;
+    position: relative;
+}
+
+.my_ms_rank form fieldset legend,
+.my_card_pick_period form fieldset legend,
+.ms_cont form fieldset legend {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+.my_ms_rank_head {
+    height: 38px;
+    width: 770px;
+}
+
+.my_ms_rank_head p {
+    font-size: 16px;
+    line-height: 38px;
+    margin-right: 23px;
+}
+
+.my_ms_rank_head p,
+.my_ms_rank_head div.my_ms_select {
+    float: left;
+    position: relative;
+}
+
+.my_ms_rank_head div.my_ms_select {
+    background: url(../img/util/sbox_arrow_down.png) 62px 10px no-repeat #fff;
+    border: 1px solid #222;
+    border-radius: 3px;
+    height: 26px;
+    margin: 5px 3px 0 0;
+    width: 78px;
+}
+
+.my_ms_rank_head p,
+.my_ms_rank_head div.my_ms_select {
+    float: left;
+    position: relative;
+}
+
+span.criteria {
+    color: #777;
+    font-size: 12px;
+    text-indent: 7px;
+    text-align: right;
+    line-height: 1.4;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.a11y {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.my_ms_rank_head select.rank_select {
+    opacity: 1;
+    appearance: none;
+    background: transparent;
+    border: 0 none;
+    text-indent: 5px;
+    height: 26px;
+    width: 78px;
+}
+
+.my_ms_rank_wrap {
+    height: 317px;
+    width: 770px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each {
+    background: #fff;
+    border-radius: 3px;
+    float: left;
+    height: 317px;
+    position: relative;
+    width: 245px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each ul li {
+    height: 317px;
+    position: relative;
+    width: 245px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each ul li header {
+    color: #777;
+    font-size: 14px;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    width: 100%;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each ul li header strong {
+    color: #222;
+    font-size: 16px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each ul li figure {
+    height: 133px;
+    left: 56px;
+    position: absolute;
+    top: 68px;
+    width: 133px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each ul li figure img {
+    width: 100%;
+}
+
+.first_bev {
+    background: url(../img/util/1st_bev.png) no-repeat;
+    background-size: 100% auto;
+    height: 34px;
+    left: 172px;
+    overflow: hidden;
+    position: absolute;
+    text-indent: -20000px;
+    top: 59px;
+    width: 34px;
+    z-index: 5;
+}
+
+.coffee_name {
+    color: #222;
+    font-size: 14px;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 215px;
+    width: 100%;
+}
+
+.second_rank {
+    border-bottom: 2px dotted #ddd;
+    display: table;
+    height: 30px;
+    left: 20px;
+    position: absolute;
+    top: 250px;
+    width: 206px;
+}
+
+.second_rank span.left {
+    background: url(../img/util/rank_bg.gif);
+    color: #ddd;
+    float: left;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    width: 25px;
+}
+
+.second_rank span.left strong {
+    color: #555;
+}
+
+.second_rank span.right {
+    color: #555;
+    display: table-cell;
+    font-size: 12px;
+    height: 30px;
+    padding: 0 0 0 11px;
+    vertical-align: middle;
+    width: 170px;
+}
+
+.third_rank {
+    display: table;
+    height: 30px;
+    left: 20px;
+    position: absolute;
+    top: 282px;
+    width: 206px;
+}
+
+.third_rank span.left {
+    background: url(../img/util/rank_bg.gif);
+    color: #ddd;
+    float: left;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    width: 25px;
+}
+
+.third_rank span.right {
+    color: #555;
+    display: table-cell;
+    font-size: 12px;
+    height: 30px;
+    padding: 0 0 0 11px;
+    vertical-align: middle;
+    width: 170px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each1 {
+    margin: 0;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each2 {
+    margin: 0 0 0 18px;
+}
+
+.my_ms_rank_wrap div.my_ms_rank_each3 {
+    margin: 0 0 0 17px;
+}
+
+/*my menu - 통계 페이지*/
+section.my_drinkShop_wrap {
+    background: url(../img/util/my_drinkShop_wrap_bg.png);
+    border-radius: 3px;
+    display: table;
+    height: 100px;
+    padding: 0 30px 0 30px;
+    width: 770px;
+}
+
+section.my_drinkShop_wrap p.drinkShop_recent {
+    display: table-cell;
+    font-size: 16px;
+    height: 100px;
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+section.my_drinkShop_info {
+    position: relative;
+    padding-top: 40px;
+}
+
+div.drinkShop_info dl.content_tabmenu {
+    position: relative;
+    padding-top: 40px;
+}
+
+
+div.drinkShop_info dl.content_tabmenu dt.stab_01 {
+    border-left: 1px solid #ddd;
+    margin-left: 0px;
+    width: 50%;
+}
+
+div.drinkShop_info dl.content_tabmenu dt.stab_02 {
+    margin-left: 50%;
+    width: 50%;
+}
+
+div.drinkShop_info dl.content_tabmenu dt.stab {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+
+div.drinkShop_info dl.content_tabmenu dt.stab a {
+    display: block;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #444;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+div.drinkShop_info dl.content_tabmenu dt.stab.on a,
+div.drinkShop_info dl.content_tabmenu dt.stab a:hover {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #006633;
+    color: #fff;
+    border: 0;
+}
+
+div.drinkShop_info dl.content_tabmenu dd.panel {
+    display: none;
+    z-index: 4;
+}
+
+div.drinkShop_info dl.content_tabmenu dd.panel.on {
+    display: block;
+}
+
+p.tip03 {
+    text-align: right;
+    color: #666;
+    font-size: 12px;
+    margin: 30px 0 10px 0;
+}
+
+p.tip03 span {
+    background: url(../img/util/list_blit.png) 0px 4px no-repeat;
+    padding-left: 9px;
+}
+
+table.drinkShop_area_info_tbl {
+    border-top: 1px solid #333;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table.drinkShop_area_info_tbl caption {
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-indent: -20000px;
+    width: 0;
+}
+
+table.drinkShop_area_info_tbl thead tr th {
+    border-bottom: 1px solid #333;
+    color: #222;
+    height: 46px;
+    vertical-align: middle;
+}
+
+table.drinkShop_area_info_tbl tbody tr td {
+    border-bottom: 1px solid #dbdbdb;
+    color: #666;
+    height: 46px;
+    padding: 7px 0;
+    vertical-align: middle;
+}
+
+table.drinkShop_area_info_tbl tbody tr td span {
+    font-weight: bold;
+    color: #006633;
+    position: relative;
+}
+
+table.drinkShop_area_info_tbl tbody tr td {
+    padding: 0 10px 0 10px;
+}
+
+table.drinkShop_area_info_tbl tbody tr td a.btn_show_pop_detail {
+    line-height: 46px;
+}
+
+table.drinkShop_area_info_tbl tbody tr td a.myFavorite {
+    display: inline-block;
+    height: 20px;
+}
+
+table.drinkShop_area_info_tbl tbody tr td a.myFavorite img {
+    margin-top: -5px;
+}
+
+.drinkShop_btnZone {
+    padding-bottom: 30px;
+    position: relative;
+}
+
+div.drinkShop_btnZone ul {
+    margin-left: -5px;
+    float: left;
+}
+
+div.drinkShop_btnZone ul li {
+    float: left;
+    border: 1px solid #cccccc;
+    background: #fcfcfc;
+    border-radius: 3px;
+    width: 56px;
+    margin-left: 5px;
+}
+
+div.drinkShop_btnZone ul li a {
+    color: #444;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    width: 100%;
+}
+
+div.drinkShop_tbl_pagination {
+    height: 27px;
+    width: 100%;
+}
+
+div.drinkShop_tbl_pagination ul.pager {
+    text-align: center;
+}
+
+
 /*공통*/
 .wrapper {
     width: 100%;
