@@ -1859,11 +1859,15 @@ input.mem[type=checkbox]:active+label {
     max-width: 570px;
 }
 
-.btn_find_mem a {
+.btn_find_mem button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: auto;
     color: #fff;
     font-size: 24px;
     display: block;
     line-height: 65px;
+    width: 500px;
 }
 
 .input_warn_text {
@@ -2294,6 +2298,20 @@ input.mem[type=checkbox]:active+label {
     color: #222;
     height: 28px;
     line-height: 28px;
+    width: 141px;
+    border-radius: 3px;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.voc_info_input_btn1>button {
+    background: #e2c383;
+    border: 1px solid #bb9f65;
+    color: #222;
+    height: 30px;
+    line-height: 30px;
     width: 141px;
     border-radius: 3px;
     display: block;
