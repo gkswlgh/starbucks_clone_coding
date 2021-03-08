@@ -2710,10 +2710,9 @@ div.find_wrap p.find_con {
     text-align: center;
 }
 
-/*이부분 height를 나중에 700으로 수정하고, js로 선택이벤트마다 find_section 위치 조정 해 줘야함.*/
 div.find_wrap {
     padding: 0 20px 0 20px;
-    height: 2100px;
+    height: 700px;
     width: auto;
     overflow: hidden;
     position: relative;
@@ -2745,8 +2744,14 @@ div.find_section3 {
     top: 1400px;
 }
 
-div.find_wrap ul.find_taste {
+div.find_wrap ul.find_taste01 {
     width: 1100px;
+}
+
+div.find_wrap ul.find_taste02,
+div.find_wrap ul.find_taste03 {
+    width: 800px;
+    margin: auto;
 }
 
 div.find_wrap ul.find_taste li {
