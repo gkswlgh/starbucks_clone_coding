@@ -1671,14 +1671,23 @@ input.mem[type=checkbox]:active+label {
     margin-top: 25px;
     text-align: center;
     margin: 0 20px;
-    max-width: 570px;
+    width: 488px;
 }
 
-.btn_mem_login a {
+.btn_mem_login button {
     color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     font-size: 24px;
+    width: 488px;
+    text-align: center;
     display: block;
     line-height: 65px;
+}
+
+.btn_mem_login button:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .input_warn_text {
@@ -2320,6 +2329,11 @@ input.mem[type=checkbox]:active+label {
     text-align: center;
 }
 
+.voc_info_input_btn1>button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 /*sitemap 사이트 맵*/
 #sitemap table tr td {
     padding: 40px 20px 10px 20px;
@@ -2649,7 +2663,7 @@ p.agree_txt {
     width: 491px;
 }
 
-.join_out_btn a {
+.join_out_btn button {
     border-radius: 3px;
     display: block;
     width: 489px;
@@ -2661,6 +2675,11 @@ p.agree_txt {
     font-weight: bold;
     color: #222;
     text-align: center;
+}
+
+.join_out_btn button:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 
