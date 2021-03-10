@@ -3325,6 +3325,11 @@ div.product_view_wrap2 {
     color: #fff;
 }
 
+.product_cart button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 input#product_count_result {
     width: 40px;
 }

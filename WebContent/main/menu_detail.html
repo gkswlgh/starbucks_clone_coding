@@ -115,19 +115,19 @@
                         <div class="product_cart clear">
                             <p>
                                 <strong>총 금액 :&nbsp;
-                                    <span class="t_006633">6100</span></strong>
+                                    <span id="ttl_price" class="ttl_price t_006633" value="6100">6100</span></strong>
                                 원
                             </p>
                             <p>
                                 <label> 수량&nbsp; </label>
-                                <input id='product_count_result' type="number" disabled value="0">
-                                <button onclick='count("plus")'>증가</button>
-                                <button onclick='count("minus")'>감소</button>
+                                <input id='product_count_result' name="qty" type="number" disabled value="1">
+                                <button class="plus">증가</button>
+                                <button class="minus">감소</button>
                             </p>
                             <br />
                             <ul class="product_cart_btns">
-                                <li class="product_cart_btn1"><a href="#" class="pay_now">바로 주문하기</a></li>
-                                <li class="product_cart_btn2" class="in_cart"><a href="#">장바구니에 담기</a></li>
+                                <li class="product_cart_btn1"><a href="#" class="pay_now" data-price="6100" data-qty="1">바로 주문하기</a></li>
+                                <li class="product_cart_btn2"><a href="#" class="in_cart" data-price="6100" data-qty="1">장바구니에 담기</a></li>
                             </ul>
                         </div>
                     </div>
@@ -140,6 +140,75 @@
             </div>
         </div>
     </div>
+    <!-- js소스파일:jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+
+        $(document).on("click", "button.plus", qtyPlus); // 수량증가
+        $(document).on("click", "button.minus", qtyMinus); // 수량감소
+
+
+        /*데이터 전송 이벤트*/
+        $(".in_cart").on("click", function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+
+            /*if문으로 로그인이 되어잇는지 확인*/
+            var incart = confirm("장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?");
+            //true일경우 이동 - 이동할 때 상품번호랑 수량 같이
+
+        });
+    });
+
+    /**
+     * 수량증가
+     */
+    function qtyPlus() {
+        var price_one = Number($(".pay_now").attr("data-price"));
+        var qty = Number($("#product_count_result").attr("value"));
+        if (qty >= 10) {
+            alert("한번에 10개까지만 주문 하실 수 있습니다.");
+            return;
+        }
+
+        //수량 input
+        $(".pay_now").attr("data-qty", qty + 1);
+        $(".in_cart").attr("data-qty", qty + 1);
+        $("#product_count_result").attr("value", qty + 1);
+        qty = qty + 1;
+
+        //총금액
+        var ttlPrice_tag = document.getElementById("ttl_price");
+        ttlPrice = Number($(".ttl_price").attr("value")) + price_one;
+        ttlPrice_tag.innerHTML = ttlPrice;
+        $(".ttl_price").attr("value", ttlPrice);
+    }
+
+    /**
+     * 수량감소
+     */
+    function qtyMinus() {
+        var price_one = Number($(".pay_now").attr("data-price"));
+        var qty = Number($("#product_count_result").attr("value"));
+        if (qty == 1) {
+            alert("1개 이상 주문 하셔야 합니다.");
+            return;
+        }
+
+        //수량 input
+        $(".pay_now").attr("data-qty", qty - 1);
+        $(".in_cart").attr("data-qty", qty - 1);
+        $("#product_count_result").attr("value", qty - 1);
+        qty = qty - 1;
+
+        //총금액
+        var ttlPrice_tag = document.getElementById("ttl_price");
+        ttlPrice = Number($(".ttl_price").attr("value")) - price_one;
+        ttlPrice_tag.innerHTML = ttlPrice;
+        $(".ttl_price").attr("value", ttlPrice);
+    }
+    </script>
 </body>
 
 </html>
