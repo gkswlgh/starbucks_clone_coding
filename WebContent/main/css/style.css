@@ -3781,6 +3781,12 @@ table.gift_info_tbl tr td div.tbl_card_sending {
     vertical-align: baseline;
 }
 
+table.gift_info_tbl tr td div.tbl_card_sending p:first-child {
+    float: left;
+    text-align: center;
+    width: 20px;
+}
+
 .gift_info_adding {
     color: #666;
     font-size: 14px;
@@ -3882,6 +3888,18 @@ table.gift_info_tbl tr td div.pickdate input {
     width: 133px;
 }
 
+table.gift_info_tbl tr td div.tbl_card_radio input.amountInput {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    float: left;
+    height: 26px;
+    width: 73px;
+    text-indent: 5px;
+    background: url(../img/util/gift_price_bg.gif) 90% center no-repeat;
+    margin-top: -8px;
+    padding-right: 10px;
+}
+
 .gift_info_adding2 {
     color: #666;
     font-size: 14px;
@@ -3923,7 +3941,8 @@ table.gift_info_tbl tr td div.pickdate input {
     float: left;
 }
 
-.gift_info_send_btns ul li a {
+.gift_info_send_btns ul li a,
+.gift_info_send_btns ul li button {
     border-radius: 3px;
     color: #fff;
     display: block;
@@ -3935,6 +3954,11 @@ table.gift_info_tbl tr td div.pickdate input {
     width: 84px;
 }
 
+.gift_info_send_btns ul li button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .gift_info_send_btns ul li.gift_info_send_btn1 a {
     background: #666;
 }
@@ -3943,7 +3967,7 @@ table.gift_info_tbl tr td div.pickdate input {
     margin-left: 5px;
 }
 
-.gift_info_send_btns ul li.gift_info_send_btn2 a {
+.gift_info_send_btns ul li.gift_info_send_btn2 button {
     background: #222;
 }
 

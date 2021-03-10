@@ -21,13 +21,13 @@
                                 <img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_ttl.png" alt="선물하기" />
                             </h2>
                             <ul class="smap">
-                                <li><a href="#"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
+                                <li><a href="javascript:void(0);"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="#"><span class="en c222">Starbucks Cards</span></a></li>
+                                <li><a href="javascript:void(0);"><span class="en c222">Starbucks Cards</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="#"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
+                                <li><a href="javascript:void(0);"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="#"><span class="en c222">선물하기</span></a></li>
+                                <li><a href="javascript:void(0);"><span class="en c222">선물하기</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -98,16 +98,17 @@
                                                 <tr>
                                                     <th scope="row">받는 사람
                                                         <br>
-                                                        <input type="checkbox" name="for_me" id="for_me"><label for="for_me" class="cf66">나에게 선물하기</label></th>
+                                                        <input type="checkbox" name="for_me" id="giftMe" data-username="유저이름" data-email="useremail@gmail.com"><label for="for_me" class="cf66">나에게 선물하기</label></th>
                                                     <td>
-                                                        <div class="sel_wrap">
+                                                        <div class="sel_wrap card_sending">
                                                             <div class="tbl_card_sending">
-                                                                <input type="text" class="voc_ttl_input1 w100" id="DS_VOC_TITLE" name="DS_VOC_TITLE" placeholder="받는 사람 이름" />
-                                                                <input type="text" class="mail_input" id="DS_CSTMR_EMAIL1" name="DS_CSTMR_EMAIL1" />
+                                                                <p>1</p>
+                                                                <input type="text" class="voc_ttl_input1 sender w100" name="name" placeholder="받는 사람 이름" />
+                                                                <input type="text" class="mail_input em_input" id="DS_CSTMR_EMAIL1" name="email1" title="이메일 앞주소" />
                                                                 <p class="mail_at">@</p>
-                                                                <input type="text" id="DS_CSTMR_EMAIL2" class="mail_input" />
-                                                                <p class="mail_sel_wrap">
-                                                                    <label for="mail">직접입력</label> <select id="mail">
+                                                                <input type="text" id="DS_CSTMR_EMAIL2" class="mail_input em_input" name="email2" title="이메일 뒷주소" />
+                                                                <p class="em_sel_wrap mail_sel_wrap">
+                                                                    <label for="em_select3_1">직접입력</label> <select id="em_select3_1" name="em_select3">
                                                                         <option selected="selected" value>직접입력</option>
                                                                         <option value="hotmail.com">hotmail.com</option>
                                                                         <option value="yahoo.co.kr">yahoo.co.kr</option>
@@ -124,7 +125,7 @@
                                                                         <option value="gmail.com">gmail.com</option>
                                                                     </select>
                                                                 </p>
-                                                                <a href="#" class="sender_addel_btn addEmail">추가</a> <a href="#" class="sender_addel_btn removeEmail">삭제</a>
+                                                                <a href="javascript:void(0);" class="sender_addel_btn addEmail">추가</a> <a href="javascript:void(0);" class="sender_addel_btn removeEmail">삭제</a>
                                                             </div>
                                                             <p class="gift_info_adding">
                                                                 - 1회 10명까지 입력하실 수 있습니다.
@@ -148,28 +149,13 @@
                                                                 <input type="radio" name="price" id="price2" value="50000">
                                                                 <label for="price2">5만원</label><input type="radio" name="price" id="price3" value="30000" checked="checked">
                                                                 <label for="price3">3만원</label><input type="radio" name="price" id="price4" value="10000">
-                                                                <label for="price4">1만원</label>
+                                                                <label for="price4">1만원</label><input type="radio" name="price" id="price5">
+                                                                <label for="price5">다른 금액</label>
+                                                                <input type="text" name="amount" class="amountInput" id="amount" title="선물 금액" maxlength="6" placeholder="직접입력">
                                                             </span>
                                                         </div>
                                                         <p class="gift_info_adding cf66">- 장당 금액은 5천원 또는 1만원~50만원까지 선물 가능합니다. (1만원 이상부터는 만원 단위로 가능)
                                                         </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">전송방법</th>
-                                                    <td>
-                                                        <div class="sel_wrap tbl_card_radio">
-                                                            <span class="radio_wrap radio_wrap_mn">
-                                                                <input type="radio" name="reqKub" id="transfer1" value="I" checked="checked">
-                                                                <label for="transfer1">즉시 전송</label>
-                                                                <input type="radio" name="reqKub" id="transfer2" value="R">
-                                                                <label for="transfer2">예약 전송</label>
-                                                            </span>
-                                                        </div>
-                                                        <div class="pickdate mt10">
-                                                            <span class="cf66">예약 일시 설정&nbsp;</span>
-                                                            <input type="date" id="pickdate" class="pickdate" />
-                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -209,8 +195,8 @@
                             <!-- 테이블 끝 -->
                             <div class="gift_info_send_btns">
                                 <ul>
-                                    <li class="gift_info_send_btn1"><a href="#">뒤로</a></li>
-                                    <li class="gift_info_send_btn2"><a href="#">다음</a></li>
+                                    <li class="gift_info_send_btn1"><a href="javascript:void(0);">뒤로</a></li>
+                                    <li class="gift_info_send_btn2"><button href="javascript:void(0);">다음</button></li>
                                 </ul>
                             </div>
                         </fieldset>
@@ -221,6 +207,13 @@
             </div>
         </div>
     </div>
+    <!-- js -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/gift_step2.js?time=<%=System.currentTimeMillis()%>"></script>
+    <!-- js 끝 -->
+    <!-- 사용자 자바스크립트 -->
+    <script type="text/javascript">
+    </script>
 </body>
 
 </html>

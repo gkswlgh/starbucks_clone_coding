@@ -143,28 +143,28 @@
             </div>
         </div>
         <!-- 내용 끝 -->
-        <!-- js -->
-        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="js/jquery.animatecss.min.js"></script>
-        <script src="js/coffee.js?time=<%=System.currentTimeMillis()%>"></script>
-        <!-- js 끝 -->
-        <!-- 폼 -->
-        <form action="productFinderView.do" name="frm" id="frm" method="POST" onsubmit="return false;">
-            <input type="hidden" name="COFFEE_TASTE1">
-            <input type="hidden" name="COFFEE_FEEL">
-            <input type="hidden" name="COFFEE_INTEN">
-        </form>
-        <!-- 폼 끝 -->
-        <!-- 사용자 자바스크립트 -->
-        <script type="text/javascript">
-        var i = {
-            goSubmit: function(inten) {
-                document.frm.COFFEE_INTEN.value = inten;
-                document.frm.submit();
-            }
-        }
-        </script>
     </div>
+    <!-- js -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.animatecss.min.js"></script>
+    <script src="js/coffee.js?time=<%=System.currentTimeMillis()%>"></script>
+    <!-- js 끝 -->
+    <!-- 폼 -->
+    <form action="productFinderView.do" name="frm" id="frm" method="POST" onsubmit="return false;">
+        <input type="hidden" name="COFFEE_TASTE1">
+        <input type="hidden" name="COFFEE_FEEL">
+        <input type="hidden" name="COFFEE_INTEN">
+    </form>
+    <!-- 폼 끝 -->
+    <!-- 사용자 자바스크립트 -->
+    <script type="text/javascript">
+    var i = {
+        goSubmit: function(inten) {
+            document.frm.COFFEE_INTEN.value = inten;
+            document.frm.submit();
+        }
+    }
+    </script>
 </body>
 
 </html>
