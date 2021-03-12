@@ -181,8 +181,8 @@
                 email1: { required: true, alphanumeric: true },
                 email2: "required",
                 phone1: "required",
-                phone2: { required: true, num: true },
-                phone3: { required: true, num: true },
+                phone2: { required: true, number: true },
+                phone3: { required: true, number: true },
                 birthdate: { required: true, date: true },
                 gender: "required"
             },
@@ -201,11 +201,11 @@
                 phone1: "연락처 형식이 잘못되었습니다.",
                 phone2: {
                     required: "연락처를 입력하세요.",
-                    num: "연락처 형식이 잘못되었습니다."
+                    number: "연락처 형식이 잘못되었습니다."
                 },
                 phone3: {
                     required: "연락처를 입력하세요.",
-                    num: "연락처 형식이 잘못되었습니다."
+                    number: "연락처 형식이 잘못되었습니다."
                 },
                 birthdate: {
                     required: "생년월일을 입력하세요.",

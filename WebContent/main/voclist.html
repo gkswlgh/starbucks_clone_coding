@@ -50,13 +50,13 @@
                     <div class="suggestion_list_inner">
                         <dl class="content_tabmenu">
                             <dt class="tab tab_first tab_01 on">
-                                <h6><a href="#" onclick="">전체</a></h6>
+                                <h6><a href="#tab_01" onclick="">전체</a></h6>
                             </dt>
                             <dt class="tab tab_02">
-                                <h6><a href="#" onclick="">접수완료</a></h6>
+                                <h6><a href="#tab_02" onclick="">접수완료</a></h6>
                             </dt>
                             <dt class="tab tab_last tab_03">
-                                <h6><a href="#" onclick="">답변완료</a></h6>
+                                <h6><a href="#tab_03" onclick="">답변완료</a></h6>
                             </dt>
                         </dl>
                         <dl>
@@ -113,7 +113,33 @@
             </div>
         </div>
         <!-- 내용 끝 -->
+        <input type="hidden" name="YN_ANSWER" id="YN_ANSWER" value="Y">
     </div>
+    <!-- js소스파일:jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $(document).on("click", ".tab_02", function() {
+            $(".tab_01").removeClass("on");
+            $(".tab_02").addClass("on");
+            $(".tab_03").removeClass("on");
+        })
+
+        $(document).on("click", ".tab_03", function() {
+            $(".tab_01").removeClass("on");
+            $(".tab_02").removeClass("on");
+            $(".tab_03").addClass("on");
+        })
+
+        $(document).on("click", ".tab_01", function() {
+            $(".tab_01").addClass("on");
+            $(".tab_02").removeClass("on");
+            $(".tab_03").removeClass("on");
+        })
+
+        //  ajax로 제이슨 가져와서 템플릿 병합해서 목록 돌리기...
+    })
+    </script>
 </body>
 
 </html>

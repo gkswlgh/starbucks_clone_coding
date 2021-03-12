@@ -6858,12 +6858,13 @@ button[disabled] {
     position: relative;
 }
 
-.adr-wrap.adr_inputbox a {
+.adr-wrap.adr_inputbox input:first-child {
     position: absolute;
-    top: 0;
+    top: 12px;
     left: 0;
     padding-left: 0;
     padding-right: 0;
+    height: 35px;
     width: 84px;
 }
 
