@@ -2456,7 +2456,7 @@ input.mem[type=checkbox]:active+label {
     width: 32.236%;
 }
 
-.search_btns>ul li a {
+.search_btns>ul li label {
     font-size: 16px;
     line-height: 38px;
     color: #444;
@@ -2465,12 +2465,18 @@ input.mem[type=checkbox]:active+label {
     width: 100%;
 }
 
-.search_btns>ul li a:hover,
-.search_btns>ul li a.on {
+.search_btns>ul li label:hover,
+.search_btns>ul li label.on {
     background: #006633;
     border-radius: 3px;
     color: #fff;
     font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.search_btns>ul li input {
+    display: none;
 }
 
 p.sch_no_result {
@@ -6071,6 +6077,11 @@ p.s_titl {
     font-size: 12px;
     line-height: 18px;
     margin-left: 10px;
+}
+
+.my_ms_card_detail_cont .my_ms_card_detail_info .my_ms_card_detail_id_modify {
+    display: none;
+    height: 25px;
 }
 
 .my_ms_card figure {

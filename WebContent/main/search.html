@@ -40,12 +40,9 @@
                         </div>
                         <div class="search_btns">
                             <ul>
-                                <li class="total_search_btn1"><a href="#" class="category_set_btn on">통합검색</a></li>
-                                <li class="total_search_btn2"><a href="#" class="category_set_btn">원두</a></li>
-                                <li class="total_search_btn3"><a href="#" class="category_set_btn">음료</a></li>
-                                <li class="total_search_btn4"><a href="#" class="category_set_btn">푸드</a></li>
-                                <li class="total_search_btn5"><a href="#" class="category_set_btn">상품</a></li>
-                                <li class="total_search_btn6"><a href="#" class="category_set_btn">매장</a></li>
+                                <li class="total_search_btn1"><input type="checkbox" id="search_all"><label class="category_set_btn on" for="search_all">통합검색</label></li>
+                                <li class="total_search_btn2"><input type="checkbox" id="search_coffee"><label for="search_coffee" class="category_set_btn">원두</label></li>
+                                <li class="total_search_btn3"><input type="checkbox" id="search_drink"><label class="category_set_btn" for="search_drink">음료</label></li>
                             </ul>
                         </div>
                     </div>
@@ -115,49 +112,28 @@
                     </ul>
                 </section>
                 <!-- 음료 끝 -->
-                <!-- 푸드 -->
-                <section class="contents_wrap bev_search_result search_food">
-                    <header class="search_result_each_ttl">
-                        <h2>푸드</h2>
-                        <a href="#">푸드 더보기</a>
-                    </header>
-                    <ul class="search_food_wrap">
-                        <li>
-                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
-                        </li>
-                    </ul>
-                </section>
-                <!-- 푸드 끝 -->
-                <!-- 상품 -->
-                <section class="contents_wrap bev_search_result search_product">
-                    <header class="search_result_each_ttl">
-                        <h2>상품</h2>
-                        <a href="#">상품 더보기</a>
-                    </header>
-                    <ul class="search_product_wrap">
-                        <li>
-                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
-                        </li>
-                    </ul>
-                </section>
-                <!-- 상품 끝 -->
-                <!-- 매장 -->
-                <section class="contents_wrap bev_search_result search_store">
-                    <header class="search_result_each_ttl">
-                        <h2>매장</h2>
-                        <a href="#">매장 더보기</a>
-                    </header>
-                    <ul class="search_store_wrap">
-                        <li>
-                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
-                        </li>
-                    </ul>
-                </section>
-                <!-- 매장 끝 -->
             </div>
         </div>
         <!-- 내용 끝 -->
     </div>
+    <!-- js소스파일:jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    // 카테고리 상세보기 선택 버튼
+    $(document).on("change", ".search_btns > ul > li > input", function() {
+
+        if ($(this).next().hasClass('on')) {
+            $(".search_btns>ul>li>label").removeClass("on");
+            $("#search_all").next().addClass("on");
+            // 상품분류 선택하면 리스트 아래에 바로 출력되도록 (ajax?)
+        } else {
+            $(".search_btns>ul>li>label").removeClass("on");
+            $(this).next().addClass("on");
+            // 상품분류 선택하면 리스트 아래에 바로 출력되도록
+        }
+        return false;
+    });
+    </script>
 </body>
 
 </html>
