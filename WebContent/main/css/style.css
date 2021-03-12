@@ -2949,6 +2949,11 @@ dl.product_view_tab>dt.dt2 a {
     background: url(//image.istarbucks.co.kr/common/img/menu/icon_ante.png) 9px center no-repeat;
 }
 
+dl.product_view_tab>dt.dt2 a.selected {
+    background: #666 url(//image.istarbucks.co.kr/common/img/menu/icon_ante_on.png) 9px center no-repeat;
+    color: #fff;
+}
+
 dl.product_view_tab>dd {
     position: relative;
     padding-top: 40px;
