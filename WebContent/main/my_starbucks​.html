@@ -6,6 +6,8 @@
     <title>Hello JSP</title>
     <!--login css소스파일-->
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css?time=<%=System.currentTimeMillis()%>" />
 </head>
 
@@ -53,36 +55,69 @@
                             <h5><span class="en">My</span> 스타벅스 카드</h5>
                             <p class="recent_card">총 보유카드 : 1장</p>
                         </header>
-                        <div class="my_ms_card_detail_cont">
-                            <div class="my_ms_card_detail_info">
-                                <p class="my_ms_card_detail_id">
-                                    <span>2021 Happy New Year</span>
-                                    <a href="#" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
-                                </p>
-                                <p class="my_ms_card_detail_id_modify">
-                                    <input type="text" id name class="my_nick_modify_input" value="2021 Happy New Year">
-                                    <a href="#" class="my_nick_modify" data-cardregnumber="34125399">수정</a>
-                                    <a href="#" class="my_nick_cancel">취소</a>
-                                </p>
-                                <p class="my_ms_card_price">
-                                    <span class="a11y">잔여금액</span>
-                                    <strong class="en t_0d5f34">0</strong>원
-                                </p>
-                                <div class="my_ms_card_btns_top">
-                                    <p class="my_ms_card_btn1">
-                                        <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="9">카드 관리</a>
+                        <div class="my_card_slick">
+                            <div class="my_ms_card_detail_cont slide">
+                                <div class="my_ms_card_detail_info">
+                                    <p class="my_ms_card_detail_id">
+                                        <span>2021 Happy New Year</span>
+                                        <a href="#" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
                                     </p>
-                                    <p class="my_ms_card_btn2">
-                                        <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="2">충전 하기</a>
+                                    <p class="my_ms_card_detail_id_modify">
+                                        <input type="text" id name class="my_nick_modify_input" value="2021 Happy New Year">
+                                        <a href="#" class="my_nick_modify" data-cardregnumber="34125399">수정</a>
+                                        <a href="#" class="my_nick_cancel">취소</a>
                                     </p>
+                                    <p class="my_ms_card_price">
+                                        <span class="a11y">잔여금액</span>
+                                        <strong class="en t_0d5f34">0</strong>원
+                                    </p>
+                                    <div class="my_ms_card_btns_top">
+                                        <p class="my_ms_card_btn1">
+                                            <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="9">카드 관리</a>
+                                        </p>
+                                        <p class="my_ms_card_btn2">
+                                            <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="2">충전 하기</a>
+                                        </p>
+                                    </div>
                                 </div>
+                                <figure>
+                                    <i class="representative_icon">
+                                        <a href="#"></a>
+                                    </i>
+                                    <p><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></p>
+                                </figure>
                             </div>
-                            <figure>
-                                <i class="representative_icon">
-                                    <a href="#"></a>
-                                </i>
-                                <p><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></p>
-                            </figure>
+                            <div class="my_ms_card_detail_cont slide">
+                                <div class="my_ms_card_detail_info">
+                                    <p class="my_ms_card_detail_id">
+                                        <span>2021 Happy New Year</span>
+                                        <a href="#" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
+                                    </p>
+                                    <p class="my_ms_card_detail_id_modify">
+                                        <input type="text" id name class="my_nick_modify_input" value="2021 Happy New Year">
+                                        <a href="#" class="my_nick_modify" data-cardregnumber="34125399">수정</a>
+                                        <a href="#" class="my_nick_cancel">취소</a>
+                                    </p>
+                                    <p class="my_ms_card_price">
+                                        <span class="a11y">잔여금액</span>
+                                        <strong class="en t_0d5f34">0</strong>원
+                                    </p>
+                                    <div class="my_ms_card_btns_top">
+                                        <p class="my_ms_card_btn1">
+                                            <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="9">카드 관리</a>
+                                        </p>
+                                        <p class="my_ms_card_btn2">
+                                            <a href="#" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="2">충전 하기</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <figure>
+                                    <i class="representative_icon">
+                                        <a href="#"></a>
+                                    </i>
+                                    <p><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></p>
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -240,6 +275,126 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="my_ms_rank_each my_ms_rank_each1">
+                                    <div class="bx-wrapper">
+                                        <div class="bx-viewport">
+                                            <ul class="edw1">
+                                                <li>
+                                                    <header>
+                                                        부문별 음료 판매 순위
+                                                        <br>
+                                                        <strong>에스프레소</strong>
+                                                    </header>
+                                                    <figure>
+                                                        <a href="#" class="goDrink">
+                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
+                                                        </a>
+                                                    </figure>
+                                                    <p class="first_bev">1위</p>
+                                                    <p class="coffee_name">
+                                                        <a href="#" class="goDrink">아이스 카페 아메리카노</a>
+                                                    </p>
+                                                    <p class="second_rank ">
+                                                        <span class="left">
+                                                            <strong>2위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">아이스 슈크림 라떼</a>
+                                                        </span>
+                                                    </p>
+                                                    <p class="third_rank ">
+                                                        <span class="left">
+                                                            <strong>3위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">카페 아메리카노</a>
+                                                        </span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my_ms_rank_each my_ms_rank_each2">
+                                    <div class="bx-wrapper">
+                                        <div class="bx-viewport">
+                                            <ul class="edw1">
+                                                <li>
+                                                    <header>
+                                                        부문별 음료 판매 순위
+                                                        <br>
+                                                        <strong>에스프레소</strong>
+                                                    </header>
+                                                    <figure>
+                                                        <a href="#" class="goDrink">
+                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
+                                                        </a>
+                                                    </figure>
+                                                    <p class="first_bev">1위</p>
+                                                    <p class="coffee_name">
+                                                        <a href="#" class="goDrink">아이스 카페 아메리카노</a>
+                                                    </p>
+                                                    <p class="second_rank ">
+                                                        <span class="left">
+                                                            <strong>2위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">아이스 슈크림 라떼</a>
+                                                        </span>
+                                                    </p>
+                                                    <p class="third_rank ">
+                                                        <span class="left">
+                                                            <strong>3위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">카페 아메리카노</a>
+                                                        </span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my_ms_rank_each my_ms_rank_each3">
+                                    <div class="bx-wrapper">
+                                        <div class="bx-viewport">
+                                            <ul class="edw1">
+                                                <li>
+                                                    <header>
+                                                        부문별 음료 판매 순위
+                                                        <br>
+                                                        <strong>에스프레소</strong>
+                                                    </header>
+                                                    <figure>
+                                                        <a href="#" class="goDrink">
+                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
+                                                        </a>
+                                                    </figure>
+                                                    <p class="first_bev">1위</p>
+                                                    <p class="coffee_name">
+                                                        <a href="#" class="goDrink">아이스 카페 아메리카노</a>
+                                                    </p>
+                                                    <p class="second_rank ">
+                                                        <span class="left">
+                                                            <strong>2위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">아이스 슈크림 라떼</a>
+                                                        </span>
+                                                    </p>
+                                                    <p class="third_rank ">
+                                                        <span class="left">
+                                                            <strong>3위</strong>
+                                                        </span>
+                                                        <span class="right">
+                                                            <a href="#" class="goDrink">카페 아메리카노</a>
+                                                        </span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </article>
                         </fieldset>
                     </form>
@@ -251,6 +406,7 @@
     </div>
     <!-- js소스파일:jQuery -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
     <script type="text/javascript">
     $(function() {
 
@@ -293,6 +449,47 @@
             $(".my_ms_card_detail_id_modify").eq(_nIdx).hide();
         }
 
+        /*카드 슬라이더 my_ms_card_detail_cont*/
+        $('.my_card_slick').slick({
+            slidesToShow: 1,
+            infinite: true,
+            slidesToScroll: 1,
+            dots: true
+        });
+
+        /*일주일 집계 슬라이드 my_ms_rank_each */
+        $('.my_ms_rank_wrap').slick({
+            slidesToShow: 3,
+            infinite: true,
+            slidesToScroll: 3
+        });
+
+        /*슬라이드 화살표*/
+        $(".slick-prev").hover(
+            function() {
+                $(".slick-prev").css({
+                    background: 'url(img/contents/arrow_left_on.png) center no-repeat'
+                });
+            },
+            function() {
+                $(".slick-prev").css({
+                    background: 'url(img/contents/arrow_left_on.png) center no-repeat'
+                });
+            }
+        );
+
+        $(".slick-next").hover(
+            function() {
+                $(".slick-next").css({
+                    background: 'url(img/contents/arrow_right_on.png) center no-repeat'
+                });
+            },
+            function() {
+                $(".slick-next").css({
+                    background: 'url(img/contents/arrow_right_on.png) center no-repeat'
+                });
+            }
+        );
     })
     </script>
 </body>

@@ -173,6 +173,52 @@
         </div>
         <!-- 내용 끝 -->
     </div>
+    <!-- js소스파일:jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+
+
+        $(document).on("click", ".icon_pencil", changeModifyMode);
+        $(document).on("click", ".my_nick_modify", modifyNickname);
+        $(document).on("click", ".my_nick_cancel", cancelModifyMode);
+
+
+        function changeModifyMode() {
+            var nIdx = $(".icon_pencil").index(this);
+            var cardNickname = $(".my_ms_card_detail_id span").eq(nIdx).text();
+
+
+            $(".my_ms_card_detail_id").eq(nIdx).hide();
+            $(".my_nick_modify_input").eq(nIdx).val(cardNickname);
+            $(".my_ms_card_detail_id_modify").eq(nIdx).show();
+        }
+
+        function modifyNickname() {
+            var nIdx = $(".my_nick_modify").index(this);
+            var strCardNickname = $(".my_nick_modify_input").eq(nIdx).val();
+
+            if (strCardNickname == "") {
+                alert("카드 닉네임을 입력하세요.");
+                $(".my_nick_modify_input").eq(nIdx).focus();
+                return;
+            }
+
+            //ajax로 이름 수정 후 마이페이지 새로고침
+            alert("카드 닉네임이 변경 되었습니다.");
+        }
+
+        function cancelModifyMode(_nIdx) {
+            if (typeof(_nIdx) != 'number') {
+                _nIdx = $(".my_nick_cancel").index(this);
+            }
+
+            $(".my_ms_card_detail_id").eq(_nIdx).show();
+            $(".my_ms_card_detail_id_modify").eq(_nIdx).hide();
+        }
+
+    })
+    </script>
 </body>
 
 </html>

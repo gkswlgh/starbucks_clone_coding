@@ -4821,17 +4821,11 @@ div.egiftCard_btnZone p.btn_list a {
     font-family: "Arial";
 }
 
-.my_ms_card_id,
-.my_ms_card_id_modify {
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 3px 0;
-}
-
 .my_ms_card_id_modify {
     display: none;
+    height: 35px;
 }
+
 
 .my_ms_card_id_modify input.my_nick_modify_input {
     border: 1px solid #ddd;
@@ -4934,15 +4928,6 @@ div.egiftCard_btnZone p.btn_list a {
     position: absolute;
     top: 21px;
     width: 328px;
-}
-
-.my_ms_card_detail_id,
-.my_ms_card_detail_id_modify {
-    color: #444;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 3px 0;
 }
 
 .icon_pencil {
@@ -5111,6 +5096,9 @@ div.egiftCard_btnZone p.btn_list a {
     width: 113px;
 }
 
+
+
+
 .my_ms_card_detail_cont figure {
     height: 203px;
     left: 365px;
@@ -5137,7 +5125,7 @@ div.egiftCard_btnZone p.btn_list a {
 }
 
 .my_ms_card_detail_cont figure p {
-    height: 193px;
+    height: 140px;
     left: 30px;
     position: absolute;
     top: 0;
@@ -6079,6 +6067,24 @@ p.s_titl {
     margin-left: 10px;
 }
 
+.my_card_slick .my_ms_card_detail_cont {
+    height: 180px;
+}
+
+.my_card_slick .representative_icon {
+    margin-left: 40px;
+}
+
+.my_card_slick .slick-prev {
+    z-index: 1;
+    margin-left: 90px;
+}
+
+.my_card_slick .slick-next {
+    margin-right: 90px;
+    z-index: 1;
+}
+
 .my_ms_card_detail_cont .my_ms_card_detail_info .my_ms_card_detail_id_modify {
     display: none;
     height: 25px;
@@ -6204,16 +6210,36 @@ span.criteria {
 .my_ms_rank_wrap div.my_ms_rank_each {
     background: #fff;
     border-radius: 3px;
+    box-sizing: border-box;
     float: left;
     height: 317px;
     position: relative;
     width: 245px;
+    margin: 0;
 }
+
+.my_ms_rank_wrap div.my_ms_rank_each {
+    border-right: 1px solid #ccc;
+}
+
 
 .my_ms_rank_wrap div.my_ms_rank_each ul li {
     height: 317px;
     position: relative;
     width: 245px;
+    margin: 0;
+}
+
+.my_ms_rank_wrap .slick-prev {
+    z-index: 1;
+    margin-left: 60px;
+    border: none;
+}
+
+.my_ms_rank_wrap .slick-next {
+    margin-right: 60px;
+    z-index: 1;
+    border: none;
 }
 
 .my_ms_rank_wrap div.my_ms_rank_each ul li header {
@@ -6329,17 +6355,6 @@ span.criteria {
     width: 170px;
 }
 
-.my_ms_rank_wrap div.my_ms_rank_each1 {
-    margin: 0;
-}
-
-.my_ms_rank_wrap div.my_ms_rank_each2 {
-    margin: 0 0 0 18px;
-}
-
-.my_ms_rank_wrap div.my_ms_rank_each3 {
-    margin: 0 0 0 17px;
-}
 
 /*my menu - 통계 페이지*/
 section.my_drinkShop_wrap {
