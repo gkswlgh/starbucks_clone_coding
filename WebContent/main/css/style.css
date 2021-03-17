@@ -1996,7 +1996,6 @@ input.mem[type=checkbox]:active+label {
 }
 
 .voc_top_txt span {
-    background: url(../img/util/csi/s_bot.png) 0 3px no-repeat;
     font-size: 12px;
     margin-top: 5px;
     text-indent: 13px;
@@ -5397,6 +5396,7 @@ ul.charge_tbl_btns li.charge_tbl_btn2 {
     margin-left: 5px;
 }
 
+ul.charge_tbl_btns li button,
 ul.charge_tbl_btns li a {
     display: block;
     font-size: 12px;
@@ -5407,8 +5407,14 @@ ul.charge_tbl_btns li a {
     width: 83px;
 }
 
-ul.charge_tbl_btns li.charge_tbl_btn1 a {
+ul.charge_tbl_btns li.charge_tbl_btn1 button {
     color: #222;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+ul.charge_tbl_btns li.charge_tbl_btn1 button:hover {
+    cursor: pointer;
 }
 
 ul.charge_tbl_btns li.charge_tbl_btn2 a {
@@ -6616,7 +6622,7 @@ div.drinkShop_tbl_pagination ul.pager {
     position: relative;
     z-index: 10;
     display: inline-block;
-    width: 36px;
+    width: 38px;
     height: 30px;
     margin: 0 0.15em;
     padding: 0 30px;
@@ -6632,7 +6638,7 @@ div.drinkShop_tbl_pagination ul.pager {
     width: 100%;
     height: 100%;
     line-height: 1.5;
-    text-indent: 15px;
+    text-indent: 10px;
     margin: 0;
     padding: 0;
     border: 0;
@@ -6702,7 +6708,7 @@ button[disabled] {
     margin: 0 auto;
     display: inline-block;
     padding-left: 1px;
-    font-size: 0;
+    font-size: 14px;
     word-spacing: 0;
     vertical-align: middle;
 }
@@ -6725,8 +6731,14 @@ button[disabled] {
 }
 
 .btn2_wrap .btn+.btn {
+    color: #fff;
     margin-top: 5px;
     background-color: #555;
+    border: none;
+}
+
+.btn2_wrap .btn+.btn:hover {
+    text-decoration: underline;
 }
 
 .bill-box {

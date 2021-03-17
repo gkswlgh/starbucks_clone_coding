@@ -53,7 +53,7 @@
                                                 <div class="sel_wrap">
                                                     <p class="user_sel_wrap">
                                                         <label for="cardNumber_AUTO">2021 Happy New Year</label>
-                                                        <select id="cardNumber_AUTO" class="cardNumber">
+                                                        <select id="cardNumber_AUTO" name="cardNumber_AUTO" class="cardNumber">
                                                             <option selected="selected" value>2021 Happy New Year</option>
                                                         </select>
                                                     </p>
@@ -142,14 +142,14 @@
                                 <!-- 테이블 끝 -->
                             </form>
                             <ul class="charge_tbl_btns">
-                                <li class="charge_tbl_btn1"><a href="#" class="charge_normal">카드 충전</a></li>
+                                <li class="charge_tbl_btn1"><button type="submit" class="charge_normal">카드 충전</button></li>
                                 <li class="charge_tbl_btn2"><a href="#">취소</a></li>
                             </ul>
                         </article>
                         <h5 class="card_charge_auto">
                             <a href="#" class>자동 충전</a>
                         </h5>
-                        <article>
+                        <article style="display: none;">
                             <form name="frm_AUTO" id="frm_AUTO" method="post">
                                 <!-- 테이블 -->
                                 <table class="w830 lowest_limit chargeWh gift_info_tbl" summary="충전 유형 선택 , 충전 카드 선택, 자동 충전일 선택, 자동 충전 금액 선택, 결제 수단 선택, 온라인 충전 시 유의 사항">
@@ -202,7 +202,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="autoReloadDay">
+                                        <tr class="autoReloadDay" style="display: none;">
                                             <th scope="row">자동 충전일 선택
                                                 <span class="checkTxt">(최대 2개까지 선택 가능)</span></th>
                                             <td>
@@ -276,7 +276,7 @@
                                                 </div>
                                                 <p class="gift_info_adding cf66">스타벅스 카드 온라인 충전은 1만원 단위로 최대 55만원까지 가능하며, 충전 후 합계 잔액이 55만원을 초과할 수 없습니다.
                                                 </p>
-                                                <p class="charge_will autoReloadDay">
+                                                <p class="charge_will autoReloadDay" style="display: none;">
                                                     <strong class="t_006633">[2021 Happy New Year]</strong>
                                                     카드에
                                                     <strong class="t_006633">매월 1일</strong>
@@ -284,7 +284,7 @@
                                                     <strong class="t_006633 totPrice">1만원</strong>
                                                     이 자동 충전 됩니다.
                                                 </p>
-                                                <p class="charge_will lowestAmount hid">
+                                                <p class="charge_will lowestAmount ">
                                                     <strong class="t_006633">[2021 Happy New Year]</strong>
                                                     카드의 잔액이
                                                     <strong class="t_006633">1만원</strong>
@@ -334,7 +334,7 @@
                                 <!-- 테이블 끝 -->
                             </form>
                             <ul class="charge_tbl_btns">
-                                <li class="charge_tbl_btn1"><a href="#" class="charge_auto">설정 완료</a></li>
+                                <li class="charge_tbl_btn1"><button type="submit" class="charge_auto">설정 완료</button></li>
                                 <li class="charge_tbl_btn2"><a href="#">취소</a></li>
                             </ul>
                         </article>
@@ -344,6 +344,50 @@
         </div>
         <!-- 내용 끝 -->
     </div>
+    <!-- js -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- validate 플러그인 참조 -->
+    <script src="plugins/validate/jquery.validate.min.js"></script>
+    <script src="plugins/validate/additional-methods.min.js"></script>
+    <!-- 사용자스크립트 -->
+    <script type="text/javascript">
+    $(function() {
+        /*탭*/
+        $(document).on("click", ".card_charge_wrap>h5>a", function() {
+            $(".card_charge_wrap>h5>a").removeClass("on");
+            $(this).addClass("on");
+            $(".card_charge_wrap>article").hide();
+            $(this).parents().next().show();
+        });
+
+        /*일반충전*/
+        $("#frm_NORMAL").submit(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+            alert("충전완료");
+        });
+
+
+        /*자동충전*/
+        $("input[name=autoReloadType]").click(function() {
+            // 기준하한
+            if ($(this).val() == 2) {
+                $(".autoReloadDay").hide();
+                $(".autoReloadDay").next().show();
+                // 월정액
+            } else if ($(this).val() == 1) {
+                $(".autoReloadDay").next().hide();
+                $(".autoReloadDay").show();
+            }
+        });
+
+        $("#frm_AUTO").submit(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+            alert("설정완료");
+        });
+    });
+    </script>
 </body>
 
 </html>
