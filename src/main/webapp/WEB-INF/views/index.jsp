@@ -5,24 +5,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<html>
-
-<head>
-    <%@ include file="/WEB-INF/views/_inc/head.jsp"%>
-</head>
-
-<body>
-    <%@ include file="/WEB-INF/views/_inc/top.jsp"%>
+<%@ include file="/WEB-INF/views/_inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/_inc/top.jsp"%>
     <!-- 내용 시작 -->
     <div id="contents">
         <!-- 플로팅 배너 시작 -->
         <div class="f_banner">
             <div class="xmas">
-                <a href="#" title="자세히 보기"> <img src="img/contents/ssg_pop.png" alt="11월 25일 스타벅스 온라인 샵 런칭!" />
+                <a href="${pageContext.request.contextPath}/" title="자세히 보기"> <img src="${pageContext.request.contextPath}/assets/img/contents/ssg_pop.png" alt="11월 25일 스타벅스 온라인 샵 런칭!" />
                 </a>
             </div>
             <div class="plcc">
-                <a href="#" title="자세히 보기"> <img src="img/contents/plcc_badge.png" alt="스타벅스 현대카드" />
+                <a href="${pageContext.request.contextPath}/" title="자세히 보기"> <img src="${pageContext.request.contextPath}/assets/img/contents/plcc_badge.png" alt="스타벅스 현대카드" />
                 </a>
             </div>
         </div>
@@ -31,33 +25,21 @@
         <div class="main_visual">
             <div class="main_visual_inner">
                 <div class="main_visual_slogan">
-                    <img src="img/contents/xmas/2020_xmas2_slogan.png" alt="CARRY the MARRY" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_slogan.png" alt="FIND YOUR BLOOMING moments" />
                 </div>
                 <div class="main_visual_set">
                     <div class="set_common set_01">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_popconrn.png" alt="토피 넛 팝콘 트리 프라푸치노" />
+                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_chocolate.png" alt="체리블라썸 화이트 초콜릿" />
                     </div>
                     <div class="set_common set_02">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dolce.png" alt="시나몬 롤 돌체 라떼" />
+                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_coldbrew.png" alt="미드나잇 베르가못 콜드 브루" />
                     </div>
                     <div class="set_common set_03">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark_blended.png" alt="다크 초콜릿 블렌디드" />
-                    </div>
-                    <div class="set_common set_04">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_panna.png" alt="크리스마스 콜드 브루 콘 파나" />
-                    </div>
-                    <div class="set_common set_05">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_relaxer.png" alt="캐모마일 릴렉서" />
-                    </div>
-                    <div class="set_common set_06">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_dark.png" alt="다크 초콜릿" />
-                    </div>
-                    <div class="set_common set_07">
-                        <a href="#"></a> <img src="img/contents/xmas/2020_xmas2_nut.png" alt="토피 넛 라떼" />
+                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_blended.png" alt="딸기 딜라이트 요거트 블렌디드" />
                     </div>
                 </div>
                 <div class="slogan_btn">
-                    <a href="#">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
                 </div>
             </div>
         </div>
@@ -73,20 +55,19 @@
                             <dt class="notice_ttl">공지사항</dt>
                             <dd>
                                 <ul class="news_result">
-                                    <li><a href="#">시스템 개선 및 점검 안내</a></li>
-                                    <li><a href="#">본인인증 시스템 작업 안내</a></li>
-                                    <li><a href="#">제휴사 서비스 점검으로 인한 My DT Pass - 소유주 인증 진행
-                                            불가</a></li>
-                                    <li><a href="#">SSG PAY 시스템 점검 안내</a></li>
-                                    <li><a href="#">삼성카드 시스템 점검에 따른 결제 일시 중단 안내</a></li>
+                                    <li>시스템 개선 및 점검 안내</li>
+                                    <li>본인인증 시스템 작업 안내</li>
+                                    <li>제휴사 서비스 점검으로 인한 My DT Pass - 소유주 인증 진행
+                                            불가</li>
+                                    <li>SSG PAY 시스템 점검 안내</li>
+                                    <li>삼성카드 시스템 점검에 따른 결제 일시 중단 안내</li>
                                 </ul>
                             </dd>
                         </dl>
-                        <span class="bgl_inner_r"><a href="#" title="공지사항 더보기">더보기</a></span>
                     </div>
                 </div>
                 <div class="line_notice_bgr">
-                    <a href="#"> <span class="prom_ttl">스타벅스 프로모션</span> <span class="prom_btn"><img id="prom_btn_toggle" class="open" src="img/contents/btn_prom_down.png" alt="스타벅스 프로모션 펼쳐보기" role="button" /></span>
+                    <a href="${pageContext.request.contextPath}/"> <span class="prom_ttl">스타벅스 프로모션</span> <span class="prom_btn"><span id="prom_btn_toggle" class="open" alt="스타벅스 프로모션 펼쳐보기" role="button"></span></span>
                     </a>
                 </div>
             </div>
@@ -98,25 +79,14 @@
                 <div class="prom_slider">
                     <div class="prom_slider_inner">
                         <ul class="prom_slider_list">
-                            <li class="prom_slide"><img src="img/contents/banner/uX1xA2_20191227175905000.jpg" alt="만원당 별 적립 이벤트" />
-                                <div class="prom_inner_btn">
-                                    <a href="#">자세히 보기</a>
-                                </div>
+                            <li class="prom_slide"><img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2VZXBB_20210317110628900.jpg" alt="체리블라썸 프로모션" />
+                                
                             </li>
-                            <li class="prom_slide"><img src="img/contents/banner/Cw54A8_20201208085148123.jpg" alt="크리스마스 2020" />
-                                <div class="prom_inner_btn">
-                                    <a href="#">자세히 보기</a>
-                                </div>
+                            <li class="prom_slide"><img src="${pageContext.request.contextPath}/assets/img/contents/banner/ymrqGG_20201201000945683.jpg" alt="스타벅스 현대카드, 5만원 이상 사용 시 별 100개 적립" />
+                                
                             </li>
-                            <li class="prom_slide"><img src="img/contents/banner/1XNXWa_20201203142925287.jpg" alt="크리스마스의 즐거움을 소중한 사람들과 함께하세요!" />
-                                <div class="prom_inner_btn">
-                                    <a href="#">자세히 보기</a>
-                                </div>
-                            </li>
-                            <li class="prom_slide"><img src="img/contents/banner/ymrqGG_20201201000945683.jpg" alt="스타벅스 현대카드, 5만원 이상 사용 시 별 100개 적립" />
-                                <div class="prom_inner_btn">
-                                    <a href="#">자세히 보기</a>
-                                </div>
+                            <li class="prom_slide"><img src="${pageContext.request.contextPath}/assets/img/contents/blossom/NFg2GI_20210222160854814.jpg" alt="스프링 리저브 원두" />
+                                
                             </li>
                         </ul>
                     </div>
@@ -128,7 +98,7 @@
         <section class="s_rewards">
             <div class="s_rewards_inner clear">
                 <div class="rewards_logo">
-                    <img src="img/contents/rewards-logo.png" alt="Starbucks Rewards" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/rewards-logo.png" alt="Starbucks Rewards" />
                 </div>
                 <div class="rewards_conts">
                     <div class="conts_info">
@@ -144,7 +114,7 @@
                             </p>
                         </div>
                         <div class="rewards_btn_group">
-                            <a href="#" class="rewards_btn_join">회원가입</a> <a href="#" class="rewards_btn_login">로그인</a>
+                            <a href="${pageContext.request.contextPath}/account/join" class="rewards_btn_join">회원가입</a> <a href="${pageContext.request.contextPath}/account/login" class="rewards_btn_login">로그인</a>
                         </div>
                     </div>
                     <div class="conts_gift">
@@ -156,7 +126,7 @@
                             <p>카드를 등록하여 스타벅스 리워드 회원이 되신 후, 첫 구매를 하시면 무료 음료쿠폰을 드립니다!</p>
                         </div>
                         <div class="btn_egift">
-                            <a href="#">e-Gift Card 선물하기</a>
+                            <a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">e-Gift Card 선물하기</a>
                         </div>
                     </div>
                 </div>
@@ -167,12 +137,12 @@
         <section class="main_bean">
             <div class="main_bean_inner">
                 <div class="bean_img_box">
-                    <img src="img/contents/xmas/2020_xmas_bean.png" alt="크리스마스 블렌드" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean.png" alt="애니버서리 블렌드" />
                 </div>
                 <div class="bean_txt_box">
-                    <img src="img/contents/xmas/2020_xmas_bean_txt.png" alt="크리스마스를 더욱 특별하게 만들어 줄 커피 크리스마스 블렌드" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean_txt.png" alt="스타벅스의 50년이 담긴 애니버서리 블렌드. 스타벅스의 50주년을 기념하여 블렌딩된 깊고 진한 풍미의 애니버서리 블렌드입니다." />
                     <div class="bean_detail_btn">
-                        <a href="#">자세히 보기</a>
+                        <a href="${pageContext.request.contextPath}/">자세히 보기</a>
                     </div>
                 </div>
             </div>
@@ -182,13 +152,13 @@
         <section class="reserve">
             <div class="reserve_inner clear">
                 <div class="reserve_ttl">
-                    <img src="img/contents/xmas/reserve_xmas_title.png" alt="RESERVE THE MERRY" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_title.png" alt="costa rica" />
                 </div>
                 <div class="reserve_visual">
-                    <img src="img/contents/xmas/reserve_xmas_beans.png" />
+                    <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_bean_0217.png" />
                 </div>
                 <div class="reserve_detail_btn">
-                    <a href="#">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
                 </div>
             </div>
         </section>
@@ -202,26 +172,12 @@
                     더하는 상품, 소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</div>
                 <div class="menu_wrap_img"></div>
                 <div class="menu_wrap_btn">
-                    <a href="#">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
                 </div>
             </div>
         </section>
         <!-- 메뉴 랩 끝 -->
-        <!-- 리저브 매거진 시작 -->
-        <section class="reserve_magazine">
-            <div class="reserve_magazine_inner">
-                <div class="magazine_left">
-                    <img src="img/contents/reserve_visual_pc.png" />
-                </div>
-                <div class="magazine_right">
-                    <img src="img/contents/reserve_text_pc.png" alt="리저브가 선사하는 특별한 경험을 온라인 매거진으로 만나보세요" />
-                </div>
-            </div>
-            <div class="magazine_detail_btn">
-                <a href="#">EXPLORE OUR STORY</a>
-            </div>
-        </section>
-        <!-- 리저브 매거진 끝 -->
+        
         <!-- 매장 랩 시작 -->
         <section class="store_wrap">
             <div class="store_wrap_inner">
@@ -234,7 +190,7 @@
                 <div class="store_txt02">차별화된 커피 경험을 누릴 수 있는 리저브 매장, 다양한 방법으로
                     편리하게 즐길 수 있는 드라이브 스루 매장, 함께해서 더 따뜻할수 있는 지역사회 소통 공간 커뮤니티 매장</div>
                 <div class="store_btn">
-                    <a href="#">매장 찾기</a>
+                    <a href="${pageContext.request.contextPath}/">매장 찾기</a>
                 </div>
             </div>
         </section>
@@ -243,6 +199,37 @@
     <!-- 내용 끝 -->
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
     <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
+    <script type="text/javascript">
+    $(function() {
+
+        /*슬라이드 화살표*/
+        $(".slick-prev").hover(
+            function() {
+                $(".slick-prev").css({
+                    background: 'url(${pageContext.request.contextPath}/assets/img/contents/arrow_left_on.png) center no-repeat'
+                });
+            },
+            function() {
+                $(".slick-prev").css({
+                    background: 'url(${pageContext.request.contextPath}/assets/img/contents/arrow_left_on.png) center no-repeat'
+                });
+            }
+        );
+
+        $(".slick-next").hover(
+            function() {
+                $(".slick-next").css({
+                    background: 'url(${pageContext.request.contextPath}/assets/img/contents/arrow_right_on.png) center no-repeat'
+                });
+            },
+            function() {
+                $(".slick-next").css({
+                    background: 'url(${pageContext.request.contextPath}/assets/img/contents/arrow_right_on.png) center no-repeat'
+                });
+            }
+        );
+    })
+    </script>
 </body>
 
 </html>

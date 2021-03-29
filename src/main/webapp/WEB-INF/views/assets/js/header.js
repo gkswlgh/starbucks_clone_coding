@@ -2,31 +2,35 @@
  * header : 메뉴바
  */
 
+
 $(function() {
-	/*gnb_sub:hover*/
-	$(".gnb_nav_inner>ul>li").hover(function() {
-		$(this).find(".gnb_sub_wrap").slideToggle(200);
-	});
-	$(".gnb_nav_inner>ul>li").mouseenter(function() {
-		/*if ($(".gnb_sub_wrap").is(":visible")) {
-			$(".gnb_sub_wrap").hide();
-			$(this).find(".gnb_sub_wrap").slideDown(300);
-		} else {
-			$(this).find(".gnb_sub_wrap").slideDown(300);
-		}*/
-		$(this).find("h2>a").addClass("on");
-	});
-	$(".gnb_nav_inner>ul>li").mouseleave(function() {
-		/*if ($(".gnb_sub_wrap").is(":visible")) {
-			$(this).find(".gnb_sub_wrap").slideUp(200);
-		}*/
-		$(this).find("h2>a").removeClass("on");
-	});
+	/*변수*/
+	//header
+	var $gnb = $('.gnb_nav').find('li');
+	var $subNav = $('.gnb_nav').find('.gnb_sub_wrap');
+
+
 
 	/*btn_search:click*/
 	$(".btn_search").click(function() {
 		$(this).attr("style", "background:#fff; width:180px;");
 		$(this).find("input").attr("style", "display:inline-block;");
 		$(".util_nav").attr("style", "right:232px;");
+	});
+
+	//gnb_subNav
+	$gnb.on('mouseover', function(e) {
+		$gnb.find("h2>a").removeClass('on');
+		$(this).find("h2>a").addClass('on');
+
+		var $thisSubNav = $(this).find('.gnb_sub_wrap');
+		$subNav.removeClass('on');
+		$thisSubNav.stop().slideDown(200);
+
+	}).on('mouseout', function(e) {
+		$gnb.find("h2>a").removeClass('on');
+
+		var $thisSubNav = $(this).find('.gnb_sub_wrap');
+		$thisSubNav.stop().slideUp(200);
 	});
 });
