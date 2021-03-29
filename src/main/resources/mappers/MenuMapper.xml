@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MenuMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="menuMap"
+		type="hanjiho.project.starbucks.model.Menu">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="id"  column="id" />
+		<result property="menu_class"  column="menu_class" />
+		<result property="name"  column="name" />
+		<result property="eng_name"  column="eng_name" />
+		<result property="price"  column="price" />
+		<result property="is_open"  column="is_open" />
+		<result property="list_img"  column="list_img" />
+		<result property="main_img"  column="main_img" />
+		<result property="description"  column="description" />
+		<result property="content"  column="content" />
+		<result property="nutri_info"  column="nutri_info" />
+		<result property="reg_date"  column="r_date" />
+		<result property="edit_date"  column="e_date" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.Menu"
+		resultMap="menuMap">
+		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8), CONVERT(main_img USING utf8), description, CONVERT(content USING utf8), CONVERT(nutri_info USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date 
+		FROM menu 
+		WHERE id=#{id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.Menu"
+		resultMap="menuMap">
+		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8), CONVERT(main_img USING utf8), description, CONVERT(content USING utf8), CONVERT(nutri_info USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date
+		FROM menu
+		<where>
+			<if test="menu_class != null and menu_class != ''">
+				menu_class LIKE concat('%', #{menu_class}, '%')
+			</if>
+			<if test="name != null and name != ''">
+				OR name LIKE concat('%', #{name}, '%')
+			</if>
+			<if test="eng_name != null and eng_name != ''">
+				OR eng_name LIKE concat('%', #{eng_name}, '%')
+			</if>
+		</where>
+
+		ORDER BY id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.Menu"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO menu (
+		menu_class, name, eng_name, price, is_open, list_img, main_img, description, content, nutri_info, reg_date, edit_date
+		) VALUES (
+		#{menu_class}, #{name}, #{eng_name}, #{price}, #{is_open}, #{list_img}, #{main_img}, #{description}, #{content}, #{nutri_info}, now(), now()
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.Menu">
+		DELETE FROM menu WHERE id=#{id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.Menu">
+		UPDATE menu SET
+		menu_class=#{menu_class},
+		name=#{name},
+		eng_name=#{eng_name},
+		price=#{price},
+		is_open=#{is_open},
+		list_img=#{list_img},
+		main_img=#{main_img},
+		description=#{description},
+		content=#{content},
+		nutri_info=#{nutri_info},
+		edit_date=now()
+		WHERE id=#{id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.Menu"
+		resultType="int">
+		SELECT COUNT(*) FROM menu
+
+		<where>
+			<if test="menu_class != null and menu_class != ''">
+				menu_class LIKE concat('%', #{menu_class}, '%')
+			</if>
+			<if test="name != null and name != ''">
+				OR name LIKE concat('%', #{name}, '%')
+			</if>
+			<if test="eng_name != null and eng_name != ''">
+				OR eng_name LIKE concat('%', #{eng_name}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LikeMenuMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="likeMenuMap"
+		type="hanjiho.project.starbucks.model.LikeMenu">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="like_id"  column="like_id" />
+		<result property="member_id"  column="member_id" />
+		<result property="menu_id"  column="menu_id" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu"
+		resultMap="likeMenuMap">
+		SELECT 
+		like_id, member_id, menu_id 
+		FROM like_menu 
+		WHERE like_id=#{like_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu"
+		resultMap="likeMenuMap">
+		SELECT 
+		like_id, member_id, menu_id 
+		FROM like_menu
+		<where>
+			<if test="member_id != null and member_id != ''">
+				member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+			<if test="menu_id != null and menu_id != ''">
+				OR menu_id LIKE concat('%', #{menu_id}, '%')
+			</if>
+		</where>
+		
+		ORDER BY like_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu"
+		useGeneratedKeys="true" keyProperty="like_id">
+		INSERT INTO like_menu (
+		member_id, menu_id
+		) VALUES (
+		#{member_id}, #{menu_id}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu">
+		DELETE FROM like_menu WHERE like_id=#{like_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu">
+		UPDATE like_menu SET
+		member_id=#{member_id},
+		menu_id=#{menu_id}
+		WHERE like_id=#{like_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu"
+		resultType="int">
+		SELECT COUNT(*) FROM like_menu
+
+		<where>
+			<if test="member_id != null and member_id != ''">
+				member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+			<if test="menu_id != null and menu_id != ''">
+				OR menu_id LIKE concat('%', #{menu_id}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

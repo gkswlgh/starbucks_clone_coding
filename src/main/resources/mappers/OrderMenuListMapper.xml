@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderMenuListMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="orderMenuListMap"
+		type="hanjiho.project.starbucks.model.OrderMenuList">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="order_menu_id"  column="order_menu_id" />
+		<result property="menu_id"  column="menu_id" />
+		<result property="order_id"  column="order_id" />
+		<result property="menu_qty"  column="menu_qty" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
+		resultMap="orderMenuListMap">
+		SELECT 
+		order_menu_id, menu_id, order_id, menu_qty 
+		FROM order_menu_list 
+		WHERE order_menu_id=#{order_menu_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
+		resultMap="orderMenuListMap">
+		SELECT 
+		order_menu_id, menu_id, order_id, menu_qty
+		FROM order_menu_list
+		<where>
+			<if test="menu_id != null and menu_id != ''">
+				menu_id LIKE concat('%', #{menu_id}, '%')
+			</if>
+			<if test="order_id != null and order_id != ''">
+				OR order_id LIKE concat('%', #{order_id}, '%')
+			</if>
+		</where>
+
+		ORDER BY order_menu_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
+		useGeneratedKeys="true" keyProperty="order_menu_id">
+		INSERT INTO order_menu_list (
+		menu_id, order_id, menu_qty
+		) VALUES (
+		#{menu_id}, #{order_id}, #{menu_qty}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList">
+		DELETE FROM order_menu_list WHERE order_menu_id=#{order_menu_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList">
+		UPDATE order_menu_list SET
+		menu_id=#{menu_id},
+		order_id=#{order_id},
+		menu_qty=#{menu_qty}
+		WHERE order_menu_id=#{order_menu_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
+		resultType="int">
+		SELECT COUNT(*) FROM order_menu_list
+
+		<where>
+			<if test="menu_id != null and menu_id != ''">
+				menu_id LIKE concat('%', #{menu_id}, '%')
+			</if>
+			<if test="order_id != null and order_id != ''">
+				OR order_id LIKE concat('%', #{order_id}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="VocMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="vocMap"
+		type="hanjiho.project.starbucks.model.Voc">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="voc_id"  column="voc_id" />
+		<result property="phone"  column="phone" />
+		<result property="email"  column="email" />
+		<result property="visit_store"  column="visit_store" />
+		<result property="voc_ttl"  column="voc_ttl" />
+		<result property="voc_txt"  column="voc_txt" />
+		<result property="reg_date"  column="r_date" />
+		<result property="voc_type"  column="voc_type" />
+		<result property="voc_type2"  column="voc_type2" />
+		<result property="member_id"  column="member_id" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.Voc"
+		resultMap="vocMap">
+		SELECT
+		voc_id, phone, email, visit_store, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id 
+		FROM voc 
+		WHERE voc_id=#{voc_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.Voc"
+		resultMap="vocMap">
+		SELECT
+		voc_id, phone, email, visit_store, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id
+		FROM voc
+		<where>
+			<if test="reg_date != null and reg_date != ''">
+				reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="voc_type != null and voc_type != ''">
+				OR voc_type LIKE concat('%', #{voc_type}, '%')
+			</if>
+			<if test="voc_type2 != null and voc_type2 != ''">
+				OR voc_type2 LIKE concat('%', #{voc_type2}, '%')
+			</if>
+			<if test="member_id != null and member_id != ''">
+				OR member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+		</where>
+
+		ORDER BY voc_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.Voc"
+		useGeneratedKeys="true" keyProperty="voc_id">
+		INSERT INTO voc (
+		phone, email, visit_store, voc_ttl, voc_txt, reg_date, voc_type, voc_type2, member_id
+		) VALUES (
+		#{phone}, #{email}, #{visit_store}, #{voc_ttl}, #{voc_txt}, now(), #{voc_type}, #{voc_type2}, #{member_id}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.Voc">
+		DELETE FROM voc WHERE voc_id=#{voc_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.Voc">
+		UPDATE voc SET
+		phone=#{phone},
+		email=#{email},
+		visit_store=#{visit_store},
+		voc_ttl=#{voc_ttl},
+		voc_txt=#{voc_txt},
+		voc_type=#{voc_type}, 
+		voc_type2=#{voc_type2},
+		member_id=#{member_id}
+		WHERE voc_id=#{voc_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.Voc"
+		resultType="int">
+		SELECT COUNT(*) FROM voc
+
+		<where>
+			<if test="reg_date != null and reg_date != ''">
+				reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="voc_type != null and voc_type != ''">
+				OR voc_type LIKE concat('%', #{voc_type}, '%')
+			</if>
+			<if test="voc_type2 != null and voc_type2 != ''">
+				OR voc_type2 LIKE concat('%', #{voc_type2}, '%')
+			</if>
+			<if test="member_id != null and member_id != ''">
+				OR member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CardMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="cardMap"
+		type="hanjiho.project.starbucks.model.Card">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="card_id"  column="card_id" />
+		<result property="member_id"  column="member_id" />
+		<result property="gift_mem_id"  column="gift_mem_id" />
+		<result property="pin_num"  column="pin_num" />
+		<result property="cash"  column="cash" />
+		<result property="card_name"  column="card_name" />
+		<result property="reg_date"  column="r_date" />
+		<result property="edit_date"  column="e_date" />
+		<result property="charge_auto"  column="charge_auto" />
+		<result property="charge_schedule"  column="charge_schedule" />
+		<result property="charge_limit"  column="charge_limit" />
+		<result property="charge_cash"  column="charge_cash" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		resultMap="cardMap">
+		SELECT 
+		card_id, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash 
+		FROM card 
+		WHERE card_id=#{card_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		resultMap="cardMap">
+		SELECT 
+		card_id, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash
+		FROM card
+		<where>
+			<if test="member_id != null and member_id != ''">
+				member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+			<if test="gift_mem_id != null and gift_mem_id != ''">
+				OR gift_mem_id LIKE concat('%', #{gift_mem_id}, '%')
+			</if>
+			<if test="pin_num != null and pin_num != ''">
+				OR pin_num LIKE concat('%', #{pin_num}, '%')
+			</if>
+		</where>
+
+		ORDER BY card_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		useGeneratedKeys="true" keyProperty="card_id">
+		INSERT INTO card (
+		 member_id, gift_mem_id, pin_num, cash, card_name, reg_date, edit_date, charge_auto
+		) VALUES (
+		#{member_id}, #{gift_mem_id}, #{pin_num}, #{cash}, #{card_name}, now(), now(), #{charge_auto}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		DELETE FROM card WHERE card_id=#{card_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		member_id=#{member_id},
+		gift_mem_id=#{gift_mem_id},
+		pin_num=#{pin_num},
+		cash=#{cash},
+		card_name=#{card_name},
+		edit_date=now(),
+		charge_auto=#{charge_auto},
+		charge_schedule=#{charge_schedule},
+		charge_limit=#{charge_limit},
+		charge_cash=#{charge_cash}
+		WHERE card_id=#{card_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		resultType="int">
+		SELECT COUNT(*) FROM card
+
+		<where>
+			<if test="member_id != null and member_id != ''">
+				member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+			<if test="gift_mem_id != null and gift_mem_id != ''">
+				OR gift_mem_id LIKE concat('%', #{gift_mem_id}, '%')
+			</if>
+			<if test="pin_num != null and pin_num != ''">
+				OR pin_num LIKE concat('%', #{pin_num}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

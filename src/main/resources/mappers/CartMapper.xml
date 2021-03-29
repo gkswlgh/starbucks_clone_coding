@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CartMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="cartMap"
+		type="hanjiho.project.starbucks.model.Cart">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="cart_id"  column="cart_id" />
+		<result property="session_id"  column="session_id" />
+		<result property="menu_qty"  column="menu_qty" />
+		<result property="reg_date"  column="r_date" />
+		<result property="edit_date"  column="e_time" />
+		<result property="member_id"  column="member_id" />
+		<result property="menu_id"  column="menu_id" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.Cart"
+		resultMap="cartMap">
+		SELECT 
+		cart_id, session_id, menu_qty, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, member_id, menu_id 
+		FROM cart 
+		WHERE cart_id=#{cart_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.Cart"
+		resultMap="cartMap">
+		SELECT 
+		cart_id, session_id, menu_qty, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, member_id, menu_id
+		FROM cart
+		<where>
+			<if test="session_id != null and session_id != ''">
+				session_id LIKE concat('%', #{session_id}, '%')
+			</if>
+			<if test="reg_date != null and reg_date != ''">
+				OR reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="edit_date != null and edit_date != ''">
+				OR edit_date LIKE concat('%', #{edit_date}, '%')
+			</if>
+			<if test="member_id != null and member_id != ''">
+				OR member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+		</where>
+
+		ORDER BY cart_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.Cart"
+		useGeneratedKeys="true" keyProperty="cart_id">
+		INSERT INTO cart (
+		session_id, menu_qty, reg_date, edit_date, member_id, menu_id
+		) VALUES (
+		#{session_id}, #{menu_qty}, now(), now(), #{member_id}, #{menu_id}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.Cart">
+		DELETE FROM cart WHERE cart_id=#{cart_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.Cart">
+		UPDATE cart SET
+		session_id=#{session_id},
+		menu_qty=#{menu_qty},
+		edit_date=now(),
+		member_id=#{member_id},
+		menu_id=#{menu_id}
+		WHERE cart_id=#{cart_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.Cart"
+		resultType="int">
+		SELECT COUNT(*) FROM cart
+
+		<where>
+			<if test="session_id != null and session_id != ''">
+				session_id LIKE concat('%', #{session_id}, '%')
+			</if>
+			<if test="reg_date != null and reg_date != ''">
+				OR reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="edit_date != null and edit_date != ''">
+				OR edit_date LIKE concat('%', #{edit_date}, '%')
+			</if>
+			<if test="member_id != null and member_id != ''">
+				OR member_id LIKE concat('%', #{member_id}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

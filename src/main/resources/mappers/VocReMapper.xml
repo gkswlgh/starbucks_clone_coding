@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="VocReMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)를 명시한다. -->
+	<resultMap id="vocReMap"
+		type="hanjiho.project.starbucks.model.VocRe">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="re_id"  column="re_id" />
+		<result property="voc_re_ttl"  column="voc_re_ttl" />
+		<result property="voc_re_txt"  column="voc_re_txt" />
+		<result property="reg_date"  column="reg_date" />
+		<result property="voc_id"  column="voc_id" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="hanjiho.project.starbucks.model.VocRe"
+		resultMap="vocReMap">
+		SELECT 
+		re_id, voc_re_ttl, CONVERT(voc_re_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_id 
+		FROM voc_re 
+		WHERE re_id=#{re_id}
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="hanjiho.project.starbucks.model.VocRe"
+		resultMap="vocReMap">
+		SELECT 
+		re_id, voc_re_ttl, CONVERT(voc_re_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_id
+		FROM voc_re
+		<where>
+			<if test="reg_date != null and reg_date != ''">
+				reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="voc_id != null and voc_id != ''">
+				OR voc_id LIKE concat('%', #{voc_id}, '%')
+			</if>
+		</where>
+
+		ORDER BY re_id DESC
+	</select>
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="hanjiho.project.starbucks.model.VocRe"
+		useGeneratedKeys="true" keyProperty="re_id">
+		INSERT INTO voc_re (
+		voc_re_ttl, voc_re_txt, reg_date, voc_id
+		) VALUES (
+		#{voc_re_ttl}, #{voc_re_txt}, now(), #{voc_id}
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="hanjiho.project.starbucks.model.VocRe">
+		DELETE FROM voc_re WHERE re_id=#{re_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="hanjiho.project.starbucks.model.VocRe">
+		UPDATE voc_re SET
+		voc_re_ttl=#{voc_re_ttl},
+		voc_re_txt=#{voc_re_txt},
+		voc_id=#{voc_id}
+		WHERE re_id=#{re_id}
+	</update>
+
+	<!-- 데이터 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="hanjiho.project.starbucks.model.VocRe"
+		resultType="int">
+		SELECT COUNT(*) FROM voc_re
+
+		<where>
+			<if test="reg_date != null and reg_date != ''">
+				reg_date LIKE concat('%', #{reg_date}, '%')
+			</if>
+			<if test="voc_id != null and voc_id != ''">
+				OR voc_id LIKE concat('%', #{voc_id}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>
