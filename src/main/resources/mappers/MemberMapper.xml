@@ -64,7 +64,7 @@
 		INSERT INTO member (
 		user_id, user_pw, user_name, user_email, phone, birthday, gender, is_out, reg_date, edit_date
 		) VALUES (
-		#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{phone}, #{birthday}, #{gender}, #{is_out}, now(), now()
+		#{user_id}, MD5(#{user_pw}), #{user_name}, #{user_email}, #{phone}, #{birthday}, #{gender}, #{is_out}, now(), now()
 		)
 	</insert>
 
@@ -79,7 +79,7 @@
 		parameterType="hanjiho.project.starbucks.model.Member">
 		UPDATE member SET
 		user_id=#{user_id},
-		user_pw=#{user_pw},
+		user_pw= MD5(#{user_pw}),
 		user_name=#{user_name},
 		user_email=#{user_email},
 		phone=#{phone},
@@ -113,5 +113,28 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 아이디 중복검사 -->
+    <select id="idUniqueCheck" parameterType="hanjiho.project.starbucks.model.Member" resultType="int">
+        SELECT COUNT(*) FROM member WHERE user_id=#{user_id}
+    </select>
+    
+    <!-- 이메일 중복검사 -->
+    <select id="emailUniqueCheck" parameterType="hanjiho.project.starbucks.model.Member" resultType="int">
+        SELECT COUNT(*) FROM member WHERE user_email=#{user_email}
+    </select>
+    
+    <!-- 로그인 조회 -->
+    <select id="login" parameterType="hanjiho.project.starbucks.model.Member" resultMap="memberMap">
+        SELECT 
+        id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2 
+        FROM member
+        WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
+    </select>
+
+    <!-- 최근 로그인 시간 갱신 -->
+    <update id="updateLoginDate" parameterType="hanjiho.project.starbucks.model.Member">
+        UPDATE member SET login_date=now() WHERE id=#{id}
+    </update>
 
 </mapper>

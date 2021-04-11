@@ -7,6 +7,7 @@ public class Member {
 	private int id;
 	private String user_id;
 	private String user_pw;
+	private String user_pw_confirm;
 	private String user_name;
 	private String user_email;
 	private String phone;

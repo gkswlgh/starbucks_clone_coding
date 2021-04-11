@@ -8,6 +8,8 @@ public class Voc {
 	private String phone;
 	private String email;
 	private String visit_store;
+	private String store_name;
+	private String visit_date;
 	private String voc_ttl;
 	private String voc_txt;
 	private String reg_date;

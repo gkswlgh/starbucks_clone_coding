@@ -116,7 +116,9 @@ public class VocServiceTest {
 		Voc input = new Voc();
 		input.setPhone("010)1111-1111");
 		input.setEmail("sdf123@assd.as");
-		input.setVisit_store("N");
+		input.setVisit_store("Y");
+		input.setStore_name("강남어쩌구점");
+		input.setVisit_date("2020-12-23");
 		input.setVoc_ttl("신규");
 		input.setVoc_txt("신규");
 		input.setVoc_type("1");
@@ -144,6 +146,8 @@ public class VocServiceTest {
 //		input.setPhone("010)1111-1111");
 //		input.setEmail("sdf123@assd.as");
 //		input.setVisit_store("N");
+//		input.setStore_name("");
+//		input.setVisit_date("");
 //		input.setVoc_ttl("신규");
 //		input.setVoc_txt("신규");
 //		input.setVoc_type("1");

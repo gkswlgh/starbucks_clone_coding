@@ -14,7 +14,7 @@ public class ProductController {
      * 메뉴 목록 페이지
      */
     @RequestMapping(value = "/product/menu_list", method = RequestMethod.GET)
-    public String coffee_finder() {
+    public String menu_list() {
         return "menu_list";
     }
 
@@ -22,7 +22,7 @@ public class ProductController {
      * 메뉴 상세 페이지
      */
     @RequestMapping(value = "/product/menu_detail", method = RequestMethod.GET)
-    public String coffee_finder_product() {
+    public String menu_detail() {
         return "menu_detail";
     }
 }

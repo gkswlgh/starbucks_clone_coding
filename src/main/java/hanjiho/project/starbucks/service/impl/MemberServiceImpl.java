@@ -97,6 +97,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int addMember(Member input) throws Exception {
 		int result=0;
+		
+		// 중복검사 기능을 먼저 호출한다. --> 예외가 발생할 경우 이 메서드가 정의하는 throws문에 의해 컨트롤러로 예외가 전달된다.
+        this.idUniqueCheck(input);
+        this.emailUniqueCheck(input);
+        
 		try {
 		    result = sqlSession.insert("MemberMapper.insertItem", input);
 
@@ -163,4 +168,79 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+
+    /**
+     * 아이디 중복검사
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void idUniqueCheck(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.selectOne("MemberMapper.idUniqueCheck", input);
+            if (result > 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이미 사용중인 아이디 입니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("아이디 중복검사에 실패했습니다.");
+        }
+    }
+
+    /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void emailUniqueCheck(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.selectOne("MemberMapper.emailUniqueCheck", input);
+            if (result > 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이미 사용중인 이메일 입니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이메일 중복검사에 실패했습니다.");
+        }
+    }
+
+
+    /**
+     * 로그인
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public Member login(Member input) throws Exception {
+        Member result = null;
+        try {
+            result = sqlSession.selectOne("MemberMapper.login", input);
+
+            if (result == null) {
+                throw new NullPointerException("result=null");
+            }
+            
+            // 조회에 성공하면 result에 저장되어 있는 PK를 활용하여 로그인 시간을 갱신한다.
+            sqlSession.update("MemberMapper.updateLoginDate", result);
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("아이디나 비밀번호가 잘못되었습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터 조회에 실패했습니다.");
+        }
+
+        return result;
+    }
 }

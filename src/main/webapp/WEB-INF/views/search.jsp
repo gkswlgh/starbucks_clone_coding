@@ -114,7 +114,6 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     // 카테고리 상세보기 선택 버튼
     $(document).on("change", ".search_btns > ul > li > input", function() {

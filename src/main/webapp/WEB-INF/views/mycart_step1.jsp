@@ -89,7 +89,7 @@
                                                 <input type="hidden" data-item-name="상품이름" data-item-price="25000" data-unit-price="25000" data-unit-qty="1" data-item-id="상품번호">
                                                 <div class="ttl2_wrap clear">
                                                     <div class="ttl2_thumb">
-                                                        <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2016/04/[9200000000044]_20160415132044486.jpg" alt>
+                                                        <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2016/04/[9200000000044]_20160415132044486.jpg" >
                                                     </div>
                                                     <div class="ttl2_cell">
                                                         <a href="${pageContext.request.contextPath}/" class="ttl2_name">블렌드 어쩌구</a>
@@ -133,7 +133,7 @@
                                                 <input type="hidden" data-item-name="상품이름" data-item-price="25000" data-unit-price="25000" data-unit-qty="1" data-item-id="상품번호">
                                                 <div class="ttl2_wrap clear">
                                                     <div class="ttl2_thumb">
-                                                        <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2016/04/[9200000000044]_20160415132044486.jpg" alt>
+                                                        <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2016/04/[9200000000044]_20160415132044486.jpg" >
                                                     </div>
                                                     <div class="ttl2_cell">
                                                         <a href="${pageContext.request.contextPath}/" class="ttl2_name">블렌드 어쩌구</a>
@@ -211,7 +211,6 @@
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
         $(document).on("click", "button.qnt-up", qtyPlus); // 수량증가

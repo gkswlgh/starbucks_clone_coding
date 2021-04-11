@@ -13,12 +13,20 @@
             </h1>
             <nav class="util_nav">
                 <ul class="clear">
-                    <li class="util_nav01 signIn"><a href="${pageContext.request.contextPath}/account/login">Sign In</a></li>
-                    <li class="util_nav01 signOut" style="display: none;"><a href="${pageContext.request.contextPath}/account/logout">Sign Out</a></li>
+                <%-- JSTL을 통해 세션에 직접 접근하기 --%>
+                <c:choose>
+                    <c:when test="${member == null}">
+                        <li class="util_nav01 on"><a href="${pageContext.request.contextPath}/account/login">Sign In</a></li>
+                		<li class="util_nav01"><a id="logout" href="${pageContext.request.contextPath}/rest/account/logout">Sign Out</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="util_nav01"><a href="${pageContext.request.contextPath}/account/login">Sign In</a></li>
+                		<li class="util_nav01 on"><a id="logout" href="${pageContext.request.contextPath}/rest/account/logout">Sign Out</a></li>
+                    </c:otherwise>
+                </c:choose>
                     <li class="util_nav02"><a href="${pageContext.request.contextPath}/sitemap">Site Map</a></li>
-                    <li class="util_nav03"><a href="${pageContext.request.contextPath}/voc">Customer Service &amp;
-                            Ideas</a></li>
-                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
+                    <li class="util_nav03"><a href="${pageContext.request.contextPath}/voc">Customer Service &amp; Ideas</a></li>
+                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
                 </ul>
             </nav>
             <p class="btn_search">
@@ -163,13 +171,13 @@
                                             <li><a href="${pageContext.request.contextPath}/">카드 충전</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">My 스타벅스 e-Gift Card</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">My 스타벅스 e-Gift Card</a></li>
                                             <li><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">선물하기</a></li>
                                             <li><a href="${pageContext.request.contextPath}/">선물 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">My Order</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">장바구니</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">My Order</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">장바구니</a></li>
                                             <li><a href="${pageContext.request.contextPath}/">주문 내역</a></li>
                                         </ul>
                                         <ul>
@@ -201,3 +209,36 @@
         </nav>
     </div>
     <!-- 헤더끝 -->
+    <script type="text/javascript">
+    $(function() {
+        $('#logout').click(function(e) {
+			// <form>태그가 submit되어 페이지가 이동되는 것을 방지한다.
+			e.preventDefault();
+			
+			$.ajax( {
+				// 결과를 읽어올 URL --> <form>태그의 action 속성
+				url: ROOT_URL + "/rest/account/logout",
+				// 웹 프로그램에게 데이터를 전송하는 방식. --> <form>태그의 method속성
+				method: "GET",
+				// 전달할 조건값은 사용자의 입력값을 활용하여 JSON형식으로 구성
+				data : {},
+				// 읽어올 내용의 형식(생략할 경우 json)
+				dataType: 'json',
+				// 읽어온 내용을 처리하기 위한 함수
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+	            	if (json.rt == "OK") {
+		                alert("로그아웃 완료");
+			            window.location = ROOT_URL;
+					} else {
+						alert("로그아웃 실패.");
+						return false;
+					}
+				}
+            	
+            }); // end $.ajax
+        }); // end click
+
+    });
+    </script>

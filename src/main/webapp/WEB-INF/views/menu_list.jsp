@@ -20,9 +20,9 @@
                             <ul class="smap">
                                 <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="${pageContext.request.contextPath}/"><span class="en c222">MENU</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/menu_list"><span class="en c222">MENU</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="${pageContext.request.contextPath}/"><span class="en c222">음료</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/menu_list"><span class="en c222">음료</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -64,43 +64,29 @@
                         <dd>
                             <div class="product_list">
                                 <dl>
-                                    <!-- 콜드브루 -->
-                                    <dt><a href="${pageContext.request.contextPath}/">콜드 브루 커피</a><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png" alt></i>
+                                    <!-- 메뉴 -->
+                                    <dt><span class="ttl">콜드 브루 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png" alt></i>
                                         <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
                                     <dd>
                                         <ul class="clear">
                                             <li class="menuDataSet">
                                                 <dl>
                                                     <dt>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrinkView"><img src="https://image.istarbucks.co.kr/upload/store/skuimg/2020/12/[9200000003270]_20201221104333775.jpg" alt="홀 그레인 오트 블렌디드"></a>
-                                                    </dt>
-                                                    <dd>홀 그레인 오트 블렌디드</dd>
-                                                </dl>
-                                            </li>
-                                            <li class="menuDataSet">
-                                                <dl>
-                                                    <dt>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrinkView"><img src="https://image.istarbucks.co.kr/upload/store/skuimg/2020/12/[9200000003270]_20201221104333775.jpg" alt="홀 그레인 오트 블렌디드"></a>
-                                                    </dt>
-                                                    <dd>홀 그레인 오트 블렌디드</dd>
-                                                </dl>
-                                            </li>
-                                            <li class="menuDataSet">
-                                                <dl>
-                                                    <dt>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrinkView"><img src="https://image.istarbucks.co.kr/upload/store/skuimg/2020/12/[9200000003270]_20201221104333775.jpg" alt="홀 그레인 오트 블렌디드"></a>
+                                                        <a href="${pageContext.request.contextPath}/product/menu_detail" class="goDrinkView"><img src="https://image.istarbucks.co.kr/upload/store/skuimg/2020/12/[9200000003270]_20201221104333775.jpg" alt="홀 그레인 오트 블렌디드"></a>
                                                     </dt>
                                                     <dd>홀 그레인 오트 블렌디드</dd>
                                                 </dl>
                                             </li>
                                         </ul>
                                     </dd>
+                                    <!-- 메뉴 끝 -->
                                 </dl>
                             </div>
                         </dd>
                         <dt class="dt2">
                             <a role="button" class="a2">영양정보로 보기</a>
                         </dt>
+                        <!-- 메뉴 -->
                         <dd>
                             <h3>블렌디드</h3>
                             <table class="coffeeInfo mb60">
@@ -127,25 +113,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>홀 그레인 오트 블렌디드</td>
-                                        <td>295</td>
-                                        <td>32</td>
-                                        <td>4</td>
-                                        <td>140</td>
-                                        <td>0.4</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>홀 그레인 오트 블렌디드</td>
-                                        <td>295</td>
-                                        <td>32</td>
-                                        <td>4</td>
-                                        <td>140</td>
-                                        <td>0.4</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>홀 그레인 오트 블렌디드</td>
+                                        <td><a href="${pageContext.request.contextPath}/product/menu_detail" class="goDrinkView">홀 그레인 오트 블렌디드</a></td>
                                         <td>295</td>
                                         <td>32</td>
                                         <td>4</td>
@@ -156,6 +124,7 @@
                                 </tbody>
                             </table>
                         </dd>
+                        <!-- 메뉴 끝 -->
                     </dl>
                     <!-- 음료 리스트 끝 -->
                 </div>
@@ -164,7 +133,6 @@
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
 

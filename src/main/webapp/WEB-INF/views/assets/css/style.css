@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-/*webfont*/
-@font-face {
-    /*나눔바른고딕 */
-    font-family: 'nbg';
-    src: url('../font/NanumBarunGothic.eot');
-    src: url('../font/NanumBarunGothic.eot?#iefix') format('embedded-opentype'), url('../font/NanumBarunGothic.woff') format('woff'), url('../font/NanumBarunGothic.ttf') format('truetype');
-    src: local(※), url('../font/NanumBarunGothic.woff') format('woff');
-}
-
 /*font awesome*/
 .header_inner>nav>ul>li.util_nav04>a>span {
     font-size: 20px;
@@ -23,7 +14,7 @@ body {
 }
 
 * {
-    font-family: 'nbg', '맑은 고딕', HelveticaNeue, DroidSans, Sans-serif,
+    font-family: 'NanumBarunGothic', '맑은 고딕', HelveticaNeue, DroidSans, Sans-serif,
         Helvetica;
     font-size: 1em;
     line-height: 1;
@@ -133,6 +124,14 @@ h1.logo a {
 .util_nav li a {
     color: #666;
     font: normal 13px Avenir, Arial, georgia;
+}
+
+.util_nav01 {
+	display: none;
+}
+
+.util_nav01.on {
+	display: block;
 }
 
 .btn_search {
@@ -335,7 +334,7 @@ h1.logo a {
     width: 1100px;
     padding-top: 15px;
     margin: 0 auto;
-    background: url(../img/gnb_sub_txbg.jpg) repeat-x;
+    background: url(../img/header/gnb_sub_txbg.jpg) repeat-x;
 }
 
 .gnb_sub_tx_inner h3 {
@@ -2824,7 +2823,7 @@ div.product_list>dl>dt {
     overflow: hidden;
 }
 
-div.product_list>dl>dt>a {
+div.product_list>dl>dt>span.ttl {
     display: block;
     float: left;
     line-height: 18px;
@@ -3079,7 +3078,7 @@ div.product_view_detail div.product_select_wrap2>div {
     margin-top: -5px;
     font-size: 16px;
     color: #444;
-    font-family: "nbg";
+    font-family: 'NanumBarunGothic';
 }
 
 div.product_info_content {
@@ -5656,7 +5655,7 @@ div.select_box label.value {
     text-indent: 4px;
     font-size: 12px;
     color: #444;
-    font-family: "nbg";
+    font-family: 'NanumBarunGothic';
     overflow: hidden;
 }
 
@@ -5674,7 +5673,7 @@ div.select_box select {
     font-size: 12px;
     color: #444;
     background: #fff;
-    font-family: "nbg";
+    font-family: 'NanumBarunGothic';
 }
 
 /*카드소개페이지*/
@@ -6853,6 +6852,10 @@ button[disabled] {
 
 .f_32 {
     font-size: 32px;
+}
+
+.cfff {
+    color: #ffffff;
 }
 
 .c222 {

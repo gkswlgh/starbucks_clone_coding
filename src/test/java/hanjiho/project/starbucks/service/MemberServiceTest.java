@@ -63,7 +63,7 @@ public class MemberServiceTest {
 	public void testB() {
 		// -> import hanjiho.project.starbucks.model.Member;
 		Member input = new Member();
-		input.setUser_name("김회원");
+//		input.setUser_name("김회원");
 
 		List<Member> output = null;
 

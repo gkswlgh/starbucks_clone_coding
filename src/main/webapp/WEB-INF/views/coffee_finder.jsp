@@ -141,7 +141,6 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <!-- 폼 -->
     <form action="productFinderView.do" name="frm" id="frm" method="POST" onsubmit="return false;">
         <input type="hidden" name="COFFEE_TASTE1">

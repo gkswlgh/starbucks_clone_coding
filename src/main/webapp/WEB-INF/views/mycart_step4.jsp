@@ -93,7 +93,6 @@
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
 </body>
 
 </html>

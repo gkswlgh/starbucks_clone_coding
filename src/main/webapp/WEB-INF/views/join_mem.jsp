@@ -11,7 +11,7 @@
         <!-- 내용 -->
         <div class="cont">
             <div class="cont_inner">
-                <form action="#" id="join_mem" name="join_mem" class="join_input_frm" method="post" enctype="multipart/form-data">
+                <form id="join_mem" name="join_mem" class="join_input_frm" method="post" action="${pageContext.request.contextPath}/rest/account/join">
                     <input type="hidden" value="0" id="store_cd" name="store_cd" />
                     <fieldset>
                         <legend>회원가입 입력폼</legend>
@@ -31,10 +31,11 @@
                                 </colgroup>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">아이디 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
+                                        <th scope="row">아이디 (중복 확인)<img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
                                                 <input type="text" class="voc_ttl_input1 w300" id="user_id" name="user_id" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
+                                                <button type="button" id="id-unique-check">아이디 중복 확인</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -78,7 +79,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">이메일 주소 (본인 확인)<img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
+                                        <th scope="row">이메일 주소 (중복 확인)<img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
                                                 <input type="text" class="mail_input" id="email1" name="email1" />
@@ -102,6 +103,7 @@
                                                         <option value="gmail.com">gmail.com</option>
                                                     </select>
                                                 </p>
+                                                <button type="button" id="email-unique-check">이메일 중복 확인</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -150,37 +152,20 @@
                             <button type="submit">회원 가입하기</button>
                         </div>
                     </fieldset>
+                    <input type="hidden" name="email" id="email"/>
+                    <input type="hidden" name="phone" id="phone"/>
                 </form>
             </div>
         </div>
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
-        var email = $("#email1").val() + "@" + $("#email2").val();
-        var tel = $("#phone1").val() + $("#phone2").val() + $("#phone3").val();
-
+        
         //이메일 뒷자리 선택
         $(document).on("change", '[name="mail"]', function() {
             $(this).parent().prev().val($(this).val());
-        });
-
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
         });
 
         /*유효성 검사 추가 함수*/
@@ -198,15 +183,55 @@
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#join_mem").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
-                user_name: { required: true, kor: true },
-                user_id: { required: true, alphanumeric: true },
+                // [아이디] 필수 + 알파벳,숫자 조합만 허용
+	            user_id: {
+	                required: true, alphanumeric: true, minlength: 4, maxlength: 30,
+	                remote : {
+	                    url : ROOT_URL + '/rest/account/id_unique_check_jquery',
+	                    type : 'post',
+	                    data : {
+	                        user_id : function() {
+	                            return $("#user_id").val();
+	                        }
+	                    }
+	                }
+	            },
+	            // [비밀번호] 필수 + 글자수 길이 제한
+	            user_pw: { required: true, minlength: 4, maxlength: 20 },
+	            // [비밀번호 확인] 필수 + 특정 항목과 일치 (id로 연결)
+	            user_pw_re: { required: true, equalTo: '#user_pw' },
+	            // [이름] 필수
+	            user_name: { required: true, kor: true, minlength: 2, maxlength: 30 },
+	            // [이메일] 필수 + 이메일 형식 일치 필요
+	            email: {
+	                required: true, email: true, maxlength: 255,
+	                remote : {
+	                    url : ROOT_URL + '/rest/account/email_unique_check_jquery',
+	                    type : 'post',
+	                    data : {
+	                        email : function() {
+	                            return $("#email").val();
+	                        }
+	                    }
+	                }
+	            },
+	            // [연락처] 필수
+	            phone: { required: true, phone: true, minlength: 9, maxlength: 11 },
                 email1: { required: true, alphanumeric: true },
                 email2: "required",
-                user_pw: { required: true, minlength: 4, maxlength: 20 },
-                user_pw_re: { required: true, equalTo: "#user_pw" },
                 phone1: "required",
                 phone2: { required: true, number: true },
                 phone3: { required: true, number: true },
@@ -217,28 +242,46 @@
             },
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
-                user_name: {
-                    required: "이름를 입력하세요.",
-                    kor: "이름은 한글만 입력 가능합니다."
-                },
                 user_id: {
-                    required: "아이디를 입력하세요.",
-                    alphanumeric: "아이디 형식이 잘못되었습니다."
-                },
+	                required: '아이디를 입력하세요.',
+	                alphanumeric: '아이디는 영어,숫자만 입력 가능합니다.',
+	                minlength: '아이디는 최소 {0}글자 이상 입력하셔야 합니다.',
+	                maxlength: '아이디는 최대 {0}글자까지 가능합니다.',
+	                remote: '이미 사용중인 아이디 입니다.'
+	            },
+	            user_pw: {
+	                required: '비밀번호를 입력하세요.',
+	                minlength: '비밀번호는 최소 {0}글자 이상 입력하셔야 합니다.',
+	                maxlength: '비밀번호는 최대 {0}글자까지 가능합니다.',
+	            },
+	            user_pw_re: {
+	                required: '비밀번호 확인값을 입력하세요.',
+	                equalTo: '비밀번호 확인이 잘못되었습니다.',
+	            },
+	            user_name: {
+	                required: '이름을 입력하세요.',
+	                kor: '이름은 한글만 입력 가능합니다.',
+	                minlength: '이름은 최소 {0}글자 이상 입력하셔야 합니다.',
+	                maxlength: '이름은 최대 {0}글자까지 가능합니다.',
+	            },
+	            email: {
+	                required: '이메일을 입력하세요.',
+	                email: '이메일 형식이 잘못되었습니다.',
+	                maxlength: '이메일은 최대 {0}글자까지 가능합니다.',
+	                remote: '이미 사용중인 이메일 입니다.'
+	            },
+	            phone: {
+	                required: '연락처를 입력하세요.',
+	                phone: '연락처 형식이 잘못되었습니다.',
+	                minlength: '연락처는 최소 {0}글자 이상 입력하셔야 합니다.',
+	                maxlength: '연락처는 최대 {0}글자까지 가능합니다.',
+	            },
                 email1: {
                     required: "이메일을 입력하세요.",
                     alphanumeric: "이메일 형식이 잘못되었습니다."
                 },
                 email2: "이메일을 입력하세요.",
-                user_pw: {
-                    required: "비밀번호를 입력하세요.",
-                    minlength: "비밀번호는 4글자 이상 입력하셔야 합니다.",
-                    maxlength: "비밀번호는 최대 20자까지 입력 가능합니다."
-                },
-                user_pw_re: {
-                    required: "비밀번호 확인값을 입력하세요.",
-                    equalTo: "비밀번호 확인이 잘못되었습니다."
-                },
+                
                 phone1: "연락처 형식이 잘못되었습니다.",
                 phone2: {
                     required: "연락처를 입력하세요.",
@@ -256,12 +299,74 @@
                 agree1: "필수 동의 사항에 체크해 주세요.",
                 agree2: "필수 동의 사항에 체크해 주세요."
             },
-            /*수동 submit*/
-            submitHandler: function() {
-                alert("가입완료");
+        }); //validate
+        
+        $('#join_mem').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					var email = $("#email1").val() + "@" + $("#email2").val();
+		        	$("#email").val(email);
+		        	var phone = $("#phone1").val() + $("#phone2").val() + $("#phone3").val() ;
+		        	$("#phone").val(phone);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+					
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+						alert("회원가입이 완료되었습니다. 로그인 해 주세요.");
+			            window.location = ROOT_URL + '/account/login';
+					} else {
+						alert("작성폼을 다시 한번 확인하세요.");
+						return false;
+					}
+				}
+		});// end ajax
+        
+        $("#id-unique-check").click(function(e) {
+            const userId = $("#user_id").val();
+
+            if (!userId) {
+                alert('아이디를 입력하세요.');
+                $("#user_id").focus();
+                return false;
             }
-        });
-    });
+
+            $.post(ROOT_URL + '/rest/account/id_unique_check', {
+                user_id: userId
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		alert('사용가능한 아이디 입니다.');	
+            	}
+            	
+            });
+        }); //id-unique-check
+
+        $("#email-unique-check").click(function(e) {
+        	var email = $("#email1").val() + "@" + $("#email2").val();
+            if (!$("#email1").val() || !$("#email2").val()) {
+            	alert('이메일을 입력하세요.');
+            	
+                return false;
+            }
+
+            $.post(ROOT_URL + '/rest/account/email_unique_check', {
+                user_email: email
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		alert('사용가능한 이메일 입니다.');	}
+            });
+        }); //email-unique-check
+        
+    }); //$(function()
     </script>
 </body>
 

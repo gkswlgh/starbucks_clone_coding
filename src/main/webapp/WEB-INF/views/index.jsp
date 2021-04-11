@@ -94,44 +94,90 @@
             </div>
         </div>
         <!-- 프로모션 배너 끝 -->
+        
         <!-- 스타벅스리워드 시작 -->
-        <section class="s_rewards">
-            <div class="s_rewards_inner clear">
-                <div class="rewards_logo">
-                    <img src="${pageContext.request.contextPath}/assets/img/contents/rewards-logo.png" alt="Starbucks Rewards" />
-                </div>
-                <div class="rewards_conts">
-                    <div class="conts_info">
-                        <div class="conts_info_txt">
-                            <h2>
-                                스타벅스만의 특별한 혜택, <strong>스타벅스 리워드</strong>
-                            </h2>
-                            <p>
-                                <strong>스타벅스 회원이세요?</strong> 로그인을 통해 나만의 리워드를 확인해보세요.
-                            </p>
-                            <p>
-                                <strong>스타벅스 회원이 아니세요?</strong> 가입을 통해 리워드 혜택을 즐기세요.
-                            </p>
-                        </div>
-                        <div class="rewards_btn_group">
-                            <a href="${pageContext.request.contextPath}/account/join" class="rewards_btn_join">회원가입</a> <a href="${pageContext.request.contextPath}/account/login" class="rewards_btn_login">로그인</a>
-                        </div>
-                    </div>
-                    <div class="conts_gift">
-                        <div class="conts_gift_txt">
-                            <p>
-                                회원 가입 후, 스타벅스 e-Gift Card를 <strong>"나에게 선물하기"로 구매하시고,
-                                    편리하게 등록하세요!</strong>
-                            </p>
-                            <p>카드를 등록하여 스타벅스 리워드 회원이 되신 후, 첫 구매를 하시면 무료 음료쿠폰을 드립니다!</p>
-                        </div>
-                        <div class="btn_egift">
-                            <a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">e-Gift Card 선물하기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+   		<%-- JSTL을 통해 세션에 직접 접근하기 --%>	
+        <c:choose>
+            <c:when test="${member == null}">
+                <section class="s_rewards">
+	            <div class="s_rewards_inner clear">
+	                <div class="rewards_logo">
+	                    <img src="${pageContext.request.contextPath}/assets/img/contents/rewards-logo.png" alt="Starbucks Rewards" />
+	                </div>
+	                <div class="rewards_conts">
+	                    <div class="conts_info">
+	                        <div class="conts_info_txt">
+	                            <h2>
+	                                집에서 주문 해보세요! <strong>스타벅스 딜리버리</strong>
+	                            </h2>
+	                            <p>
+	                                <strong>스타벅스 회원이세요?</strong> 로그인을 통해 가까운 매장에서 주문해보세요.
+	                            </p>
+	                            <p>
+	                                <strong>스타벅스 회원이 아니세요?</strong> 가입을 통해 스타벅스 딜리버리를 즐기세요.
+	                            </p>
+	                        </div>
+	                        <div class="rewards_btn_group">
+	                            <a href="${pageContext.request.contextPath}/account/join" class="rewards_btn_join">회원가입</a> <a href="${pageContext.request.contextPath}/account/login" class="rewards_btn_login">로그인</a>
+	                        </div>
+	                    </div>
+	                    <div class="conts_gift">
+	                        <div class="conts_gift_txt">
+	                            <p>
+	                                회원 가입 후, 스타벅스 e-Gift Card를 <strong>"나에게 선물하기"로 구매하시고,
+	                                    편리하게 등록하세요!</strong>
+	                            </p>
+	                            <p>카드를 등록해서 보다 빠르게 주문하세요!</p>
+	                        </div>
+	                        <div class="btn_egift">
+	                            <a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">e-Gift Card 선물하기</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	       </c:when>
+	       <c:otherwise>
+	           <section class="s_rewards">
+	            <div class="s_rewards_inner clear">
+	                <div class="rewards_logo">
+	                    <img src="${pageContext.request.contextPath}/assets/img/contents/rewards-logo.png" alt="Starbucks Rewards" />
+	                </div>
+	                <div class="rewards_conts">
+	                    <div class="conts_info">
+	                        <div class="conts_info_txt">
+	                            <h2>
+	                                안녕하세요! <strong> ${member.user_name} </strong> 님.
+	                            </h2>
+	                            <p>
+	                                <strong><a class="cfff" href="${pageContext.request.contextPath}/product/menu_list">메뉴 보러가기,</a></strong> 주문할 메뉴를 장바구니에 담아보세요!
+	                            </p>
+	                            <p>
+	                                <strong><a class="cfff" href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">주문하러 가기,</a></strong> 장바구니에 담긴 메뉴를 주문해보세요!
+	                            </p>
+	                        </div>
+	                        <div class="rewards_btn_group">
+	                            <a href="${pageContext.request.contextPath}/product/menu_list" class="rewards_btn_join">메뉴 보러가기</a> <a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1" class="rewards_btn_login">장바구니</a>
+	                        </div>
+	                    </div>
+	                    <div class="conts_gift">
+	                        <div class="conts_gift_txt">
+	                            <p>
+	                                내 카드 잔고 확인은? <strong><a class="cfff" href="${pageContext.request.contextPath}/my_starbucks">마이페이지 바로가기</a></strong>
+	                            </p>
+	                            <p>스타벅스 카드를 사용해서 번거로운 결제 절차를 생략하세요!</p>
+	                        </div>
+	                        <div class="btn_egift">
+	                            <a href="${pageContext.request.contextPath}/my_starbucks">마이페이지 바로가기</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+	       </c:otherwise>
+        </c:choose>
+        
+        
         <!-- 스타벅스리워드 끝 -->
         <!-- 메인 빈 시작 -->
         <section class="main_bean">
@@ -142,7 +188,7 @@
                 <div class="bean_txt_box">
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean_txt.png" alt="스타벅스의 50년이 담긴 애니버서리 블렌드. 스타벅스의 50주년을 기념하여 블렌딩된 깊고 진한 풍미의 애니버서리 블렌드입니다." />
                     <div class="bean_detail_btn">
-                        <a href="${pageContext.request.contextPath}/">자세히 보기</a>
+                        <a href="${pageContext.request.contextPath}/">매장에서 구매하기</a>
                     </div>
                 </div>
             </div>
@@ -158,7 +204,7 @@
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_bean_0217.png" />
                 </div>
                 <div class="reserve_detail_btn">
-                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/">매장에서 구매하기</a>
                 </div>
             </div>
         </section>
@@ -172,7 +218,7 @@
                     더하는 상품, 소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</div>
                 <div class="menu_wrap_img"></div>
                 <div class="menu_wrap_btn">
-                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/product/menu_list">자세히 보기</a>
                 </div>
             </div>
         </section>
@@ -198,7 +244,6 @@
     </div>
     <!-- 내용 끝 -->
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
 

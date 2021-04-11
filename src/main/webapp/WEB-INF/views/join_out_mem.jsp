@@ -48,7 +48,6 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
         /*플러그인의 기본 설정 옵션 추가*/
@@ -69,7 +68,6 @@
         });
 
 
-
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#join_out_mem").validate({
             /*입력검사 규칙*/
@@ -79,7 +77,6 @@
             },
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
-
                 agree: "필수 동의 사항에 체크해 주세요."
             },
             /*수동 submit*/

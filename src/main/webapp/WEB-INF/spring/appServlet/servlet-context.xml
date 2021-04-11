@@ -32,6 +32,8 @@
 	<context:component-scan
 		base-package="hanjiho.project.starbucks.controllers" />
 	<context:component-scan
+		base-package="hanjiho.project.starbucks.controllers.rest" />
+	<context:component-scan
 		base-package="hanjiho.project.starbucks.service.impl" />
 
 	<!-- 인터셉터 등록 -->

@@ -46,4 +46,20 @@ public class MyPageController {
 		
 		return "voclist​";
 	}
+	
+	/**
+	 * 장바구니 컨트롤러
+	 */
+	@RequestMapping(value = "/my_starbucks/mycart_step1", method = RequestMethod.GET)
+	public String mycart_step1(Locale locale, Model model) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "mycart_step1​";
+	}
 }

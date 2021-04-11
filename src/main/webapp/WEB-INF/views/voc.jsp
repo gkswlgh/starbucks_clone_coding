@@ -193,7 +193,6 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
         var tel = $("#phone1").val() + $("#phone2").val() + $("#phone3").val();

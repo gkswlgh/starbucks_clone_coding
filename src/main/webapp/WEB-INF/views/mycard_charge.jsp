@@ -342,7 +342,6 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <!-- 사용자스크립트 -->
     <script type="text/javascript">
     $(function() {

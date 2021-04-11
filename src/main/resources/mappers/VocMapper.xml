@@ -12,6 +12,8 @@
 		<result property="phone"  column="phone" />
 		<result property="email"  column="email" />
 		<result property="visit_store"  column="visit_store" />
+		<result property="store_name"  column="store_name" />
+		<result property="visit_date"  column="v_date" />
 		<result property="voc_ttl"  column="voc_ttl" />
 		<result property="voc_txt"  column="voc_txt" />
 		<result property="reg_date"  column="r_date" />
@@ -25,7 +27,7 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		resultMap="vocMap">
 		SELECT
-		voc_id, phone, email, visit_store, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id 
+		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id 
 		FROM voc 
 		WHERE voc_id=#{voc_id}
 	</select>
@@ -35,7 +37,7 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		resultMap="vocMap">
 		SELECT
-		voc_id, phone, email, visit_store, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id
+		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id
 		FROM voc
 		<where>
 			<if test="reg_date != null and reg_date != ''">
@@ -60,9 +62,9 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		useGeneratedKeys="true" keyProperty="voc_id">
 		INSERT INTO voc (
-		phone, email, visit_store, voc_ttl, voc_txt, reg_date, voc_type, voc_type2, member_id
+		phone, email, visit_store, store_name, visit_date, voc_ttl, voc_txt, reg_date, voc_type, voc_type2, member_id
 		) VALUES (
-		#{phone}, #{email}, #{visit_store}, #{voc_ttl}, #{voc_txt}, now(), #{voc_type}, #{voc_type2}, #{member_id}
+		#{phone}, #{email}, #{visit_store}, #{store_name}, #{visit_date}, #{voc_ttl}, #{voc_txt}, now(), #{voc_type}, #{voc_type2}, #{member_id}
 		)
 	</insert>
 
@@ -79,6 +81,8 @@
 		phone=#{phone},
 		email=#{email},
 		visit_store=#{visit_store},
+		store_name=#{store_name},
+		visit_date=#{visit_date},
 		voc_ttl=#{voc_ttl},
 		voc_txt=#{voc_txt},
 		voc_type=#{voc_type}, 

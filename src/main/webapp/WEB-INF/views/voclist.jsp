@@ -113,7 +113,6 @@
         <input type="hidden" name="YN_ANSWER" id="YN_ANSWER" value="Y">
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <%@ include file="/WEB-INF/views/_inc/js_src.jsp"%>
     <script type="text/javascript">
     $(function() {
         $(document).on("click", ".tab_02", function() {

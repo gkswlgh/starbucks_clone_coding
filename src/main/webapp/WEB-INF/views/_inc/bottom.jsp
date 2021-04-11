@@ -67,3 +67,10 @@
         </aside>
     </div>
     <!-- 푸터끝 -->
+    
+<script src="${pageContext.request.contextPath}/assets/js/header.js?time=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/assets/js/contents.js?time=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/assets/js/footer.js?time=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/assets/js/coffee.js?time=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/assets/js/gift_step1_tab.js?time=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/assets/js/gift_step2.js?time=<%=System.currentTimeMillis()%>"></script>
