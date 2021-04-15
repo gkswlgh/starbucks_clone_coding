@@ -31,6 +31,6 @@ public class CardController {
      */
     @RequestMapping(value = "/starbucks_card/gift_step1", method = RequestMethod.GET)
     public String gift_step1() {
-        return "gift_step1";
+        return "my_starbucks/gift_step1";
     }
 }

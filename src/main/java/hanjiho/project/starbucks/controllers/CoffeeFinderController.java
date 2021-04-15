@@ -17,12 +17,4 @@ public class CoffeeFinderController {
     public String coffee_finder() {
         return "coffee_finder";
     }
-
-    /**
-     * 커피파인더 상세 페이지
-     */
-    @RequestMapping(value = "/coffee_finder/product", method = RequestMethod.GET)
-    public String coffee_finder_product() {
-        return "coffee_finder_product";
-    }
 }

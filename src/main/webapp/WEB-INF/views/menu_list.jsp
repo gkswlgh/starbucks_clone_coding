@@ -37,20 +37,20 @@
                             <div class="clear">
                                 <strong>분류보기</strong>
                                 <div class="check_all product_all">
-                                    <input id="product_all" name="product_all" type="checkbox" /> <label for="product_all">전체 선택</label>
+                                    <input id="product_all" name="product_all" type="checkbox" checked/> <label for="product_all">전체 선택</label>
                                 </div>
                             </div>
                             <div class="menu_btns">
                                 <ul>
-                                    <li class="total_search_btn1"><input type="checkbox" class="hid" name="product_cold_brew" id="product_cold_brew"><label for="product_cold_brew"><a class="category_set_btn on">콜드브루</a></label></li>
-                                    <li class="total_search_btn2"><input type="checkbox" class="hid" name="product_brood" id="product_brood"><label for="product_brood"><a class="category_set_btn">브루드 커피</a></label></li>
-                                    <li class="total_search_btn3"><input type="checkbox" class="hid" name="product_espresso" id="product_espresso"><label for="product_espresso"><a class="category_set_btn">에스프레소</a></label></li>
-                                    <li class="total_search_btn4"><input type="checkbox" class="hid" name="product_frappuccino" id="product_frappuccino"><label for="product_frappuccino"><a class="category_set_btn">프라푸치노</a></label></li>
-                                    <li class="total_search_btn5"><input type="checkbox" class="hid" name="product_blended" id="product_blended"><label for="product_blended"><a class="category_set_btn">블렌디드</a></label></li>
-                                    <li class="total_search_btn6"><input type="checkbox" class="hid" name="product_fizzo" id="product_fizzo"><label for="product_fizzo"><a class="category_set_btn">스타벅스 피지오</a></label></li>
-                                    <li class="total_search_btn7"><input type="checkbox" class="hid" name="product_tea" id="product_tea"><label for="product_tea"><a class="category_set_btn">티(티바나)</a></label></li>
-                                    <li class="total_search_btn8"><input type="checkbox" class="hid" name="product_etc" id="product_etc"><label for="product_etc"><a class="category_set_btn">기타 제조 음료</a></label></li>
-                                    <li class="total_search_btn9"><input type="checkbox" class="hid" name="product_juice" id="product_juice"><label for="product_juice"><a class="category_set_btn">스타벅스 주스(병음료)</a></label></li>
+                                    <li class="total_search_btn1"><input type="checkbox" class="hid" name="product_cold_brew" id="product_cold_brew" checked><label for="product_cold_brew"><a class="category_set_btn on">콜드브루</a></label></li>
+                                    <li class="total_search_btn2"><input type="checkbox" class="hid" name="product_brood" id="product_brood" checked><label for="product_brood"><a class="category_set_btn on">브루드 커피</a></label></li>
+                                    <li class="total_search_btn3"><input type="checkbox" class="hid" name="product_espresso" id="product_espresso" checked><label for="product_espresso"><a class="category_set_btn on">에스프레소</a></label></li>
+                                    <li class="total_search_btn4"><input type="checkbox" class="hid" name="product_frappuccino" id="product_frappuccino" checked><label for="product_frappuccino"><a class="category_set_btn on">프라푸치노</a></label></li>
+                                    <li class="total_search_btn5"><input type="checkbox" class="hid" name="product_blended" id="product_blended" checked><label for="product_blended"><a class="category_set_btn on">블렌디드</a></label></li>
+                                    <li class="total_search_btn6"><input type="checkbox" class="hid" name="product_fizzo" id="product_fizzo" checked><label for="product_fizzo"><a class="category_set_btn on">스타벅스 피지오</a></label></li>
+                                    <li class="total_search_btn7"><input type="checkbox" class="hid" name="product_tea" id="product_tea" checked><label for="product_tea"><a class="category_set_btn on">티(티바나)</a></label></li>
+                                    <li class="total_search_btn8"><input type="checkbox" class="hid" name="product_etc" id="product_etc" checked><label for="product_etc"><a class="category_set_btn on">기타 제조 음료</a></label></li>
+                                    <li class="total_search_btn9"><input type="checkbox" class="hid" name="product_juice" id="product_juice" checked><label for="product_juice"><a class="category_set_btn on">스타벅스 주스(병음료)</a></label></li>
                                 </ul>
                             </div>
                         </div>
@@ -64,32 +64,114 @@
                         <dd>
                             <div class="product_list">
                                 <dl>
-                                    <!-- 메뉴 -->
-                                    <dt><span class="ttl">콜드 브루 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png" alt></i>
-                                        <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
-                                    <dd>
-                                        <ul class="clear">
-                                            <li class="menuDataSet">
-                                                <dl>
-                                                    <dt>
-                                                        <a href="${pageContext.request.contextPath}/product/menu_detail" class="goDrinkView"><img src="https://image.istarbucks.co.kr/upload/store/skuimg/2020/12/[9200000003270]_20201221104333775.jpg" alt="홀 그레인 오트 블렌디드"></a>
-                                                    </dt>
-                                                    <dd>홀 그레인 오트 블렌디드</dd>
-                                                </dl>
-                                            </li>
-                                        </ul>
-                                    </dd>
-                                    <!-- 메뉴 끝 -->
+                                <c:choose>
+						        <c:when test="${menuList != null && fn:length(menuList) > 0}">
+						        <c:forEach var="i" items="${menuList}" varStatus="status">
+								<c:choose>
+								    <c:when test="${status.index == 0}">
+                                	<dt class="menu_class_0"><span class="ttl">콜드 브루 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+		                    	<span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 1}">
+								    <dt class="menu_class_1"><span class="ttl">브루드 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 2}">
+								    <dt class="menu_class_2"><span class="ttl">에스프레소</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 3}">
+								    <dt class="menu_class_3"><span class="ttl">프라푸치노</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 4}">
+								    <dt class="menu_class_4"><span class="ttl">블렌디드</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 5}">
+								    <dt class="menu_class_5"><span class="ttl">스타벅스 피지오</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 6}">
+								    <dt class="menu_class_6"><span class="ttl">티(티바나)</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:when test="${status.index == 7}">
+								    <dt class="menu_class_7"><span class="ttl">기타 제조 음료</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
+								    </c:when>
+								    <c:otherwise>
+								    <dt class="menu_class_8"><span class="ttl">스타벅스 주스(병음료)</span></dt>
+								    </c:otherwise>
+								</c:choose>
+								
+                                 <!-- 사진보기 메뉴 -->
+                                 <dd class="menu_class_${status.index}">
+		                           <ul class="clear">
+                                	<c:choose>
+							        	<c:when test="${i != null && fn:length(i) > 0 }">
+						            		<c:forEach var="item" items="${i}">
+		                                           <li class="menuDataSet">
+		                                               <dl>
+		                                                   <dt>
+		                                                       <a href="${pageContext.request.contextPath}/product/menu_detail/${item.id}" class="goDrinkView"><img src="${item.list_img}" alt="${item.name}"></a>
+		                                                   </dt>
+		                                                   <dd>${item.name}</dd>
+		                                               </dl>
+		                                           </li>
+								            </c:forEach>
+								        </c:when>
+								    </c:choose>
+                                    </ul>
+                                 </dd>
+                                 <!-- 사진보기 메뉴 끝 -->
+					            </c:forEach>
+						        </c:when>
+							    </c:choose>
                                 </dl>
                             </div>
                         </dd>
                         <dt class="dt2">
                             <a role="button" class="a2">영양정보로 보기</a>
                         </dt>
-                        <!-- 메뉴 -->
+                        <!-- 영양정보 메뉴 -->
                         <dd>
-                            <h3>블렌디드</h3>
-                            <table class="coffeeInfo mb60">
+                        	<div class="product_list">
+                        	<c:choose>
+					        <c:when test="${menuList != null && fn:length(menuList) > 0}">
+					        <c:forEach var="i" items="${menuList}" varStatus="status">
+                            
+	                            <c:choose>
+								    <c:when test="${status.index == 0}">
+								    <h3 class="menu_class_0">콜드 브루 커피</h3>
+								    </c:when>
+								    <c:when test="${status.index == 1}">
+								    <h3 class="menu_class_1">브루드 커피</h3>
+								    </c:when>
+								    <c:when test="${status.index == 2}">
+								    <h3 class="menu_class_2">에스프레소</h3>
+								    </c:when>
+								    <c:when test="${status.index == 3}">
+								    <h3 class="menu_class_3">프라푸치노</h3>
+								    </c:when>
+								    <c:when test="${status.index == 4}">
+								    <h3 class="menu_class_4">블렌디드</h3>
+								    </c:when>
+								    <c:when test="${status.index == 5}">
+								    <h3 class="menu_class_5">스타벅스 피지오</h3>
+								    </c:when>
+								    <c:when test="${status.index == 6}">
+								    <h3 class="menu_class_6">티(티바나)</h3>
+								    </c:when>
+								    <c:when test="${status.index == 7}">
+								    <h3 class="menu_class_7">기타 제조 음료</h3>
+								    </c:when>
+								    <c:otherwise>
+								    <h3 class="menu_class_8">스타벅스 주스(병음료)</h3>
+								    </c:otherwise>
+								</c:choose>
+							
+                            <table class="coffeeInfo mb60 menu_class_${status.index}">
                                 <caption class="hid">메뉴, 칼로리, 당류, 단백질, 나트륨, 포화지방, 카페인 정보</caption>
                                 <colgroup>
                                     <col width="16%">
@@ -112,19 +194,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+	                                <c:choose>
+							        <c:when test="${i != null && fn:length(i) > 0 }">
+						            <c:forEach var="item" items="${i}">
                                     <tr>
-                                        <td><a href="${pageContext.request.contextPath}/product/menu_detail" class="goDrinkView">홀 그레인 오트 블렌디드</a></td>
-                                        <td>295</td>
-                                        <td>32</td>
-                                        <td>4</td>
-                                        <td>140</td>
-                                        <td>0.4</td>
-                                        <td>0</td>
+                                        <td><a href="${pageContext.request.contextPath}/product/menu_detail/${item.id}" class="goDrinkView">${item.name}</a></td>
+                                        <td>${item.kcal}</td>
+                                        <td>${item.sugars}</td>
+                                        <td>${item.protein}</td>
+                                        <td>${item.salt}</td>
+                                        <td>${item.fat}</td>
+                                        <td>${item.caffeine}</td>
                                     </tr>
+						            </c:forEach>
+							        </c:when>
+								    </c:choose>
                                 </tbody>
                             </table>
+				            </c:forEach>
+					        </c:when>
+						    </c:choose>
+						    </div>
                         </dd>
-                        <!-- 메뉴 끝 -->
+                        <!-- 영양정보 메뉴 끝 -->
                     </dl>
                     <!-- 음료 리스트 끝 -->
                 </div>
@@ -136,15 +228,10 @@
     <script type="text/javascript">
     $(function() {
 
-        $("div.product_list > dl > dd > ul > li").bind("click", function() {
-            goUrl = $(this).find("a").attr("href");
-            location.href = goUrl;
-        });
-
         // 음료 - 분류보기 - 사진으로 보기 & 영양정보로 보기
         $("dl.product_view_tab > dt > a:not(.selected)").parent().next().hide();
         $("dl.product_view_tab > dt > a").bind("click", function() {
-
+        	
             if ($(this).hasClass('a2')) {
                 $('#mn_select_wrap').hide();
             } else {
@@ -155,32 +242,198 @@
             $(this).addClass("selected");
             $("dl.product_view_tab > dd").hide();
             $(this).parent().next().show();
+            
+            
+            if ($("#product_cold_brew").prop('checked')) {
+            	$('.menu_class_0').show();
+            } else {
+            	$('.menu_class_0').hide();
+            }
+            
+            if ($("#product_brood").prop('checked')) {
+            	$('.menu_class_1').show();
+            } else {
+            	$('.menu_class_1').hide();
+            }
+            
+            if ($("#product_espresso").prop('checked')) {
+            	$('.menu_class_2').show();
+            } else {
+            	$('.menu_class_2').hide();
+            }
+            
+            if ($("#product_frappuccino").prop('checked')) {
+            	$('.menu_class_3').show();
+            } else {
+            	$('.menu_class_3').hide();
+            }
+            
+            if ($("#product_blended").prop('checked')) {
+            	$('.menu_class_4').show();
+            } else {
+            	$('.menu_class_4').hide();
+            }
+            
+            if ($("#product_fizzo").prop('checked')) {
+            	$('.menu_class_5').show();
+            } else {
+            	$('.menu_class_5').hide();
+            }
+            
+            if ($("#product_tea").prop('checked')) {
+            	$('.menu_class_6').show();
+            } else {
+            	$('.menu_class_6').hide();
+            }
+            
+            if ($("#product_etc").prop('checked')) {
+            	$('.menu_class_7').show();
+            } else {
+            	$('.menu_class_7').hide();
+            }
+            
+            if ($("#product_juice").prop('checked')) {
+            	$('.menu_class_8').show();
+            } else {
+            	$('.menu_class_8').hide();
+            }
+            
             return false;
         });
 
-
         // 카테고리 상세보기 전체선택 버튼
         $(document).on("change", "#product_all", function() {
-
-            if ($(this).prop('checked')) {
+        	
+            if ($("#product_all").prop('checked')) {
                 $("div.menu_btns > ul > li > label > a").addClass("on");
+                $("div.menu_btns > ul > li > input").prop('checked', true);
             } else {
                 $("div.menu_btns > ul > li > label > a").removeClass("on");
+                $("div.menu_btns > ul > li > input").prop('checked', false);
             }
+            
+
+            if ($("#product_cold_brew").prop('checked')) {
+            	$('.menu_class_0').show();
+            } else {
+            	$('.menu_class_0').hide();
+            }
+            
+            if ($("#product_brood").prop('checked')) {
+            	$('.menu_class_1').show();
+            } else {
+            	$('.menu_class_1').hide();
+            }
+            
+            if ($("#product_espresso").prop('checked')) {
+            	$('.menu_class_2').show();
+            } else {
+            	$('.menu_class_2').hide();
+            }
+            
+            if ($("#product_frappuccino").prop('checked')) {
+            	$('.menu_class_3').show();
+            } else {
+            	$('.menu_class_3').hide();
+            }
+            
+            if ($("#product_blended").prop('checked')) {
+            	$('.menu_class_4').show();
+            } else {
+            	$('.menu_class_4').hide();
+            }
+            
+            if ($("#product_fizzo").prop('checked')) {
+            	$('.menu_class_5').show();
+            } else {
+            	$('.menu_class_5').hide();
+            }
+            
+            if ($("#product_tea").prop('checked')) {
+            	$('.menu_class_6').show();
+            } else {
+            	$('.menu_class_6').hide();
+            }
+            
+            if ($("#product_etc").prop('checked')) {
+            	$('.menu_class_7').show();
+            } else {
+            	$('.menu_class_7').hide();
+            }
+            
+            if ($("#product_juice").prop('checked')) {
+            	$('.menu_class_8').show();
+            } else {
+            	$('.menu_class_8').hide();
+            }
+            
             return false;
         });
 
 
         // 카테고리 상세보기 선택 버튼
         $(document).on("change", "div.menu_btns > ul > li > input", function() {
-
-            if ($(this).next().children().hasClass('on')) {
-                $(this).next().children().removeClass("on");
-                // 상품분류 선택하면 리스트 아래에 변화가 바로 표시되도록 (ajax?)
-            } else {
+        	
+            if ($(this).prop('checked')) {
                 $(this).next().children().addClass("on");
-                // 상품분류 선택하면 리스트 아래에 변화가 바로 표시되도록
+            } else {
+                $(this).next().children().removeClass("on");
             }
+            
+            if ($("#product_cold_brew").prop('checked')) {
+            	$('.menu_class_0').show();
+            } else {
+            	$('.menu_class_0').hide();
+            }
+            
+            if ($("#product_brood").prop('checked')) {
+            	$('.menu_class_1').show();
+            } else {
+            	$('.menu_class_1').hide();
+            }
+            
+            if ($("#product_espresso").prop('checked')) {
+            	$('.menu_class_2').show();
+            } else {
+            	$('.menu_class_2').hide();
+            }
+            
+            if ($("#product_frappuccino").prop('checked')) {
+            	$('.menu_class_3').show();
+            } else {
+            	$('.menu_class_3').hide();
+            }
+            
+            if ($("#product_blended").prop('checked')) {
+            	$('.menu_class_4').show();
+            } else {
+            	$('.menu_class_4').hide();
+            }
+            
+            if ($("#product_fizzo").prop('checked')) {
+            	$('.menu_class_5').show();
+            } else {
+            	$('.menu_class_5').hide();
+            }
+            
+            if ($("#product_tea").prop('checked')) {
+            	$('.menu_class_6').show();
+            } else {
+            	$('.menu_class_6').hide();
+            }
+            
+            if ($("#product_etc").prop('checked')) {
+            	$('.menu_class_7').show();
+            } else {
+            	$('.menu_class_7').hide();
+            }
+            
+            if ($("#product_juice").prop('checked')) {
+            	$('.menu_class_8').show();
+            } else {
+            	$('.menu_class_8').hide();
+            }
+            
             return false;
         });
     });

@@ -19,15 +19,7 @@ public class HomeController {
 	 * 인덱스 컨트롤러
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String index() {
 		return "index";
 	}
 	
@@ -35,15 +27,7 @@ public class HomeController {
 	 * 사이트맵 컨트롤러
 	 */
 	@RequestMapping(value = "/sitemap", method = RequestMethod.GET)
-	public String sitemap(Locale locale, Model model) {
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String sitemap() {
 		return "sitemap";
 	}
 	
@@ -51,15 +35,7 @@ public class HomeController {
 	 * 통합검색 컨트롤러
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(Locale locale, Model model) {
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String search() {
 		return "search";
 	}
 	
@@ -67,15 +43,7 @@ public class HomeController {
 	 * 고객문의 컨트롤러
 	 */
 	@RequestMapping(value = "/voc", method = RequestMethod.GET)
-	public String voc(Locale locale, Model model) {
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String voc() {
 		return "voc";
 	}
 	

@@ -26,7 +26,7 @@
                 </c:choose>
                     <li class="util_nav02"><a href="${pageContext.request.contextPath}/sitemap">Site Map</a></li>
                     <li class="util_nav03"><a href="${pageContext.request.contextPath}/voc">Customer Service &amp; Ideas</a></li>
-                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
+                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
                 </ul>
             </nav>
             <p class="btn_search">
@@ -176,8 +176,8 @@
                                             <li><a href="${pageContext.request.contextPath}/">선물 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">My Order</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">장바구니</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">My Order</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">장바구니</a></li>
                                             <li><a href="${pageContext.request.contextPath}/">주문 내역</a></li>
                                         </ul>
                                         <ul>
@@ -186,10 +186,10 @@
                                             <li><a href="${pageContext.request.contextPath}/">My 고객의 소리</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">개인정보관리</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">개인정보 확인 및 수정</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">회원 탈퇴</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">비밀번호 변경</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks">개인정보관리</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/account/myinfo_modify">개인정보 확인 및 수정</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/account/join_out">회원 탈퇴</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">비밀번호 변경</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                             <div class="gnb_sub_txbg">
                                 <div class="gnb_sub_tx_inner">
                                     <h3>
-                                        <a href="${pageContext.request.contextPath}/mystarbucks">My Starbucks 메인페이지</a>
+                                        <a href="${pageContext.request.contextPath}/my_starbucks">My Starbucks 메인페이지</a>
                                     </h3>
                                     <p class="gnb_sub_ex_txt">My Starbucks 메인페이지에서 내 카드를 한눈에 확인하고, 스타벅스 판매 집계도 조회해보세요.</p>
                                 </div>

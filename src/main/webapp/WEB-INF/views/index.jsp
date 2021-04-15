@@ -29,17 +29,14 @@
                 </div>
                 <div class="main_visual_set">
                     <div class="set_common set_01">
-                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_chocolate.png" alt="체리블라썸 화이트 초콜릿" />
+                        <a href="${pageContext.request.contextPath}/product/menu_detail/100"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_chocolate.png" alt="체리블라썸 화이트 초콜릿" />
                     </div>
                     <div class="set_common set_02">
-                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_coldbrew.png" alt="미드나잇 베르가못 콜드 브루" />
+                        <a href="${pageContext.request.contextPath}/product/menu_detail/2"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_coldbrew.png" alt="미드나잇 베르가못 콜드 브루" />
                     </div>
                     <div class="set_common set_03">
-                        <a href="${pageContext.request.contextPath}/"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_blended.png" alt="딸기 딜라이트 요거트 블렌디드" />
+                        <a href="${pageContext.request.contextPath}/product/menu_detail/56"></a> <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_blended.png" alt="딸기 딜라이트 요거트 블렌디드" />
                     </div>
-                </div>
-                <div class="slogan_btn">
-                    <a href="${pageContext.request.contextPath}/">자세히 보기</a>
                 </div>
             </div>
         </div>

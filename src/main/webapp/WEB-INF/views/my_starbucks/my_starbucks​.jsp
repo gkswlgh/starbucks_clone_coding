@@ -18,7 +18,7 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My Starbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">My Starbucks</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -29,15 +29,15 @@
             <div class="cont_inner">
                 <div class="user_index">
                     <h5 class="c222">
-                        <span class="mem">회원</span>
+                        <span class="mem">${member.user_name}</span>
                         님 안녕하세요.
                     </h5>
                     <div class="user_stat_btns">
                         <ul>
-                            <li class="btn_black"><a href="${pageContext.request.contextPath}/">
+                            <li class="btn_black"><a href="${pageContext.request.contextPath}/account/myinfo_modify">
                                     개인정보 수정
                                 </a></li>
-                            <li class="btn_gray"><a href="${pageContext.request.contextPath}/">
+                            <li class="btn_gray"><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">
                                     비밀번호 변경
                                 </a></li>
                         </ul>

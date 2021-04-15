@@ -35,7 +35,7 @@
                                         <td>
                                             <div class="sel_wrap">
                                                 <input type="text" class="voc_ttl_input1 w300" id="user_id" name="user_id" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
-                                                <button type="button" id="id-unique-check">아이디 중복 확인</button>
+                                                <button type="button" id="id-unique-check" class="unique-check">아이디 중복 확인</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -103,7 +103,7 @@
                                                         <option value="gmail.com">gmail.com</option>
                                                     </select>
                                                 </p>
-                                                <button type="button" id="email-unique-check">이메일 중복 확인</button>
+                                                <button type="button" id="email-unique-check" class="unique-check">이메일 중복 확인</button>
                                             </div>
                                         </td>
                                     </tr>

@@ -27,7 +27,7 @@
 	<select id="selectItem"
 		parameterType="hanjiho.project.starbucks.model.Menu"
 		resultMap="menuMap">
-		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8), CONVERT(main_img USING utf8), description, CONVERT(content USING utf8), CONVERT(nutri_info USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date 
+		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8) as list_img, CONVERT(main_img USING utf8) as main_img, description, CONVERT(content USING utf8) as content, CONVERT(nutri_info USING utf8) as nutri_info, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date 
 		FROM menu 
 		WHERE id=#{id}
 	</select>
@@ -36,7 +36,7 @@
 	<select id="selectList"
 		parameterType="hanjiho.project.starbucks.model.Menu"
 		resultMap="menuMap">
-		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8), CONVERT(main_img USING utf8), description, CONVERT(content USING utf8), CONVERT(nutri_info USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date
+		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8) as list_img, CONVERT(main_img USING utf8) as main_img, description, CONVERT(content USING utf8) as content, CONVERT(nutri_info USING utf8) as nutri_info, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date
 		FROM menu
 		<where>
 			<if test="menu_class != null and menu_class != ''">
@@ -50,7 +50,7 @@
 			</if>
 		</where>
 
-		ORDER BY id DESC
+		ORDER BY id ASC
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->

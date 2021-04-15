@@ -250,4 +250,65 @@ public class AccountRestController {
         webHelper.removeAllSession();
         return webHelper.getJsonData();
     }
+    
+    /** 회원가입 */
+    @RequestMapping(value = "/rest/account/myinfo_modify", method = RequestMethod.POST)
+    public Map<String, Object> modify(
+            @RequestParam(value = "user_id",        required = false) String userId,
+            @RequestParam(value = "user_name",      required = false) String userName,
+            @RequestParam(value = "email1",     required = false) String email1,
+            @RequestParam(value = "email2",     required = false) String email2,
+			@RequestParam(value = "phone1", 	required = false) String phone1,
+			@RequestParam(value = "phone2", 	required = false) String phone2,
+			@RequestParam(value = "phone3", 	required = false) String phone3,
+            @RequestParam(value = "birthdate",       required = false) String birthdate, 
+            @RequestParam(value = "gender",         required = false) String gender) {
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
+        if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
+        
+        
+        //이메일 조립- 유효성검사
+        String userEmail = email1 + "@" + email2;
+        if (!regexHelper.isValue(email1)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isValue(email2)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isEmail(userEmail)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
+        
+        // 전화번호 조립 - 유효성검사
+     	String tel = phone1 + phone2 + phone3;
+     	if (!regexHelper.isTel(tel)) {
+     			return webHelper.getJsonWarning("전화번호 형식이 잘못되었습니다");
+     		}
+        if (!regexHelper.isValue(gender)) { return webHelper.getJsonWarning("성별을 입력하세요."); }
+     	if (!regexHelper.isValue(birthdate)) { return webHelper.getJsonWarning("생년월일을 입력하세요."); }
+        
+        
+        // 전화번호 조립 - 최종
+     		tel = phone1 + ")" + phone2 + "-" + phone3;
+        
+        /** 3) 데이터 저장 */
+        Member input = new Member();
+		input.setUser_id(userId);
+		input.setUser_name(userName);
+		input.setUser_email(userEmail);
+		input.setPhone(tel);
+		input.setBirthday(birthdate);
+		input.setGender(gender);
+		input.setPostcode(null);
+		input.setAddr1(null);
+		input.setAddr2(null);
+        
+        try {
+            memberService.editMember(input);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData();
+    }
 }

@@ -269,6 +269,15 @@
 			<version>2.9.0</version>
 		</dependency>
 		
+		<!-- ========== json ========= -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		
 		<!-- ========== 메일발송라이브러리 ========= -->
 		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
 		<dependency>

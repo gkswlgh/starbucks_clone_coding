@@ -17,4 +17,11 @@ public class Menu {
 	private String nutri_info;
 	private String reg_date;
 	private String edit_date;
+	
+	private String kcal;
+	private String fat;
+	private String protein;
+	private String salt;
+	private String sugars;
+	private String caffeine;
 }
