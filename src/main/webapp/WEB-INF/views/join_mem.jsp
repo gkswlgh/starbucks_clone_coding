@@ -12,7 +12,6 @@
         <div class="cont">
             <div class="cont_inner">
                 <form id="join_mem" name="join_mem" class="join_input_frm" method="post" action="${pageContext.request.contextPath}/rest/account/join">
-                    <input type="hidden" value="0" id="store_cd" name="store_cd" />
                     <fieldset>
                         <legend>회원가입 입력폼</legend>
                         <!-- 테이블 -->
@@ -108,7 +107,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">휴대전화</th>
+                                        <th scope="row">휴대전화 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
                                                 <p class="phone_sel_wrap">
@@ -129,7 +128,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">생일</th>
+                                        <th scope="row">생일 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap mt10">
                                                 <input type="date" id="birthdate" class="birthdate" name="birthdate" />
@@ -151,9 +150,9 @@
                         <div class="voc_info_input_btn1">
                             <button type="submit">회원 가입하기</button>
                         </div>
-                    </fieldset>
                     <input type="hidden" name="email" id="email"/>
                     <input type="hidden" name="phone" id="phone"/>
+                    </fieldset>
                 </form>
             </div>
         </div>

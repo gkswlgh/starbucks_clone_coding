@@ -230,7 +230,7 @@
 					
 	            	if (json.rt == "OK") {
 		                alert("로그아웃 완료");
-			            window.location = ROOT_URL;
+			            window.location = ROOT_URL + '/';
 					} else {
 						alert("로그아웃 실패.");
 						return false;

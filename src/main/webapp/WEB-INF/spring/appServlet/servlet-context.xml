@@ -44,5 +44,19 @@
 				class="hanjiho.project.starbucks.interceptor.AppInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	<!-- 스케쥴러 어노테이션 선언 -->
+	<task:annotation-driven/>
+	
+	<!-- 스케쥴러로 동작할 객체 생성 -->
+	<!-- SimpleScheduler 타입의 scheduleJob 객체생성 -->
+	<beans:bean id="scheduleJob" class="hanjiho.project.starbucks.scheduler.SimpleScheduler" />
+	
+	<!-- 생성한 스케쥴러 객체에 대한 작업 스케쥴 지정 -->
+  <!-- scheduleJob 객체의 메서드 호출 및 시간 규칙 지정 -->
+	<task:scheduled-tasks>
+		<!-- 매일 자정에 실행되는 작업 -->
+		<task:scheduled ref="scheduleJob" method="everyMidnight" cron="0 0 0 * * ?" />
+	</task:scheduled-tasks>
 
 </beans:beans>

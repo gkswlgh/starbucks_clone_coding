@@ -91,7 +91,7 @@
 				
             	if (json.rt == "OK") {
 	                alert("로그인 완료");
-		            window.location = ROOT_URL;
+		            window.location = ROOT_URL + '/';
 				} else {
 					alert("아이디 혹은 비밀번호를 다시 한번 확인하세요.");
 					return false;

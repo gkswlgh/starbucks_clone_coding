@@ -146,14 +146,39 @@ public class MemberServiceImpl implements MemberService {
 	/**
 	 * 회원 데이터 삭제하기
 	 * @param Member 삭제할 회원의 일련번호를 담고 있는 Beans
+	 * @return String
+	 * @throws Exception
+	 */
+	@Override
+	public String deleteMember() throws Exception { 
+		int result=0;
+		try {
+		    result = sqlSession.delete("MemberMapper.deleteItem");
+
+		    if (result == 0) {
+		    	return "삭제된 회원이 없습니다>>" + result;
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("삭제된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 삭제에 실패했습니다.");
+		}
+		return "삭제된 회원 수>>" + result;
+	}
+	
+	/**
+	 * 회원 탈퇴시 컬럼 갱신하기
+	 * @param Member 갱신할 회원의 일련번호를 담고 있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
 	@Override
-	public int deleteMember(Member input) throws Exception {
+	public int joinOut(Member input) throws Exception {
 		int result=0;
 		try {
-		    result = sqlSession.delete("MemberMapper.deleteItem", input);
+		    result = sqlSession.delete("MemberMapper.joinOut", input);
 
 		    if (result == 0) {
 		        throw new NullPointerException("result=0");
@@ -241,6 +266,29 @@ public class MemberServiceImpl implements MemberService {
             throw new Exception("데이터 조회에 실패했습니다.");
         }
 
+        return result;
+    }
+
+    /**
+     * 비번검사
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public int checkPw(Member input) throws Exception {
+        int result = 0;
+        try {
+            result = sqlSession.selectOne("MemberMapper.checkPw", input);
+            if (result != 1) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("비밀번호가 잘못되었습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터 조회에 실패했습니다.");
+        }
         return result;
     }
 }

@@ -14,7 +14,7 @@
 		<result property="user_name"  column="user_name" />
 		<result property="user_email"  column="user_email" />
 		<result property="phone"  column="phone" />
-		<result property="birthday"  column="b_date" />
+		<result property="birthdate"  column="b_date" />
 		<result property="gender"  column="gender" />
 		<result property="is_out"  column="is_out" />
 		<result property="login_date"  column="l_date" />
@@ -64,33 +64,56 @@
 		INSERT INTO member (
 		user_id, user_pw, user_name, user_email, phone, birthday, gender, is_out, reg_date, edit_date
 		) VALUES (
-		#{user_id}, MD5(#{user_pw}), #{user_name}, #{user_email}, #{phone}, #{birthday}, #{gender}, #{is_out}, now(), now()
+		#{user_id}, MD5(#{user_pw}), #{user_name}, #{user_email}, #{phone}, #{birthdate}, #{gender}, #{is_out}, now(), now()
 		)
 	</insert>
 
 	<!-- 데이터 삭제를 위한 기능 정의 -->
 	<delete id="deleteItem"
 		parameterType="hanjiho.project.starbucks.model.Member">
-		DELETE FROM member WHERE id=#{id}
+		DELETE FROM member 
+		WHERE is_out='Y' AND del_date=date_format(date_add(now(), INTERVAL -3 MONTH), '%Y-%m-%d')
 	</delete>
+	
+	<!-- 탈퇴시 컬럼 갱신을 위한 기능 정의 -->
+	<update id="joinOut"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE member SET
+		del_date=now(),
+		is_out='Y'
+		WHERE id=#{id} AND is_out='N'
+	</update>
 
-	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<!-- 회원정보 갱신을 위한 기능 정의 -->
 	<update id="updateItem"
 		parameterType="hanjiho.project.starbucks.model.Member">
 		UPDATE member SET
-		user_id=#{user_id},
-		user_pw= MD5(#{user_pw}),
 		user_name=#{user_name},
-		user_email=#{user_email},
 		phone=#{phone},
-		birthday=#{birthday},
+		birthday=#{birthdate},
 		gender=#{gender},
-		is_out=#{is_out},
-		edit_date=now(),
+		edit_date=now()
+		WHERE id=#{id} AND is_out='N'
+	</update>
+	
+	<!-- 비밀번호 갱신을 위한 기능 정의 -->
+	<update id="updatePw"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE member SET
+		user_pw= MD5(#{user_pw}),
+		edit_date=now()
+		WHERE id=#{id} AND is_out='N'
+	</update>
+	
+	<!-- 회원 주소 추가(갱신)을 위한 기능 정의 -->
+	<update id="updateAddress"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE member SET
 		postcode=#{postcode},
 		addr1=#{addr1},
-		addr2=#{addr2}
-		WHERE id=#{id}
+		addr2=#{addr2},
+		edit_date=now()
+		WHERE id=#{id} AND is_out='N'
 	</update>
 
 	<!-- 데이터 수 조회하기 -->
@@ -116,12 +139,12 @@
 	
 	<!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="hanjiho.project.starbucks.model.Member" resultType="int">
-        SELECT COUNT(*) FROM member WHERE user_id=#{user_id}
+        SELECT COUNT(*) FROM member WHERE user_id=#{user_id} AND is_out='N'
     </select>
     
     <!-- 이메일 중복검사 -->
     <select id="emailUniqueCheck" parameterType="hanjiho.project.starbucks.model.Member" resultType="int">
-        SELECT COUNT(*) FROM member WHERE user_email=#{user_email}
+        SELECT COUNT(*) FROM member WHERE user_email=#{user_email} AND is_out='N'
     </select>
     
     <!-- 로그인 조회 -->
@@ -134,7 +157,14 @@
 
     <!-- 최근 로그인 시간 갱신 -->
     <update id="updateLoginDate" parameterType="hanjiho.project.starbucks.model.Member">
-        UPDATE member SET login_date=now() WHERE id=#{id}
+        UPDATE member SET login_date=now() WHERE id=#{id} AND is_out='N'
     </update>
+    
+    <!-- 비밀번호 검사 -->
+    <select id="checkPw" parameterType="hanjiho.project.starbucks.model.Member" resultType="int">
+        SELECT COUNT(*) 
+        FROM member 
+        WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
+    </select>
 
 </mapper>

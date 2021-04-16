@@ -195,7 +195,7 @@ public class AccountRestController {
 		input.setUser_name(userName);
 		input.setUser_email(userEmail);
 		input.setPhone(tel);
-		input.setBirthday(birthdate);
+		input.setBirthdate(birthdate);
 		input.setGender(gender);
 		input.setIs_out("N"); // 탈퇴아님 --> 탈퇴시 'Y'로 업데이트
 		input.setPostcode(null);
@@ -234,9 +234,22 @@ public class AccountRestController {
         
         try {
             output = memberService.login(input);
+            
+			//phone자르기
+			String tel = output.getPhone();
+			output.setPhone1(tel.substring(0, tel.lastIndexOf(")")));
+			output.setPhone2(tel.substring(tel.lastIndexOf(")")+1, tel.lastIndexOf("-")));
+			output.setPhone3(tel.substring(tel.lastIndexOf("-")+1));
+			
+			//email자르기
+			String email = output.getUser_email();
+			output.setEmail1(email.substring(0, email.lastIndexOf("@")));
+			output.setEmail2(email.substring(email.lastIndexOf("@")+1));
+			
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
+        
 
         /** 4) 세션 생성 및 결과 표시 */
         webHelper.setSession("member", output);
@@ -251,13 +264,11 @@ public class AccountRestController {
         return webHelper.getJsonData();
     }
     
-    /** 회원가입 */
+    /** 회원정보수정 */
     @RequestMapping(value = "/rest/account/myinfo_modify", method = RequestMethod.POST)
     public Map<String, Object> modify(
-            @RequestParam(value = "user_id",        required = false) String userId,
+            @RequestParam(value = "id",        required = false) int id,
             @RequestParam(value = "user_name",      required = false) String userName,
-            @RequestParam(value = "email1",     required = false) String email1,
-            @RequestParam(value = "email2",     required = false) String email2,
 			@RequestParam(value = "phone1", 	required = false) String phone1,
 			@RequestParam(value = "phone2", 	required = false) String phone2,
 			@RequestParam(value = "phone3", 	required = false) String phone3,
@@ -267,16 +278,6 @@ public class AccountRestController {
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
-        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
-        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
-        if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
-        
-        
-        //이메일 조립- 유효성검사
-        String userEmail = email1 + "@" + email2;
-        if (!regexHelper.isValue(email1)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
-        if (!regexHelper.isValue(email2)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
-        if (!regexHelper.isEmail(userEmail)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
         
         // 전화번호 조립 - 유효성검사
      	String tel = phone1 + phone2 + phone3;
@@ -292,23 +293,57 @@ public class AccountRestController {
         
         /** 3) 데이터 저장 */
         Member input = new Member();
-		input.setUser_id(userId);
+		input.setId(id);
 		input.setUser_name(userName);
-		input.setUser_email(userEmail);
 		input.setPhone(tel);
-		input.setBirthday(birthdate);
+		input.setBirthdate(birthdate);
 		input.setGender(gender);
-		input.setPostcode(null);
-		input.setAddr1(null);
-		input.setAddr2(null);
+		
+        Member output = new Member();
         
         try {
             memberService.editMember(input);
+            output = memberService.getMemberItem(input);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
 
-        /** 4) 결과 표시 */
+
+        /** 4) 세션 생성 및 결과 표시 */
+        webHelper.setSession("member", output);
+        log.debug("세션 저장 완료");
         return webHelper.getJsonData();
     }
+    
+    /** 회원탈퇴 */
+    @RequestMapping(value = "/rest/account/join_out", method = RequestMethod.POST)
+    public Map<String, Object> join_out(
+            @RequestParam(value = "id",        required = false) int id,
+            @RequestParam(value = "user_id",        required = false) String userId,
+            @RequestParam(value = "user_pw",   required = false) String userPw) {
+
+        /** 데이터 저장 */
+        Member input = new Member();
+		input.setId(id);
+		input.setUser_id(userId);
+		input.setUser_pw(userPw);
+        
+        try {
+            int result = memberService.checkPw(input);
+            if (result == 1) {
+                memberService.joinOut(input);
+            } else {
+                return webHelper.getJsonError("데이터 조회 실패.");
+            }
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /**로그아웃*/
+        webHelper.removeAllSession();
+
+        /** 결과 표시 */
+        return webHelper.getJsonData();
+    }
+    
 }

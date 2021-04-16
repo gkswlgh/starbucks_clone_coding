@@ -45,11 +45,17 @@ public interface MemberService {
 	/**
 	 * 회원 데이터 삭제하기
 	 * @param Member 삭제할 회원의 일련번호를 담고 있는 Beans
+	 * @return String
+	 * @throws Exception
+	 */
+	public String deleteMember() throws Exception;
+	/**
+	 * 회원 탈퇴시 컬럼 갱신하기
+	 * @param Member 갱신할 회원의 일련번호를 담고 있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
-	public int deleteMember(Member input) throws Exception;
-	
+	public int joinOut(Member input) throws Exception;
     /**
      * 아이디 중복검사
      * @param input
@@ -70,4 +76,11 @@ public interface MemberService {
      * @throws Exception
      */
     public Member login(Member input) throws Exception;
+    
+    /**
+     * 비번확인
+     * @param input
+     * @throws Exception
+     */
+    public int checkPw(Member input) throws Exception;
 }

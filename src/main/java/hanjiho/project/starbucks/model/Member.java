@@ -7,11 +7,10 @@ public class Member {
 	private int id;
 	private String user_id;
 	private String user_pw;
-	private String user_pw_confirm;
 	private String user_name;
 	private String user_email;
 	private String phone;
-	private String birthday;
+	private String birthdate;
 	private String gender;
 	private String is_out;
 	private String login_date;
@@ -20,4 +19,14 @@ public class Member {
 	private String postcode;
 	private String addr1;
 	private String addr2;
+	private String del_date;
+
+	private String user_pw_confirm;
+	
+	private String phone1;
+	private String phone2;
+	private String phone3;
+
+	private String email1;
+	private String email2;
 }

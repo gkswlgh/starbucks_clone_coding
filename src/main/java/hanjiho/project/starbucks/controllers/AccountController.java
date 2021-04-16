@@ -43,15 +43,7 @@ public class AccountController {
     }
     
     /**
-     * 로그아웃 컨트롤러
-     */
-    @RequestMapping(value = "/account/logout", method = RequestMethod.GET)
-    public String logout() {
-        return "index";
-    }
-
-    /**
-     * 회원정보수정 컨트롤러
+     * 회원정보수정 페이지
      */
     @RequestMapping(value = "/account/myinfo_modify", method = RequestMethod.GET)
     public String modify() {
@@ -59,7 +51,7 @@ public class AccountController {
     }
     
     /**
-     * 탈퇴 컨트롤러
+     * 탈퇴 페이지
      */
     @RequestMapping(value = "/account/join_out", method = RequestMethod.GET)
     public String join_out() {
@@ -67,7 +59,15 @@ public class AccountController {
     }
     
     /**
-     * 비밀번호 수정 컨트롤러
+     * 탈퇴 페이지2 (비번검사)
+     */
+    @RequestMapping(value = "/account/join_out2", method = RequestMethod.GET)
+    public String join_out2() {
+        return "my_starbucks/join_out_mem2";
+    }
+    
+    /**
+     * 비밀번호 수정 페이지
      */
     @RequestMapping(value = "/account/myinfo_change_pw", method = RequestMethod.GET)
     public String myinfo_change_pw() {

@@ -25,7 +25,7 @@
                         <div class="find_mem bd_none">
                             <strong>이메일로 아이디 찾기</strong>
                             <div class="find_mem_input_box bd_none">
-                                <label for="txt_user_name" class="hid">이름</label> <input type="text" class="find_mem_input_txt mb10" id="txt_user_name" name="txt_user_name" placeholder="이름을 입력해주세요." maxlength="20" required="required" /> <label for="txt_user_email" class="hid">이메일</label>
+                                <label for="txt_user_email" class="hid">이메일</label>
                                 <input type="text" class="find_mem_input_txt mb10" id="txt_user_email" name="txt_user_email" placeholder="이메일을 입력해 주세요." maxlength="20" required="required" />
                                 <p class="btn_find_mem">
                                     <button type="submit">아이디 찾기</button>
@@ -44,50 +44,58 @@
     <script type="text/javascript">
     $(function() {
 
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
-
-        /*유효성 검사 추가 함수*/
-        //한글검사
-        $.validator.addMethod("kor", function(value, element) {
-            return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
-        });
-
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#find_id").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*{required는 필수, 그외 부가 기능}*/
-                txt_user_name: { required: true, kor: true },
                 txt_user_email: { required: true, email: true }
 
             },
             /*규칙이 맞지 않은 경우의 메시지*/
             messages: {
                 /*rules에 맞지 않을 경우 메시지*/
-                txt_user_name: {
-                    required: "이름를 입력하세요.",
-                    kor: "이름은 한글만 입력 가능합니다."
-                },
                 txt_user_email: {
                     required: "이메일을 입력하세요.",
                     email: "이메일 형식이 잘못되었습니다."
                 }
             }
         }); //end validate()
+        
+
+        $('#find_id').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+						alert("회원가입이 완료되었습니다. 로그인 해 주세요.");
+			            window.location = ROOT_URL + '/account/login';
+					} else {
+						alert("작성폼을 다시 한번 확인하세요.");
+						return false;
+					}
+				}
+		});// end ajax
     });
     </script>
 </body>
