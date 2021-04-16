@@ -291,4 +291,29 @@ public class MemberServiceImpl implements MemberService {
         }
         return result;
     }
+    
+    /**
+	 * 이메일 정보로 아이디 찾기
+	 * @param Member 조회할 회원의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	@Override
+	public Member find_id(Member input) throws Exception {
+		Member result = null;
+		try {
+		    result = sqlSession.selectOne("MemberMapper.find_id", input);
+
+		    if (result == null) {
+		        throw new NullPointerException("result=null");
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
 }

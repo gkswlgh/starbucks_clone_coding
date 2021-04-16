@@ -10,7 +10,7 @@
 <div id="container"></div>
     <div class="find_mem_wrap">
         <div class="find_mem_inner">
-            <form id="find_id" name="find_id" action="" method="post">
+            <form id="find_id" name="find_id" action="${pageContext.request.contextPath}/rest/account/find_id" method="post">
                 <fieldset>
                     <legend class="hid">회원 개인정보를 조회하는 폼</legend>
                     <div class="find_mem_ttl">아이디 찾기</div>
@@ -29,8 +29,6 @@
                                 <input type="text" class="find_mem_input_txt mb10" id="txt_user_email" name="txt_user_email" placeholder="이메일을 입력해 주세요." maxlength="20" required="required" />
                                 <p class="btn_find_mem">
                                     <button type="submit">아이디 찾기</button>
-                                </p>
-                                <p class="input_warn_text t_006633">존재하지 않는 회원 이름 혹은 이메일입니다.
                                 </p>
                             </div>
                         </div>
@@ -88,10 +86,9 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-						alert("회원가입이 완료되었습니다. 로그인 해 주세요.");
-			            window.location = ROOT_URL + '/account/login';
+			            window.location = ROOT_URL + '/account/find_id_ok/'+ json.id;
 					} else {
-						alert("작성폼을 다시 한번 확인하세요.");
+						alert("통신 실패. 다시 시도해주세요.");
 						return false;
 					}
 				}

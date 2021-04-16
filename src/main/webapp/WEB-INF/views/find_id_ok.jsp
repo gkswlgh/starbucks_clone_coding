@@ -10,36 +10,37 @@
 <div id="container"></div>
     <div class="find_mem_wrap">
         <div class="find_mem_inner">
-            <form id="find_mem" action="" method="post">
-                <fieldset>
-                    <legend class="hid">회원 개인정보를 조회하는 폼</legend>
-                    <div class="find_mem_ttl">아이디 찾기</div>
-                    <section class="find_mem_form">
-                        <div class="find_mem_result">
-                            <div class="find_mem_sally"></div>
-                            <div class="mem_result_txt">
-                                <strong>아이디가 기억나지 않으세요?</strong> <span class="result_txt_sub">아래
-                                    인증 방법을 통해 아이디를 확인 하실 수 있습니다.</span>
-                            </div>
+            <div class="find_mem_ttl">아이디 찾기</div>
+            <section class="find_mem_form">
+                <div class="find_mem_result">
+                    <div class="find_mem_sally"></div>
+                </div>
+                <div class="find_mem bd_none">
+                    <strong>아이디 확인</strong>
+                    <div class="find_mem_input_box bd_none">
+                        <div class="mem_result_txt">
+                            <span class="result_txt_sub">사용자님의 아이디는 ${output.user_id}입니다.
+                            </span>
                         </div>
-                        <div class="find_mem bd_none">
-                            <strong>아이디 확인</strong>
-                            <div class="find_mem_input_box bd_none">
-                                <div class="mem_result_txt">
-                                    <span class="result_txt_sub">사용자님의 아이디는 gkswlgh413입니다.
-                                    </span>
-                                </div>
-                                <p class="btn_find_mem">
-                                    <button onclick="">로그인 페이지로 이동</button>
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                </fieldset>
-            </form>
+                        <p class="btn_find_mem">
+                            <button id="find_id_ok">로그인 페이지로 이동</button>
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
+    <script type="text/javascript">
+    $(function() {
+    	
+    	// .로그인 페이지로 이동.
+    	$("#find_id_ok").click(function(e) {
+            window.location = ROOT_URL + '/account/login';
+	    });
+    	
+    });
+    </script>
 </body>
 
 </html>

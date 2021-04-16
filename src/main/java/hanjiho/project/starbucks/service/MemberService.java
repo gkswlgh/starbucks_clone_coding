@@ -83,4 +83,13 @@ public interface MemberService {
      * @throws Exception
      */
     public int checkPw(Member input) throws Exception;
+
+    /**
+     * 이메일 정보로 아이디 찾기
+	 * @param Member 조회할 회원의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+     */
+    public Member find_id(Member input) throws Exception;
+    
 }

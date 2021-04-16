@@ -1,6 +1,7 @@
 package hanjiho.project.starbucks.controllers.rest;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -162,6 +163,8 @@ public class AccountRestController {
         if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
         if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
         if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
+        if (!regexHelper.isValue(userName)) { return webHelper.getJsonWarning("이름을 입력하세요."); }
+        if (!regexHelper.isKor(userName)) { return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
         if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
@@ -210,6 +213,40 @@ public class AccountRestController {
 
         /** 4) 결과 표시 */
         return webHelper.getJsonData();
+    }
+    
+
+    /** 이메일로 아이디 찾기 */
+    @RequestMapping(value = "/rest/account/find_id", method = RequestMethod.POST)
+    public Map<String, Object> find_id(
+            @RequestParam(value = "txt_user_email",     required = false) String email) {
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+        if (!regexHelper.isValue(email)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
+
+        /** 2) 데이터 조회 */
+        Member input = new Member();
+        input.setUser_email(email);
+        
+        /** 3) 로그인 */
+        Member output = null;
+        Map<String, Object> data = new HashMap<String, Object>();
+        
+        try {
+            output = memberService.find_id(input);
+            
+            //json에 담아 넘길 유저 일련번호 저장
+            data.put("id", output.getId());
+			
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData(data);
     }
 
     /** 로그인 */
@@ -278,6 +315,8 @@ public class AccountRestController {
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+        if (!regexHelper.isValue(userName)) { return webHelper.getJsonWarning("이름을 입력하세요."); }
+        if (!regexHelper.isKor(userName)) { return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다."); }
         
         // 전화번호 조립 - 유효성검사
      	String tel = phone1 + phone2 + phone3;

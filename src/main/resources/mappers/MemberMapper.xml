@@ -34,6 +34,7 @@
 		FROM member 
 		WHERE id=#{id}
 	</select>
+	
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"
@@ -166,5 +167,16 @@
         FROM member 
         WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
     </select>
+    
+    
+	<!-- 이메일으로 단일행 조회해서 아이디 찾기 -->
+	<select id="find_id"
+		parameterType="hanjiho.project.starbucks.model.Member"
+		resultMap="memberMap">
+		SELECT 
+		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2 
+		FROM member 
+		WHERE user_email=#{user_email}
+	</select>
 
 </mapper>
