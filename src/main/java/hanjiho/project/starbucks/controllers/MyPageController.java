@@ -41,4 +41,12 @@ public class MyPageController {
 	public String cart_step1() {
 		return "my_starbucks/cart_step1​";
 	}
+	
+	/**
+	 * 나만의메뉴/좋아하는메뉴 컨트롤러
+	 */
+	@RequestMapping(value = "/my_starbucks/my_menu", method = RequestMethod.GET)
+	public String my_menu() {
+		return "my_starbucks/my_menu​";
+	}
 }

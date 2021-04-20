@@ -183,8 +183,8 @@
                                         </ul>
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">고객 서비스</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">My 메뉴</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">My 고객의 소리</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/my_menu">My 메뉴</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/voclist">My 고객의 소리</a></li>
                                         </ul>
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks">개인정보관리</a></li>

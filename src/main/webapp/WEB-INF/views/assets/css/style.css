@@ -3085,6 +3085,17 @@ div.product_view_detail div.myDrink a {
     border-radius: 3px;
 }
 
+div.product_view_detail p.myDrink_login {
+    position: absolute;
+    right: 0;
+    top: 35px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #063;
+    font-weight: bold;
+}
+
 div.product_view_detail div.product_info_head {
     height: 59px;
     line-height: 59px;

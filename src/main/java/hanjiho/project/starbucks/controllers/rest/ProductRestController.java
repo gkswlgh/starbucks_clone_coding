@@ -41,7 +41,7 @@ public class ProductRestController {
     
 
     /** 아이디 중복검사 */
-    @RequestMapping(value = "/rest/product/likemenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/product/like_menu", method = RequestMethod.POST)
     public Map<String, Object> likemenu(
             // 회원일련번호
             @RequestParam(value = "member_id", defaultValue = "0") int member_id,

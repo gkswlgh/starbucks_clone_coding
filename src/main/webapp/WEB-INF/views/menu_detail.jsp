@@ -50,7 +50,16 @@
                                     <br />
                                     <span>${output.eng_name}</span></h4>
                                 <p class="t1">${output.description}</p>
-                                <div class="myDrink"><a href="${pageContext.request.contextPath}/rest/product/likemenu" role="button" title="나만의 음료 등록 옵션 열기">나만의 음료로 등록</a></div>
+                                <c:choose>
+		                        	<c:when test="${member != null}">
+			                        	<input type="hidden" id="member_id" value="${member.id}"/>
+			                        	<input type="hidden" id="menu_id" value="${output.id}"/>
+	                        			<div class="myDrink"><a id="likeMenu" title="나만의 음료 등록">나만의 음료로 등록</a></div>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                                <div class="myDrink"><a id="likeMenuGoLogin" title="나만의 음료 등록">나만의 음료로 등록</a></div>
+		                        	</c:otherwise>
+		                        </c:choose>
                             </div>
                             <div class="product_view_info">
                                 <div class="product_info_head">
@@ -122,8 +131,8 @@
                             </p>
                             <br />
                             <ul class="product_cart_btns">
-                                <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
-                                <li class="product_cart_btn2"><a href="${pageContext.request.contextPath}/" class="in_cart" data-price="${output.price}" data-qty="1">장바구니에 담기</a></li>
+                                <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" id="pay_now" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
+                                <li class="product_cart_btn2"><a href="${pageContext.request.contextPath}/" class="in_cart" id="in_cart" data-price="${output.price}" data-qty="1">장바구니에 담기</a></li>
                             </ul>
                         </div>
                     </div>
@@ -144,8 +153,8 @@
         $(document).on("click", "button.minus", qtyMinus); // 수량감소
 
 
-        /*데이터 전송 이벤트*/
-        $(".in_cart").on("click", function(e) {
+        /*장바구니*/
+        $("#in_cart").on("click", function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
 
@@ -153,7 +162,40 @@
             var incart = confirm("장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?");
             //true일경우 이동 - 이동할 때 상품번호랑 수량 같이
 
-        });
+        });//장바구니끝
+        
+        //메뉴좋아요버튼
+        $("#likeMenu").click(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+            
+        	var member_id = $("#member_id").val();
+        	var menu_id = $("#menu_id").val();
+        	
+            if (member_id == null || menu_id == null) {
+            	alert('회원 혹은 메뉴 데이터를 확인할 수 없습니다.');
+                return false;
+            }
+
+            $.post(ROOT_URL + '/rest/product/like_menu', {
+            	member_id: member_id,
+            	menu_id: menu_id
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		alert('나만의 음료로 등록되었습니다.');	}
+            });
+        }); //메뉴좋아요버튼끝
+        
+        //로그인버튼
+        $("#likeMenuGoLogin").click(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+        	
+            if (confirm('로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동하시겠습니까?')) {
+                window.location = ROOT_URL + "/account/login";
+            }
+            
+        }); //로그인버튼끝
     });
 
     /**

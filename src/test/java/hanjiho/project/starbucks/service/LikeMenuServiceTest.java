@@ -63,7 +63,7 @@ public class LikeMenuServiceTest {
 	public void testB() {
 		// -> import hanjiho.project.starbucks.model.LikeMenu;
 		LikeMenu input = new LikeMenu();
-		input.setMember_id(2);
+		input.setMember_id(10);
 
 		List<LikeMenu> output = null;
 
