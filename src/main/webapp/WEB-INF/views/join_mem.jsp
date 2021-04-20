@@ -17,8 +17,8 @@
                         <!-- 테이블 -->
                         <div class="voc_input_tbl">
                             <!-- 인삿말 -->
-                            <div class="">
-                                <strong> Starbucks 회원가입 </strong>
+                            <div class="join_ttl">
+                                <strong> 회원가입 </strong>
                             </div>
                             <!-- 인삿말 끝 -->
                             <p class="must_input">표시 항목은 필수 입력 사항입니다.</p>
@@ -150,8 +150,6 @@
                         <div class="voc_info_input_btn1">
                             <button type="submit">회원 가입하기</button>
                         </div>
-                    <input type="hidden" name="email" id="email"/>
-                    <input type="hidden" name="phone" id="phone"/>
                     </fieldset>
                 </form>
             </div>
@@ -305,11 +303,6 @@
 				beforeSubmit: function (arr, form, options) {
 					// 현재 통신중인 대상 페이지를 로그로 출력함
 					console.log(">> Ajax 통신 시작 >> " + this.url);
-					
-					var email = $("#email1").val() + "@" + $("#email2").val();
-		        	$("#email").val(email);
-		        	var phone = $("#phone1").val() + $("#phone2").val() + $("#phone3").val() ;
-		        	$("#phone").val(phone);
 					
 					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
 					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.

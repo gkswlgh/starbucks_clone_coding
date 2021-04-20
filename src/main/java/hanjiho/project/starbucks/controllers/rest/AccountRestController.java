@@ -42,9 +42,9 @@ public class AccountRestController {
             // 아이디
             @RequestParam(value = "user_id", required = false) String userId) {
 
-        if (!regexHelper.isValue(userId)) {
-            return webHelper.getJsonWarning("아이디를 입력하세요.");
-        }
+        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
+        if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
         
         Member input = new Member();
         
@@ -91,14 +91,12 @@ public class AccountRestController {
             @RequestParam(value = "user_email",     required = false) String userEmail) {
     	
         //이메일 조립- 유효성검사
-        if (!regexHelper.isEmail(userEmail)) { return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다."); }
-
         if (!regexHelper.isValue(userEmail)) {
             return webHelper.getJsonWarning("이메일을 입력하세요.");
         }
         
         if (!regexHelper.isEmail(userEmail)) {
-            return webHelper.getJsonWarning("이메일 주소가 잘못되었습니다.");
+            return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다.");
         }
         
         Member input = new Member();
@@ -141,9 +139,9 @@ public class AccountRestController {
     @RequestMapping(value = "/rest/account/join", method = RequestMethod.POST)
     public Map<String, Object> join(
             @RequestParam(value = "user_id",        required = false) String userId,
+            @RequestParam(value = "user_name",      required = false) String userName,
             @RequestParam(value = "user_pw",        required = false) String userPw,
             @RequestParam(value = "user_pw_re",required = false) String userPwConfirm,
-            @RequestParam(value = "user_name",      required = false) String userName,
             @RequestParam(value = "email1",     required = false) String email1,
             @RequestParam(value = "email2",     required = false) String email2,
 			@RequestParam(value = "phone1", 	required = false) String phone1,
@@ -248,6 +246,174 @@ public class AccountRestController {
         /** 4) 결과 표시 */
         return webHelper.getJsonData(data);
     }
+    
+    /** 이메일, 아이디로 비번 찾기 */
+    @RequestMapping(value = "/rest/account/find_pw", method = RequestMethod.POST)
+    public Map<String, Object> find_pw(
+            @RequestParam(value = "txt_user_id",        required = false) String userId,
+            @RequestParam(value = "txt_user_email",     required = false) String email) {
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
+        if (!regexHelper.isValue(email)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
+
+        /** 2) 데이터 조회 */
+        Member input = new Member();
+        input.setUser_id(userId);
+        input.setUser_email(email);
+        
+        /** 3) 로그인 */
+        Member output = null;
+        Map<String, Object> data = new HashMap<String, Object>();
+        
+        try {
+            output = memberService.find_id(input);
+            
+            //json에 담아 넘길 유저 일련번호 저장
+            data.put("id", output.getId());
+			
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData(data);
+    }
+    
+    /** 인증번호 검사 - 비번 찾기 */
+    @RequestMapping(value = "/rest/account/find_pw_au", method = RequestMethod.POST)
+    public Map<String, Object> find_pw_au(
+            @RequestParam(value = "id",        defaultValue = "0") int id,
+            @RequestParam(value = "au_num",    defaultValue = "0") int au_num) {
+
+    	//유효성검사
+		if (id == 0) {
+			return webHelper.getJsonWarning("회원일련번호를 입력하세요");
+		}
+		if (au_num == 0) {
+			return webHelper.getJsonWarning("인증번호를 입력하세요");
+		}
+		
+        /** 2) 데이터 조회 */
+        Member input = new Member();
+        input.setId(id);
+        
+        /** 3) 로그인 */
+        Member output = null;
+        Map<String, Object> data = new HashMap<String, Object>();
+        
+        try {
+            output = memberService.getMemberItem(input);
+            
+            /*인증번호 검사*/
+            int tmp = output.getAu_num();
+            if (tmp != au_num) {
+                return webHelper.getJsonError("인증 번호가 일치하지 않습니다.");
+            }
+            
+            //json에 담아 넘길 유저 일련번호 저장
+            data.put("id", output.getId());
+			
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData(data);
+    }
+    
+    /** 비번 변경 */
+    @RequestMapping(value = "/rest/account/change_pw", method = RequestMethod.POST)
+    public Map<String, Object> change_pw(
+            @RequestParam(value = "id",        			defaultValue = "0") int id,
+            @RequestParam(value = "txt_change_pw",        required = false) String userPw,
+            @RequestParam(value = "txt_change_pw_check",	required = false) String userPwConfirm) {
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+		if (id == 0) {
+			return webHelper.getJsonWarning("회원일련번호를 입력하세요");
+		}
+        if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
+        if (!regexHelper.isValue(userPwConfirm)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
+        if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
+        if (!userPw.equals(userPwConfirm)) { return webHelper.getJsonWarning("비밀번호는 확인이 잘못되었습니다."); }
+        
+        /** 2) 데이터 조회 */
+        Member input = new Member();
+        input.setId(id);
+		input.setUser_pw(userPw);
+        
+        /** 3) 데이터 업데이트 */
+        Map<String, Object> data = new HashMap<String, Object>();
+        try {
+        	memberService.updatePw(input);
+        	
+            //json에 담아 넘길 유저 일련번호 저장
+            data.put("id", id);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData(data);
+    }
+    
+    
+
+    /** 마이페이지 - 비번 변경 */
+    @RequestMapping(value = "/rest/account/myinfo_change_pw", method = RequestMethod.POST)
+    public Map<String, Object> myinfo_change_pw(
+            @RequestParam(value = "id",        			defaultValue = "0") int id,
+            @RequestParam(value = "txt_change_pw_id",        required = false) String userId,
+            @RequestParam(value = "txt_change_pw_now",        required = false) String userPwNow,
+            @RequestParam(value = "txt_change_pw",        required = false) String userPw,
+            @RequestParam(value = "txt_change_pw_re",	required = false) String userPwConfirm) {
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+		if (id == 0) {
+			return webHelper.getJsonWarning("회원일련번호를 입력하세요");
+		}
+        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isValue(userPwNow)) { return webHelper.getJsonWarning("현재 비밀번호를 입력하세요."); }
+        if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("새로운 비밀번호를 입력하세요."); }
+        if (!regexHelper.isValue(userPwConfirm)) { return webHelper.getJsonWarning("새로운 비밀번호를 다시 한번 입력하세요."); }
+        if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
+        if (!userPw.equals(userPwConfirm)) { return webHelper.getJsonWarning("비밀번호 확인이 잘못되었습니다."); }
+        
+        /** 2) 데이터 조회 */
+        Member input = new Member();
+		input.setUser_id(userId);
+		input.setUser_pw(userPwNow);
+
+        Member input2 = new Member();
+        input2.setId(id);
+        input2.setUser_pw(userPw);
+        
+        /** 3) 데이터 업데이트 */
+        Map<String, Object> data = new HashMap<String, Object>();
+        try {
+        	memberService.checkPw(input);
+        	memberService.updatePw(input2);
+        	
+            //json에 담아 넘길 유저 일련번호 저장
+            data.put("id", id);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        /** 4) 결과 표시 */
+        return webHelper.getJsonData(data);
+    }
+
+
 
     /** 로그인 */
     @RequestMapping(value = "/rest/account/login", method = RequestMethod.POST)
@@ -259,6 +425,7 @@ public class AccountRestController {
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
         if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
         if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
 
         /** 2) 데이터 조회 */
@@ -304,7 +471,7 @@ public class AccountRestController {
     /** 회원정보수정 */
     @RequestMapping(value = "/rest/account/myinfo_modify", method = RequestMethod.POST)
     public Map<String, Object> modify(
-            @RequestParam(value = "id",        required = false) int id,
+            @RequestParam(value = "id",        defaultValue = "0") int id,
             @RequestParam(value = "user_name",      required = false) String userName,
 			@RequestParam(value = "phone1", 	required = false) String phone1,
 			@RequestParam(value = "phone2", 	required = false) String phone2,
@@ -315,10 +482,16 @@ public class AccountRestController {
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+		if (id == 0) {
+			return webHelper.getJsonWarning("회원일련번호를 입력하세요");
+		}
         if (!regexHelper.isValue(userName)) { return webHelper.getJsonWarning("이름을 입력하세요."); }
         if (!regexHelper.isKor(userName)) { return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다."); }
         
         // 전화번호 조립 - 유효성검사
+        if (!regexHelper.isValue(phone1)) { return webHelper.getJsonWarning("전화번호 앞자리를 입력하세요."); }
+        if (!regexHelper.isValue(phone2)) { return webHelper.getJsonWarning("전화번호 뒷자리를 입력하세요."); }
+        if (!regexHelper.isValue(phone3)) { return webHelper.getJsonWarning("전화번호 뒷자리를 입력하세요."); }
      	String tel = phone1 + phone2 + phone3;
      	if (!regexHelper.isTel(tel)) {
      			return webHelper.getJsonWarning("전화번호 형식이 잘못되었습니다");
@@ -357,10 +530,21 @@ public class AccountRestController {
     /** 회원탈퇴 */
     @RequestMapping(value = "/rest/account/join_out", method = RequestMethod.POST)
     public Map<String, Object> join_out(
-            @RequestParam(value = "id",        required = false) int id,
+            @RequestParam(value = "id",        defaultValue = "0") int id,
             @RequestParam(value = "user_id",        required = false) String userId,
             @RequestParam(value = "user_pw",   required = false) String userPw) {
 
+
+        /** 1) 유효성 검증 */
+        // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
+        // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
+		if (id == 0) {
+			return webHelper.getJsonWarning("회원일련번호를 입력하세요");
+		}
+        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
+        if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
+        
         /** 데이터 저장 */
         Member input = new Member();
 		input.setId(id);

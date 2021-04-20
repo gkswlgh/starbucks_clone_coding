@@ -23,6 +23,8 @@
 		<result property="postcode"  column="postcode" />
 		<result property="addr1"  column="addr1" />
 		<result property="addr2"  column="addr2" />
+		<result property="del_date"  column="del_date" />
+		<result property="au_num"  column="au_num" />
 	</resultMap>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
@@ -30,7 +32,7 @@
 		parameterType="hanjiho.project.starbucks.model.Member"
 		resultMap="memberMap">
 		SELECT 
-		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2 
+		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2, au_num 
 		FROM member 
 		WHERE id=#{id}
 	</select>
@@ -116,6 +118,14 @@
 		edit_date=now()
 		WHERE id=#{id} AND is_out='N'
 	</update>
+	
+	<!-- 인증번호 갱신을 위한 기능 정의 -->
+	<update id="updateAuNum"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE member SET
+		au_num=#{au_num}
+		WHERE id=#{id} AND is_out='N'
+	</update>
 
 	<!-- 데이터 수 조회하기 -->
 	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
@@ -168,15 +178,21 @@
         WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
     </select>
     
-    
-	<!-- 이메일으로 단일행 조회해서 아이디 찾기 -->
+	<!-- 아이디, 이메일으로 단일행 조회해서 회원정보 찾기 -->
 	<select id="find_id"
 		parameterType="hanjiho.project.starbucks.model.Member"
 		resultMap="memberMap">
 		SELECT 
 		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2 
 		FROM member 
-		WHERE user_email=#{user_email}
+		<where>
+			<if test="user_id != null and user_id != ''">
+				user_id LIKE concat('%', #{user_id}, '%')
+			</if>
+			<if test="user_email != null and user_email != ''">
+				AND user_email LIKE concat('%', #{user_email}, '%')
+			</if>
+		</where>
 	</select>
 
 </mapper>

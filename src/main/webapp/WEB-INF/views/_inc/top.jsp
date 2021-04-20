@@ -30,8 +30,9 @@
                 </ul>
             </nav>
             <p class="btn_search">
-                <a href="${pageContext.request.contextPath}/search"> <img src="${pageContext.request.contextPath}/assets/img/header/icon_magnifier_black.png" alt="통합검색" />
-                </a> <label for="totalSearch">통합검색</label> <input type="text" id="totalSearch" placeholder="통합검색" />
+                <span id="btn_search_span"><img src="${pageContext.request.contextPath}/assets/img/header/icon_magnifier_black.png" alt="통합검색" /></span>
+                <label for="totalSearch">통합검색</label> 
+                <input type="text" id="totalSearch" placeholder="통합검색" />
             </p>
         </div>
         <nav class="gnb_nav">

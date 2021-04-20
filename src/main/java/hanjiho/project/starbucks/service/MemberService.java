@@ -91,5 +91,19 @@ public interface MemberService {
 	 * @throws Exception
      */
     public Member find_id(Member input) throws Exception;
+
+    /**
+     * 인증번호 갱신
+     * @param input
+     * @throws Exception
+     */
+    public void updateAuNum(Member input) throws Exception;
+
+    /**
+     * 비밀번호 갱신
+     * @param input
+     * @throws Exception
+     */
+    public void updatePw(Member input) throws Exception;
     
 }

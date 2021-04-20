@@ -12,13 +12,11 @@
         <header class="sub_tit_wrap">
             <div class="sub_tit_bg">
                 <div class="sub_tit_inner">
-                    <h4>
-                        <img src="//image.istarbucks.co.kr/common/img/search/total_search_ttl.png" alt="통합 검색" />
-                    </h4>
+                    <h4>검색</h4>
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">통합검색</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/search"><span class="en">검색</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -28,108 +26,98 @@
         <div class="wrapper">
             <div class="inner">
                 <!-- 통합검색 입력 -->
+				<form method="get" action="${pageContext.request.contextPath}/search">
                 <fieldset>
                     <legend class="hid">통합검색 입력</legend>
                     <div class="search_input_wrap">
                         <strong>원하시는 검색어를 입력하신 후 검색 버튼을 클릭하세요.</strong>
                         <div class="search_input">
-                            <input type="text" name="search" id="search" /> <a href="${pageContext.request.contextPath}/" class="search_btn">검색</a>
-                        </div>
-                        <div class="search_btns">
-                            <ul>
-                                <li class="total_search_btn1"><input type="checkbox" id="search_all"><label class="category_set_btn on" for="search_all">통합검색</label></li>
-                                <li class="total_search_btn2"><input type="checkbox" id="search_coffee"><label for="search_coffee" class="category_set_btn">원두</label></li>
-                                <li class="total_search_btn3"><input type="checkbox" id="search_drink"><label class="category_set_btn" for="search_drink">음료</label></li>
-                            </ul>
+                            <input type="search" placeholder="이름으로 검색" name="keyword" id="keyword" value="${keyword}" /> <button type="submit" id="search_btn" class="search_btn">검색</button>
                         </div>
                     </div>
                 </fieldset>
-                <p class="sch_no_result">검색 결과가 없습니다.</p>
+                </form>
                 <!-- 통합검색 입력 끝 -->
-                <!-- 커피 -->
-                <section class="contents_wrap card_search_result search_coffee">
-                    <header class="search_result_each_ttl">
-                        <h2>원두</h2>
-                        <a href="${pageContext.request.contextPath}/">원두 더보기</a>
-                    </header>
-                    <ul class="search_coffee_wrap">
-                        <li>
-                            <figure>
-                                <img src="//image.istarbucks.co.kr//upload/store/skuimg/2015/08/[11019857]_20150809121431365.jpg" alt>
-                            </figure>
-                            <div class="card_search_result_txt">
-                                <header>
-                                    <h3 class="rt_title">
-                                        <span class="yellow_bg">콜롬비아</span>250g (Colombia 250g)
-                                    </h3>
-                                </header>
-                                <p class="card_search_result_cont rt_text">
-                                    견과류의 풍미를 간직한 부드럽고 균형 잡힌 커피
-                                </p>
-                                <p class="card_search_result_link">
-                                    <a href="${pageContext.request.contextPath}/" class="en" target="_blank">
-                                        http://www.starbucks.co.kr/coffee/product_view.do?PRODUCT_CD=11019857
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <figure>
-                                <img src="//image.istarbucks.co.kr//upload/store/skuimg/2015/08/[11019857]_20150809121431365.jpg" alt>
-                            </figure>
-                            <div class="card_search_result_txt">
-                                <header>
-                                    <h3 class="rt_title">
-                                        <span class="yellow_bg">콜롬비아</span>250g (Colombia 250g)
-                                    </h3>
-                                </header>
-                                <p class="card_search_result_cont rt_text">
-                                    견과류의 풍미를 간직한 부드럽고 균형 잡힌 커피
-                                </p>
-                                <p class="card_search_result_link">
-                                    <a href="${pageContext.request.contextPath}/" class="en" target="_blank">
-                                        http://www.starbucks.co.kr/coffee/product_view.do?PRODUCT_CD=11019857
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-                <!-- 커피 끝 -->
-                <!-- 음료 -->
-                <section class="contents_wrap bev_search_result search_drink">
-                    <header class="search_result_each_ttl">
-                        <h2>음료</h2>
-                        <a href="${pageContext.request.contextPath}/">음료 더보기</a>
-                    </header>
-                    <ul class="search_drink_wrap">
-                        <li>
-                            <p class="sch_no_result_subtap">검색 결과가 없습니다.</p>
-                        </li>
-                    </ul>
-                </section>
-                <!-- 음료 끝 -->
+                <!-- 검색 결과 -->
+	                <c:choose>
+		                <c:when test="${keyword == null || keyword == ''}">
+	                		<p class="sch_no_result">검색어를 입력해주세요.</p>
+				        </c:when>
+						<c:otherwise>
+	                		<c:choose>
+					        <c:when test="${output != null && fn:length(output) > 0}">
+				                <section class="contents_wrap card_search_result search_coffee">
+				                    <header class="search_result_each_ttl">
+				                        <h2>메뉴</h2>
+				                        <a href="${pageContext.request.contextPath}/product/menu_list">다른 메뉴 더보기</a>
+				                    </header>
+				                    <ul class="search_coffee_wrap">
+				        			<c:forEach var="item" items="${output}" varStatus="status">
+				        				<%-- 출력을 위해 준비한 메뉴 이름 변수 --%>
+										<c:set var="name" value="${item.name}" />
+										<%-- 검색어가 있다면? --%>
+										<c:if test="${keyword != ''}">
+											<%-- 검색어에 mark태그를 적용하여 형광팬효과 준비 --%>
+											<c:set var="mark" value="<span class='yellow_bg'>${keyword}</span>" />
+											<%-- 출력을 위해 준비한 이름에서 검색어와 일치하는
+					    						단어를 형광팬효과로 변경 --%>
+											<c:set var="name" value="${fn:replace(name,keyword,mark)}" />
+										</c:if>
+				        				<%-- 출력을 위해 준비한 메뉴 이름 변수 --%>
+										<c:set var="eng_name" value="${item.eng_name}" />
+										<%-- 검색어가 있다면? --%>
+										<c:if test="${keyword != ''}">
+											<%-- 검색어에 mark태그를 적용하여 형광팬효과 준비 --%>
+											<c:set var="mark" value="<span class='yellow_bg'>${keyword}</span>" />
+											<%-- 출력을 위해 준비한 이름에서 검색어와 일치하는
+					    						단어를 형광팬효과로 변경 --%>
+											<c:set var="eng_name" value="${fn:replace(eng_name,keyword,mark)}" />
+										</c:if>
+										<%-- 상세페이지로 이동하기 위한 URL --%>
+										<c:url value="${pageContext.request.contextPath}/product/menu_detail/${item.id}" var="viewUrl">
+										</c:url>
+				                        <li>
+				                            <figure>
+			                                    <a href="${viewUrl}" class="en" target="_blank">
+				                                	<img src="${item.list_img}">
+			                                    </a>
+				                            </figure>
+				                            <div class="card_search_result_txt">
+				                                <header>
+				                                    <h3 class="rt_title">
+					                                    <a href="${viewUrl}" class="en" target="_blank">
+					                                        ${name}&nbsp;(${eng_name})
+					                                    </a>
+				                                    </h3>
+				                                </header>
+				                                <p class="card_search_result_cont rt_text">
+				                                    <a href="${viewUrl}" class="en" target="_blank">
+				                                    	${item.description}
+			                                    	</a>
+				                                </p>
+				                                <p class="card_search_result_link">
+				                                    <a href="${viewUrl}" class="en" target="_blank">
+				                                        ${viewUrl}
+				                                    </a>
+				                                </p>
+				                            </div>
+				                        </li>
+				                        </c:forEach>
+				                    </ul>
+				                </section>
+					        </c:when>
+							<c:otherwise>
+		                		<p class="sch_no_result">검색 결과가 없습니다.</p>
+							</c:otherwise>
+				    		</c:choose>
+						</c:otherwise>
+				    </c:choose>
+                <!-- 검색 결과 끝 -->
             </div>
         </div>
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
-    <script type="text/javascript">
-    // 카테고리 상세보기 선택 버튼
-    $(document).on("change", ".search_btns > ul > li > input", function() {
-
-        if ($(this).next().hasClass('on')) {
-            $(".search_btns>ul>li>label").removeClass("on");
-            $("#search_all").next().addClass("on");
-            // 상품분류 선택하면 리스트 아래에 바로 출력되도록 (ajax?)
-        } else {
-            $(".search_btns>ul>li>label").removeClass("on");
-            $(this).next().addClass("on");
-            // 상품분류 선택하면 리스트 아래에 바로 출력되도록
-        }
-        return false;
-    });
-    </script>
 </body>
 
 </html>

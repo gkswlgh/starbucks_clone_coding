@@ -20,6 +20,7 @@ public class Member {
 	private String addr1;
 	private String addr2;
 	private String del_date;
+	private int au_num;
 
 	private String user_pw_confirm;
 	

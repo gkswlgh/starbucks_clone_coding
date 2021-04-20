@@ -63,7 +63,9 @@ public class MenuServiceTest {
 	public void testB() {
 		// -> import hanjiho.project.starbucks.model.Menu;
 		Menu input = new Menu();
+        input.setIs_open("Y");
 		input.setName("미드나잇");
+		input.setEng_name("미드나잇");
 
 		List<Menu> output = null;
 

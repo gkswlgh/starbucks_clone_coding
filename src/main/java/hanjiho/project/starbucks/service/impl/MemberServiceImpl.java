@@ -178,7 +178,7 @@ public class MemberServiceImpl implements MemberService {
 	public int joinOut(Member input) throws Exception {
 		int result=0;
 		try {
-		    result = sqlSession.delete("MemberMapper.joinOut", input);
+		    result = sqlSession.update("MemberMapper.joinOut", input);
 
 		    if (result == 0) {
 		        throw new NullPointerException("result=0");
@@ -316,4 +316,50 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+
+    /**
+     * 인증번호 갱신
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void updateAuNum(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.update("MemberMapper.updateAuNum", input);
+            if (result == 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("인증번호 갱신에 실패했습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("인증번호 갱신에 실패했습니다.");
+        }
+    }
+
+    /**
+     * 비밀번호 갱신
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void updatePw(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.update("MemberMapper.updatePw", input);
+            if (result == 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("비밀번호 갱신에 실패했습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("비밀번호 갱신에 실패했습니다.");
+        }
+    }
 }

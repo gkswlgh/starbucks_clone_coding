@@ -271,6 +271,8 @@ public class WebHelper {
 
         // 세션을 저장한다.
         this.session.setAttribute(key, value);
+        // 세션 유지시간 (-1 은 무한대)
+        session.setMaxInactiveInterval(-1);
     }
 
     /**

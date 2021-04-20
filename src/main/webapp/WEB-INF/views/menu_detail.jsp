@@ -50,7 +50,7 @@
                                     <br />
                                     <span>${output.eng_name}</span></h4>
                                 <p class="t1">${output.description}</p>
-                                <div class="myDrink"><a href="${pageContext.request.contextPath}/" role="button" title="나만의 음료 등록 옵션 열기">나만의 음료로 등록</a></div>
+                                <div class="myDrink"><a href="${pageContext.request.contextPath}/rest/product/likemenu" role="button" title="나만의 음료 등록 옵션 열기">나만의 음료로 등록</a></div>
                             </div>
                             <div class="product_view_info">
                                 <div class="product_info_head">

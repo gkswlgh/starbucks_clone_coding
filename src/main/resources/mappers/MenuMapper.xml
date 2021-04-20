@@ -39,14 +39,13 @@
 		SELECT id, menu_class, name, eng_name, price, is_open, CONVERT(list_img USING utf8) as list_img, CONVERT(main_img USING utf8) as main_img, description, CONVERT(content USING utf8) as content, CONVERT(nutri_info USING utf8) as nutri_info, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date
 		FROM menu
 		<where>
-			<if test="menu_class != null and menu_class != ''">
-				menu_class LIKE concat('%', #{menu_class}, '%')
-			</if>
-			<if test="name != null and name != ''">
-				OR name LIKE concat('%', #{name}, '%')
-			</if>
-			<if test="eng_name != null and eng_name != ''">
-				OR eng_name LIKE concat('%', #{eng_name}, '%')
+			<if test="is_open != null and is_open != ''">
+			is_open = '${is_open}'
+				<if test="(name != null and name != '') and (eng_name != null and eng_name != '')">
+				AND ( 	name LIKE concat('%', #{name}, '%')
+						OR eng_name LIKE concat('%', #{eng_name}, '%')
+					)
+				</if>
 			</if>
 		</where>
 

@@ -10,7 +10,7 @@
 <div id="container"></div>
     <div class="find_mem_wrap">
         <div class="find_mem_inner">
-            <form id="find_pw" name="find_pw" action="" method="post">
+            <form id="find_pw" name="find_pw" action="${pageContext.request.contextPath}/rest/account/find_pw" method="post">
                 <fieldset>
                     <legend class="hid">회원 개인정보를 조회하는 폼</legend>
                     <div class="find_mem_ttl">비밀번호 찾기</div>
@@ -30,7 +30,8 @@
                                 <p class="btn_find_mem">
                                     <button type="submit">이메일로 인증번호 보내기</button>
                                 </p>
-                                <p class="input_warn_text t_006633">존재하지 않는 회원 아이디 혹은 이메일입니다.
+                                <p class="input_warn_text t_006633">인증번호 전송에 시간이 다소 소요될 수 있습니다.
+                                <br>뒤로가기나 새로고침을 누르지 마시고, 다음 페이지로 넘어갈 때까지 잠시 기다려주시기 바랍니다.
                                 </p>
                             </div>
                         </div>
@@ -44,24 +45,18 @@
     <script type="text/javascript">
     $(function() {
 
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
-
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#find_pw").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*{required는 필수, 그외 부가 기능}*/
@@ -82,6 +77,30 @@
                 }
             }
         }); //end validate()
+
+        $('#find_pw').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+			            window.location = ROOT_URL + '/account/find_pw_au/'+ json.id;
+					} else {
+						alert("통신 실패. 다시 시도해주세요.");
+						return false;
+					}
+				}
+		});// end ajax
+        
     });
     </script>
 </body>

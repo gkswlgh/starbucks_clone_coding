@@ -23,7 +23,7 @@
                             </span>
                         </div>
                         <p class="btn_find_mem">
-                            <button id="find_id_ok">로그인 페이지로 이동</button>
+                            <button id="goLogin">로그인 페이지로 이동</button>
                         </p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
     $(function() {
     	
     	// .로그인 페이지로 이동.
-    	$("#find_id_ok").click(function(e) {
+    	$("#goLogin").click(function(e) {
             window.location = ROOT_URL + '/account/login';
 	    });
     	

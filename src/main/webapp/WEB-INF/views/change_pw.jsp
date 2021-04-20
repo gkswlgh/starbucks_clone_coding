@@ -10,17 +10,13 @@
 <div id="container"></div>
     <div class="find_mem_wrap">
         <div class="find_mem_inner">
-            <form id="change_pw" name="change_pw">
+            <form id="change_pw" name="change_pw" action="${pageContext.request.contextPath}/rest/account/change_pw" method="post">
                 <fieldset>
                     <legend class="hid">회원 개인정보를 조회하는 폼</legend>
                     <div class="find_mem_ttl">비밀번호 찾기</div>
                     <section class="find_mem_form">
                         <div class="find_mem_result">
                             <div class="find_mem_sally"></div>
-                            <div class="mem_result_txt">
-                                <strong>비밀번호가 기억나지 않으세요?</strong> <span class="result_txt_sub">아래
-                                    인증 방법을 통해 비밀번호를 변경 하실 수 있습니다.</span>
-                            </div>
                         </div>
                         <div class="find_mem bd_none">
                             <strong>비밀번호 변경하기</strong>
@@ -32,8 +28,7 @@
                                 <p class="btn_find_mem">
                                     <button type="submit">비밀번호 변경</button>
                                 </p>
-                                <p class="input_warn_text t_006633">비밀번호 확인이 잘못되었습니다.
-                                </p>
+                                <input type="hidden" id="id" name="id" value="${output.id}"/>
                             </div>
                         </div>
                     </section>
@@ -44,35 +39,33 @@
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
     <!-- 사용자스크립트 -->
     <script type="text/javascript">
-    $(function() {
-
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
+    $(function(e) {
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#change_pw").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*{required는 필수, 그외 부가 기능}*/
+                id: { required: true },
                 txt_change_pw: { required: true, minlength: 4, maxlength: 20 },
                 txt_change_pw_check: { required: true, equalTo: "#txt_change_pw" }
             },
             /*규칙이 맞지 않은 경우의 메시지*/
             messages: {
                 /*rules에 맞지 않을 경우 메시지*/
+                id: {
+                    required: "회원정보가 없습니다."
+                },
                 txt_change_pw: {
                     required: "비밀번호를 입력하세요.",
                     minlength: "비밀번호는 4글자 이상 입력하셔야 합니다.",
@@ -84,6 +77,30 @@
                 }
             }
         }); //end validate()
+        
+
+        $('#change_pw').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+			            window.location = ROOT_URL + '/account/find_pw_ok'+ json.id;
+					} else {
+						alert("통신 실패. 다시 시도해주세요.");
+						return false;
+					}
+				}
+		});// end ajax
     });
     </script>
 </body>

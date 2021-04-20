@@ -27,11 +27,10 @@
         <!-- 내용 -->
         <div class="cont w1100">
             <div class="cont_inner">
-                <form action="#" id="vocVO" name="vocForm" class="voc_input_frm" method="post" enctype="multipart/form-data">
-                    <input type="hidden" value="0" id="store_cd" name="store_cd" />
+                <form action="${pageContext.request.contextPath}/rest/voc" id="vocVO" name="vocForm" class="voc_input_frm" method="post">
                     <fieldset>
-                        <input type="hidden" name="DC_VISIT_STR" id="CD_VISIT_STR" /> <input type="hidden" name="DS_CSTMR_CTTPC" id="DS_CSTMR_CTTPC" /> <input type="hidden" name="DS_CSTMR_EMAIL" id="DS_CSTMR_EMAIL" />
-                        <legend>고객의 소리 입력폼</legend>
+                        <legend>
+                        고객의 소리 입력 폼</legend>
                         <!-- 인삿말 -->
                         <div class="voc_top_bg">
                             <div class="voc_top_txt">
@@ -47,6 +46,11 @@
                         <!-- 인삿말 끝 -->
                         <!-- 테이블 -->
                         <div class="voc_input_tbl">
+		                		<c:choose>
+		                        	<c:when test="${member == null}">
+	                        			<div class="voc_ttl"><strong> 비회원 고객 문의 작성 폼 </strong></div>
+		                        	</c:when>
+		                        </c:choose>
                             <p class="must_input">표시 항목은 필수 입력 사항입니다.</p>
                             <table class=" w1000" summary="분야, 답변 받으실 메일, 연락처, 장소, 제목, 내용">
                                 <caption>분야, 답변 받으실 메일, 연락처, 장소, 제목, 내용에 대한 테이블</caption>
@@ -55,6 +59,19 @@
                                     <col width="740" />
                                 </colgroup>
                                 <tbody>
+			                		<c:choose>
+			                        	<c:when test="${member != null}">
+		                                    <tr>
+		                                        <th scope="row">문의 회원</th>
+		                                        <td>
+		                                            <div class="sel_wrap">
+		                                                <input type="text" class="voc_ttl_input1" value="${member.user_name}(${member.user_id})" disabled/>
+		                                                <input type="hidden" id="id" name="id" value="${member.id}"/>
+		                                            </div>
+		                                        </td>
+		                                    </tr>
+			                        	</c:when>
+			                        </c:choose>
                                     <tr>
                                         <th scope="row">분야 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" />
                                         </th>
@@ -63,22 +80,22 @@
                                                 <p class="cate_sel_wrap">
                                                     <label for="TP_VOC_DEMAND">문의유형</label> <select name="TP_VOC_DEMAND" id="TP_VOC_DEMAND">
                                                         <option value>문의유형</option>
-                                                        <option value="01">문의</option>
-                                                        <option value="02">칭찬</option>
-                                                        <option value="03">제안</option>
-                                                        <option value="04">불만</option>
+                                                        <option value="1">문의</option>
+                                                        <option value="2">칭찬</option>
+                                                        <option value="3">제안</option>
+                                                        <option value="4">불만</option>
                                                     </select>
                                                 </p>
                                                 <p class="cate_sel_wrap">
                                                     <label for="CD_VOC_CAUSE">분류</label> <select name="CD_VOC_CAUSE" id="CD_VOC_CAUSE">
                                                         <option value>분류</option>
-                                                        <option value="001">제품/상품</option>
-                                                        <option value="002">스타벅스 카드</option>
-                                                        <option value="003">결제정책/전자영수증</option>
-                                                        <option value="004">사이렌오더/e-Gift Item</option>
-                                                        <option value="005">스타벅스 딜리버스</option>
-                                                        <option value="006">고객경험설문/마이스타벅스리뷰</option>
-                                                        <option value="007">스토어케어/고객센터</option>
+                                                        <option value="1">제품/상품</option>
+                                                        <option value="2">스타벅스 카드</option>
+                                                        <option value="3">결제정책/전자영수증</option>
+                                                        <option value="4">사이렌오더/e-Gift Item</option>
+                                                        <option value="5">스타벅스 딜리버스</option>
+                                                        <option value="6">고객경험설문/마이스타벅스리뷰</option>
+                                                        <option value="7">스토어케어/고객센터</option>
                                                     </select>
                                                 </p>
                                             </div>
@@ -88,12 +105,13 @@
                                         <th scope="row">답변 받으실 메일 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
-                                                <input type="text" class="mail_input" id="email1" name="email1" />
+                                                <input type="text" class="mail_input" id="email1" name="email1" value="${member.email1}"/>
                                                 <p class="mail_at">@</p>
-                                                <input type="text" id="email2" name="email2" class="mail_input" />
+                                                <input type="text" class="mail_input" id="email2" name="email2" value="${member.email2}"/>
+                                            
                                                 <p class="mail_sel_wrap">
                                                     <label for="mail">직접입력</label> <select id="mail" name="mail">
-                                                        <option selected value>직접입력</option>
+                                                        <option selected="selected" value>직접입력</option>
                                                         <option value="hotmail.com">hotmail.com</option>
                                                         <option value="yahoo.co.kr">yahoo.co.kr</option>
                                                         <option value="hanmir.com">hanmir.com</option>
@@ -109,7 +127,7 @@
                                                         <option value="gmail.com">gmail.com</option>
                                                     </select>
                                                 </p>
-                                            </div>
+                                           </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -117,7 +135,7 @@
                                         <td>
                                             <div class="sel_wrap">
                                                 <p class="phone_sel_wrap">
-                                                    <label for="phone1">010</label> <select id="phone1" name="phone1" formnovalidate>
+                                                    <label for="phone1">010</label> <select id="phone1" name="phone1" value="${member.phone1}" formnovalidate>
                                                         <option value="010">010</option>
                                                         <option value="011">011</option>
                                                         <option value="016">016</option>
@@ -127,9 +145,9 @@
                                                     </select>
                                                 </p>
                                                 <p class="cell_hyphen">-</p>
-                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" value="${member.phone2}" maxlength="4" ref="num" />
                                                 <p class="cell_hyphen">-</p>
-                                                <input type="text" class="cellphone_input" id="phone3" name="phone3" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="phone3" name="phone3" value="${member.phone3}" maxlength="4" ref="num" />
                                             </div>
                                         </td>
                                     </tr>
@@ -137,17 +155,17 @@
                                         <th scope="row">장소 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="tbl_radio_wrap">
-                                                <input id="HOW1" name="how" checked type="radio" value="Y" /> <label for="HOW1">매장 방문</label>
-                                                <input id="HOW2" name="how" type="radio" value="N" /> <label for="HOW2">매장 방문
+                                                <input id="VISIT1" name="visit" checked type="radio" value="Y" /> <label for="VISIT1">매장 방문</label>
+                                                <input id="VISIT2" name="visit" type="radio" value="N" /> <label for="VISIT2">매장 방문
                                                     외</label>
                                             </div>
                                             <div class="sel_wrap mt10">
                                                 <p class="visit_txt">방문매장</p>
-                                                <input type="text" id="VISIT" name="visit" class="visit_input" placeholder="지점명을 적어주세요." />
+                                                <input type="text" id="VISIT_STORE" name="visit_store" class="visit_input" placeholder="지점명을 적어주세요." />
                                             </div>
                                             <div class="sel_wrap mt10">
                                                 <p class="visit_txt">방문일</p>
-                                                <input type="date" id="VISIT_DATE" name="visit" class="visit_input" />
+                                                <input type="date" id="VISIT_DATE" name="visit_date" class="visit_input" />
                                             </div>
                                         </td>
                                     </tr>
@@ -155,13 +173,13 @@
                                         <th scope="row">제목 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
-                                                <input type="text" class="voc_ttl_input1" id="DS_VOC_TITLE" name="voc_title" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
+                                                <input type="text" class="voc_ttl_input1" id="DS_VOC_TITLE" name="voc_title"  onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">내용 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
-                                        <td><textarea class="textArea" name="voc_txt" id="voc_txt" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" placeholder="관계 법령에 저촉되거나 사회통념 등에 어긋나는 내용(예: 개인정보 보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방, 의도적인 업무 방해 등) 또는 광고성 게시물은 별도의 사전 통보 없이 답변이 되지 않을 수 있으며, 등록된 의견은 처리가 시작되면 수정이 불가하오니 이 점 양지하여 주시기 바랍니다."></textarea>
+                                        <td><textarea class="textArea" name="voc_txt" id="voc_txt" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;"  placeholder="관계 법령에 저촉되거나 사회통념 등에 어긋나는 내용(예: 개인정보 보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방, 의도적인 업무 방해 등) 또는 광고성 게시물은 별도의 사전 통보 없이 답변이 되지 않을 수 있으며, 등록된 의견은 처리가 시작되면 수정이 불가하오니 이 점 양지하여 주시기 바랍니다."></textarea>
                                             <br /> <span id="realByte">0 / 2500byte</span></td>
                                     </tr>
                                 </tbody>
@@ -195,47 +213,31 @@
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
     <script type="text/javascript">
     $(function() {
-        var tel = $("#phone1").val() + $("#phone2").val() + $("#phone3").val();
-
+        
         //이메일 뒷자리 선택
         $(document).on("change", '[name="mail"]', function() {
-            $(this).parent().prev().focus();
             $(this).parent().prev().val($(this).val());
-            $(this).parent().prev().html($(this).val());
-            $(this).parent().prev().prev().focus();
         });
 
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
 
         /*유효성 검사 추가 함수*/
         //텍스트검사
-        $.validator.addMethod("text", function(value, element) {
+        $.validator.addMethod("voc_txt", function(value, element) {
             return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) || /^[a-zA-Z0-9]*$/i.test(value);
-        });
-
-        //한국식전화번호검사
-        $.validator.addMethod("phone", function(value, element) {
-            return this.optional(element) ||
-                /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i.test(value) ||
-                /^\d{2,3}\d{3,4}\d{4}$/i.test(value);
         });
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#vocVO").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
@@ -243,11 +245,12 @@
                 CD_VOC_CAUSE: "required",
                 email1: { required: true, alphanumeric: true },
                 email2: "required",
-                phone1: "required",
-                phone2: { required: true, number: true },
-                phone3: { required: true, number: true },
-                voc_title: { required: true, text: true },
-                voc_txt: "required"
+                phone2: { number: true },
+                phone3: { number: true },
+                voc_title: { required: true },
+                voc_txt: "required",
+                visit: "required",
+                visit_store: "voc_txt"
             },
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
@@ -258,43 +261,60 @@
                     alphanumeric: "이메일 형식이 잘못되었습니다."
                 },
                 email2: "이메일을 입력하세요.",
-                phone1: "연락처 형식이 잘못되었습니다.",
                 phone2: {
-                    required: "연락처를 입력하세요.",
                     number: "연락처 형식이 잘못되었습니다."
                 },
                 phone3: {
-                    required: "연락처를 입력하세요.",
                     number: "연락처 형식이 잘못되었습니다."
                 },
                 voc_title: {
-                    required: "제목을 입력하세요.",
-                    text: "제목은 한글, 숫자, 영어만 입력 가능합니다."
+                    required: "제목을 입력하세요."
                 },
-                voc_txt: "내용을 입력하세요."
-            },
-            /*수동 submit*/
-            submitHandler: function(e) {
-                /*기본 동작 수행 방식*/
-                e.preventDefault();
-
-                alert("문의완료");
+                voc_txt: "내용을 입력하세요.",
+                visit: "매장 방문 여부를 선택하세요",
+                visit_store: "지점명은 한글, 숫자, 영어만 입력 가능합니다."
             }
         });
+        
+        $('#vocVO').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+					
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+			            window.location = ROOT_URL + '/voc_ok';
+					} else {
+						alert("작성폼을 다시 한번 확인하세요.");
+						return false;
+					}
+				}
+		});// end ajax
 
 
         /*  장소 구분 선택   */
-        $("input[name=how]").click(function() {
+        $("input[name=visit]").click(function() {
             // 매장방문
             if ($(this).val() == "Y") {
                 $(".mt10").show();
                 // 매장방문 외
             } else if ($(this).val() == "N") {
+                $("#VISIT_STORE").val("");
+                $("#VISIT_DATE").val("");
                 $(".mt10").hide();
             }
         });
 
-        //제목,내용 복사 붙여넣기 방지 및 글자수제한
+        //내용 글자수제한
         //byte check;
         $('#voc_txt').keyup(function(event) {
             var maxByte = 2500; //최대 입력 바이트 수
@@ -329,6 +349,7 @@
         });
 
     });
+
 
     //복사 붙여넣기 방지 alert event
     function fnPaste() {

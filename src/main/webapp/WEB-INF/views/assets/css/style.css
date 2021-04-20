@@ -134,7 +134,8 @@ h1.logo a {
 	display: block;
 }
 
-.btn_search {
+.btn_search,
+.btn_search_on {
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -146,13 +147,15 @@ h1.logo a {
     top: 9px;
 }
 
-.btn_search img {
+.btn_search img,
+.btn_search_on img {
     position: absolute;
     right: 6px;
     top: 6px;
 }
 
-.btn_search label {
+.btn_search label,
+.btn_search_on label {
     display: block;
     width: 1px;
     height: 1px;
@@ -160,7 +163,8 @@ h1.logo a {
     overflow: hidden;
 }
 
-.btn_search input {
+.btn_search input,
+.btn_search_on input {
     display: none;
     background: none;
     border: none;
@@ -174,13 +178,15 @@ h1.logo a {
     width: 123px;
 }
 
-.btn_search a {
+.btn_search span,
+.btn_search_on span {
     display: block;
     position: absolute;
     right: 0;
     top: 0;
     height: 34px;
     width: 34px;
+    cursor: pointer;
 }
 
 .gnb_nav {
@@ -1718,6 +1724,18 @@ input.mem[type=checkbox]:active+label {
     max-width: 570px;
 }
 
+
+.btn_find_mem a {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: auto;
+    color: #fff;
+    font-size: 24px;
+    display: block;
+    line-height: 65px;
+    width: 500px;
+}
+
 .btn_find_mem button {
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -1727,6 +1745,11 @@ input.mem[type=checkbox]:active+label {
     display: block;
     line-height: 65px;
     width: 500px;
+}
+
+.btn_find_mem button:hover {
+	cursor: pointer;
+	
 }
 
 .input_warn_text {
@@ -1813,6 +1836,11 @@ input.mem[type=checkbox]:active+label {
     padding: 0;
     text-indent: -20000px;
     width: 0;
+}
+
+.voc_ttl {
+	margin-left: 50px;
+    font-size: 19px;
 }
 
 .voc_top_bg {
@@ -2271,20 +2299,26 @@ input.mem[type=checkbox]:active+label {
     color: #666;
     float: left;
     font-size: 14px;
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     text-indent: 20px;
     width: 440px;
     outline: none;
 }
 
-.search_input a {
+.search_input button {
     background: url(../img/util/btn_total_search.png);
     float: right;
     height: 45px;
     overflow: hidden;
     text-indent: -20000px;
     width: 45px;
+    border:none;
+	cursor: pointer;
+}
+
+.search_input button:active {
+	border: none;
 }
 
 .search_btns {
@@ -2331,7 +2365,11 @@ input.mem[type=checkbox]:active+label {
 
 p.sch_no_result {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 150px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .card_search_result {
@@ -2344,6 +2382,7 @@ p.sch_no_result {
     border-bottom: 1px solid #ddd;
     height: 40px;
     width: 100%;
+    margin-top:100px;
 }
 
 .search_result_each_ttl h2 {
@@ -2443,6 +2482,11 @@ p.sch_no_result {
 
 
 /* join_mem 회원가입*/
+
+.join_ttl {
+	margin-left: 5px;
+	font-size: 19px;
+}
 
 .agree_checkbox {
     float: right;
@@ -2744,7 +2788,7 @@ div.find_wrap ul.find_taste3 {
 
 .menu_btns>ul li a:hover,
 .menu_btns>ul li a.on {
-    background: rgb(142,173,80);
+    background: #063;
     border-radius: 3px;
     color: #fff;
     font-weight: bold;
@@ -6862,6 +6906,9 @@ button[disabled] {
 
 .yellow_bg {
     background: #ffef00;
+    font-size:16px;
+    font-weight: bold;
+    line-height: 1.4;
 }
 
 .f_22 {
