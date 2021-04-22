@@ -10,7 +10,7 @@
     <div id="container">
         <div class="wrapper">
             <div class="inner p0">
-                <!-- 서브타이틀d -->
+                <!-- 서브타이틀 -->
                 <header class="sub_tit_wrap sub_tit_wrap_short2">
                     <div class="sub_tit_bg_white2">
                         <div class="sub_tit_inner_short2">
@@ -54,10 +54,10 @@
 		                        	<c:when test="${member != null}">
 			                        	<input type="hidden" id="member_id" value="${member.id}"/>
 			                        	<input type="hidden" id="menu_id" value="${output.id}"/>
-	                        			<div class="myDrink"><a id="likeMenu" title="나만의 음료 등록">나만의 음료로 등록</a></div>
+	                        			<div class="myDrink"><a id="likeMenu" title="좋아하는 음료 등록">좋아하는 음료로 등록</a></div>
 		                        	</c:when>
 		                        	<c:otherwise>
-		                                <div class="myDrink"><a id="likeMenuGoLogin" title="나만의 음료 등록">나만의 음료로 등록</a></div>
+		                                <div class="myDrink"><a id="likeMenuGoLogin" title="좋아하는 음료 등록">좋아하는 음료로 등록</a></div>
 		                        	</c:otherwise>
 		                        </c:choose>
                             </div>
@@ -157,14 +157,25 @@
         $("#in_cart").on("click", function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
+            
+            
+            
 
-            /*if문으로 로그인이 되어잇는지 확인*/
-            var incart = confirm("장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?");
-            //true일경우 이동 - 이동할 때 상품번호랑 수량 같이
+            //이동 - 이동할 때 상품번호랑 수량 같이
+            $.post(ROOT_URL + '/rest/', {
+            	member_id: member_id,
+            	menu_id: menu_id
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		if (confirm("장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?")) {
+            			window.location = ROOT_URL + "/my/cart_step1";
+            			}
+            		}
+            });
 
         });//장바구니끝
         
-        //메뉴좋아요버튼
+        //좋아하는메뉴버튼
         $("#likeMenu").click(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
@@ -182,9 +193,9 @@
             	menu_id: menu_id
             }, function(json) {
             	if (json.rt == "OK") {
-            		alert('나만의 음료로 등록되었습니다.');	}
+            		alert('좋아하는 음료로 등록되었습니다.');	}
             });
-        }); //메뉴좋아요버튼끝
+        }); //좋아하는메뉴버튼끝
         
         //로그인버튼
         $("#likeMenuGoLogin").click(function(e) {

@@ -127,7 +127,7 @@
 	                            <p>카드를 등록해서 보다 빠르게 주문하세요!</p>
 	                        </div>
 	                        <div class="btn_egift">
-	                            <a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">e-Gift Card 선물하기</a>
+	                            <a href="${pageContext.request.contextPath}/my/gift_step1">e-Gift Card 선물하기</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -201,7 +201,7 @@
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_bean_0217.png" />
                 </div>
                 <div class="reserve_detail_btn">
-                    <a href="${pageContext.request.contextPath}/">매장에서 구매하기</a>
+                    <a href="${pageContext.request.contextPath}/">가까운 매장 찾기</a>
                 </div>
             </div>
         </section>
@@ -215,7 +215,7 @@
                     더하는 상품, 소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</div>
                 <div class="menu_wrap_img"></div>
                 <div class="menu_wrap_btn">
-                    <a href="${pageContext.request.contextPath}/product/menu_list">자세히 보기</a>
+                    <a href="${pageContext.request.contextPath}/product/menu_list">가까운 매장 찾기</a>
                 </div>
             </div>
         </section>

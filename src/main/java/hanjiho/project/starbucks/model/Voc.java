@@ -16,4 +16,7 @@ public class Voc {
 	private String voc_type;
 	private String voc_type2;
 	private Integer member_id;
+	private String re_ok;
+	private String voc_re_txt;
+	private String re_reg_date;
 }

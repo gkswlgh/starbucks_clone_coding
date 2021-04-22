@@ -2614,7 +2614,7 @@ p.agree_txt {
     height: 74px;
     margin: 0 auto;
     position: relative;
-    width: auto;
+    width: 1100px;
 }
 
 .sub_tit_inner_short ul.smap {
@@ -6940,6 +6940,10 @@ button[disabled] {
 
 .c666 {
     color: #666;
+}
+
+.c063 {
+    color: #063;
 }
 
 .cf66 {

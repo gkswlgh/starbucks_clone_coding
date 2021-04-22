@@ -37,7 +37,7 @@
                             </div>
                             <br />
                             <p class="btn_find_mem">
-                                <a href="${pageContext.request.contextPath}/my_starbucks/voclist">내 문의 내역 확인하러 가기</a>
+                                <a href="${pageContext.request.contextPath}/my/voclist">내 문의 내역 확인하러 가기</a>
                             </p>
                         </div>
                     </div>

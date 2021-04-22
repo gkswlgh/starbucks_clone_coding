@@ -7,4 +7,7 @@ public class LikeMenu {
 	private int like_id;
 	private int member_id;
 	private int menu_id;
+	private String reg_date;
+
+	private String menu_name;
 }

@@ -73,24 +73,52 @@
                                             <th class="en" scope="col">No</th>
                                             <th scope="col">제목</th>
                                             <th scope="col">작성일</th>
-                                            <th scope="col">답변예정일</th>
+                                            <th scope="col">답변일</th>
                                             <th scope="col">답변여부</th>
                                         </tr>
                                     </thead>
                                     <tbody id="all">
-                                        <tr>
-                                            <td>1</td>
+                                    <c:choose>
+								        <c:when test="${vocList != null && fn:length(vocList) > 0}">
+								        	<c:forEach var="item" items="${vocList}" varStatus="status">
+                                                <c:if test="${item.re_ok eq 'Y'}">
+                                        <tr class="re_Y">
+							        			</c:if>
+                                                <c:if test="${item.re_ok eq 'N'}">
+                                        <tr class="re_N">
+							        			</c:if>
+                                            <td>${status.index+1}</td>
                                             <td class="tr">
-                                                <a href="${pageContext.request.contextPath}/" onclick="">말차 초콜릿 라떼</a>
+                                                <a href="${pageContext.request.contextPath}/my/vocview/${item.voc_id}">${item.voc_ttl}</a>
                                             </td>
-                                            <td>2021-01-29</td>
-                                            <td>2021-01-31</td>
+                                            <td>${item.reg_date}</td>
+                                                <c:if test="${item.re_ok eq 'Y'}">
+                                            <td>${item.re_reg_date}</td>
+							        			</c:if>
+                                                <c:if test="${item.re_ok eq 'N'}">
+                                            <td></td>
+							        			</c:if>
                                             <td>
-                                                <p class="icon_complete">
+                                                <p class="icon_complete"> 
+                                                <c:if test="${item.re_ok eq 'Y'}">
                                                     <span>답변완료</span>
+							        			</c:if>
+                                                <c:if test="${item.re_ok eq 'N'}">
+                                                    <span>접수완료</span>
+							        			</c:if>
                                                 </p>
                                             </td>
                                         </tr>
+								            </c:forEach>
+							        	</c:when>
+								        <c:otherwise> 
+								        <tr>
+                                            <td colspan="5">
+                                            	아직 접수된 문의가 없습니다. <a href="${pageContext.request.contextPath}/voc" class="c063">(문의 접수하러 가기)</a>
+                                            </td>
+                                        </tr>
+								        </c:otherwise>
+								    </c:choose>
                                     </tbody>
                                 </table>
                                 <!-- 고객의 소리 페이징 -->
@@ -119,21 +147,25 @@
             $(".tab_01").removeClass("on");
             $(".tab_02").addClass("on");
             $(".tab_03").removeClass("on");
+            $(".re_Y").hide();
+            $(".re_N").show();
         })
 
         $(document).on("click", ".tab_03", function() {
             $(".tab_01").removeClass("on");
             $(".tab_02").removeClass("on");
             $(".tab_03").addClass("on");
+            $(".re_Y").show();
+            $(".re_N").hide();
         })
 
         $(document).on("click", ".tab_01", function() {
             $(".tab_01").addClass("on");
             $(".tab_02").removeClass("on");
             $(".tab_03").removeClass("on");
+            $(".re_Y").show();
+            $(".re_N").show();
         })
-
-        //  ajax로 제이슨 가져와서 템플릿 병합해서 목록 돌리기...
     })
     </script>
 </body>

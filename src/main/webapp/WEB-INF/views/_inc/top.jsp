@@ -26,7 +26,7 @@
                 </c:choose>
                     <li class="util_nav02"><a href="${pageContext.request.contextPath}/sitemap">Site Map</a></li>
                     <li class="util_nav03"><a href="${pageContext.request.contextPath}/voc">Customer Service &amp; Ideas</a></li>
-                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
+                    <li class="util_nav04"><a href="${pageContext.request.contextPath}/my/cart_step1">My Cart&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></a></li>
                 </ul>
             </nav>
             <p class="btn_search">
@@ -135,13 +135,13 @@
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/starbucks_card/about_card">스타벅스 카드</a></li>
                                             <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card">스타벅스 카드 소개</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">카드 등록하기</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">카드 충전하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/mycard_info_input">카드 등록하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/mycard_charge">카드 충전하기</a></li>
                                         </ul>
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/starbucks_card/about_egift">스타벅스 e-Gift Card</a></li>
                                             <li><a href="${pageContext.request.contextPath}/starbucks_card/about_egift">스타벅스 e-Gift Card 소개</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">선물하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/gift_step1">선물하기</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                             <div class="gnb_sub_txbg">
                                 <div class="gnb_sub_tx_inner">
                                     <h3>
-                                        <a href="${pageContext.request.contextPath}/">스타벅스 카드 등록하기</a>
+                                        <a href="${pageContext.request.contextPath}/my/mycard_info_input">스타벅스 카드 등록하기</a>
                                     </h3>
                                     <p class="gnb_sub_ex_txt">카드 등록 후 리워드 서비스를 누리고 사용내역도
                                         조회해보세요.</p>
@@ -166,25 +166,25 @@
                                 <div class="gnb_sub_inner">
                                     <div class="sub_up clear">
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">My 스타벅스 카드</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">보유 카드 조회</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">카드 등록</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">카드 충전</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/mycard_list">My 스타벅스 카드</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/mycard_list">보유 카드 조회</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/mycard_info_input">카드 등록</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/mycard_charge">카드 충전</a></li>
                                         </ul>
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">My 스타벅스 e-Gift Card</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">선물하기</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">선물 내역</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/gift_step1">선물하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/egift_card">선물 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">My Order</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/cart_step1">장바구니</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/">주문 내역</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/order_list">My Order</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/cart_step1">장바구니</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/order_list">주문 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/">고객 서비스</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/my_menu">My 메뉴</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/my_starbucks/voclist">My 고객의 소리</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/my_menu">고객 서비스</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/my_menu/${member.id}">My 메뉴</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my/voclist">My 고객의 소리</a></li>
                                         </ul>
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my_starbucks">개인정보관리</a></li>

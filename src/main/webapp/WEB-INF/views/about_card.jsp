@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en c222">Starbucks Cards</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">Starbucks Cards</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en c222">스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en c222">스타벅스 카드 소개</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">스타벅스 카드 소개</span></a></li>
                     </ul>
                 </div>
             </div>

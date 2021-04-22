@@ -80,16 +80,20 @@ public class MyPageRestController {
      	if (!regexHelper.isTel(tel)) {
      			return webHelper.getJsonWarning("전화번호 형식이 잘못되었습니다");
      		}
+     	
         if (!regexHelper.isValue(visit)) { return webHelper.getJsonWarning("매방 방문 여부를 선택하세요."); }
-        if (visit == "Y") {
+        if (visit.equals("Y")) {
          	if (!regexHelper.isValue(visit_store)) { return webHelper.getJsonWarning("방문 매장명을 입력하세요."); }
+         	if (visit_store == "" || visit_store == null) { return webHelper.getJsonWarning("방문 매장명을 입력하세요."); }
          	if (!regexHelper.isValue(visit_date)) { return webHelper.getJsonWarning("매장 방문일을 입력하세요."); }
-        }
-        if (visit_date == "") {
-        	visit_date = null;
-        }
-        if (visit_store == "") {
-        	visit_store = null;
+         	if (visit_date == "" || visit_date == null) { return webHelper.getJsonWarning("매장 방문일을 입력하세요."); }
+        } else if (visit.equals("N")) {
+            if (visit_date == "") {
+            	visit_date = null;
+            }
+            if (visit_store == "") {
+            	visit_store = null;
+            }
         }
      	if (!regexHelper.isValue(voc_title)) { return webHelper.getJsonWarning("제목을 입력하세요."); }
      	if (!regexHelper.isValue(voc_txt)) { return webHelper.getJsonWarning("내용을 입력하세요."); }

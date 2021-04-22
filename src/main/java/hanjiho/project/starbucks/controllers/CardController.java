@@ -25,12 +25,4 @@ public class CardController {
     public String about_egift() {
         return "about_egift";
     }
-    
-    /**
-     * 선물하기 페이지
-     */
-    @RequestMapping(value = "/starbucks_card/gift_step1", method = RequestMethod.GET)
-    public String gift_step1() {
-        return "my_starbucks/gift_step1";
-    }
 }

@@ -41,7 +41,7 @@
                                 </p>
                                 <span>고객의 소리 운영시간 : 월~ 일 09:00 ~ 18:00 (연중무휴)</span>
                             </div>
-                            <a href="${pageContext.request.contextPath}/" class="btn_ask_list">나의 문의 내역 보기</a>
+                            <a href="${pageContext.request.contextPath}/my/voclist/${member.id}" class="btn_ask_list">나의 문의 내역 보기</a>
                         </div>
                         <!-- 인삿말 끝 -->
                         <!-- 테이블 -->

@@ -11,6 +11,7 @@
 		<result property="like_id"  column="like_id" />
 		<result property="member_id"  column="member_id" />
 		<result property="menu_id"  column="menu_id" />
+		<result property="reg_date"  column="r_date" />
 	</resultMap>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
@@ -18,7 +19,7 @@
 		parameterType="hanjiho.project.starbucks.model.LikeMenu"
 		resultMap="likeMenuMap">
 		SELECT 
-		like_id, member_id, menu_id 
+		like_id, member_id, menu_id ,date_format(reg_date, '%Y-%m-%d %H:%i:%s') as r_date
 		FROM like_menu 
 		WHERE like_id=#{like_id}
 	</select>
@@ -28,7 +29,7 @@
 		parameterType="hanjiho.project.starbucks.model.LikeMenu"
 		resultMap="likeMenuMap">
 		SELECT 
-		like_id, member_id, menu_id 
+		like_id, member_id, menu_id , date_format(reg_date, '%Y-%m-%d %H:%i:%s') as r_date
 		FROM like_menu
 		<where>
 			<if test="member_id != null and member_id != ''">
@@ -47,9 +48,9 @@
 		parameterType="hanjiho.project.starbucks.model.LikeMenu"
 		useGeneratedKeys="true" keyProperty="like_id">
 		INSERT INTO like_menu (
-		member_id, menu_id
+		member_id, menu_id, reg_date
 		) VALUES (
-		#{member_id}, #{menu_id}
+		#{member_id}, #{menu_id}, now()
 		)
 	</insert>
 
@@ -64,7 +65,8 @@
 		parameterType="hanjiho.project.starbucks.model.LikeMenu">
 		UPDATE like_menu SET
 		member_id=#{member_id},
-		menu_id=#{menu_id}
+		menu_id=#{menu_id},
+		reg_date=now()
 		WHERE like_id=#{like_id}
 	</update>
 

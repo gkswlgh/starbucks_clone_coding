@@ -114,7 +114,7 @@ public class VocServiceImpl implements VocService {
 	}
 
 	/**
-	 * 문의 데이터 수정하기
+	 * 답변완료시 문의 데이터 수정하기
 	 * @param Voc 수정할 정보를 담고 있는 Beans
 	 * @return int
 	 * @throws Exception

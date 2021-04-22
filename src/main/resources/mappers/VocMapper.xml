@@ -20,6 +20,9 @@
 		<result property="voc_type"  column="voc_type" />
 		<result property="voc_type2"  column="voc_type2" />
 		<result property="member_id"  column="member_id" />
+		<result property="re_ok"  column="re_ok" />
+		<result property="voc_re_txt"  column="voc_re_txt" />
+		<result property="re_reg_date"  column="r_r_date" />
 	</resultMap>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
@@ -27,7 +30,7 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		resultMap="vocMap">
 		SELECT
-		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id 
+		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8) as voc_txt, date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id, re_ok, CONVERT(voc_re_txt USING utf8) as voc_re_txt, date_format(re_reg_date, '%Y-%m-%d') as r_r_date
 		FROM voc 
 		WHERE voc_id=#{voc_id}
 	</select>
@@ -37,23 +40,22 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		resultMap="vocMap">
 		SELECT
-		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8), date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id
+		voc_id, phone, email, visit_store, store_name, date_format(visit_date, '%Y-%m-%d') as v_date, voc_ttl, CONVERT(voc_txt USING utf8) as voc_txt, date_format(reg_date, '%Y-%m-%d') as r_date, voc_type, voc_type2, member_id, re_ok, CONVERT(voc_re_txt USING utf8) as voc_re_txt, date_format(re_reg_date, '%Y-%m-%d') as r_r_date
 		FROM voc
 		<where>
-			<if test="reg_date != null and reg_date != ''">
-				reg_date LIKE concat('%', #{reg_date}, '%')
-			</if>
 			<if test="voc_type != null and voc_type != ''">
-				OR voc_type LIKE concat('%', #{voc_type}, '%')
+			 	voc_type = #{voc_type}
 			</if>
 			<if test="voc_type2 != null and voc_type2 != ''">
-				OR voc_type2 LIKE concat('%', #{voc_type2}, '%')
+				AND voc_type2 = #{voc_type2}
 			</if>
 			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
+				AND member_id = #{member_id}
+			</if>
+			<if test="re_ok != null and re_ok != ''">
+				AND re_ok = #{re_ok}
 			</if>
 		</where>
-
 		ORDER BY voc_id DESC
 	</select>
 
@@ -62,9 +64,9 @@
 		parameterType="hanjiho.project.starbucks.model.Voc"
 		useGeneratedKeys="true" keyProperty="voc_id">
 		INSERT INTO voc (
-		phone, email, visit_store, store_name, visit_date, voc_ttl, voc_txt, reg_date, voc_type, voc_type2, member_id
+		phone, email, visit_store, store_name, visit_date, voc_ttl, voc_txt, reg_date, voc_type, voc_type2, member_id, re_ok
 		) VALUES (
-		#{phone}, #{email}, #{visit_store}, #{store_name}, #{visit_date}, #{voc_ttl}, #{voc_txt}, now(), #{voc_type}, #{voc_type2}, #{member_id}
+		#{phone}, #{email}, #{visit_store}, #{store_name}, #{visit_date}, #{voc_ttl}, #{voc_txt}, now(), #{voc_type}, #{voc_type2}, #{member_id}, "N"
 		)
 	</insert>
 
@@ -74,20 +76,13 @@
 		DELETE FROM voc WHERE voc_id=#{voc_id}
 	</delete>
 
-	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<!-- 답변완료시 데이터 갱신을 위한 기능 정의 -->
 	<update id="updateItem"
 		parameterType="hanjiho.project.starbucks.model.Voc">
 		UPDATE voc SET
-		phone=#{phone},
-		email=#{email},
-		visit_store=#{visit_store},
-		store_name=#{store_name},
-		visit_date=#{visit_date},
-		voc_ttl=#{voc_ttl},
-		voc_txt=#{voc_txt},
-		voc_type=#{voc_type}, 
-		voc_type2=#{voc_type2},
-		member_id=#{member_id}
+		re_ok = "Y",
+		voc_re_txt=#{voc_re_txt},
+		re_reg_date=now()
 		WHERE voc_id=#{voc_id}
 	</update>
 
@@ -100,17 +95,17 @@
 		SELECT COUNT(*) FROM voc
 
 		<where>
-			<if test="reg_date != null and reg_date != ''">
-				reg_date LIKE concat('%', #{reg_date}, '%')
-			</if>
 			<if test="voc_type != null and voc_type != ''">
-				OR voc_type LIKE concat('%', #{voc_type}, '%')
+			 	voc_type = #{voc_type}
 			</if>
 			<if test="voc_type2 != null and voc_type2 != ''">
-				OR voc_type2 LIKE concat('%', #{voc_type2}, '%')
+				AND voc_type2 = #{voc_type2}
 			</if>
 			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
+				AND member_id = #{member_id}
+			</if>
+			<if test="re_ok != null and re_ok != ''">
+				AND re_ok = #{re_ok}
 			</if>
 		</where>
 	</select>

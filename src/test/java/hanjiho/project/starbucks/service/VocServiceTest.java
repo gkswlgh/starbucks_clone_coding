@@ -110,49 +110,40 @@ public class VocServiceTest {
 		}
 	}
 
-	// 데이터 저장 테스트
-	@Test
-	public void testE() {
-		Voc input = new Voc();
-		input.setPhone("010)1111-1111");
-		input.setEmail("sdf123@assd.as");
-		input.setVisit_store("Y");
-		input.setStore_name("강남어쩌구점");
-		input.setVisit_date("2020-12-23");
-		input.setVoc_ttl("신규");
-		input.setVoc_txt("신규");
-		input.setVoc_type("1");
-		input.setVoc_type2("1");
-		input.setMember_id(2);
-
-		int output = 0;
-
-		try {
-			output = vocService.addVoc(input);
-			log.debug("저장된 데이터 수: " + output);
-			// [중요] 생성된 PK값은 MyBatis에 의해 입력 파라미터의 해당 멤버변수에 셋팅된다.
-			log.debug("생성된 PK값: " + input.getVoc_id());
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			e.printStackTrace();
-		}
-	}
-
-//	// 데이터 수정 테스트
+//	// 데이터 저장 테스트
 //	@Test
-//	public void testF() {
+//	public void testE() {
 //		Voc input = new Voc();
-//		input.setVoc_id(1);
 //		input.setPhone("010)1111-1111");
 //		input.setEmail("sdf123@assd.as");
-//		input.setVisit_store("N");
-//		input.setStore_name("");
-//		input.setVisit_date("");
+//		input.setVisit_store("Y");
+//		input.setStore_name("강남어쩌구점");
+//		input.setVisit_date("2020-12-23");
 //		input.setVoc_ttl("신규");
 //		input.setVoc_txt("신규");
 //		input.setVoc_type("1");
 //		input.setVoc_type2("1");
 //		input.setMember_id(2);
+//
+//		int output = 0;
+//
+//		try {
+//			output = vocService.addVoc(input);
+//			log.debug("저장된 데이터 수: " + output);
+//			// [중요] 생성된 PK값은 MyBatis에 의해 입력 파라미터의 해당 멤버변수에 셋팅된다.
+//			log.debug("생성된 PK값: " + input.getVoc_id());
+//		} catch (Exception e) {
+//			log.error(e.getLocalizedMessage());
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	// 데이터 수정 테스트
+//	@Test
+//	public void testF() {
+//		Voc input = new Voc();
+//		input.setVoc_id(11);
+//		input.setVoc_re_txt("답변내용~~~~~");
 //
 //		int output = 0;
 //
