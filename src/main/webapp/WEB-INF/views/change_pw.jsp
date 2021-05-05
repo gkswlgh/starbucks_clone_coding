@@ -94,7 +94,7 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-			            window.location = ROOT_URL + '/account/find_pw_ok'+ json.id;
+			            window.location = ROOT_URL + '/account/find_pw_ok/'+ json.id;
 					} else {
 						alert("통신 실패. 다시 시도해주세요.");
 						return false;

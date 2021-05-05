@@ -6749,7 +6749,7 @@ button[disabled] {
     font-weight: bold;
     background: #fff;
     color: #666;
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
     position: relative;
@@ -6757,13 +6757,15 @@ button[disabled] {
 }
 
 .btn_order1:hover {
-    background: #aaa;
+    background: #ccc;
     color: #fff;
+    cursor: pointer;
 }
 
 .btn_order2 {
     margin-left: 4px;
     height: auto;
+    cursor: pointer;
     font-size: 18px;
     font-weight: bold;
     padding: 15px 48px;
@@ -6774,8 +6776,9 @@ button[disabled] {
 }
 
 .btn_order2:hover {
-    background-color: #74824c;
+    background-color: #004000;
     text-decoration: none;
+    cursor: pointer;
 }
 
 /*장바구니 주문서작성*/

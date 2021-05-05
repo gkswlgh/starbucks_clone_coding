@@ -3,6 +3,8 @@ package hanjiho.project.starbucks.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,12 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import hanjiho.project.starbucks.helper.WebHelper;
+import hanjiho.project.starbucks.model.Cart;
 import hanjiho.project.starbucks.model.LikeMenu;
+import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
 import hanjiho.project.starbucks.model.Voc;
+import hanjiho.project.starbucks.service.CartService;
 import hanjiho.project.starbucks.service.LikeMenuService;
 import hanjiho.project.starbucks.service.MenuService;
 import hanjiho.project.starbucks.service.VocService;
@@ -37,6 +43,8 @@ public class MyController {
 	LikeMenuService likeMenuService;
 	@Autowired
 	VocService vocService;
+	@Autowired
+	CartService cartService;
 	
     /**
      * 선물하기 페이지
@@ -177,8 +185,24 @@ public class MyController {
      * 장바구니 페이지
      */
     @RequestMapping(value = "/my/cart_step1", method = RequestMethod.GET)
-    public String cart_step1() {
-        return "my_starbucks/cart_step1";
+    public ModelAndView cart_step1(HttpSession session, @SessionAttribute(value = "member", required = false) Member member, Model model) {
+    	
+    	Cart input = new Cart();
+    	if (member != null) {
+    		input.setMember_id(member.getId());
+    	} else {
+    		input.setSession_id(session.getId());
+    	}
+    	
+    	List<Cart> output = new ArrayList<Cart>();
+    	try {
+			output = cartService.getCartList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/cart_step1");
     }
     
     /**

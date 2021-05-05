@@ -50,10 +50,10 @@
                                     <br />
                                     <span>${output.eng_name}</span></h4>
                                 <p class="t1">${output.description}</p>
+			                    <input type="hidden" id="menu_id" value="${output.id}"/>
                                 <c:choose>
 		                        	<c:when test="${member != null}">
 			                        	<input type="hidden" id="member_id" value="${member.id}"/>
-			                        	<input type="hidden" id="menu_id" value="${output.id}"/>
 	                        			<div class="myDrink"><a id="likeMenu" title="좋아하는 음료 등록">좋아하는 음료로 등록</a></div>
 		                        	</c:when>
 		                        	<c:otherwise>
@@ -131,9 +131,16 @@
                             </p>
                             <br />
                             <ul class="product_cart_btns">
+                                <c:choose>
+		                        	<c:when test="${member != null}">
                                 <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" id="pay_now" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
+		                        	</c:when>
+		                        	<c:otherwise>
+                                <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" id="GoLogin" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
+		                        	</c:otherwise>
+		                        </c:choose>
                                 <li class="product_cart_btn2"><a href="${pageContext.request.contextPath}/" class="in_cart" id="in_cart" data-price="${output.price}" data-qty="1">장바구니에 담기</a></li>
-                            </ul>
+		                    </ul>
                         </div>
                     </div>
                     <div class="product_view_wrap2">
@@ -157,22 +164,22 @@
         $("#in_cart").on("click", function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
-            
-            
-            
 
+        	var menu_id = $("#menu_id").val();
+        	var menu_qty = $("#in_cart").data("qty");
+            
+            
             //이동 - 이동할 때 상품번호랑 수량 같이
-            $.post(ROOT_URL + '/rest/', {
-            	member_id: member_id,
-            	menu_id: menu_id
+            $.post(ROOT_URL + '/rest/product/in_cart', {
+            	menu_id: menu_id,
+            	menu_qty: menu_qty
             }, function(json) {
             	if (json.rt == "OK") {
             		if (confirm("장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?")) {
             			window.location = ROOT_URL + "/my/cart_step1";
-            			}
-            		}
+           			}
+           		}
             });
-
         });//장바구니끝
         
         //좋아하는메뉴버튼
@@ -199,6 +206,17 @@
         
         //로그인버튼
         $("#likeMenuGoLogin").click(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+        	
+            if (confirm('로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동하시겠습니까?')) {
+                window.location = ROOT_URL + "/account/login";
+            }
+            
+        }); //로그인버튼끝
+        
+        //로그인버튼2
+        $("#GoLogin").click(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
         	

@@ -58,9 +58,9 @@ public class MyRestController {
 
     	// 데이터조회+삭제
         LikeMenu input = new LikeMenu();
-		for (String item: data) {
+		for (String item: data) {   
 			//형변환 string to int
-			int tmp = Integer.parseInt(item);
+			int tmp = Integer.parseInt(item); 
 			// 데이터삭제
 			input.setLike_id(tmp);
 	        try {
