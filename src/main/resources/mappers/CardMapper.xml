@@ -9,6 +9,7 @@
 		type="hanjiho.project.starbucks.model.Card">
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
 		<result property="card_id"  column="card_id" />
+		<result property="card_num"  column="card_num" />
 		<result property="member_id"  column="member_id" />
 		<result property="gift_mem_id"  column="gift_mem_id" />
 		<result property="pin_num"  column="pin_num" />
@@ -27,7 +28,7 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		resultMap="cardMap">
 		SELECT 
-		card_id, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash 
+		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash 
 		FROM card 
 		WHERE card_id=#{card_id}
 	</select>
@@ -37,7 +38,7 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		resultMap="cardMap">
 		SELECT 
-		card_id, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash
+		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash
 		FROM card
 		<where>
 			<if test="member_id != null and member_id != ''">
@@ -59,9 +60,9 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		useGeneratedKeys="true" keyProperty="card_id">
 		INSERT INTO card (
-		 member_id, gift_mem_id, pin_num, cash, card_name, reg_date, edit_date, charge_auto
+		 card_num, member_id, gift_mem_id, pin_num, cash, card_name, reg_date, edit_date, charge_auto
 		) VALUES (
-		#{member_id}, #{gift_mem_id}, #{pin_num}, #{cash}, #{card_name}, now(), now(), #{charge_auto}
+		#{card_num}, null, #{gift_mem_id}, #{pin_num}, #{cash}, "White Siren e-Gift", now(), now(), "0"
 		)
 	</insert>
 
@@ -76,15 +77,30 @@
 		parameterType="hanjiho.project.starbucks.model.Card">
 		UPDATE card SET
 		member_id=#{member_id},
-		gift_mem_id=#{gift_mem_id},
-		pin_num=#{pin_num},
-		cash=#{cash},
 		card_name=#{card_name},
-		edit_date=now(),
-		charge_auto=#{charge_auto},
+		pin_num=null,
+		edit_date=now()
+		WHERE card_id=#{card_id}
+	</update>
+	
+	<!-- 충전 기능 정의 -->
+	<update id="charge"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		cash=#{cash},
+		edit_date=now()
+		WHERE card_id=#{card_id}
+	</update>
+	
+	<!-- 자동충전 기능 정의 -->
+	<update id="autoCharge"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		charge_auto="Y",
 		charge_schedule=#{charge_schedule},
 		charge_limit=#{charge_limit},
-		charge_cash=#{charge_cash}
+		charge_cash=#{charge_cash},
+		edit_date=now()
 		WHERE card_id=#{card_id}
 	</update>
 
@@ -97,14 +113,11 @@
 		SELECT COUNT(*) FROM card
 
 		<where>
-			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
-			</if>
-			<if test="gift_mem_id != null and gift_mem_id != ''">
-				OR gift_mem_id LIKE concat('%', #{gift_mem_id}, '%')
-			</if>
 			<if test="pin_num != null and pin_num != ''">
-				OR pin_num LIKE concat('%', #{pin_num}, '%')
+				pin_num=#{pin_num}
+			</if>
+			<if test="card_num != null and card_num != ''">
+				AND card_num=#{card_num}
 			</if>
 		</where>
 	</select>

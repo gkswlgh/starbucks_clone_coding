@@ -73,4 +73,3 @@
 <script src="${pageContext.request.contextPath}/assets/js/footer.js?time=<%=System.currentTimeMillis()%>"></script>
 <script src="${pageContext.request.contextPath}/assets/js/coffee.js?time=<%=System.currentTimeMillis()%>"></script>
 <script src="${pageContext.request.contextPath}/assets/js/gift_step1_tab.js?time=<%=System.currentTimeMillis()%>"></script>
-<script src="${pageContext.request.contextPath}/assets/js/gift_step2.js?time=<%=System.currentTimeMillis()%>"></script>

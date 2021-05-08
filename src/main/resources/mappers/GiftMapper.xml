@@ -54,7 +54,7 @@
 		INSERT INTO gift (
 		member_id, to_mem_email, to_mem_name, message, gift_price, pay_method, reg_date
 		) VALUES (
-		#{member_id}, #{to_mem_email}, #{to_mem_name}, #{message}, #{gift_price}, #{pay_method}, now()
+		#{member_id}, #{to_mem_email}, #{to_mem_name}, #{message}, #{gift_price}, "N", now()
 		)
 	</insert>
 
@@ -72,8 +72,7 @@
 		to_mem_email=#{to_mem_email},
 		to_mem_name=#{to_mem_name},
 		message=#{message},
-		gift_price=#{gift_price},
-		pay_method=#{pay_method}
+		gift_price=#{gift_price}
 		WHERE gift_id=#{gift_id}
 	</update>
 

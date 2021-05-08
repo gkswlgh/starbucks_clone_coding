@@ -248,7 +248,7 @@
         		money += Number(data[i].dataset.unitPrice);
         	}
 
-        	if (money >= 20000) {
+        	if (money >= 20000 || money == 0) {
         		del = 0;
         	}
 

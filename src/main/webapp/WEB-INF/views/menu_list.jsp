@@ -69,39 +69,39 @@
 						        <c:forEach var="i" items="${menuList}" varStatus="status">
 								<c:choose>
 								    <c:when test="${status.index == 0}">
-                                	<dt class="menu_class_0"><span class="ttl">콜드 브루 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+                                	<dt class="menu_class_0"><div id="menu_class_0" class="h_box"></div><span class="ttl">콜드 브루 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 		                    	<span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 1}">
-								    <dt class="menu_class_1"><span class="ttl">브루드 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_1"><div id="menu_class_1" class="h_box"></div><span class="ttl">브루드 커피</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 2}">
-								    <dt class="menu_class_2"><span class="ttl">에스프레소</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_2"><div id="menu_class_2" class="h_box"></div><span class="ttl">에스프레소</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 3}">
-								    <dt class="menu_class_3"><span class="ttl">프라푸치노</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_3"><div id="menu_class_3" class="h_box"></div><span class="ttl">프라푸치노</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 4}">
-								    <dt class="menu_class_4"><span class="ttl">블렌디드</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_4"><div id="menu_class_4" class="h_box"></div><span class="ttl">블렌디드</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 5}">
-								    <dt class="menu_class_5"><span class="ttl">스타벅스 피지오</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_5"><div id="menu_class_5" class="h_box"></div><span class="ttl">스타벅스 피지오</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 6}">
-								    <dt class="menu_class_6"><span class="ttl">티(티바나)</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_6"><div id="menu_class_6" class="h_box"></div><span class="ttl">티(티바나)</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:when test="${status.index == 7}">
-								    <dt class="menu_class_7"><span class="ttl">기타 제조 음료</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
+								    <dt class="menu_class_7"><div id="menu_class_7" class="h_box"></div><span class="ttl">기타 제조 음료</span><i class="summaryIcon"><img src="//image.istarbucks.co.kr/common/img/menu/logo_decaf.png"></i>
 			                    <span class="summary">디카페인 에스프레소 샷 추가 가능 (일부 음료 제외)</span></dt>
 								    </c:when>
 								    <c:otherwise>
-								    <dt class="menu_class_8"><span class="ttl">스타벅스 주스(병음료)</span></dt>
+								    <dt class="menu_class_8"><div id="menu_class_8" class="h_box"></div><span class="ttl">스타벅스 주스(병음료)</span></dt>
 								    </c:otherwise>
 								</c:choose>
 								

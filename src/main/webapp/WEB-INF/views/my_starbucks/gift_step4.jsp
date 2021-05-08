@@ -51,12 +51,12 @@
                         </div>
                     </div>
                     <div class="gift_card_txt">
-                        <h5 class="m0"><span class="user">회원</span>님의 결제가 정상적으로 완료되었습니다!</h5>
+                        <h5 class="m0"><span class="user">${member.user_name}</span>님의 결제가 정상적으로 완료되었습니다!</h5>
                     </div>
                     <div class="card_gift_payment">
                         <dl class="clear">
                             <dt>
-                                <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" class="cardImgUrl" alt="2021 Happy New Year">
+                                <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" class="cardImgUrl" alt="White Siren e-Gift">
                             </dt>
                             <dd>
                                 <p></p>
@@ -73,32 +73,32 @@
                             <tbody>
                                 <tr>
                                     <th class="fth">카드명</th>
-                                    <td class="ftd cardName">2021 Happy New Year</td>
+                                    <td class="ftd cardName">White Siren e-Gift</td>
                                     <th class="fth">받는 사람</th>
-                                    <td class="ftd receiverInfo">이름 [이메일@email.com]</td>
+                                    <td class="ftd receiverInfo">${output.to_mem_name}</td>
                                 </tr>
                                 <tr>
                                     <th>선물할 방법</th>
-                                    <td>이메일</td>
+                                    <td>이메일 [ ${output.to_mem_email} ]</td>
                                     <th>선물 금액</th>
-                                    <td>10,000원</td>
+                                    <td>${output.gift_price}원</td>
                                 </tr>
                                 <tr>
-                                    <th>전송방법</th>
-                                    <td>즉시 전송</td>
+                                    <th>보내는 사람</th>
+                                    <td>${member.user_name}</td>
                                     <th>결제수단</th>
                                     <td>신용카드</td>
                                 </tr>
                                 <tr>
                                     <td class="ltd" colspan="4">
-                                        <p>총 결제금액: <span>10,000원</span></p>
+                                        <p>총 결제금액: <span>${output.gift_price}원</span></p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="gift_pay_done_btns">
                             <ul>
-                                <li class="gift_pay_done_btn1"><a href="${pageContext.request.contextPath}/">선물 계속하기</a></li>
+                                <li class="gift_pay_done_btn1"><a href="${pageContext.request.contextPath}/my/gift_step1">선물 계속하기</a></li>
                                 <li class="gift_pay_done_btn2"><a href="${pageContext.request.contextPath}/">선물 내역 확인하기</a></li>
                             </ul>
                         </div>

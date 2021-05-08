@@ -18,13 +18,13 @@
                                 <img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_ttl.png" alt="선물하기" />
                             </h2>
                             <ul class="smap">
-                                <li><a href="javascript:void(0);"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
+                                <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">Starbucks Cards</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">Starbucks Cards</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_egift"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">선물하기</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/my/gift_step1"><span class="en c222">선물하기</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,15 +51,18 @@
                         </div>
                     </div>
                     <div class="gift_card_txt">
-                        <h5 class="m0">결제 하기 전, 최종 확인해보세요!</h5>
+                        <h5 class="m0">한 번 보낸 선물은 취소할 수 없습니다. &nbsp;신중히 확인 후 결제해주세요.
+                        <br /><br />
+                        <span class="cf66">결제 버튼을 누르고 다음페이지로 넘어가기 까지 다소 시간이 걸립니다. &nbsp;새로고침 하지 말고 기다려주세요.</span>
+                        </h5>
                     </div>
                     <div class="card_gift_payment">
                         <dl class="clear">
                             <dt>
-                                <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" class="cardImgUrl" alt="2021 Happy New Year">
+                                <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" class="cardImgUrl" alt="White Siren e-Gift">
                             </dt>
                             <dd>
-                                <p class="reqMsg_html">나에게 선물</p>
+                                <p class="reqMsg_html">${input.message}</p>
                             </dd>
                         </dl>
                         <table summary="결제하기" class="payment_tb">
@@ -73,43 +76,71 @@
                             <tbody>
                                 <tr>
                                     <th class="fth">카드명</th>
-                                    <td class="ftd cardName">2021 Happy New Year</td>
+                                    <td class="ftd cardName">White Siren e-Gift</td>
                                     <th class="fth">받는 사람</th>
-                                    <td class="ftd receiverInfo">이름 [이메일@email.com]</td>
+                                    <td class="ftd receiverInfo">${input.to_mem_name}</td>
                                 </tr>
                                 <tr>
                                     <th>선물할 방법</th>
-                                    <td>이메일</td>
+                                    <td>이메일 [ ${input.to_mem_email} ]</td>
                                     <th>선물 금액</th>
-                                    <td>10,000원</td>
+                                    <td>${input.gift_price}원</td>
                                 </tr>
                                 <tr>
-                                    <th>전송방법</th>
-                                    <td>즉시 전송</td>
+                                    <th>보내는 사람</th>
+                                    <td>${member.user_name}</td>
                                     <th>결제수단</th>
                                     <td>신용카드</td>
                                 </tr>
                                 <tr>
                                     <td class="ltd" colspan="4">
-                                        <p>총 결제금액: <span>10,000원</span></p>
+                                        <p>총 결제금액: <span>${input.gift_price}원</span></p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="gift_payment_btns">
                             <ul>
-                                <li class="gift_payment_btn2"><a href="#">장바구니 담기</a></li>
-                                <li class="gift_payment_btn3"><a href="#">결제하기</a></li>
-                                <li class="gift_payment_btn1"><a href="#">뒤로</a></li>
+                                <li class="gift_payment_btn1"><a onclick="history.back(); return false;">뒤로</a></li>
+                                <li class="gift_payment_btn3"><button id="goOrder">결제하기</button></li>
                             </ul>
                         </div>
                     </div>
+                    <input type="hidden" id="to_mem_email" value="${input.to_mem_email}"/>
+                    <input type="hidden" id="to_mem_name" value="${input.to_mem_name}"/>
+                    <input type="hidden" id="message" value="${input.message}"/>
+                    <input type="hidden" id="gift_price" value="${input.gift_price}"/>
                 </section>
                 <!-- 내용 끝 -->
             </div>
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
+    <!-- 사용자 자바스크립트 -->
+    <script type="text/javascript">
+    $(function() {
+
+    	//다음페이지
+        $("#goOrder").on("click", function(e) {
+	        e.preventDefault();
+	    	var to_mem_email = $("#to_mem_email").val();
+	    	var to_mem_name = $("#to_mem_name").val();
+	    	var message = $("#message").val();
+	    	var gift_price = $("#gift_price").val();
+	    	
+        	if (confirm('결제하시겠습니까?')) {
+                $.post(ROOT_URL + "/my/rest/gift_step3", {
+                	to_mem_email: to_mem_email,
+                	to_mem_name: to_mem_name,
+                	message: message,
+                	gift_price: gift_price
+                }, function(json) {
+                	window.location = ROOT_URL + '/my/gift_step4/'+ json.gift_id;
+                });
+	        }
+        });
+    });
+    </script>
 </body>
 
 </html>

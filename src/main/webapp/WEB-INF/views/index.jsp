@@ -154,7 +154,7 @@
 	                            </p>
 	                        </div>
 	                        <div class="rewards_btn_group">
-	                            <a href="${pageContext.request.contextPath}/product/menu_list" class="rewards_btn_join">메뉴 보러가기</a> <a href="${pageContext.request.contextPath}/my_starbucks/mycart_step1" class="rewards_btn_login">장바구니</a>
+	                            <a href="${pageContext.request.contextPath}/product/menu_list" class="rewards_btn_join">메뉴 보러가기</a> <a href="${pageContext.request.contextPath}/my/cart_step1" class="rewards_btn_login">장바구니</a>
 	                        </div>
 	                    </div>
 	                    <div class="conts_gift">

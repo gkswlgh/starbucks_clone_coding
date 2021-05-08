@@ -2865,6 +2865,13 @@ div.product_list>dl>dt {
     margin-bottom: 20px;
     border-radius: 3px;
     overflow: hidden;
+	position: relative;
+}
+
+div.h_box {
+	position: absolute;
+	top: -130px;
+	height: 30px;
 }
 
 div.product_list>dl>dt>span.ttl {
@@ -3404,7 +3411,7 @@ ul.product_cart_btns li.product_cart_btn2 a {
 }
 
 .card_gift_info_section {
-    padding-bottom: 70px;
+    padding-bottom: 100px;
 }
 
 .card_gift_steps {
@@ -3638,9 +3645,8 @@ ul.product_cart_btns li.product_cart_btn2 a {
 }
 
 .gift_card_list_wrap ul li {
-    float: left;
     height: 210px;
-    margin: 30px 0 0 20px;
+    margin: auto;
     position: relative;
     width: 260px;
 }
@@ -3916,6 +3922,7 @@ table.gift_info_tbl tr td div.tbl_card_radio input.amountInput {
 .card_gift_payment dl {
     width: 1100px;
     margin-bottom: 50px;
+    
 }
 
 .card_gift_payment dl dt {
@@ -3979,15 +3986,17 @@ table.payment_tb td.ltd span {
     color: #006633;
 }
 
+.card_gift_payment {
+	margin-bottom: 1px;
+}
+
 
 .gift_payment_btns,
 .gift_payment_done_btns {
-    float: left;
     height: 45px;
     margin-top: 40px;
     width: 100%;
     position: relative;
-    margin-bottom: 80px;
 }
 
 .gift_payment_btns ul {
@@ -4015,6 +4024,13 @@ table.payment_tb td.ltd span {
     width: 88px;
 }
 
+.gift_payment_btns ul li.gift_payment_btn3 button {
+    background: #222;
+    margin-left: 5px;
+    width: 88px;
+    cursor: pointer;
+}
+
 .gift_payment_btns ul li.gift_payment_btn1 a {
     background: #666;
     margin-left: 5px;
@@ -4031,6 +4047,24 @@ table.payment_tb td.ltd span {
     line-height: 45px;
     text-align: center;
     width: 100%;
+}
+
+
+.gift_payment_btns ul li button,
+.gift_payment_done_btns ul li button {
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    width: 100%;
+}
+
+.gift_payment_btns ul li button:hover,
+.gift_payment_done_btns ul li button:hover {
+	text-decoration: underline;
 }
 
 /*선물하기 - 4단계*/

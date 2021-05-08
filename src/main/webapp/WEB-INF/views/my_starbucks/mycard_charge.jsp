@@ -35,7 +35,7 @@
                     <legend class="hid">카드 충전폼</legend>
                     <section class="card_charge_wrap">
                         <h5 class="card_charge_regular">
-                            <a href="${pageContext.request.contextPath}/" class="on">일반 충전</a>
+                            <a class="on">일반 충전</a>
                         </h5>
                         <article>
                             <form name="frm_NORMAL" id="frm_NORMAL" method="post">
@@ -144,7 +144,7 @@
                             </ul>
                         </article>
                         <h5 class="card_charge_auto">
-                            <a href="${pageContext.request.contextPath}/" class>자동 충전</a>
+                            <a class>자동 충전</a>
                         </h5>
                         <article style="display: none;">
                             <form name="frm_AUTO" id="frm_AUTO" method="post">
@@ -156,14 +156,10 @@
                                             <th scope="row">충전 유형 선택</th>
                                             <td>
                                                 <div class="sel_wrap tbl_radio_wrap ">
-                                                    <input type="radio" class="ctype1" name="autoReloadType" id="autoReloadType_1" value="2" checked="checked">
-                                                    <label for="autoReloadType_1" class="ctype1">기준 하한 자동 충전</label>
-                                                    <input type="radio" class="ctype2" name="autoReloadType" id="autoReloadType_2" value="1">
-                                                    <label for="autoReloadType_2" class="ctype2">월 정액 자동 충전</label>
+                                                    <input type="radio" class="ctype" name="autoReloadType" id="autoReloadType" value="1" checked>
+                                                    <label for="autoReloadType" class="ctype">월 정액 자동 충전</label>
                                                 </div>
-                                                <p class="ctype_guide">기준 잔액의 이하로 카드의 잔액이 떨어 졌을 경우, 설정하신 충전 금액으로 자동 충전되는 서비스입니다.
-                                                </p>
-                                                <p class="ctype_guide hid">
+                                                <p class="ctype_guide">
                                                     매월 지정한 날짜에 설정해놓은 금액이 자동 충전되는 서비스입니다.
                                                 </p>
                                             </td>
@@ -199,7 +195,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="autoReloadDay" style="display: none;">
+                                        <tr class="autoReloadDay">
                                             <th scope="row">자동 충전일 선택
                                                 <span class="checkTxt">(최대 2개까지 선택 가능)</span></th>
                                             <td>
@@ -238,27 +234,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">기준 잔액 선택</th>
-                                            <td>
-                                                <div class="sel_wrap tbl_card_radio charge_options">
-                                                    <span class="radio_wrap radio_wrap_mn">
-                                                        <label>
-                                                            <input type="radio" name="lowestAmount" value="50000">
-                                                            5만원
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="lowestAmount" value="30000" checked="checked">
-                                                            3만원
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="lowestAmount" value="10000">
-                                                            1만원
-                                                        </label>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <th scope="row">자동 충전 금액 선택 </th>
                                             <td class="clear">
                                                 <div class="sel_wrap tbl_card_radio charge_options">
@@ -273,19 +248,11 @@
                                                 </div>
                                                 <p class="gift_info_adding cf66">스타벅스 카드 온라인 충전은 1만원 단위로 최대 55만원까지 가능하며, 충전 후 합계 잔액이 55만원을 초과할 수 없습니다.
                                                 </p>
-                                                <p class="charge_will autoReloadDay" style="display: none;">
+                                                <p class="charge_will autoReloadDay">
                                                     <strong class="t_006633">[2021 Happy New Year]</strong>
                                                     카드에
                                                     <strong class="t_006633">매월 1일</strong>
                                                     마다
-                                                    <strong class="t_006633 totPrice">1만원</strong>
-                                                    이 자동 충전 됩니다.
-                                                </p>
-                                                <p class="charge_will lowestAmount ">
-                                                    <strong class="t_006633">[2021 Happy New Year]</strong>
-                                                    카드의 잔액이
-                                                    <strong class="t_006633">1만원</strong>
-                                                    보다 낮을 경우
                                                     <strong class="t_006633 totPrice">1만원</strong>
                                                     이 자동 충전 됩니다.
                                                 </p>

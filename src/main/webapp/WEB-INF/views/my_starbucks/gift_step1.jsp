@@ -18,13 +18,13 @@
                                 <img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_ttl.png" alt="선물하기" />
                             </h2>
                             <ul class="smap">
-                                <li><a href="javascript:void(0);"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
+                                <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">Starbucks Cards</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">Starbucks Cards</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_egift"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">선물하기</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/my/gift_step1"><span class="en c222">선물하기</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,92 +51,12 @@
                         </div>
                     </div>
                     <div class="gift_card_txt">
-                        <h5>선물하실 카드 이미지를 선택해 주세요.</h5>
+                        <h5>카드를 클릭해서 정보 입력 페이지로 넘어가세요.</h5>
                     </div>
-                    <div class="gift_card_tabs_wrap">
-                        <h5 class="gift_card_tab1">
-                            <a href="javascript:void(0);" class="tab on">시즌</a>
-                        </h5>
-                        <article class="on">
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
-                        <h5 class="gift_card_tab2">
-                            <a href="javascript:void(0);" class="tab">축하</a>
-                        </h5>
-                        <article>
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
-                        <h5 class="gift_card_tab3">
-                            <a href="javascript:void(0);" class="tab">응원</a>
-                        </h5>
-                        <article>
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
-                        <h5 class="gift_card_tab4">
-                            <a href="javascript:void(0);" class="tab">감사</a>
-                        </h5>
-                        <article>
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
-                        <h5 class="gift_card_tab5">
-                            <a href="javascript:void(0);" class="tab">사랑</a>
-                        </h5>
-                        <article>
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
-                        <h5 class="gift_card_tab6">
-                            <a href="javascript:void(0);" class="tab">Coffee</a>
-                        </h5>
-                        <article>
-                            <p class="gift_card_num">
-                                총 <span class="t_b7312c">6개</span> 카드가 있습니다.
-                            </p>
-                            <div class="gift_card_list_wrap">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="goStep2" data-egiftimgmngseq="277" data-cardimgurl="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" data-cardname="Sweet Valentine"><img src="https://image.istarbucks.co.kr/cardImg/20210121/007804.png" alt="Sweet Valentine"><span class="en">Sweet Valentine</span></a></li>
-                                </ul>
-                            </div>
-                        </article>
+                    <div class="gift_card_list_wrap">
+                        <ul>
+                            <li><a href="${pageContext.request.contextPath}/my/gift_step2" class="goStep2"><img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="Sweet Valentine"><span class="en">White Siren e-Gift</span></a></li>
+                        </ul>
                     </div>
                 </section>
                 <!-- 내용 끝 -->

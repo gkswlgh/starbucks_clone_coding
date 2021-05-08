@@ -18,13 +18,13 @@
                                 <img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_ttl.png" alt="선물하기" />
                             </h2>
                             <ul class="smap">
-                                <li><a href="javascript:void(0);"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
+                                <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">Starbucks Cards</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en c222">Starbucks Cards</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/starbucks_card/about_egift"><span class="en c222">스타벅스 e-Gift Card</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="javascript:void(0);"><span class="en c222">선물하기</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/my/gift_step1"><span class="en c222">선물하기</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <h5 class="m0">선물할 정보 입력 및 메시지 입력을 해주세요.</h5>
                     </div>
                     <!-- form -->
-                    <form action="" enctype="multipart/form-data" method="post" id="frmUpload">
+                    <form action="${pageContext.request.contextPath}/my/gift_step3" method="post" id="frmUpload" name="frmUpload">
                         <input type="hidden" name="b2bYn" value="N">
                         <input type="hidden" id="egiftImgMngSeq" value="274">
                         <input type="hidden" id="cardName" value="2021 Happy New Year">
@@ -66,8 +66,8 @@
                             <legend class="hid">선물할 정보 입력 및 메시지 입력을 해주세요.</legend>
                             <div class="gift_card_visual">
                                 <dl>
-                                    <dd class="en"><img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_e_flag.png"> 2021 Happy New Year</dd>
-                                    <dt><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></dt>
+                                    <dd class="en"><img src="//image.istarbucks.co.kr/common/img/msr/sceGift/gift_e_flag.png"> White Siren e-Gift</dd>
+                                    <dt><img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="White Siren e-Gift"></dt>
                                 </dl>
                             </div>
                             <!-- 테이블 -->
@@ -95,11 +95,13 @@
                                                 <tr>
                                                     <th scope="row">받는 사람
                                                         <br>
-                                                        <input type="checkbox" name="for_me" id="giftMe" data-username="유저이름" data-email="useremail@gmail.com"><label for="for_me" class="cf66">나에게 선물하기</label></th>
+                                                        <input type="checkbox" name="for_me" id="giftMe" data-username="${member.user_name}" data-email="${member.user_email}"><label for="for_me" class="cf66">나에게 선물하기</label></th>
                                                     <td>
                                                         <div class="sel_wrap card_sending">
                                                             <div class="tbl_card_sending">
+                                                            	<!-- 
                                                                 <p>1</p>
+                                                                 -->
                                                                 <input type="text" class="voc_ttl_input1 sender w100" name="name" placeholder="받는 사람 이름" />
                                                                 <input type="text" class="mail_input em_input" id="DS_CSTMR_EMAIL1" name="email1" title="이메일 앞주소" />
                                                                 <p class="mail_at">@</p>
@@ -122,11 +124,15 @@
                                                                         <option value="gmail.com">gmail.com</option>
                                                                     </select>
                                                                 </p>
-                                                                <a href="javascript:void(0);" class="sender_addel_btn addEmail">추가</a> <a href="javascript:void(0);" class="sender_addel_btn removeEmail">삭제</a>
+                                                                <!-- 
+                                                                <a href="${pageContext.request.contextPath}/" class="sender_addel_btn addEmail">추가</a> <a href="${pageContext.request.contextPath}/" class="sender_addel_btn removeEmail">삭제</a>
+                                                                 -->
                                                             </div>
                                                             <p class="gift_info_adding">
+                                                            <!-- 
                                                                 - 1회 10명까지 입력하실 수 있습니다.
                                                                 <br>
+                                                            -->
                                                                 - 이메일 전송을 하시는 경우 발송 환경에 따라 수신완료까지 최대 3시간이 소요될 수 있습니다.
                                                             </p>
                                                         </div>
@@ -134,7 +140,8 @@
                                                 </tr>
                                                 <tr id="reqMsg_tr">
                                                     <th scope="row">메시지 입력 </th>
-                                                    <td><textarea class="textArea w880" id="reqMsg" placeholder="내용을 입력해 주세요. (200자 내외)"></textarea></td>
+                                                    <td><textarea class="textArea w880" name="reqMsg" id="reqMsg" placeholder="내용을 입력해 주세요. (400byte 내외, 약 200자)"></textarea>
+                                                    <br /> <span id="realByte">0 / 400byte</span></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">금액 선택 </th>
@@ -144,14 +151,14 @@
                                                                 <input type="radio" name="price" id="price1" value="100000">
                                                                 <label for="price1">10만원</label>
                                                                 <input type="radio" name="price" id="price2" value="50000">
-                                                                <label for="price2">5만원</label><input type="radio" name="price" id="price3" value="30000" checked="checked">
+                                                                <label for="price2">5만원</label><input type="radio" name="price" id="price3" value="30000" checked>
                                                                 <label for="price3">3만원</label><input type="radio" name="price" id="price4" value="10000">
                                                                 <label for="price4">1만원</label><input type="radio" name="price" id="price5">
                                                                 <label for="price5">다른 금액</label>
-                                                                <input type="text" name="amount" class="amountInput" id="amount" title="선물 금액" maxlength="6" placeholder="직접입력">
+                                                                <input type="text" name="amount" class="amountInput" id="amount" title="선물 금액" maxlength="6" placeholder="직접입력" >
                                                             </span>
                                                         </div>
-                                                        <p class="gift_info_adding cf66">- 장당 금액은 5천원 또는 1만원~50만원까지 선물 가능합니다. (1만원 이상부터는 만원 단위로 가능)
+                                                        <p class="gift_info_adding cf66">- 1만원 ~ 50만원까지 선물 가능합니다.
                                                         </p>
                                                     </td>
                                                 </tr>
@@ -160,10 +167,8 @@
                                                     <td>
                                                         <div class="sel_wrap tbl_card_radio">
                                                             <span class="radio_wrap radio_wrap_mn">
-                                                                <input type="radio" name="gopaymethod" id="payMethod1" value="onlycard" checked="checked">
+                                                                <input type="radio" name="gopaymethod" id="payMethod1" value="N" checked="checked">
                                                                 <label for="payMethod1">신용카드</label>
-                                                                <input type="radio" name="gopaymethod" id="payMethod2" value="onlybank">
-                                                                <label for="payMethod2">실시간 계좌이체</label>
                                                             </span>
                                                         </div>
                                                     </td>
@@ -192,8 +197,8 @@
                             <!-- 테이블 끝 -->
                             <div class="gift_info_send_btns">
                                 <ul>
-                                    <li class="gift_info_send_btn1"><a href="javascript:void(0);">뒤로</a></li>
-                                    <li class="gift_info_send_btn2"><button href="javascript:void(0);">다음</button></li>
+                                    <li class="gift_info_send_btn1"><a href="${pageContext.request.contextPath}/my/gift_step1">뒤로</a></li>
+                                    <li class="gift_info_send_btn2"><button>다음</button></li>
                                 </ul>
                             </div>
                         </fieldset>
@@ -207,6 +212,232 @@
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
     <!-- 사용자 자바스크립트 -->
     <script type="text/javascript">
+    $(function() {
+    	
+
+        // 나에게 선물하기
+        $("#giftMe").on("change", giftMe);
+        
+        if ($("#giftMe").is(":checked")) {
+            $("#reqMsg").val("나에게 선물");
+            $("#reqMsg_tr").hide();
+        }
+
+        //받는 사람 이메일 뒷자리 선택
+        $(document).on("change", '[name="em_select3"]', function() {
+            $(this).parent().prev().val($(this).val());
+        });
+
+        /*
+        $(document).on("click", "a.addEmail", addEmailArea); // 이메일 입력창 [추가]
+        $(document).on("click", "a.removeEmail", removeEmailArea); // 이메일 입력창 [삭제]
+        */
+
+        $("#amount").on("keyup", changeTotPrice); // 충전금액 입력
+
+        $("#amount").on("click", function() {
+            $("#price5").prop("checked", true);
+        });
+
+        $(document).on("change", '[name="price"]', function() {
+            if (!$("#price5").prop("checked")) {
+            	$("#amount").val("");
+            }
+        });
+
+        // 충전금액 검사2
+        $("#amount").on("focusout", function() {
+            if (number < 10000) {
+                alert("1만원 ~ 50만원까지 가능합니다.");
+                number = 0;
+                $(this).val("");
+            }
+           var my_price = $("#amount").val();
+           $("#price5").val(my_price);
+        });
+
+        
+        /*유효성 검사 추가 함수*/
+        //한글검사
+        $.validator.addMethod("kor", function(value, element) {
+            return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
+        });
+
+        /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
+        $("#frmUpload").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
+            /*입력검사 규칙*/
+            rules: {
+                /*name속성 : {required는 필수, 그외 부가 기능}*/
+                name: { required: true, kor: true },
+                email1: { required: true, alphanumeric: true },
+                email2: "required",
+                price: { required: true, num: true },
+                gopaymethod: "required"
+            },
+            messages: {
+                /*name속성 : {rules에 맞지 않을 경우 메시지}*/
+                name: {
+                    required: "이름을 입력하세요.",
+                    kor: "이름은 한글만 입력 가능합니다."
+                },
+                email1: {
+                    required: "이메일 앞자리를 입력하세요.",
+                    alphanumeric: "이메일 형식이 잘못되었습니다."
+                },
+                email2:  "이메일 뒷자리를 입력하세요.",
+                price: {
+                    required: "금액을 선택해주세요.",
+                    num: "숫자만 선택 가능합니다."
+                },
+                gopaymethod: "결제 수단을 선택하세요"
+            }
+        });
+
+        //내용 글자수제한
+        //byte check;
+        $('#reqMsg').keyup(function(event) {
+            var maxByte = 400; //최대 입력 바이트 수
+            var str = $("#reqMsg").val();
+            var str_len = str.length;
+
+            var rbyte = 0;
+            var rlen = 0;
+            var one_char = "";
+            var str2 = "";
+
+            for (var i = 0; i < str_len; i++) {
+                one_char = str.charAt(i);
+
+                if (escape(one_char).length > 4) {
+                    rbyte += 2; //한글2Byte
+                } else {
+                    rbyte++; //영문 등 나머지 1Byte
+                }
+
+                if (rbyte <= maxByte) {
+                    rlen = i + 1; //return할 문자열 갯수
+                }
+            }
+
+            $('#realByte').text(rbyte + ' / 400byte');
+            if (rbyte > maxByte) {
+                alert("한글 " + (maxByte / 2) + "자 / 영문 " + maxByte + "자를 초과 입력할 수 없습니다.");
+                str2 = str.substr(0, rlen); //문자열 자르기
+                $('#realByte').text('400 / 400byte');
+            }
+        });
+    	
+
+    });
+
+    
+
+    // 충전금액 검사
+    function changeTotPrice() {
+        $(this).val($(this).val().replace(/[^0-9]/g, ""));
+        number = $(this).val();
+        if (number > 500000) {
+            alert("1만원 ~ 50만원까지 가능합니다.");
+            number = 0;
+            $(this).val("");
+        }
+    }
+
+    /**
+     * 나에게 선물하기
+     */
+    function giftMe() {
+        var $div = $(".tbl_card_sending").eq(0);
+
+        var userName = "";
+        var arrEmail = new Array("", "");
+
+        if ($(this).is(":checked")) {
+            userName = $(this).data("username");
+            arrEmail = $(this).data("email").split("@");
+
+            /*
+            while ($(".tbl_card_sending").length > 1) {
+                removeEmailArea();
+            }
+            */
+
+            $("#reqMsg").val("나에게 선물");
+            $("#reqMsg_tr").hide();
+        } else {
+            $("#reqMsg").val("");
+            $("#reqMsg_tr").show();
+        }
+
+        $div.find('[name="name"]').val(userName);
+        $div.find('[name="email1"]').val(arrEmail[0]);
+        $div.find('[name="email2"]').val(arrEmail[1]);
+    }
+
+    /**
+     * 받는사람 이메일 영역 추가
+     */
+     /*
+    function addEmailArea() {
+        var nLength = $(".tbl_card_sending").length;
+        if (nLength >= 10) {
+            alert("1회 10명까지만 입력 하실 수 있습니다.");
+            return;
+        }
+
+        var nSeq = nLength + 1;
+
+        var div = '<div class="tbl_card_sending">';
+        div += '  <p>' + nSeq + '</p>';
+        div += '  <input class="voc_ttl_input1 sender w100" placeholder="받는 사람 이름" type="text" name="name" />';
+        div += '  <input class="mail_input em_input" name="email1" title="이메일 앞주소" type="text" />';
+        div += '  <p class="mail_at">@</p>';
+        div += '  <input class="mail_input em_input" name="email2" title="이메일 뒷주소" type="text" />';
+        div += '  <p class="em_sel_wrap mail_sel_wrap">';
+        div += '      <label for="em_select3_' + nSeq + '">직접입력</label>';
+        div += '      <select id="em_select3_' + nSeq + '" name="em_select3" title="이메일 선택">';
+        div += '          <option value="" selected="selected">직접입력</option>';
+        div += '          <option value="hotmail.com">hotmail.com</option><option value="yahoo.co.kr">yahoo.co.kr</option><option value="hanmir.com">hanmir.com</option>option value="naver.com">naver.com</option><option value="empal.com">empal.com</option><option value="hitel.net">hitel.net</option><option value="netian.com">netian.com</option><option value="nate.com">nate.com</option><option value="korea.com">korea.com</option><option value="hanmail.net">hanmail.net</option><option value="freechal.com">freechal.com</option><option value="lycos.co.kr">lycos.co.kr</option><option value="gmail.com">gmail.com</option>';
+        div += '      </select>';
+        div += '  </p>';
+        div += '  <a class="sender_addel_btn addEmail" href="${pageContext.request.contextPath}/">추가</a>';
+        div += '  <a class="sender_addel_btn removeEmail" href="${pageContext.request.contextPath}/">삭제</a>';
+        div += '</div>';
+
+        $("a.addEmail, a.removeEmail").remove();
+        $(div).insertBefore(".card_sending >p.gift_info_adding");
+    }
+     */
+
+    /**
+     * 받는사람 이메일 영역 삭제
+     */
+     /*
+    function removeEmailArea() {
+        var nLength = $(".tbl_card_sending").length;
+        if (nLength == 1) {
+            alert("1명 이상 입력 하셔야 합니다.");
+            return;
+        }
+        var $div = $(".tbl_card_sending");
+        var nTargetIdx = $div.length - 2;
+
+        $div.eq(nTargetIdx).append($("a.addEmail, a.removeEmail"));
+        $div.last().remove();
+    }
+    */
+
+
     </script>
 </body>
 

@@ -72,15 +72,15 @@
                                     <div class="sub_up clear">
                                         <ul>
                                             <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/product/menu_list">음료</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">콜드브루</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">브루드 커피</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">에스프레소</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">프라푸치노</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">블렌디드</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">스타벅스 피지오</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">티(티바나)</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">기타 제조 음료</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/product/menu_list">스타벅스 주스(병음료)</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_0">콜드브루</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_1">브루드 커피</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_2">에스프레소</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_3">프라푸치노</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_4">블렌디드</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_5">스타벅스 피지오</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_6">티(티바나)</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_7">기타 제조 음료</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/menu_list#menu_class_8">스타벅스 주스(병음료)</a></li>
                                         </ul>
                                     </div>
                                 </div>
