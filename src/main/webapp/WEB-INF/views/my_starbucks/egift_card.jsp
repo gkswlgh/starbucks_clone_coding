@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">My Starbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 스타벅스 e-Gift Card</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_egift"><span class="en">My 스타벅스 e-Gift Card</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">선물내역</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/egift_card"><span class="en">선물내역</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -34,53 +34,56 @@
                 <!-- 선물내역 -->
                 <!-- 기간선택 -->
                 <section class="my_card_pick_period">
-                    <form method="post">
+                    <form action="${pageContext.request.contextPath}/my/egift_card" method="post">
                         <fieldset>
                             <legend>기간 선택 폼</legend>
                             <dl class="my_card_pick_bg">
                                 <dt>기간별</dt>
                                 <dd>
-                                    <input type="radio" id="pickPeriod2" name="pickPeriod" checked="checked" value="1_MONTH" />
-                                    <label for="pickPeriod2">1개월</label>
-                                    <input type="radio" id="pickPeriod4" name="pickPeriod" checked="checked" value="1_YEAR" />
-                                    <label for="pickPeriod4">1년</label>
-                                </dd>
-                            </dl>
-                            <dl class="my_card_pick_date">
-                                <dt>일자별</dt>
-                                <dd>
-                                    <input type="date" id="pickDate01" name="pickDate" title="원하는 날짜를 선택해 주세요.">
-                                    <p class="hyphen_bg"></p>
-                                    <input type="date" id="pickDate02" name="pickDate" title="원하는 날짜를 선택해 주세요.">
-                                    <p class="btn_pick_date">
-                                        <a href="${pageContext.request.contextPath}/">검색</a>
-                                    </p>
+                                    <input type="radio" id="pickPeriod1" name="pickPeriod" value="-1" 
+                                    <c:if test="${pickPeriod == -1}"> checked</c:if>
+									/>
+                                    <label for="pickPeriod1">1개월</label>
+                                    <input type="radio" id="pickPeriod2" name="pickPeriod" value="-12" 
+                                    <c:if test="${pickPeriod == -12}"> checked</c:if>
+                                    />
+                                    <label for="pickPeriod2">1년</label>
+                                    <input type="radio" id="pickPeriod3" name="pickPeriod" value="-36" 
+                                    <c:if test="${pickPeriod == -36}"> checked</c:if>
+                                    />
+                                    <label for="pickPeriod3">3년</label>
+	                               <p class="btn_pick_date">
+	                                   <button type="submit">검색</button>
+	                               </p>
                                 </dd>
                             </dl>
                         </fieldset>
                     </form>
                 </section>
                 <!-- 기간선택 끝 -->
-                <p class="my_card_date_refer">최대 조회 기간은 5년입니다.</p>
+                	<p class="my_card_date_refer">최대 조회 기간은 3년입니다.</p>
                 <!-- 목록 -->
                 <section class="eGift_list_wrap">
                     <ul class="eGift_list_inner">
-                        <li class="clear">
+                    <c:choose>
+			        	<c:when test="${output != null && fn:length(output) > 0}">
+		            		<c:forEach var="output" items="${output}" varStatus="status">
+                    <li class="clear">
                             <article class="eGift_list_z01 clear">
-                                <p class="num">1</p>
+                                <p class="num">${status.index + 1}</p>
                                 <ul class="eGift_list_ul">
                                     <li class="clear">
                                         <div class="eGift_infor_wrap clear">
                                             <div class="eGift_infor_inner">
                                                 <div class="eGift_infor_01">
                                                     <p class="eGift_card">
-                                                        <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="e-gift 카드">
+                                                        <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드">
                                                     </p>
                                                     <dl class="eGift_text clear">
                                                         <dt>메&nbsp;시&nbsp;지</dt>
-                                                        <dd class="clear">나에게 선물</dd>
+                                                        <dd class="clear" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${output.message}</dd>
                                                         <dt>받는 사람:</dt>
-                                                        <dd class="last">이름 [이메일]</dd>
+                                                        <dd class="last">${output.to_mem_name} [ ${output.to_mem_email} ]</dd>
                                                     </dl>
                                                 </div>
                                             </div>
@@ -90,11 +93,11 @@
                                                 <div class="eGift_infor_02">
                                                     <dl class="eGift_text02 clear">
                                                         <dt>단가 :&nbsp;</dt>
-                                                        <dd class="clear">10,000원</dd>
+                                                        <dd class="clear">${output.gift_price}원</dd>
                                                         <dt>주문수량 :&nbsp;</dt>
                                                         <dd class="clear">1장</dd>
                                                         <dt>가격 :&nbsp;</dt>
-                                                        <dd>10,000원</dd>
+                                                        <dd>${output.gift_price}원</dd>
                                                     </dl>
                                                 </div>
                                             </div>
@@ -107,74 +110,26 @@
                                             <dt>결제수단 :&nbsp;</dt>
                                             <dd class="clear">신용카드</dd>
                                             <dt>결제금액 :&nbsp;</dt>
-                                            <dd class="clear">10,000원</dd>
+                                            <dd class="clear">${output.gift_price}원</dd>
                                             <dt>결제일 :&nbsp;</dt>
-                                            <dd>2021-01-28</dd>
+                                            <dd>${output.reg_date}</dd>
                                         </dl>
                                         <ul class="btn_eGift_z02 clear">
                                             <li class="btn_eGift_b01">
-                                                <a href="${pageContext.request.contextPath}/" class="goView" data-egiftpgtransseq="2021012844186794">상세보기</a>
+                                                <a href="${pageContext.request.contextPath}/my/egift_card_view/${output.gift_id}">상세보기</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </article>
                         </li>
-                        <li class="clear">
-                            <article class="eGift_list_z01 clear">
-                                <p class="num">2</p>
-                                <ul class="eGift_list_ul">
-                                    <li class="clear">
-                                        <div class="eGift_infor_wrap clear">
-                                            <div class="eGift_infor_inner">
-                                                <div class="eGift_infor_01">
-                                                    <p class="eGift_card">
-                                                        <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="e-gift 카드">
-                                                    </p>
-                                                    <dl class="eGift_text clear">
-                                                        <dt>메&nbsp;시&nbsp;지</dt>
-                                                        <dd class="clear">나에게 선물</dd>
-                                                        <dt>받는 사람:</dt>
-                                                        <dd class="last">이름 [이메일]</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="eGift_infor_wrap02">
-                                            <div class="eGift_infor_inner">
-                                                <div class="eGift_infor_02">
-                                                    <dl class="eGift_text02 clear">
-                                                        <dt>단가 :&nbsp;</dt>
-                                                        <dd class="clear">10,000원</dd>
-                                                        <dt>주문수량 :&nbsp;</dt>
-                                                        <dd class="clear">1장</dd>
-                                                        <dt>가격 :&nbsp;</dt>
-                                                        <dd>10,000원</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="eGift_infor_wrap03 clear">
-                                    <div class="eGift_infor_03">
-                                        <dl class="eGift_text03 clear">
-                                            <dt>결제수단 :&nbsp;</dt>
-                                            <dd class="clear">신용카드</dd>
-                                            <dt>결제금액 :&nbsp;</dt>
-                                            <dd class="clear">10,000원</dd>
-                                            <dt>결제일 :&nbsp;</dt>
-                                            <dd>2021-01-28</dd>
-                                        </dl>
-                                        <ul class="btn_eGift_z02 clear">
-                                            <li class="btn_eGift_b01">
-                                                <a href="${pageContext.request.contextPath}/" class="goView" data-egiftpgtransseq="2021012844186794">상세보기</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </article>
-                        </li>
+				            </c:forEach>
+				        </c:when>
+			    <c:otherwise>
+			    <li style="padding:60px;">검색 결과가 없습니다.
+			    </li>
+			    </c:otherwise>
+				    </c:choose>
                     </ul>
                 </section>
                 <!-- 목록 끝 -->

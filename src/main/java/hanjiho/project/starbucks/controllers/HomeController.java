@@ -89,5 +89,13 @@ public class HomeController {
 	public String voc_ok() {
 		return "voc_ok";
 	}
+
+	/**
+	 * 페이지없음 컨트롤러 
+	 */
+	@RequestMapping(value = "/page_none", method = RequestMethod.GET)
+	public String page_none() {
+		return "page_none";
+	}
 	
 }

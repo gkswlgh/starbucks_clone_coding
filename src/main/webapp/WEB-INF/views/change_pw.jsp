@@ -94,7 +94,15 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-			            window.location = ROOT_URL + '/account/find_pw_ok/'+ json.id;
+			            //window.location = ROOT_URL + '/account/find_pw_ok/'+ json.id;
+						var myRedirect = function(redirectUrl, arg, value) {
+							  var form = $('<form action="' + redirectUrl + '" method="post">' +
+							  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+							  $('body').append(form);
+							  $(form).submit();
+						};
+					
+						myRedirect(ROOT_URL + '/account/find_pw_ok', "id", json.id);
 					} else {
 						alert("통신 실패. 다시 시도해주세요.");
 						return false;

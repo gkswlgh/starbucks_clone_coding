@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">카드 등록</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_info_input"><span class="en">카드 등록</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -30,8 +30,7 @@
         <!-- 서브타이틀 끝 -->
         <div class="cont">
             <div class="cont_inner">
-                <form action="#" id="mycard_input" name="mycard_input" class="mycard_input_frm" method="post" enctype="multipart/form-data">
-                    <input type="hidden" value="0" id="store_cd" name="store_cd" />
+                <form action="${pageContext.request.contextPath}/my/rest/mycard_info_input" id="mycard_input" name="mycard_input" class="mycard_input_frm" method="post">
                     <fieldset>
                         <legend>카드 등록 입력폼</legend>
                         <!-- 테이블 -->
@@ -61,13 +60,13 @@
                                         <th scope="row">카드번호 (16자리) <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
-                                                <input type="text" class="cellphone_input" id="card_num1" name="card_num" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="card_num1" name="card_num1" maxlength="4" ref="num" />
                                                 <p class="cell_hyphen">-</p>
-                                                <input type="text" class="cellphone_input" id="card_num2" name="card_num" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="card_num2" name="card_num2" maxlength="4" ref="num" />
                                                 <p class="cell_hyphen">-</p>
-                                                <input type="text" class="cellphone_input" id="card_num3" name="card_num" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="card_num3" name="card_num3" maxlength="4" ref="num" />
                                                 <p class="cell_hyphen">-</p>
-                                                <input type="text" class="cellphone_input" id="card_num4" name="card_num" maxlength="4" ref="num" />
+                                                <input type="text" class="cellphone_input" id="card_num4" name="card_num4" maxlength="4" ref="num" />
                                             </div>
                                         </td>
                                     </tr>
@@ -104,22 +103,6 @@
     <script type="text/javascript">
     $(function() {
 
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
-
         /*유효성 검사 추가 함수*/
         //카드명검사
         $.validator.addMethod("cardname", function(value, element) {
@@ -128,10 +111,24 @@
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#mycard_input").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
                 card_name: { required: true, cardname: true, minlength: 4, maxlength: 20 },
+                card_num1: { required: true, number: true, minlength: 4, maxlength: 4 },
+                card_num2: { required: true, number: true, minlength: 4, maxlength: 4 },
+                card_num3: { required: true, number: true, minlength: 4, maxlength: 4 },
+                card_num4: { required: true, number: true, minlength: 4, maxlength: 4 },
                 pin_num: { required: true, number: true, minlength: 8, maxlength: 8 },
                 agree1: "required",
                 agree2: "required"
@@ -144,6 +141,30 @@
                     minlength: "카드명은 최소 4글자 이상 입력해야 합니다.",
                     maxlength: "카드명은 최대 20글자까지만 입력 가능합니다."
                 },
+                card_num1: {
+                    required: "카드 번호를 입력하세요.",
+                    number: "카드 번호는 숫자로 입력해 주세요.",
+                    minlength: "카드 번호는 각 4자리 숫자로 입력해 주세요.",
+                    maxlength: "카드 번호는 각 4자리 숫자로 입력해 주세요."
+                },
+                card_num2: {
+                    required: "카드 번호를 입력하세요.",
+                    number: "카드 번호는 숫자로 입력해 주세요.",
+                    minlength: "카드 번호는 각 4자리 숫자로 입력해 주세요.",
+                    maxlength: "카드 번호는 각 4자리 숫자로 입력해 주세요."
+                },
+                card_num3: {
+                    required: "카드 번호를 입력하세요.",
+                    number: "카드 번호는 숫자로 입력해 주세요.",
+                    minlength: "카드 번호는 각 4자리 숫자로 입력해 주세요.",
+                    maxlength: "카드 번호는 각 4자리 숫자로 입력해 주세요."
+                },
+                card_num4: {
+                    required: "카드 번호를 입력하세요.",
+                    number: "카드 번호는 숫자로 입력해 주세요.",
+                    minlength: "카드 번호는 각 4자리 숫자로 입력해 주세요.",
+                    maxlength: "카드 번호는 각 4자리 숫자로 입력해 주세요."
+                },
                 pin_num: {
                     required: "PIN번호를 입력하세요.",
                     number: "PIN번호는 8자리 숫자로 입력해 주세요.",
@@ -155,11 +176,32 @@
             }
         }); //end validate()
 
-        $("#mycard_input").submit(function(e) {
-            /*기본 동작 수행 방식*/
-            e.preventDefault();
-            alert("카드등록완료");
-        });
+        $('#mycard_input').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+					
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+						if (confirm("카드가 등록되었습니다. 카드 조회 페이지로 이동하시겠습니까?")) {
+				            window.location = ROOT_URL + '/my/mycard_list';
+						}
+					} else {
+						alert("작성폼을 다시 한번 확인하세요.");
+						return false;
+					}
+				}
+		});// end ajax
+        
     });
     </script>
 </body>

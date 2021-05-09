@@ -2786,12 +2786,18 @@ div.find_wrap ul.find_taste3 {
     width: 32.236%;
 }
 
-.menu_btns>ul li a:hover,
+.menu_btns>ul li a.on:hover,
 .menu_btns>ul li a.on {
     background: #063;
     border-radius: 3px;
     color: #fff;
     font-weight: bold;
+}
+
+.menu_btns>ul li a:hover {
+    background: #f4f4f1;
+    border-radius: 3px;
+    color: #222;
 }
 
 .menu_btns>ul li a {
@@ -4234,6 +4240,17 @@ table.payment_tb td.ltd span {
     line-height: 28px;
     text-align: center;
     width: 100%;
+}
+
+.btn_pick_date button {
+    background: #777;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    line-height: 28px;
+    text-align: center;
+    width: 100%;
+    cursor:pointer;
 }
 
 .my_card_date_refer {

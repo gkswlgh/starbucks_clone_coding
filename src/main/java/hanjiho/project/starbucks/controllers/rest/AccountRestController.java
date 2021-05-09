@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
+import hanjiho.project.starbucks.helper.Util;
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.service.MemberService;
@@ -32,6 +34,12 @@ public class AccountRestController {
     @Autowired
     RegexHelper regexHelper;
 
+    @Autowired
+    Util util;
+    
+    @Autowired
+    MailHelper mailHelper;
+    
     /** Service 패턴 구현체 주입 */
     @Autowired
     MemberService memberService;
@@ -269,12 +277,29 @@ public class AccountRestController {
         /** 3) 로그인 */
         Member output = null;
         Map<String, Object> data = new HashMap<String, Object>();
-        
+
+        int auNum = 0;
         try {
             output = memberService.find_id(input);
             
             //json에 담아 넘길 유저 일련번호 저장
             data.put("id", output.getId());
+            
+
+            /** 3) 인증번호 생성 */
+            auNum = util.random(100000, 999999);
+            output.setAu_num(auNum);
+            
+            memberService.updateAuNum(output);
+            
+            /** 4) 이메일 발송 */
+            String receiver = output.getUser_email();
+            String subject = "[스타벅스(한지호 포트폴리오)] 인증번호를 확인해주세요.";
+            String content = "<p style='margin:10px;border:1px solid #ddd;padding:20px;font-size:15px;'>"
+            		+"<br> 이메일 인증페이지로 돌아가 다음 6자리 숫자를 입력해주세요.<br>" 
+            		+"<span style='font-size:22px;'>"
+            		+ auNum +"</span></p>";
+            mailHelper.sendMail(receiver, subject, content);
 			
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());

@@ -24,15 +24,18 @@
                         </div>
                         <div class="find_mem bd_none">
                             <strong>이메일 인증하여 비밀번호 찾기</strong>
+                            
                             <div class="find_mem_input_box bd_none">
                                 <label for="txt_user_id" class="hid">아이디</label> <input type="text" class="find_mem_input_txt mb10" id="txt_user_id" name="txt_user_id" placeholder="아이디를 입력해주세요." maxlength="20" required="required" /> <label for="txt_user_email" class="hid">이메일</label>
                                 <input type="text" class="find_mem_input_txt mb10" id="txt_user_email" name="txt_user_email" placeholder="이메일을 입력해 주세요." maxlength="20" required="required" />
                                 <p class="btn_find_mem">
                                     <button type="submit">이메일로 인증번호 보내기</button>
                                 </p>
-                                <p class="input_warn_text t_006633">인증번호 전송에 시간이 다소 소요될 수 있습니다.
-                                <br>뒤로가기나 새로고침을 누르지 마시고, 다음 페이지로 넘어갈 때까지 잠시 기다려주시기 바랍니다.
-                                </p>
+                                
+                                <p class="cf66" style="line-height:20px;font-weight:bold;margin-top:10px;">
+                                인증번호 전송에 시간이 다소 소요될 수 있습니다.
+	                            <br>뒤로가기나 새로고침을 누르지 마시고, 다음 페이지로 넘어갈 때까지 잠시 기다려주시기 바랍니다.
+	                            </p>
                             </div>
                         </div>
                     </section>
@@ -93,7 +96,15 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-			            window.location = ROOT_URL + '/account/find_pw_au/'+ json.id;
+			            //window.location = ROOT_URL + '/account/find_pw_au/'+ json.id;
+						var myRedirect = function(redirectUrl, arg, value) {
+							  var form = $('<form action="' + redirectUrl + '" method="post">' +
+							  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+							  $('body').append(form);
+							  $(form).submit();
+						};
+					
+						myRedirect(ROOT_URL + '/account/find_pw_au', "id", json.id);
 					} else {
 						alert("통신 실패. 다시 시도해주세요.");
 						return false;

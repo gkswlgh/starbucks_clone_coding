@@ -12,4 +12,7 @@ public class Gift {
 	private int gift_price;
 	private String pay_method;
 	private String reg_date;
+
+	// sql용
+	private int pickPeriod;
 }

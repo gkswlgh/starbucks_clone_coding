@@ -16,6 +16,7 @@
 		<result property="gift_price"  column="gift_price" />
 		<result property="pay_method"  column="pay_method" />
 		<result property="reg_date"  column="r_date" />
+		<result property="pickPeriod"  column="pickPeriod" />
 	</resultMap>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
@@ -37,10 +38,11 @@
 		FROM gift
 		<where>
 			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
+				member_id = #{member_id}
 			</if>
-			<if test="reg_date != null and reg_date != ''">
-				OR reg_date LIKE concat('%', #{reg_date}, '%')
+			<if test="pickPeriod != 0">
+				AND date_format(reg_date,  '%Y%m%d')
+				BETWEEN date_format(date_add(now(), INTERVAL #{pickPeriod} MONTH), '%Y%m%d') AND date_format(now(), '%Y%m%d')
 			</if>
 		</where>
 

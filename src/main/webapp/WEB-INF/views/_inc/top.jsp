@@ -88,7 +88,7 @@
                             <div class="gnb_sub_txbg">
                                 <div class="gnb_sub_tx_inner">
                                     <h3>
-                                        <a href="${pageContext.request.contextPath}/product/menu_detail">
+                                        <a href="${pageContext.request.contextPath}/product/menu_detail/3">
                                             나이트로 콜드 브루&nbsp;<img src="${pageContext.request.contextPath}/assets/img/header/icon_gnb_new.png">
                                         </a>
                                     </h3>
@@ -172,7 +172,7 @@
                                             <li><a href="${pageContext.request.contextPath}/my/mycard_charge">카드 충전</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/starbucks_card/gift_step1">My 스타벅스 e-Gift Card</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/egift_card">My 스타벅스 e-Gift Card</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/gift_step1">선물하기</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/egift_card">선물 내역</a></li>
                                         </ul>
@@ -182,7 +182,7 @@
                                             <li><a href="${pageContext.request.contextPath}/my/order_list">주문 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/my_menu">고객 서비스</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/my_menu/${member.id}">고객 서비스</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/my_menu/${member.id}">My 메뉴</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/voclist">My 고객의 소리</a></li>
                                         </ul>

@@ -20,7 +20,7 @@
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
                         <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">My Starbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/my_starbucks/voclist"><span class="en">My 고객의 소리</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/voclist"><span class="en">My 고객의 소리</span></a></li>
                     </ul>
                 </div>
             </div>

@@ -60,16 +60,30 @@ public class MyController {
      * 선물하기 페이지
      */
     @RequestMapping(value = "/my/gift_step1", method = RequestMethod.GET)
-    public String gift_step1() {
-        return "my_starbucks/gift_step1";
+    public ModelAndView gift_step1(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView("my_starbucks/gift_step1");
     }
     
     /**
      * 선물하기 2 페이지 (정보 입력)
      */
     @RequestMapping(value = "/my/gift_step2", method = RequestMethod.GET)
-    public String gift_step2() {
-        return "my_starbucks/gift_step2";
+    public ModelAndView gift_step2(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView("my_starbucks/gift_step2");
     }
     
     /**
@@ -85,6 +99,11 @@ public class MyController {
             @RequestParam(value = "price",     required = false) String price,
             @RequestParam(value = "gopaymethod",     required = false) String gopaymethod) {
 
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
         String userEmail = email1 + "@" + email2;
         int price_num = Integer.parseInt(price);
     	
@@ -109,7 +128,7 @@ public class MyController {
     @RequestMapping(value = "/my/gift_step4/{gift_id}", method = RequestMethod.GET)
     public ModelAndView gift_step4(Model model,
             @PathVariable(value = "gift_id") int gift_id) {
-
+    	
     	Gift input = new Gift();
     	input.setGift_id(gift_id);
 
@@ -119,53 +138,158 @@ public class MyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+    	
         model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/gift_step4");
     }
 
     /**
-     * 선물내역 페이지
+     * 선물내역 페이지 GET
      */
     @RequestMapping(value = "/my/egift_card", method = RequestMethod.GET)
-    public String egift_card() {
-        return "my_starbucks/egift_card";
+    public ModelAndView egift_card(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	Gift input = new Gift();
+    	input.setMember_id(member.getId());
+    	
+    	List<Gift> output = new ArrayList<Gift>();
+    	try {
+			output = giftService.getGiftList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        model.addAttribute("pickPeriod", -1);
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/egift_card");
+    }
+    
+    /**
+     * 선물내역 페이지 POST
+     */
+    @RequestMapping(value = "/my/egift_card", method = RequestMethod.POST)
+    public ModelAndView egift_card(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "pickPeriod", defaultValue = "0") int pickPeriod) {
+
+    	if (pickPeriod == 0) {
+    		pickPeriod = -1;
+    	}
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	Gift input = new Gift();
+    	input.setMember_id(member.getId());
+    	input.setPickPeriod(pickPeriod);
+    	
+    	List<Gift> output = new ArrayList<Gift>();
+    	try {
+			output = giftService.getGiftList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        model.addAttribute("pickPeriod", pickPeriod);
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/egift_card");
+    }
+
+    /**
+     * 선물내역 상세 페이지
+     */
+    @RequestMapping(value = "/my/egift_card_view/{gift_id}", method = RequestMethod.GET)
+    public ModelAndView egift_card_view(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @PathVariable(value = "gift_id") int gift_id) {
+    	
+    	Gift input = new Gift();
+    	input.setGift_id(gift_id);
+
+    	Gift output = new Gift();
+    	try {
+			output = giftService.getGiftItem(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != output.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/egift_card_view");
     }
     
     /**
      * 카드등록 페이지
      */
     @RequestMapping(value = "/my/mycard_info_input", method = RequestMethod.GET)
-    public String mycard_info_input() {
-        return "my_starbucks/mycard_info_input";
+    public ModelAndView mycard_info_input(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/mycard_info_input");
     }
     
     /**
      * 보유카드 페이지
      */
     @RequestMapping(value = "/my/mycard_list", method = RequestMethod.GET)
-    public String mycard_list() {
-        return "my_starbucks/mycard_list";
+    public ModelAndView mycard_list(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/mycard_list");
     }
     
     /**
      * 카드충전 페이지
      */
     @RequestMapping(value = "/my/mycard_charge", method = RequestMethod.GET)
-    public String mycard_charge() {
-        return "my_starbucks/mycard_charge";
+    public ModelAndView mycard_charge(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/mycard_charge");
     }
 
     /**
      * 문의목록 페이지
      */
-    @RequestMapping(value = "/my/voclist/{member_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/my/voclist", method = RequestMethod.GET)
     public ModelAndView voclist(Model model,
-            @PathVariable(value = "member_id") int member_id) {
+            @SessionAttribute(value = "member", required = false) Member member) {
 
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
         List<Voc> output = new ArrayList<Voc>();
     	Voc input = new Voc();
-    	input.setMember_id(member_id);
+    	input.setMember_id(member.getId());
 
         try {
 			output = vocService.getVocList(input);
@@ -182,7 +306,9 @@ public class MyController {
      */
     @RequestMapping(value = "/my/vocview/{voc_id}", method = RequestMethod.GET)
     public ModelAndView vocview(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "voc_id") int voc_id) {
+    	
     	
     	Voc input = new Voc();
     	input.setVoc_id(voc_id);
@@ -204,6 +330,11 @@ public class MyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != output.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
         
         model.addAttribute("voc", output);
         model.addAttribute("vocRe", output2);
@@ -303,7 +434,14 @@ public class MyController {
      * 주문내역 페이지
      */
     @RequestMapping(value = "/my/order_list", method = RequestMethod.GET)
-    public String order_list() {
-        return "my_starbucks/order_list";
+    public ModelAndView order_list(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/order_list");
     }
 }

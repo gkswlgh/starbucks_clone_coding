@@ -46,9 +46,15 @@ public class CardRestController {
 	CardService cardService;
 
     /** 카드 등록 - Card update */
-    @RequestMapping(value = "/rest/card", method = RequestMethod.POST)
+    @RequestMapping(value = "/my/rest/mycard_info_input", method = RequestMethod.POST)
     public Map<String, Object> del_like_menu(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_name",  required = false) String card_name,
+            @RequestParam(value = "card_num1",  defaultValue = "0") int card_num1,
+            @RequestParam(value = "card_num2",  defaultValue = "0") int card_num2,
+            @RequestParam(value = "card_num3",  defaultValue = "0") int card_num3,
+            @RequestParam(value = "card_num4",  defaultValue = "0") int card_num4,
+            @RequestParam(value = "pin_num",  defaultValue = "0") int pin_num) {
 
         return webHelper.getJsonData();
     }

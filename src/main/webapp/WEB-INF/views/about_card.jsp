@@ -57,7 +57,7 @@
                                             <p class="p2">다양한 충전방법을 통해 간편하게
                                                 <br>충전이 가능합니다.</p>
                                             <p class="btn">
-                                                <a href="javascript:void(0);" required="login" data-href="/my/mycard_charge.do">바로가기</a>
+                                                <a href="${pageContext.request.contextPath}/my/mycard_charge">바로가기</a>
                                             </p>
                                         </dd>
                                     </dl>
@@ -70,7 +70,7 @@
                                             <p class="p2">카드 등록 후 리워드 서비스를 누리고
                                                 <br>사용내역도 조회해보세요.</p>
                                             <p class="btn">
-                                                <a href="javascript:void(0);" required="login" data-href="/my/mycard_info_input.do">바로가기</a>
+                                                <a href="${pageContext.request.contextPath}/my/mycard_info_input">바로가기</a>
                                             </p>
                                         </dd>
                                     </dl>
@@ -82,7 +82,7 @@
                                             <p class="p3">스타벅스 e-Gift Card
                                                 <br>선물하기</p>
                                             <p class="g_btn">
-                                                <a href="javascript:void(0);" required="login" data-href="/msr/sceGift/gift_step1.do">바로가기</a>
+                                                <a href="${pageContext.request.contextPath}/my/gift_step1">바로가기</a>
                                             </p>
                                         </dd>
                                     </dl>
