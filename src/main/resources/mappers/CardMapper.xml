@@ -93,6 +93,15 @@
 		WHERE card_id=#{card_id}
 	</update>
 	
+	<!-- 이름 변경하기 -->
+	<update id="editName"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		card_name=#{card_name},
+		edit_date=now()
+		WHERE card_id=#{card_id}
+	</update>
+	
 	<!-- 충전 기능 정의 -->
 	<update id="charge"
 		parameterType="hanjiho.project.starbucks.model.Card">

@@ -48,71 +48,49 @@
                     <div class="my_ms_card_detail_inner my_ms_card_inner">
                         <header>
                             <h5><span class="en">My</span> 스타벅스 카드</h5>
-                            <p class="recent_card">총 보유카드 : 1장</p>
+                            <p class="recent_card">총 보유카드 : ${cardCount}장</p>
+         
+                         <a href="${pageContext.request.contextPath}/my/mycard_list" class="btn_go_charge c063" style="float:right;font-weight:bold;" data-cardnickname="${item.card_name}" data-card-id="${item.card_id}" >전체 카드 목록 보러가기 ▶ </a>
+
                         </header>
                         <div class="my_card_slick">
+                    <c:choose>
+				        <c:when test="${output != null && fn:length(output) > 0}">
+				        	<c:forEach var="item" items="${output}" varStatus="status">
                             <div class="my_ms_card_detail_cont slide">
                                 <div class="my_ms_card_detail_info">
                                     <p class="my_ms_card_detail_id">
-                                        <span>2021 Happy New Year</span>
-                                        <a href="${pageContext.request.contextPath}/" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
+                                        <span>${item.card_name}</span>
+                                        <a class="icon_pencil pencil" data-cardnickname="${item.card_name}">정보수정</a>
                                     </p>
                                     <p class="my_ms_card_detail_id_modify">
-                                        <input type="text" id name class="my_nick_modify_input" value="2021 Happy New Year">
-                                        <a href="${pageContext.request.contextPath}/" class="my_nick_modify" data-cardregnumber="34125399">수정</a>
-                                        <a href="${pageContext.request.contextPath}/" class="my_nick_cancel">취소</a>
+                                        <input type="text" id name class="my_nick_modify_input" data-card-id="${item.card_id}" value="${item.card_name}">
+                                        <a class="my_nick_modify" data-card-id="${item.card_id}">수정</a>
+                                        <a class="my_nick_cancel">취소</a>
                                     </p>
                                     <p class="my_ms_card_price">
                                         <span class="a11y">잔여금액</span>
-                                        <strong class="en t_0d5f34">0</strong>원
+                                        <strong class="en t_0d5f34">${item.cash}</strong>원
                                     </p>
                                     <div class="my_ms_card_btns_top">
                                         <p class="my_ms_card_btn1">
-                                            <a href="${pageContext.request.contextPath}/" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="9">카드 관리</a>
+                                            <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" class="btn_go_charge" data-cardnickname="${item.card_name}" data-card-id="${item.card_id}" >카드 관리</a>
                                         </p>
                                         <p class="my_ms_card_btn2">
-                                            <a href="${pageContext.request.contextPath}/" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="2">충전 하기</a>
+                                            <a href="${pageContext.request.contextPath}/my/mycard_charge" class="btn_go_charge" data-card-id="${item.card_id}" >충전 하기</a>
                                         </p>
                                     </div>
                                 </div>
                                 <figure>
-                                    <i class="representative_icon">
-                                        <a href="${pageContext.request.contextPath}/"></a>
-                                    </i>
-                                    <p><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></p>
+                                    <p><img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드"></p>
                                 </figure>
                             </div>
-                            <div class="my_ms_card_detail_cont slide">
-                                <div class="my_ms_card_detail_info">
-                                    <p class="my_ms_card_detail_id">
-                                        <span>2021 Happy New Year</span>
-                                        <a href="${pageContext.request.contextPath}/" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
-                                    </p>
-                                    <p class="my_ms_card_detail_id_modify">
-                                        <input type="text" id name class="my_nick_modify_input" value="2021 Happy New Year">
-                                        <a href="${pageContext.request.contextPath}/" class="my_nick_modify" data-cardregnumber="34125399">수정</a>
-                                        <a href="${pageContext.request.contextPath}/" class="my_nick_cancel">취소</a>
-                                    </p>
-                                    <p class="my_ms_card_price">
-                                        <span class="a11y">잔여금액</span>
-                                        <strong class="en t_0d5f34">0</strong>원
-                                    </p>
-                                    <div class="my_ms_card_btns_top">
-                                        <p class="my_ms_card_btn1">
-                                            <a href="${pageContext.request.contextPath}/" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="9">카드 관리</a>
-                                        </p>
-                                        <p class="my_ms_card_btn2">
-                                            <a href="${pageContext.request.contextPath}/" class="btn_go_charge" data-cardregnumber="34125399" data-autoreloadtype="2">충전 하기</a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <figure>
-                                    <i class="representative_icon">
-                                        <a href="${pageContext.request.contextPath}/"></a>
-                                    </i>
-                                    <p><img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt="2021 Happy New Year"></p>
-                                </figure>
-                            </div>
+					            </c:forEach>
+				        	</c:when>
+					        <c:otherwise> 
+					        
+					        </c:otherwise>
+					    </c:choose>
                         </div>
                     </div>
                 </section>
@@ -422,6 +400,7 @@
         function modifyNickname() {
             var nIdx = $(".my_nick_modify").index(this);
             var strCardNickname = $(".my_nick_modify_input").eq(nIdx).val();
+            var card_id = $(".my_nick_modify_input").eq(nIdx).data("card-id");
 
             if (strCardNickname == "") {
                 alert("카드 닉네임을 입력하세요.");
@@ -430,7 +409,16 @@
             }
 
             //ajax로 이름 수정 후 마이페이지 새로고침
-            alert("카드 닉네임이 변경 되었습니다.");
+            $.post(ROOT_URL + '/my/rest/editcard_name', {
+            	card_name: strCardNickname,
+            	card_id: card_id
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("카드 닉네임이 변경 되었습니다.");
+            		location.reload();
+            	}
+            });
+            
         }
 
         function cancelModifyMode(_nIdx) {

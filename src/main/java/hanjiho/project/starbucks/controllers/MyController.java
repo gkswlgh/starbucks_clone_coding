@@ -59,18 +59,12 @@ public class MyController {
 	GiftService giftService;
 	@Autowired
 	CardService cardService;
-	
+
     /**
      * 선물하기 페이지
      */
     @RequestMapping(value = "/my/gift_step1", method = RequestMethod.GET)
-    public ModelAndView gift_step1(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
-    	
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member == null) {
-        	return new ModelAndView ("page_none");
-    	}
+    public ModelAndView gift_step1(Model model) {
     	
     	return new ModelAndView("my_starbucks/gift_step1");
     }
@@ -215,6 +209,11 @@ public class MyController {
     public ModelAndView egift_card_view(Model model,
             @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "gift_id") int gift_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
     	
     	Gift input = new Gift();
     	input.setGift_id(gift_id);
@@ -292,10 +291,6 @@ public class MyController {
             @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "card_id") int card_id) {
     	
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member == null) {
-        	return new ModelAndView ("page_none");
-    	}
     	Card input = new Card();
     	input.setCard_id(card_id);
 
@@ -305,6 +300,11 @@ public class MyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != output.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
     	
         model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/mycard_view");
@@ -394,14 +394,19 @@ public class MyController {
     /**
      * 내 메뉴 페이지
      */
-    @RequestMapping(value = "/my/my_menu/{member_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/my/my_menu", method = RequestMethod.GET)
     public ModelAndView my_menu(Model model,
-            @PathVariable(value = "member_id") int member_id) {
+            @SessionAttribute(value = "member", required = false) Member member) {
 
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
         List<LikeMenu> output = new ArrayList<LikeMenu>();
         LikeMenu input = new LikeMenu();
         
-        input.setMember_id(member_id);
+        input.setMember_id(member.getId());
         
         try {
             output = likeMenuService.getLikeMenuList(input);
@@ -419,15 +424,13 @@ public class MyController {
 	            
 	            //output의 index번째 like_menu객체에 menu_name 세팅
 	            output.get(index).setMenu_name(menu_name);
-	            
+	             
 	            index++;
 	        }
         } catch (Exception e) {
             return webHelper.redirect(null, e.getLocalizedMessage());
         }
         
-	       
-
         model.addAttribute("menuList", output);
         return new ModelAndView ("my_starbucks/my_menu");
     }

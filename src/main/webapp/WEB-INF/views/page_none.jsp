@@ -29,9 +29,10 @@
             <div class="cont_inner">
                 <!-- 보유카드 없음 -->
                 <section class="my_card_status">
-                    <div class="my_card_status_cont">
-                        <strong>페이지를 찾을 수 없습니다.</strong>
-                        <p>로그인 후 이용해 주세요.</p>
+                    <div class="my_card_status_cont"  style="padding-bottom: 50px;">
+                        <strong style="line-height: 27px;">로그인 후 바로 이용이 가능합니다.
+                        <br />지금 바로 로그인하시겠습니까?</strong>
+                        <p style="padding-top: 20px;"><a href="${pageContext.request.contextPath}/account/join">회원가입을 하려면 여기를 클릭해주세요.</a></p>
                         <span><a href="${pageContext.request.contextPath}/account/login">로그인 하러 가기</a></span>
                     </div>
                 </section>

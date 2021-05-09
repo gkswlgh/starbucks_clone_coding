@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
@@ -47,7 +48,7 @@ public class CardRestController {
 
     /** 카드 등록 - Card update */
     @RequestMapping(value = "/my/rest/mycard_info_input", method = RequestMethod.POST)
-    public Map<String, Object> del_like_menu(Model model,
+    public Map<String, Object> mycard_info_input(Model model,
             @SessionAttribute(value = "member", required = false) Member member,
             @RequestParam(value = "card_name",  required = false) String card_name,
             @RequestParam(value = "card_num1",  defaultValue = "0") int card_num1,
@@ -85,4 +86,61 @@ public class CardRestController {
 
         return webHelper.getJsonData();
     }
+    
+    
+    /** 카드 이름 변경 - Card update */
+    @RequestMapping(value = "/my/rest/editcard_name", method = RequestMethod.POST)
+    public Map<String, Object> editcard_name(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_name",  required = false) String card_name,
+            @RequestParam(value = "card_id",  required = false) int card_id) {
+
+    	//유효성검사
+        if (!regexHelper.isValue(card_name)) { return webHelper.getJsonWarning("카드이름을 입력해주세요."); }
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+    	input.setCard_name(card_name);
+    	
+    	try {
+			cardService.editName(input);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        return webHelper.getJsonData();
+    }
+
+
+    /** 카드 삭제 - Card delete */
+    @RequestMapping(value = "/my/rest/del_card", method = RequestMethod.POST)
+    public Map<String, Object> del_card(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_id",  required = false) int card_id) {
+
+    	//유효성검사
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+
+    	Card output = new Card();
+    	try {
+    		//로그인정보로 본인확인
+    		output = cardService.getCardItem(input);
+	    	if (member.getId() != output.getMember_id()) { return webHelper.getJsonWarning("잘못된 접근 방식입니다."); }
+			//삭제
+	    	cardService.deleteCard(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        return webHelper.getJsonData();
+    }
+
+
 }

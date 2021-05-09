@@ -1,30 +1,23 @@
 package hanjiho.project.starbucks.controllers.rest;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
-import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Voc;
 import hanjiho.project.starbucks.service.VocService;
 import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
 @RestController
-public class MyPageRestController {
+public class VocRestController {
 
     /** WebHelper 주입 */
     @Autowired

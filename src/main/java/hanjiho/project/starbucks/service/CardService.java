@@ -49,6 +49,13 @@ public interface CardService {
 	 */
 	public int editCard(Card input) throws Exception;
 	/**
+	 * 이름 변경
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int editName(Card input) throws Exception;
+	/**
 	 * 카드 데이터 삭제하기
 	 * @param Card 삭제할 카드의 일련번호를 담고 있는 Beans
 	 * @return int

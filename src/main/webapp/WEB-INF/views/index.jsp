@@ -150,7 +150,7 @@
 	                                <strong><a class="cfff" href="${pageContext.request.contextPath}/product/menu_list">메뉴 보러가기,</a></strong> 주문할 메뉴를 장바구니에 담아보세요!
 	                            </p>
 	                            <p>
-	                                <strong><a class="cfff" href="${pageContext.request.contextPath}/my_starbucks/mycart_step1">주문하러 가기,</a></strong> 장바구니에 담긴 메뉴를 주문해보세요!
+	                                <strong><a class="cfff" href="${pageContext.request.contextPath}/my/cart_step1">주문하러 가기,</a></strong> 장바구니에 담긴 메뉴를 주문해보세요!
 	                            </p>
 	                        </div>
 	                        <div class="rewards_btn_group">
@@ -160,12 +160,12 @@
 	                    <div class="conts_gift">
 	                        <div class="conts_gift_txt">
 	                            <p>
-	                                내 카드 잔고 확인은? <strong><a class="cfff" href="${pageContext.request.contextPath}/my_starbucks">마이페이지 바로가기</a></strong>
+	                                내 카드 잔고 확인은? <strong><a class="cfff" href="${pageContext.request.contextPath}/mypage">마이페이지 바로가기</a></strong>
 	                            </p>
 	                            <p>스타벅스 카드를 사용해서 번거로운 결제 절차를 생략하세요!</p>
 	                        </div>
 	                        <div class="btn_egift">
-	                            <a href="${pageContext.request.contextPath}/my_starbucks">마이페이지 바로가기</a>
+	                            <a href="${pageContext.request.contextPath}/mypage">마이페이지 바로가기</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -185,7 +185,7 @@
                 <div class="bean_txt_box">
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean_txt.png" alt="스타벅스의 50년이 담긴 애니버서리 블렌드. 스타벅스의 50주년을 기념하여 블렌딩된 깊고 진한 풍미의 애니버서리 블렌드입니다." />
                     <div class="bean_detail_btn">
-                        <a href="${pageContext.request.contextPath}/">매장에서 구매하기</a>
+                        <a href="${pageContext.request.contextPath}/">가까운 매장 찾기</a>
                     </div>
                 </div>
             </div>
@@ -215,7 +215,7 @@
                     더하는 상품, 소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</div>
                 <div class="menu_wrap_img"></div>
                 <div class="menu_wrap_btn">
-                    <a href="${pageContext.request.contextPath}/product/menu_list">가까운 매장 찾기</a>
+                    <a href="${pageContext.request.contextPath}/product/menu_list">메뉴 보러가기</a>
                 </div>
             </div>
         </section>

@@ -43,7 +43,7 @@
                                 <table class="w830 regular_charge gift_info_tbl chargeWh" summary="충전 카드 선택, 충전 금액 선택, 결제 수단 선택, 온라인 충전 시 유의 사항">
                                     <caption>충전 카드 선택, 충전 금액 선택, 결제 수단 선택, 온라인 충전 시 유의 사항에 대한 테이블</caption>
                                     <tbody>
-                                        <tr>
+                                        <tr> 
                                             <th scope="row">충전 카드 선택
                                             </th>
                                             <td>
@@ -60,7 +60,7 @@
                                                         <i class="representative_icon">
                                                             <a href="${pageContext.request.contextPath}/"></a>
                                                         </i>
-                                                        <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt class="cardImgUrl">
+                                                        <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt class="cardImgUrl">
                                                     </figure>
                                                     <p>
                                                         <strong class="en cardNumber">**** - **** - **12 - 1547</strong>
@@ -181,7 +181,7 @@
                                                         <i class="representative_icon">
                                                             <a href="${pageContext.request.contextPath}/"></a>
                                                         </i>
-                                                        <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt class="cardImgUrl">
+                                                        <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt class="cardImgUrl">
                                                     </figure>
                                                     <p>
                                                         <strong class="en cardNumber">**** - **** - **12 - 1547</strong>

@@ -98,7 +98,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><a href="${pageContext.request.contextPath}/my_starbucks">MY STARBUCKS</a></th>
+                                    <th scope="row"><a href="${pageContext.request.contextPath}/mypage">MY STARBUCKS</a></th>
                                     <td>
                                         <div class="sitemap clear">
                                             <ul>
@@ -114,7 +114,7 @@
                                                 <li><a href="${pageContext.request.contextPath}/my/egift_card">- 선물 내역</a></li>
                                             </ul>
                                             <ul>
-                                                <li class="sitemap_li_ttl"><a href="${pageContext.request.contextPath}/my/my_menu/${member.id}">My 메뉴</a></li>
+                                                <li class="sitemap_li_ttl"><a href="${pageContext.request.contextPath}/my/my_menu">My 메뉴</a></li>
                                             </ul>
                                         </div>
                                         <div class="sitemap clear">
@@ -128,7 +128,7 @@
                                                 <li class="sitemap_li_ttl"><a href="${pageContext.request.contextPath}/my/voclist">My 고객의 소리</a></li>
                                             </ul>
                                             <ul>
-                                                <li class="sitemap_li_ttl"><a href="${pageContext.request.contextPath}/my_starbucks">개인정보관리</a></li>
+                                                <li class="sitemap_li_ttl"><a href="${pageContext.request.contextPath}/mypage">개인정보관리</a></li>
                                                 <li><a href="${pageContext.request.contextPath}/account/myinfo_modify">- 개인정보확인 및 수정</a></li>
                                                 <li><a href="${pageContext.request.contextPath}/account/join_out">- 비밀번호 변경</a></li>
                                                 <li><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">- 회원 탈퇴</a></li>

@@ -1,5 +1,8 @@
 package hanjiho.project.starbucks.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.Util;
 import hanjiho.project.starbucks.helper.WebHelper;
+import hanjiho.project.starbucks.model.Card;
 import hanjiho.project.starbucks.model.Member;
+import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.MemberService;
 
 /**
@@ -35,6 +40,8 @@ public class AccountController {
     /** Service 패턴 구현체 주입 */
     @Autowired
     MemberService memberService;
+    @Autowired
+    CardService cardService;
 
     /**
      * 회원가입 페이지
@@ -109,7 +116,6 @@ public class AccountController {
             output = memberService.getMemberItem(input);
             
         } catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
         }
         
@@ -149,7 +155,6 @@ public class AccountController {
         try {
 			output = memberService.getMemberItem(input);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -158,6 +163,7 @@ public class AccountController {
     	return new ModelAndView ("find_pw_ok");
     }
     
+
     /**
      * 회원정보수정 페이지
      */

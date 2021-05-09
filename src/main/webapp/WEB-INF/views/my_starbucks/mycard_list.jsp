@@ -35,7 +35,7 @@
                 <section class="my_ms_card_list">
                     <div class="my_ms_card_list_inner">
                         <header>
-                            <h5><strong class="userNameList">회원</strong>님의 스타벅스 카드 상세정보</h5>
+                            <h5><strong class="userNameList">${member.user_name}</strong>님의 스타벅스 카드 상세정보</h5>
                             <p class="recent_card totalCntList">
                                 (보유카드 : ${cardCount}장)
                             </p>
@@ -47,9 +47,6 @@
 				        	<c:forEach var="item" items="${output}" varStatus="status">
                                 <li>
                                     <figure>
-                                        <i class="representative_icon">
-                                            <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" ></a>
-                                        </i>
                                         <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" >
                                             <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드">
                                         </a>
@@ -60,8 +57,8 @@
                                             <a class="icon_pencil pencil" data-cardnickname="${item.card_name}">정보수정</a>
                                         </p>
                                         <p class="my_ms_card_id_modify">
-                                            <input type="text" id name class="my_nick_modify_input">
-                                            <a class="my_nick_modify list" data-cardregnumber="34125399">수정</a>
+                                            <input type="text" class="my_nick_modify_input" value="${item.card_name}" data-card-id="${item.card_id}">
+                                            <a class="my_nick_modify list" data-cardnickname="${item.card_name}">수정</a>
                                             <a class="my_nick_cancel list">취소</a>
                                         </p>
                                         <p class="my_ms_card_number">(${item.card_id})</p>
@@ -74,9 +71,6 @@
                                 </li>
 					            </c:forEach>
 				        	</c:when>
-					        <c:otherwise> 
-					        
-					        </c:otherwise>
 					    </c:choose>
                             </ul>
                         </div>
@@ -90,16 +84,17 @@
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
     <script type="text/javascript">
     $(function() {
-
-
+    	//연필버튼
         $(document).on("click", ".icon_pencil", changeModifyMode);
+    	//수정버튼
         $(document).on("click", ".my_nick_modify", modifyNickname);
+    	//취소버튼
         $(document).on("click", ".my_nick_cancel", cancelModifyMode);
-
+    	
 
         function changeModifyMode() {
             var nIdx = $(".icon_pencil").index(this);
-            var cardNickname = $(".my_ms_card_id span").eq(nIdx).text();
+            var cardNickname = $(".my_ms_card_id strong").eq(nIdx).text();
 
 
             $(".my_ms_card_id").eq(nIdx).hide();
@@ -110,6 +105,7 @@
         function modifyNickname() {
             var nIdx = $(".my_nick_modify").index(this);
             var strCardNickname = $(".my_nick_modify_input").eq(nIdx).val();
+            var card_id = $(".my_nick_modify_input").eq(nIdx).data("card-id");
 
             if (strCardNickname == "") {
                 alert("카드 닉네임을 입력하세요.");
@@ -117,8 +113,16 @@
                 return;
             }
 
-            //ajax로 이름 수정 후 마이페이지 새로고침
-            alert("카드 닉네임이 변경 되었습니다.");
+            //ajax로 이름 수정 후 페이지 새로고침
+            $.post(ROOT_URL + '/my/rest/editcard_name', {
+            	card_name: strCardNickname,
+            	card_id: card_id
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("카드 닉네임이 변경 되었습니다.");
+            		location.reload();
+            	}
+            });
         }
 
         function cancelModifyMode(_nIdx) {
@@ -129,6 +133,7 @@
             $(".my_ms_card_id").eq(_nIdx).show();
             $(".my_ms_card_id_modify").eq(_nIdx).hide();
         }
+
 
     })
     </script>
