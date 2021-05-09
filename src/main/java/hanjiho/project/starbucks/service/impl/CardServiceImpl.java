@@ -89,6 +89,26 @@ public class CardServiceImpl implements CardService {
 	}
 
 	/**
+	 * 카드 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int cardCount(Card input) throws Exception {
+		int result=0;
+		
+		try {
+			result = sqlSession.selectOne("CardMapper.cardCount", input);
+			
+		} catch (Exception e) {
+		    log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+
+	/**
 	 * 카드 데이터 등록하기
 	 * @param Card 저장할 정보를 담고 있는 Beans
 	 * @return int
@@ -162,5 +182,31 @@ public class CardServiceImpl implements CardService {
 		}
 		return result;
 	}
+
+	/**
+	 * 핀번호 검사
+	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	@Override
+	public Card pinCheck(Card input) throws Exception {
+		Card result = null;
+		try {
+		    result = sqlSession.selectOne("CardMapper.pinCheck", input);
+
+		    if (result == null) {
+		        throw new NullPointerException("result=null");
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 	
 }

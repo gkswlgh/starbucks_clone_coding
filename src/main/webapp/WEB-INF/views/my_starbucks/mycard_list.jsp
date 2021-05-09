@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">보유카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">보유카드</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -37,92 +37,47 @@
                         <header>
                             <h5><strong class="userNameList">회원</strong>님의 스타벅스 카드 상세정보</h5>
                             <p class="recent_card totalCntList">
-                                (보유카드 : 1장)
+                                (보유카드 : ${cardCount}장)
                             </p>
                         </header>
                         <div class="my_ms_card_list_cont">
                             <ul class="my_ms_card_list_ul">
+                    <c:choose>
+				        <c:when test="${output != null && fn:length(output) > 0}">
+				        	<c:forEach var="item" items="${output}" varStatus="status">
                                 <li>
                                     <figure>
                                         <i class="representative_icon">
-                                            <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399"></a>
+                                            <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" ></a>
                                         </i>
-                                        <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399">
-                                            <img src="https://image.istarbucks.co.kr/cardThumbImg/20201229/007764_thumb.png" alt="e-gift 카드">
+                                        <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" >
+                                            <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드">
                                         </a>
                                     </figure>
                                     <div class="my_ms_card_list_info">
                                         <p class="my_ms_card_id">
-                                            <strong class="cardNickname">2021 Happy New Year</strong>
-                                            <a href="${pageContext.request.contextPath}/" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
+                                            <strong class="cardNickname">${item.card_name}</strong>
+                                            <a class="icon_pencil pencil" data-cardnickname="${item.card_name}">정보수정</a>
                                         </p>
                                         <p class="my_ms_card_id_modify">
                                             <input type="text" id name class="my_nick_modify_input">
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_modify list" data-cardregnumber="34125399">수정</a>
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_cancel list">취소</a>
+                                            <a class="my_nick_modify list" data-cardregnumber="34125399">수정</a>
+                                            <a class="my_nick_cancel list">취소</a>
                                         </p>
-                                        <p class="my_ms_card_number">(121547)</p>
+                                        <p class="my_ms_card_number">(${item.card_id})</p>
                                         <p class="my_ms_card_price">
                                             잔액
-                                            <strong class="en t_0d5f34"> 10,000</strong>
+                                            <strong class="en t_0d5f34"> ${item.cash}</strong>
                                             원
                                         </p>
                                     </div>
                                 </li>
-                                <li>
-                                    <figure>
-                                        <i>
-                                            <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399"></a>
-                                        </i>
-                                        <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399">
-                                            <img src="https://image.istarbucks.co.kr/cardThumbImg/20201229/007764_thumb.png" alt="e-gift 카드">
-                                        </a>
-                                    </figure>
-                                    <div class="my_ms_card_list_info">
-                                        <p class="my_ms_card_id">
-                                            <strong class="cardNickname">2021 Happy New Year</strong>
-                                            <a href="${pageContext.request.contextPath}/" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
-                                        </p>
-                                        <p class="my_ms_card_id_modify">
-                                            <input type="text" id name class="my_nick_modify_input">
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_modify list" data-cardregnumber="34125399">수정</a>
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_cancel list">취소</a>
-                                        </p>
-                                        <p class="my_ms_card_number">(121547)</p>
-                                        <p class="my_ms_card_price">
-                                            잔액
-                                            <strong class="en t_0d5f34"> 10,000</strong>
-                                            원
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure>
-                                        <i>
-                                            <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399"></a>
-                                        </i>
-                                        <a href="${pageContext.request.contextPath}/" class="goMycard" data-cardregnumber="34125399">
-                                            <img src="https://image.istarbucks.co.kr/cardThumbImg/20201229/007764_thumb.png" alt="e-gift 카드">
-                                        </a>
-                                    </figure>
-                                    <div class="my_ms_card_list_info">
-                                        <p class="my_ms_card_id">
-                                            <strong class="cardNickname">2021 Happy New Year</strong>
-                                            <a href="${pageContext.request.contextPath}/" class="icon_pencil pencil" data-cardstatus="R" data-cardnickname="2021 Happy New Year">정보수정</a>
-                                        </p>
-                                        <p class="my_ms_card_id_modify">
-                                            <input type="text" id name class="my_nick_modify_input">
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_modify list" data-cardregnumber="34125399">수정</a>
-                                            <a href="${pageContext.request.contextPath}/" class="my_nick_cancel list">취소</a>
-                                        </p>
-                                        <p class="my_ms_card_number">(121547)</p>
-                                        <p class="my_ms_card_price">
-                                            잔액
-                                            <strong class="en t_0d5f34"> 10,000</strong>
-                                            원
-                                        </p>
-                                    </div>
-                                </li>
+					            </c:forEach>
+				        	</c:when>
+					        <c:otherwise> 
+					        
+					        </c:otherwise>
+					    </c:choose>
                             </ul>
                         </div>
                     </div>

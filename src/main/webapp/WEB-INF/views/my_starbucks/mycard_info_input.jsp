@@ -104,10 +104,6 @@
     $(function() {
 
         /*유효성 검사 추가 함수*/
-        //카드명검사
-        $.validator.addMethod("cardname", function(value, element) {
-            return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) || /^[a-zA-Z0-9]*$/i.test(value);
-        });
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#mycard_input").validate({
@@ -124,7 +120,7 @@
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
-                card_name: { required: true, cardname: true, minlength: 4, maxlength: 20 },
+                card_name: { required: true, minlength: 4, maxlength: 20 },
                 card_num1: { required: true, number: true, minlength: 4, maxlength: 4 },
                 card_num2: { required: true, number: true, minlength: 4, maxlength: 4 },
                 card_num3: { required: true, number: true, minlength: 4, maxlength: 4 },
@@ -137,7 +133,6 @@
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
                 card_name: {
                     required: "카드명을 입력하세요.",
-                    cardname: "카드명은 한글, 영어, 숫자의 조합만 입력 가능합니다.",
                     minlength: "카드명은 최소 4글자 이상 입력해야 합니다.",
                     maxlength: "카드명은 최대 20글자까지만 입력 가능합니다."
                 },

@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">보유카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">보유 카드</span></a></li>
                     </ul>
                 </div>
             </div>

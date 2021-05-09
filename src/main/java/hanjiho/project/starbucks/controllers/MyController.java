@@ -20,12 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
+import hanjiho.project.starbucks.model.Card;
 import hanjiho.project.starbucks.model.Cart;
 import hanjiho.project.starbucks.model.Gift;
 import hanjiho.project.starbucks.model.LikeMenu;
 import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
 import hanjiho.project.starbucks.model.Voc;
+import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.CartService;
 import hanjiho.project.starbucks.service.GiftService;
 import hanjiho.project.starbucks.service.LikeMenuService;
@@ -55,6 +57,8 @@ public class MyController {
 	CartService cartService;
 	@Autowired
 	GiftService giftService;
+	@Autowired
+	CardService cardService;
 	
     /**
      * 선물하기 페이지
@@ -178,6 +182,7 @@ public class MyController {
             @SessionAttribute(value = "member", required = false) Member member,
             @RequestParam(value = "pickPeriod", defaultValue = "0") int pickPeriod) {
 
+    	// 검색기간 (-1은 1달전 -12는 1년전)
     	if (pickPeriod == 0) {
     		pickPeriod = -1;
     	}
@@ -256,8 +261,53 @@ public class MyController {
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
+    	Card input = new Card();
+    	input.setMember_id(member.getId());
+
+    	List<Card> output = new ArrayList<Card>();
+    	int cardCount = 0;
+    	try {
+    		cardCount = cardService.cardCount(input);
+    		output = cardService.getCardList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	
+    	//만약 보유카드가 0장이라면
+    	if (cardCount == 0) {
+        	return new ModelAndView ("my_starbucks/mycard_none");
+    	}
+    	
+        model.addAttribute("cardCount", cardCount);
+        model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/mycard_list");
+    }
+    
+
+    /**
+     * 보유카드 상세 페이지
+     */
+    @RequestMapping(value = "/my/mycard_view/{card_id}", method = RequestMethod.GET)
+    public ModelAndView mycard_view(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @PathVariable(value = "card_id") int card_id) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+
+    	Card output = new Card();
+    	try {
+    		output = cardService.getCardItem(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/mycard_view");
     }
     
     /**

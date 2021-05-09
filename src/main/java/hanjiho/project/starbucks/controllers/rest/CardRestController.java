@@ -56,6 +56,33 @@ public class CardRestController {
             @RequestParam(value = "card_num4",  defaultValue = "0") int card_num4,
             @RequestParam(value = "pin_num",  defaultValue = "0") int pin_num) {
 
+    	//유효성검사
+        if (!regexHelper.isValue(card_name)) { return webHelper.getJsonWarning("카드이름을 입력해주세요."); }
+    	if (card_num1 == 0) { return webHelper.getJsonWarning("카드번호를 입력해주세요."); }
+    	if (card_num2 == 0) { return webHelper.getJsonWarning("카드번호를 입력해주세요."); }
+    	if (card_num3 == 0) { return webHelper.getJsonWarning("카드번호를 입력해주세요."); }
+    	if (card_num4 == 0) { return webHelper.getJsonWarning("카드번호를 입력해주세요."); }
+    	if (pin_num == 0) { return webHelper.getJsonWarning("핀번호를 입력해주세요."); }
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	
+    	String card_num = card_num1 + "" + card_num2 + "" + card_num3 + "" + card_num4;
+    	
+    	Card input = new Card();
+    	input.setCard_num(card_num);
+    	input.setPin_num(pin_num);
+
+    	Card output = new Card();
+    	try {
+    		output = cardService.pinCheck(input);
+    		// member_id , card_name 등록
+        	output.setMember_id(member.getId());
+        	output.setCard_name(card_name);
+    		// editCard (update)
+			cardService.editCard(output);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
         return webHelper.getJsonData();
     }
 }

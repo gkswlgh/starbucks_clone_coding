@@ -23,11 +23,17 @@ public interface CardService {
 	 */
 	public List<Card> getCardList(Card input) throws Exception;
 	/**
-	 * 카드 데이터가 저장되어 있는 갯수 조회
+	 * 카드 데이터가 저장되어 있는 갯수 조회 (검사)
 	 * @return int
 	 * @throws Exception
 	 */
 	public int getCardCount(Card input) throws Exception;
+	/**
+	 * 카드 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int cardCount(Card input) throws Exception;
 	/**
 	 * 카드 데이터 등록하기
 	 * @param Card 저장할 정보를 담고 있는 Beans
@@ -49,4 +55,11 @@ public interface CardService {
 	 * @throws Exception
 	 */
 	public int deleteCard(Card input) throws Exception;
+	/**
+	 * 핀번호 검사
+	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public Card pinCheck(Card input) throws Exception;
 }

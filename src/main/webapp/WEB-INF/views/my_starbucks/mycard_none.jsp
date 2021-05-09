@@ -18,11 +18,11 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">My 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">보유 카드</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                     </div>
                     <div class="my_card_status_cont">
                         <strong>등록된 카드가 없습니다.</strong>
-                        <p>스타벅스만의 특별한 혜택을 이용하시기 위해서는 카드가 필요합니다.<br>스타벅스 카드를 등록하시고 생일 무료음료 쿠폰과 다양한 스타벅스의 리워드를 이용하세요.</p>
-                        <span><a href="${pageContext.request.contextPath}/">카드 등록하기</a></span>
+                        <p>스타벅스만의 특별한 혜택을 이용하시기 위해서는 카드가 필요합니다.<br>스타벅스 카드를 등록하시고 스타벅스 딜리버리를 이용하세요.</p>
+                        <span><a href="${pageContext.request.contextPath}/my/mycard_info_input">카드 등록하기</a></span>
                     </div>
                 </section>
                 <!-- 보유카드 없음 끝 -->
