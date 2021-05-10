@@ -48,7 +48,7 @@
                                     <a class="my_nick_modify" data-card-id="${output.card_id}">수정</a>
                                     <a class="my_nick_cancel">취소</a>
                                 </p>
-                                <p class="my_ms_card_num en">●●●● - ●●●● - ●●●● - 1547</p>
+                                <p class="my_ms_card_num en">●●●● - ●●●● - ●●●● - ${fn:substring(output.card_num, 12, 16)}</p>
                                 <p class="my_ms_card_detail_date">
                                     최종 사용일 :
                                     <span class="en">${output.edit_date}</span>
@@ -58,7 +58,7 @@
                                 </p>
                                 <p class="my_ms_card_detail_price">
                                     잔액
-                                    <strong class="en t_0d5f34"> ${output.cash}</strong>
+                                    <strong class="en t_0d5f34"> <fmt:formatNumber value="${output.cash}" pattern="#,###" /></strong>
                                     원
                                 </p>
                                 <div class="my_ms_card_btns_top">
@@ -69,10 +69,41 @@
                                         <a id="deleteCard" class="btn_cancel_reg btn_cancel_pop" data-card-id="${output.card_id}" data-cardnickname="${output.card_name}">카드등록해지</a>
                                     </p>
                                 </div>
+                                <div class="my_ms_card_btns_bottom">
+                                    <p class="my_ms_card_btn1">
+                                        <a id="balance_trs_btn" data-card-id="${output.card_id}">잔액이전</a>
+                                    </p>
+                                    <p class="my_ms_card_btn2 regi_cancel">
+                                        <a href="${pageContext.request.contextPath}/voc" class="btn_cancel_reg btn_cancel_pop" >분실신고</a>
+                                    </p>
+                                </div>
                             </div>
                             <figure>
                                 <p><img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드"></p>
-                            </figure>
+                            </figure><c:choose>
+							        <c:when test="${cardList != null && fn:length(cardList) > 0}">
+                            <div id="balance_trs" style="display:none;position:absolute;top:250px;left:50px;line-height:50px;padding:0 30px 0 30px;">
+                            이 카드의 잔액을 전부  
+                                  <div class="sel_wrap" style="display:inline-block;position:relative;top:10px;">
+                                      <p class="user_sel_wrap">
+                                          <select id="cardNumber_AUTO" name="cardNumber_AUTO" class="cardNumber">
+							        	<c:forEach var="item" items="${cardList}" varStatus="status">
+                                              <option class="trs_card" value="${item.card_id}">${item.card_name}</option>
+					           		 	</c:forEach>
+                                          </select>
+                                      </p>
+                                  </div>
+                            으로 이전합니다.
+                            <span>
+                               <a id="balance_trs_ok" style="padding:5px 10px;border:1px solid #222;margin-left:10px;" data-card-id="${output.card_id}" data-cardnickname="${output.card_name}">잔액이전 완료하기</a>
+                            </span>
+                            <span style="position:absolute;top:-15px;left:60px;">▼</span>
+                            </div></c:when>
+					        <c:otherwise> 
+					         <div id="balance_trs" style="display:none;position:absolute;top:250px;left:50px;line-height:50px;padding:0 30px 0 30px;">
+					         이 카드 외의 다른 카드가 없습니다.</div>
+					        </c:otherwise>
+					    </c:choose>
                         </div>
                     </div>
                 </section>
@@ -98,7 +129,16 @@
         $(document).on("click", ".my_nick_cancel", cancelModifyMode);
       	//삭제버튼
         $(document).on("click", "#deleteCard", deleteCard);
-
+      	//잔액이전표시버튼
+        $(document).on("click", "#balance_trs_btn", balanceTrs1);
+      	//잔액이전확인버튼
+        $(document).on("click", "#balance_trs_ok", balanceTrs2);
+      	//select 변경 시
+        $(document).on("change", "#cardNumber_AUTO", function() {
+        	
+        });
+      	
+      	//삭제
         function deleteCard() {
 			var card_name = $(this).data("cardnickname");
 			var card_id = $(this).data("card-id");
@@ -117,7 +157,39 @@
             });
         }
 
+      	//잔액이전표시
+        function balanceTrs1() {
+			if ($(this).hasClass("on")) {
+				$(this).removeClass("on");
+				$("#balance_trs").hide();
+			} else {
+				$(this).addClass("on");
+				$("#balance_trs").show();
+			}
+        }
+        
+      	//잔액이전
+        function balanceTrs2() {
+            var nIdx = document.getElementById("cardNumber_AUTO").selectedIndex;
+			var card_id = $(this).data("card-id");
+			var card_id_new = $(".trs_card").eq(nIdx).val();
+            
+            if (!confirm("정말 이 카드의 잔액을 전부 선택한 카드로 옮기시겠습니까?")) {
+                return;
+            }
+			
+			$.post(ROOT_URL + '/my/rest/balance_trs', {
+            	card_id: card_id,
+            	card_id_new: card_id_new
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("잔액이 이전되었습니다.");
+            		location.reload();
+            	}
+            });
+        }
 
+      	//연필
         function changeModifyMode() {
             var nIdx = $(".icon_pencil").index(this);
             var cardNickname = $(".my_ms_card_detail_id span").eq(nIdx).text();
@@ -128,6 +200,7 @@
             $(".my_ms_card_detail_id_modify").eq(nIdx).show();
         }
 
+        //수정
         function modifyNickname() {
             var nIdx = $(".my_nick_modify").index(this);
             var strCardNickname = $(".my_nick_modify_input").eq(nIdx).val();
@@ -151,6 +224,7 @@
             });
         }
 
+        //취소(연필)
         function cancelModifyMode(_nIdx) {
             if (typeof(_nIdx) != 'number') {
                 _nIdx = $(".my_nick_cancel").index(this);

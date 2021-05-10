@@ -113,6 +113,92 @@ public class CardRestController {
 
         return webHelper.getJsonData();
     }
+    
+
+    /** 카드 충전 (잔액 변경) - Card update */
+    @RequestMapping(value = "/my/rest/charge", method = RequestMethod.POST)
+    public Map<String, Object> charge(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_id",  required = false) int card_id,
+            @RequestParam(value = "cash",  required = false) int cash) {
+
+    	//유효성검사
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	if (cash == 0) { return webHelper.getJsonWarning("충전액 정보가 없습니다."); }
+    	
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+
+    	//잔액확인
+    	Card output = new Card();
+    	try {
+    		output = cardService.getCardItem(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    	//충전
+    	int sum = output.getCash() + cash;
+    	input.setCash(sum);
+    	try {
+    		cardService.charge(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return webHelper.getJsonData();
+    }
+
+
+    /** 카드 잔액 이전 - Card update */
+    @RequestMapping(value = "/my/rest/balance_trs", method = RequestMethod.POST)
+    public Map<String, Object> balance_trs(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_id",  required = false) int card_id,
+            @RequestParam(value = "card_id_new",  required = false) int card_id_new) {
+
+    	//유효성검사
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	if (card_id_new == 0) { return webHelper.getJsonWarning("이전할 카드 정보가 없습니다."); }
+    	
+    	//기존카드 데이터입력
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+    	//이전할카드 데이터입력
+    	Card input2 = new Card();
+    	input2.setCard_id(card_id_new);
+    	
+    	int tmp = 0;
+    	int tmp2 = 0;
+
+    	//잔액확인
+    	Card output = new Card();
+    	try {
+    		output = cardService.getCardItem(input);
+    		tmp = output.getCash(); 
+    		output = cardService.getCardItem(input2);
+    		tmp2 = output.getCash(); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    	//충전
+    	tmp += tmp2;
+    	input2.setCash(tmp);
+    	input.setCash(0);
+    	try {
+    		//cash에 tmp저장
+    		cardService.charge(input2);
+    		//cash에 0저장
+    		cardService.charge(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return webHelper.getJsonData();
+    }
 
 
     /** 카드 삭제 - Card delete */

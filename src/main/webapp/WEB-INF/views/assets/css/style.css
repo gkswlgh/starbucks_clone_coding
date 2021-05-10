@@ -6946,6 +6946,12 @@ button[disabled] {
 	background-color:#042;
 }
 
+/*추가함*/
+
+#balance_trs_btn.on {
+	background-color: #bbb;
+	color:#fff;
+}
 
 /*공통*/
 .wrapper {

@@ -49,13 +49,15 @@
                         <header>
                             <h5><span class="en">My</span> 스타벅스 카드</h5>
                             <p class="recent_card">총 보유카드 : ${cardCount}장</p>
-         
-                         <a href="${pageContext.request.contextPath}/my/mycard_list" class="btn_go_charge c063" style="float:right;font-weight:bold;" data-cardnickname="${item.card_name}" data-card-id="${item.card_id}" >전체 카드 목록 보러가기 ▶ </a>
-
-                        </header>
-                        <div class="my_card_slick">
                     <c:choose>
 				        <c:when test="${output != null && fn:length(output) > 0}">
+                         <a href="${pageContext.request.contextPath}/my/mycard_list" class="btn_go_charge c063" style="float:right;font-weight:bold;" data-cardnickname="${item.card_name}" data-card-id="${item.card_id}" >전체 카드 목록 보러가기 ▶ </a>
+				        </c:when>
+                    </c:choose>
+                        </header>
+                    <c:choose>
+				        <c:when test="${output != null && fn:length(output) > 0}">
+                        <div class="my_card_slick">
 				        	<c:forEach var="item" items="${output}" varStatus="status">
                             <div class="my_ms_card_detail_cont slide">
                                 <div class="my_ms_card_detail_info">
@@ -86,12 +88,26 @@
                                 </figure>
                             </div>
 					            </c:forEach>
+                        </div>
 				        	</c:when>
 					        <c:otherwise> 
-					        
+					        <div style="margin:60px 40px 40px 40px;width:550px;font-size:16px;position:relative;line-height:25px;">
+					        	등록된 카드가 없습니다.
+					        	<br />선물 받은 카드가 있다면 <strong class="c063">카드 등록하기</strong>를,
+					        	<br />없다면 <strong class="c063">나에게 선물하기</strong>를 통해 스타벅스 카드를 시작해보세요!
+                    <div class="user_stat_btns" style="position: absolute; top:-10px; right:-130px;">
+                        <ul>
+                            <li class="btn_black"><a style="background-color:#063" href="${pageContext.request.contextPath}/my/mycard_info_input">
+                                    카드 등록하기
+                                </a></li>
+                            <li class="btn_gray"><a style="background-color:#063"  href="${pageContext.request.contextPath}/my/gift_step1">
+                                    카드 선물하기
+                                </a></li>
+                        </ul>
+                    </div>
+					        </div>
 					        </c:otherwise>
 					    </c:choose>
-                        </div>
                     </div>
                 </section>
                 <!-- 보유카드 목록 끝 -->

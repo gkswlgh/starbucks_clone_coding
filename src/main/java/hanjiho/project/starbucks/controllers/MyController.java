@@ -125,7 +125,13 @@ public class MyController {
      */
     @RequestMapping(value = "/my/gift_step4/{gift_id}", method = RequestMethod.GET)
     public ModelAndView gift_step4(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "gift_id") int gift_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
     	
     	Gift input = new Gift();
     	input.setGift_id(gift_id);
@@ -133,6 +139,11 @@ public class MyController {
     	Gift output = new Gift();
     	try {
 			output = giftService.getGiftItem(input);
+
+	        // 비회원, 다른 회원으로 부터의 접근 제한
+	    	if (member.getId() != output.getMember_id()) {
+	        	return new ModelAndView ("page_none");
+	    	}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -290,13 +301,20 @@ public class MyController {
     public ModelAndView mycard_view(Model model,
             @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "card_id") int card_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
     	
     	Card input = new Card();
     	input.setCard_id(card_id);
 
+    	List<Card> cardList = new ArrayList<Card>();
     	Card output = new Card();
     	try {
     		output = cardService.getCardItem(input);
+    		cardList = cardService.getCardListOut(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -306,6 +324,7 @@ public class MyController {
         	return new ModelAndView ("page_none");
     	}
     	
+    	model.addAttribute("cardList", cardList);
         model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/mycard_view");
     }
@@ -321,7 +340,18 @@ public class MyController {
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
-    	
+
+    	Card input = new Card();
+    	input.setMember_id(member.getId());
+
+    	List<Card> cardList = new ArrayList<Card>();
+    	try {
+    		cardList = cardService.getCardListOut(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    	model.addAttribute("cardList", cardList);
     	return new ModelAndView ("my_starbucks/mycard_charge");
     }
 
@@ -359,6 +389,10 @@ public class MyController {
             @SessionAttribute(value = "member", required = false) Member member,
             @PathVariable(value = "voc_id") int voc_id) {
     	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
     	
     	Voc input = new Voc();
     	input.setVoc_id(voc_id);
@@ -464,12 +498,15 @@ public class MyController {
      */
     @RequestMapping(value = "/my/cart_step2", method = RequestMethod.GET)
     public ModelAndView cart_step2(HttpSession session, @SessionAttribute(value = "member", required = false) Member member, Model model) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
     	
     	Cart input = new Cart();
     	if (member != null) {
     		input.setMember_id(member.getId());
-    	} else {
-    		input.setSession_id(session.getId());
     	}
     	
     	List<Cart> output = new ArrayList<Cart>();

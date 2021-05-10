@@ -23,6 +23,13 @@ public interface CardService {
 	 */
 	public List<Card> getCardList(Card input) throws Exception;
 	/**
+	 * input select 카드 조회
+	 * @param Card 조회시 제외할 카드의 일련번호를 담고있는 Beans
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<Card> getCardListOut(Card input) throws Exception;
+	/**
 	 * 카드 데이터가 저장되어 있는 갯수 조회 (검사)
 	 * @return int
 	 * @throws Exception
@@ -55,6 +62,13 @@ public interface CardService {
 	 * @throws Exception
 	 */
 	public int editName(Card input) throws Exception;
+	/**
+	 * 카드 충전 (잔액 수정)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int charge(Card input) throws Exception;
 	/**
 	 * 카드 데이터 삭제하기
 	 * @param Card 삭제할 카드의 일련번호를 담고 있는 Beans

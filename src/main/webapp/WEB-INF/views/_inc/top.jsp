@@ -37,7 +37,8 @@
         </div>
         <nav class="gnb_nav">
             <div class="gnb_nav_inner clear">
-                <ul class="clear">
+                <ul class="clear" style="margin-left: 610px;">
+                <!-- 
                     <li class="gnb_nav01">
                         <h2>
                             <a href="${pageContext.request.contextPath}/coffee_finder">COFFEE</a>
@@ -62,6 +63,7 @@
                             </div>
                         </div>
                     </li>
+                     -->
                     <li class="gnb_nav02">
                         <h2>
                             <a href="${pageContext.request.contextPath}/product/menu_list">MENU</a>
@@ -98,6 +100,7 @@
                             </div>
                         </div>
                     </li>
+                    <!-- 
                     <li class="gnb_nav03">
                         <h2>
                             <a href="${pageContext.request.contextPath}/">STORE</a>
@@ -124,6 +127,7 @@
                             </div>
                         </div>
                     </li>
+                     -->
                     <li class="gnb_nav05">
                         <h2>
                             <a href="${pageContext.request.contextPath}/starbucks_card/about_card">STARBUCKS CARDS</a>

@@ -37,6 +37,7 @@
                                 <col width="740" />
                             </colgroup>
                             <tbody>
+                            <!-- 
                                 <tr>
                                     <th scope="row">COFFEE</th>
                                     <td>
@@ -47,6 +48,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                 -->
                                 <tr>
                                     <th scope="row">MENU</th>
                                     <td>
@@ -66,6 +68,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <!-- 
                                 <tr>
                                     <th scope="row">STORE</th>
                                     <td>
@@ -78,6 +81,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                 -->
                                 <tr>
                                     <th scope="row">STARBUCKS CARDS</th>
                                     <td>

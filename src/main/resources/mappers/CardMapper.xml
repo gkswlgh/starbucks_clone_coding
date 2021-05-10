@@ -64,6 +64,17 @@
 
 		ORDER BY card_id DESC
 	</select>
+	
+	<!-- input select 카드 조회 -->
+	<select id="selectListOut"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		resultMap="cardMap">
+		SELECT 
+		card_id, card_num, member_id, cash, card_name
+		FROM card
+		WHERE card_id != #{card_id}
+		ORDER BY card_id DESC
+	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->
 	<insert id="insertItem"
