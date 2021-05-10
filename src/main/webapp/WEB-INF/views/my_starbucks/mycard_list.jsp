@@ -64,7 +64,7 @@
                                         <p class="my_ms_card_number">(${item.card_id})</p>
                                         <p class="my_ms_card_price">
                                             잔액
-                                            <strong class="en t_0d5f34"> ${item.cash}</strong>
+                                            <strong class="en t_0d5f34"> <fmt:formatNumber value="${item.cash}" pattern="#,###" /></strong>
                                             원
                                         </p>
                                     </div>

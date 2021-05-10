@@ -52,14 +52,14 @@
         <aside class="copyright">
             <div class="copyright_inner">
                 <ul class="link_btn">
-                    <li><a href="${pageContext.request.contextPath}/">매장 찾기</a></li>
+                    <li><a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">매장 찾기</a></li>
                     <li><a href="${pageContext.request.contextPath}/sitemap">사이트 맵</a></li>
                 </ul>
                 <ul class="copy">
-                    <li>사업자등록번호 : 201-81-21515</li>
-                    <li>(주)스타벅스커피 코리아 대표이사 : 송 데이비드 호섭</li>
-                    <li>TEL : 1522-3232</li>
-                    <li>개인정보 책임자 : 장석현</li>
+                    <li>사업자등록번호 : 000-00-00000</li>
+                    <li>(주)스타벅스커피 코리아 대표이사 : 차이 티 라떼</li>
+                    <li>TEL : 0000-0000</li>
+                    <li>개인정보 책임자 : 참치김밥</li>
                 </ul>
                 <address class="copy_en en">&copy; 2020 Starbucks Coffee
                     Company. All Rights Reserved.</address>

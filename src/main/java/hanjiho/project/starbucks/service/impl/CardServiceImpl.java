@@ -235,6 +235,32 @@ public class CardServiceImpl implements CardService {
 		return result;
 	}
 	
+
+	/**
+	 * 카드 자동 충전 (잔액 수정)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int chargeAuto(Card input) throws Exception {
+		int result=0;
+		try {
+		    result = sqlSession.update("CardMapper.chargeAuto", input);
+
+		    if (result == 0) {
+		        throw new NullPointerException("result=0");
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("수정된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 수정에 실패했습니다.");
+		}
+		return result;
+	}
+	
 	/**
 	 * 카드 데이터 삭제하기
 	 * @param Card 삭제할 카드의 일련번호를 담고 있는 Beans

@@ -120,7 +120,7 @@
                         <div class="product_cart clear">
                             <p>
                                 <strong>총 금액 :&nbsp;
-                                    <span id="ttl_price" class="ttl_price t_006633" value="${output.price}">${output.price}</span></strong>
+                                    <span id="ttl_price" class="ttl_price t_006633" value="${output.price}"><fmt:formatNumber value="${output.price}" pattern="#,###" /></span></strong>
                                 원
                             </p>
                             <p>

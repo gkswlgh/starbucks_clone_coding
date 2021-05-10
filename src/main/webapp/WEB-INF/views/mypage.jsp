@@ -72,7 +72,7 @@
                                     </p>
                                     <p class="my_ms_card_price">
                                         <span class="a11y">잔여금액</span>
-                                        <strong class="en t_0d5f34">${item.cash}</strong>원
+                                        <strong class="en t_0d5f34"><fmt:formatNumber value="${item.cash}" pattern="#,###" /></strong>원
                                     </p>
                                     <div class="my_ms_card_btns_top">
                                         <p class="my_ms_card_btn1">

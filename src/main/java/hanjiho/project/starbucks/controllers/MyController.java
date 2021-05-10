@@ -309,6 +309,7 @@ public class MyController {
     	
     	Card input = new Card();
     	input.setCard_id(card_id);
+    	input.setMember_id(member.getId());
 
     	List<Card> cardList = new ArrayList<Card>();
     	Card output = new Card();
@@ -345,11 +346,17 @@ public class MyController {
     	input.setMember_id(member.getId());
 
     	List<Card> cardList = new ArrayList<Card>();
+    	int cardCount = 0;
     	try {
-    		cardList = cardService.getCardListOut(input);
+    		cardCount = cardService.cardCount(input);
+    		cardList = cardService.getCardList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    	
+    	if (cardCount == 0) {
+        	return new ModelAndView ("my_starbucks/mycard_none");
+    	}
 
     	model.addAttribute("cardList", cardList);
     	return new ModelAndView ("my_starbucks/mycard_charge");

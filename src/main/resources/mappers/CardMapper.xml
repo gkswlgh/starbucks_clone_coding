@@ -72,7 +72,7 @@
 		SELECT 
 		card_id, card_num, member_id, cash, card_name
 		FROM card
-		WHERE card_id != #{card_id}
+		WHERE card_id != #{card_id} AND member_id = #{member_id}
 		ORDER BY card_id DESC
 	</select>
 
@@ -130,6 +130,16 @@
 		charge_schedule=#{charge_schedule},
 		charge_limit=#{charge_limit},
 		charge_cash=#{charge_cash},
+		edit_date=now()
+		WHERE card_id=#{card_id}
+	</update>
+	
+	
+	<!-- 자동충전 (스케쥴러에 의해 실행됨) -->
+	<update id="charge"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		cash=#{cash},
 		edit_date=now()
 		WHERE card_id=#{card_id}
 	</update>

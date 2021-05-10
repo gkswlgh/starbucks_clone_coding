@@ -107,13 +107,13 @@
                                         </div>
                                     </td>
                                     <td class="cart_price2">
-                                        <span class="num">${item.price}</span>
+                                        <span class="num"><fmt:formatNumber value="${item.price}" pattern="#,###" /></span>
                                         <i class="unit">원</i>
                                     </td>
                                     <td class="cart_selling2">
                                         <span class="label">판매 가격</span>
                                         <span class="price">
-                                            <b class="num x-row-net">${item.menu_qty * item.price}</b>
+                                            <b class="num x-row-net"><fmt:formatNumber value="${item.menu_qty * item.price}" pattern="#,###" /></b>
                                             <i class="unit">원</i>
                                         </span>
                                     </td>
@@ -251,10 +251,16 @@
         	if (money >= 20000 || money == 0) {
         		del = 0;
         	}
-
+        	
+        	var sum = money+del;
+        	//콤마
+        	money = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        	del = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        	sum = sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        	
         	$("#all-item-price").html(money);
         	$("#del-price").html(del);
-        	$("#cart-price").html(money+del);
+        	$("#cart-price").html(sum);
         }
         
         
@@ -279,6 +285,7 @@
 
 	        //총금액
 	        $hid.attr("data-unit-price", price_unit);
+	        price_unit = price_unit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");//콤마처리
 	        $(this).parent().parent().next().next().children().eq(1).children().eq(0).html(price_unit);
 	        
 	        //qty수정
@@ -314,6 +321,7 @@
 
 	        //총금액
 	        $hid.attr("data-unit-price", price_unit);
+	        price_unit = price_unit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");//콤마처리
 	        $(this).parent().parent().next().next().children().eq(1).children().eq(0).html(price_unit);
 
 	        //qty수정

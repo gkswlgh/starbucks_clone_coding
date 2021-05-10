@@ -146,10 +146,13 @@ public class CardRestController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	
-        return webHelper.getJsonData();
-    }
 
+        Map<String, Object> data = new HashMap<String, Object>();
+        //json에 담아 넘길 카드 일련번호 저장
+        data.put("card_id", card_id);
+        return webHelper.getJsonData(data);
+    }
+    
 
     /** 카드 잔액 이전 - Card update */
     @RequestMapping(value = "/my/rest/balance_trs", method = RequestMethod.POST)
