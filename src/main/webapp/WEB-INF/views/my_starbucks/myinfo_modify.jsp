@@ -42,7 +42,7 @@
                                         <th scope="row">이메일 확인</th>
                                         <td>
                                             <div class="sel_wrap">
-                                            <p class="mail_at">${member.email1}@${member.email2}</p>
+                                            <p class="mail_at">${member.user_email}</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -76,25 +76,25 @@
                                                 <p class="phone_sel_wrap">
                                                     <label for="phone1">010</label> <select id="phone1" name="phone1">
 													<option value="010"
-														<c:if test="${member.phone1 == '010'}">selected</c:if>>010</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '010'}">selected</c:if>>010</option>
 													<option value="011"
-														<c:if test="${member.phone1 == '011'}">selected</c:if>>011</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '011'}">selected</c:if>>011</option>
 													<option value="016"
-														<c:if test="${member.phone1 == '016'}">selected</c:if>>016</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '016'}">selected</c:if>>016</option>
 													<option value="017"
-														<c:if test="${member.phone1 == '017'}">selected</c:if>>017</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '017'}">selected</c:if>>017</option>
 													<option value="018"
-														<c:if test="${member.phone1 == '018'}">selected</c:if>>018</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '018'}">selected</c:if>>018</option>
 													<option value="109"
-														<c:if test="${member.phone1 == '019'}">selected</c:if>>019</option>
+														<c:if test="${fn:substringBefore(member.phone, ')') == '019'}">selected</c:if>>019</option>
 												</select>
                                                 </p>
                                                 <p class="cell_hyphen">-</p>
                                                 <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num"
-                                                value="${member.phone2}" />
+                                                value="${fn:substringBefore(fn:substringAfter(member.phone, ')'), '-')}" />
                                                 <p class="cell_hyphen">-</p>
                                                 <input type="text" class="cellphone_input" id="phone3" name="phone3" maxlength="4" ref="num" 
-                                                value="${member.phone3}" />
+                                                value="${fn:substringAfter(member.phone, '-')}" />
                                             </div>
                                         </td>
                                     </tr>
@@ -209,8 +209,8 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-						alert("회원 정보 수정이 완료되었습니다. 마이페이지로 돌아갑니다.");
-			            window.location = ROOT_URL + '/my_starbucks';
+						alert("회원 정보 수정이 완료되었습니다. 확인 버튼을 누르면 메인페이지로 이동합니다.");
+			            window.location = ROOT_URL + '/';
 					} else {
 						alert("작성 폼을 다시 한번 확인하세요.");
 						return false;

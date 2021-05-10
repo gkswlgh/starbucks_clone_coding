@@ -18,7 +18,7 @@
                             <ul class="smap">
                                 <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로" /></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="${pageContext.request.contextPath}/"><span class="en c222">장바구니</span></a></li>
+                                <li><a href="#none"><span class="en c222">장바구니</span></a></li>
                             </ul>
                         </div>
                     </div>

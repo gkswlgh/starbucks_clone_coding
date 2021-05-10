@@ -18,9 +18,9 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/mypage"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
                         <li><a href="${pageContext.request.contextPath}/my/mycard_charge"><span class="en">카드 충전</span></a></li>
                     </ul>
@@ -217,11 +217,11 @@
                                                 <div class="sel_wrap tbl_card_radio charge_options ">
                                                     <span class="ez-checkbox ez-checked">
                                                         <label>
-                                                            <input type="radio" name="autoReloadDay" value="1" checked="checked">
+                                                            <input type="radio" name="autoReloadDay" value="01" checked="checked">
                                                             매월 1일
                                                         </label>
                                                         <label>
-                                                            <input type="radio" name="autoReloadDay" value="5">
+                                                            <input type="radio" name="autoReloadDay" value="05">
                                                             매월 5일
                                                         </label>
                                                         <label>
@@ -239,10 +239,6 @@
                                                         <label>
                                                             <input type="radio" name="autoReloadDay" value="25">
                                                             매월 25일
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="autoReloadDay" value="99">
-                                                            매월 말일
                                                         </label>
                                                     </span>
                                                 </div>
@@ -385,7 +381,11 @@
 			var date = $("input[name='autoReloadDay']:checked").val();
 			if (date == "99") {
 				date = "말";
-			}
+			} else if (date == "01") {
+				date = "1";
+			} else if (date == "05") {
+				date = "5";
+			} 
 			$(".chargeDate").html("매월 " + date + "일");
         }
 
@@ -435,7 +435,21 @@
         $("#frm_AUTO").submit(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
-            alert("설정완료");
+            var nIdx = document.getElementById("cardNumber_AUTO").selectedIndex;
+            var card_id = Number($(".trs_card_AUTO").eq(nIdx).val());
+            var charge_cash = Number($("input[name='priceA']:checked").val());
+            var charge_schedule = $("input[name='autoReloadDay']:checked").val();
+            
+			$.post(ROOT_URL + '/my/rest/auto_charge', {
+            	card_id: card_id,
+            	charge_schedule: charge_schedule,
+            	charge_cash: charge_cash
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("자동 충전이 설정되었습니다. 충전된 카드 상세 페이지로 이동합니다.");
+            		window.location = ROOT_URL + "/my/mycard_view/"+json.card_id;
+            	}
+            });
         });
     });
     </script>

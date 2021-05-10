@@ -15,6 +15,5 @@ public class Card {
 	private String edit_date;
 	private String charge_auto;
 	private String charge_schedule;
-	private Integer charge_limit;
 	private Integer charge_cash;
 }

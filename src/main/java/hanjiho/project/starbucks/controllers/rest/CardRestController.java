@@ -154,6 +154,66 @@ public class CardRestController {
     }
     
 
+
+    /** 카드 자동 충전 (설정 변경) - Card update */
+    @RequestMapping(value = "/my/rest/auto_charge", method = RequestMethod.POST)
+    public Map<String, Object> auto_charge(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_id",  required = false) int card_id,
+            @RequestParam(value = "charge_schedule",  required = false) String charge_schedule,
+            @RequestParam(value = "charge_cash",  required = false) int charge_cash) {
+
+    	//유효성검사
+        if (!regexHelper.isValue(charge_schedule)) { return webHelper.getJsonWarning("충전일을 입력해주세요."); }
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	if (charge_cash == 0) { return webHelper.getJsonWarning("충전액 정보가 없습니다."); }
+    	
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+    	input.setCharge_schedule(charge_schedule);
+    	input.setCharge_cash(charge_cash);
+
+    	//설정변경
+    	try {
+    		cardService.autoCharge(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        Map<String, Object> data = new HashMap<String, Object>();
+        //json에 담아 넘길 카드 일련번호 저장
+        data.put("card_id", card_id);
+        return webHelper.getJsonData(data);
+    }
+
+    /** 카드 자동 충전 해지 (설정 변경) - Card update */
+    @RequestMapping(value = "/my/rest/auto_cancel", method = RequestMethod.POST)
+    public Map<String, Object> auto_cancel(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "card_id",  required = false) int card_id) {
+
+    	//유효성검사
+    	if (member == null) { return webHelper.getJsonWarning("로그인 정보가 없습니다."); }
+    	if (card_id == 0) { return webHelper.getJsonWarning("카드 정보가 없습니다."); }
+    	
+    	Card input = new Card();
+    	input.setCard_id(card_id);
+
+    	//설정변경
+    	try {
+    		cardService.autoChargeCancel(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        Map<String, Object> data = new HashMap<String, Object>();
+        //json에 담아 넘길 카드 일련번호 저장
+        data.put("card_id", card_id);
+        return webHelper.getJsonData(data);
+    }
+    
+
     /** 카드 잔액 이전 - Card update */
     @RequestMapping(value = "/my/rest/balance_trs", method = RequestMethod.POST)
     public Map<String, Object> balance_trs(Model model,

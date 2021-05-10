@@ -19,7 +19,6 @@
 		<result property="edit_date"  column="e_date" />
 		<result property="charge_auto"  column="charge_auto" />
 		<result property="charge_schedule"  column="charge_schedule" />
-		<result property="charge_limit"  column="charge_limit" />
 		<result property="charge_cash"  column="charge_cash" />
 	</resultMap>
 
@@ -28,7 +27,7 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		resultMap="cardMap">
 		SELECT 
-		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash 
+		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_cash 
 		FROM card 
 		WHERE card_id=#{card_id}
 	</select>
@@ -38,7 +37,7 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		resultMap="cardMap">
 		SELECT 
-		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash 
+		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_cash 
 		FROM card 
 		WHERE pin_num=#{pin_num} AND card_num=#{card_num}
 	</select>
@@ -48,21 +47,29 @@
 		parameterType="hanjiho.project.starbucks.model.Card"
 		resultMap="cardMap">
 		SELECT 
-		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_limit, charge_cash
+		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_cash
 		FROM card
 		<where>
 			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
+				member_id = #{member_id}
 			</if>
 			<if test="gift_mem_id != null and gift_mem_id != ''">
-				OR gift_mem_id LIKE concat('%', #{gift_mem_id}, '%')
-			</if>
-			<if test="pin_num != null and pin_num != ''">
-				OR pin_num LIKE concat('%', #{pin_num}, '%')
+				OR gift_mem_id = #{gift_mem_id}
 			</if>
 		</where>
 
 		ORDER BY card_id DESC
+	</select>
+	
+	<!-- 자동 충전을 사용하고 있는 카드 목록 조회 (charge_auto가 1) -->
+	<select id="autoList"
+		parameterType="hanjiho.project.starbucks.model.Card"
+		resultMap="cardMap">
+		SELECT 
+		card_id, cash, charge_auto, charge_schedule, charge_cash
+		FROM card
+		WHERE charge_auto="1" AND charge_schedule=date_format(now(), '%d')
+		ORDER BY card_id DESC 
 	</select>
 	
 	<!-- input select 카드 조회 -->
@@ -126,22 +133,30 @@
 	<update id="autoCharge"
 		parameterType="hanjiho.project.starbucks.model.Card">
 		UPDATE card SET
-		charge_auto="Y",
+		charge_auto="1",
 		charge_schedule=#{charge_schedule},
-		charge_limit=#{charge_limit},
 		charge_cash=#{charge_cash},
+		edit_date=now()
+		WHERE card_id=#{card_id}
+	</update>
+	
+	<!-- 자동충전 해지 -->
+	<update id="autoChargeCancel"
+		parameterType="hanjiho.project.starbucks.model.Card">
+		UPDATE card SET
+		charge_auto="0",
 		edit_date=now()
 		WHERE card_id=#{card_id}
 	</update>
 	
 	
 	<!-- 자동충전 (스케쥴러에 의해 실행됨) -->
-	<update id="charge"
+	<update id="chargeSchedule"
 		parameterType="hanjiho.project.starbucks.model.Card">
 		UPDATE card SET
 		cash=#{cash},
 		edit_date=now()
-		WHERE card_id=#{card_id}
+		WHERE charge_auto="1" AND card_id=#{card_id}
 	</update>
 
 	<!-- 데이터 수 조회하기 (검사) -->

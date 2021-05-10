@@ -18,9 +18,9 @@
                     <ul class="smap">
                         <li><a href="${pageContext.request.contextPath}/"><img src="//image.istarbucks.co.kr/common/img/common/icon_home_w.png" alt="홈으로" /></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/my_starbucks"><span class="en">MyStarbucks</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/mypage"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/starbucks_card/about_card"><span class="en">My 스타벅스 카드</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">My 스타벅스 카드</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
                         <li><a href="${pageContext.request.contextPath}/my/mycard_list"><span class="en">보유 카드</span></a></li>
                     </ul>
@@ -71,17 +71,19 @@
                                 </div>
                                 <div class="my_ms_card_btns_bottom">
                                     <p class="my_ms_card_btn1">
-                                        <a id="balance_trs_btn" data-card-id="${output.card_id}">잔액이전</a>
+                                        <a id="balance_trs_btn">잔액이전</a>
                                     </p>
                                     <p class="my_ms_card_btn2 regi_cancel">
-                                        <a href="${pageContext.request.contextPath}/voc" class="btn_cancel_reg btn_cancel_pop" >분실신고</a>
+                                        <a id="cancelAuto_btn" class="btn_cancel_reg btn_cancel_pop">자동충전여부</a>
                                     </p>
                                 </div>
                             </div>
                             <figure>
                                 <p><img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt="e-gift 카드"></p>
-                            </figure><c:choose>
-							        <c:when test="${cardList != null && fn:length(cardList) > 0}">
+                            </figure>
+                            <!-- 잔액이전 -->
+                            <c:choose>
+							    <c:when test="${cardList != null && fn:length(cardList) > 0}">
                             <div id="balance_trs" style="display:none;position:absolute;top:250px;left:50px;line-height:50px;padding:0 30px 0 30px;">
                             이 카드의 잔액을 전부  
                                   <div class="sel_wrap" style="display:inline-block;position:relative;top:10px;">
@@ -104,6 +106,31 @@
 					         이 카드 외의 다른 카드가 없습니다.</div>
 					        </c:otherwise>
 					    </c:choose>
+					    <!-- 잔액이전 끝 -->
+					    <!-- 자동충전여부 -->
+					    <c:choose>
+						<c:when test="${output.charge_auto == '1'}">
+                            <div id="cancelAuto_div" style="display:none;position:absolute;top:250px;left:50px;line-height:50px;padding:0 30px 0 30px;">
+                            매월
+                            <span class="t_0d5f34 f_22 b">
+                            ${output.charge_schedule}
+                            </span>
+                            일에
+                            <span class="t_0d5f34 f_22 b">
+                            ${output.charge_cash / 10000}
+                            </span>
+                            만원이 자동충전 되도록 설정되어있습니다.
+                            <span>
+                               <a id="cancelAuto" data-card-id="${output.card_id}"  style="padding:5px 10px;border:1px solid #222;margin-left:10px;" data-cardnickname="${output.card_name}">자동충전 해지하기</a>
+                            </span>
+                            <span style="position:absolute;top:-15px;left:180px;">▼</span>
+                            </div></c:when>
+					        <c:otherwise> 
+					         <div id="cancelAuto_div" style="display:none;position:absolute;top:250px;left:50px;line-height:50px;padding:0 30px 0 30px;">
+					         이 카드에는 자동충전이 설정되어있지 않습니다.</div>
+					        </c:otherwise>
+					    </c:choose>
+					    <!-- 자동충전여부 끝 -->
                         </div>
                     </div>
                 </section>
@@ -133,10 +160,10 @@
         $(document).on("click", "#balance_trs_btn", balanceTrs1);
       	//잔액이전확인버튼
         $(document).on("click", "#balance_trs_ok", balanceTrs2);
-      	//select 변경 시
-        $(document).on("change", "#cardNumber_AUTO", function() {
-        	
-        });
+      	//자동충전표시버튼 (cancelAuto_div표시)
+      	$(document).on("click", "#cancelAuto_btn", cancelAuto_btn);
+      	//자동충전해지버튼 (cancelAuto)
+        $(document).on("click", "#cancelAuto", cancelAuto);
       	
       	//삭제
         function deleteCard() {
@@ -164,7 +191,22 @@
 				$("#balance_trs").hide();
 			} else {
 				$(this).addClass("on");
+				$("#cancelAuto_btn").removeClass("on");
+				$("#cancelAuto_div").hide();
 				$("#balance_trs").show();
+			}
+        }
+
+      	//자동충전표시
+        function cancelAuto_btn() {
+			if ($(this).hasClass("on")) {
+				$(this).removeClass("on");
+				$("#cancelAuto_div").hide();
+			} else {
+				$(this).addClass("on");
+				$("#balance_trs_btn").removeClass("on");
+				$("#balance_trs").hide();
+				$("#cancelAuto_div").show();
 			}
         }
         
@@ -184,6 +226,25 @@
             }, function(json) {
             	if (json.rt == "OK") {
                     alert("잔액이 이전되었습니다.");
+            		location.reload();
+            	}
+            });
+        }
+      	
+
+      	//자동충전해지
+        function cancelAuto() {
+			var card_id = $(this).data("card-id");
+            
+            if (!confirm("이 카드에 적용된 자동충전을 해지하시겠습니까?")) {
+                return;
+            }
+			
+			$.post(ROOT_URL + '/my/rest/auto_cancel', {
+            	card_id: card_id
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("자동충전이 해지되었습니다.");
             		location.reload();
             	}
             });

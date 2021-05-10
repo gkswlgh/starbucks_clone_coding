@@ -200,7 +200,10 @@
             	menu_id: menu_id
             }, function(json) {
             	if (json.rt == "OK") {
-            		alert('좋아하는 음료로 등록되었습니다.');	}
+					if (confirm('좋아하는 음료로 등록되었습니다. 마이페이지에서 확인하시겠습니까?')) {
+		                window.location = ROOT_URL + "/my/my_menu";
+					}
+            	}
             });
         }); //좋아하는메뉴버튼끝
         

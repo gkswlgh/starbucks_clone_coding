@@ -41,7 +41,7 @@
                         <p class="s_titl">
                             <span class="f_22 t_006633"><strong>축하, 감사, 응원 등 메시지와 함께 스타벅스 카드를 선물 할 수 있는 가장 빠르고, 간편한 방법!</strong></span><br><br>
                             홈페이지를 통해 스타벅스 카드
-                            <span><a href="javascript:void(0);" required="login" class="t_006633 en" data-href="/msr/sceGift/gift_step1.do">[e-Gift Card 구매·선물]</a></span>이 가능합니다.<br><br><br>
+                            <span><a href="javascript:void(0);" required="login" class="t_006633 en" data-href="/my/gift_step1">[e-Gift Card 구매·선물]</a></span>이 가능합니다.<br><br><br>
                             스타벅스 카드 선물을 위해 실물 카드를 직접 구매 및 전달해야 하는 번거로움 없이 웹에서
                             선물하시려는 e-Mail으로 즉시 또는 예약(원하시는 날짜와 시간 지정)전송하실 수 있습니다.<br><br>
                             <strong class="cf66">※ 스타벅스 홈페이지 회원만 이용 가능하며, 자신에게도 선물하실 수 있습니다.</strong>
@@ -64,7 +64,7 @@
                         <p class="s_titl">
                             <span class="f_22 t_006633">온라인 혹은 오프라인 스타벅스 매장에서 사용할 수 있는 e-스타벅스 카드입니다.</span><br><br>
                             스타벅스 e-Gift Card는 실물 카드로 교환 하면 회원가입 없이도 즉시 사용할 수 있습니다. <br><br>스타벅스 회원이라면
-                            <span><a href="javascript:void(0);" required="login" class="t_006633 en" data-href="/my/mycard_info_input.do">[카드 등록]</a></span>후, 더욱 편리하게 사용하세요.
+                            <span><a href="javascript:void(0);" required="login" class="t_006633 en" data-href="/my/mycard_info_input">[카드 등록]</a></span>후, 더욱 편리하게 사용하세요.
                         </p>
                         <div class="sc_buy_wrap2">
                             <ul class="clear">

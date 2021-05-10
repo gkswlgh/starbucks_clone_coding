@@ -11,13 +11,11 @@
     <div id="contents">
         <!-- 플로팅 배너 시작 -->
         <div class="f_banner">
-            <div class="xmas">
-                <a href="${pageContext.request.contextPath}/" title="자세히 보기"> <img src="${pageContext.request.contextPath}/assets/img/contents/ssg_pop.png" alt="11월 25일 스타벅스 온라인 샵 런칭!" />
-                </a>
-            </div>
+            <!-- <div class="xmas">
+                <img src="${pageContext.request.contextPath}/assets/img/contents/ssg_pop.png" alt="11월 25일 스타벅스 온라인 샵 런칭!" />
+            </div> -->
             <div class="plcc">
-                <a href="${pageContext.request.contextPath}/" title="자세히 보기"> <img src="${pageContext.request.contextPath}/assets/img/contents/plcc_badge.png" alt="스타벅스 현대카드" />
-                </a>
+                <img src="${pageContext.request.contextPath}/assets/img/contents/plcc_badge.png" alt="스타벅스 현대카드" />
             </div>
         </div>
         <!-- 플로팅 배너 끝 -->
@@ -185,7 +183,7 @@
                 <div class="bean_txt_box">
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean_txt.png" alt="스타벅스의 50년이 담긴 애니버서리 블렌드. 스타벅스의 50주년을 기념하여 블렌딩된 깊고 진한 풍미의 애니버서리 블렌드입니다." />
                     <div class="bean_detail_btn">
-                        <a href="${pageContext.request.contextPath}/">가까운 매장 찾기</a>
+                        <a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">가까운 매장 찾기</a>
                     </div>
                 </div>
             </div>
@@ -201,7 +199,7 @@
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_bean_0217.png" />
                 </div>
                 <div class="reserve_detail_btn">
-                    <a href="${pageContext.request.contextPath}/">가까운 매장 찾기</a>
+                    <a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">가까운 매장 찾기</a>
                 </div>
             </div>
         </section>
@@ -233,7 +231,7 @@
                 <div class="store_txt02">차별화된 커피 경험을 누릴 수 있는 리저브 매장, 다양한 방법으로
                     편리하게 즐길 수 있는 드라이브 스루 매장, 함께해서 더 따뜻할수 있는 지역사회 소통 공간 커뮤니티 매장</div>
                 <div class="store_btn">
-                    <a href="${pageContext.request.contextPath}/">매장 찾기</a>
+                    <a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">매장 찾기</a>
                 </div>
             </div>
         </section>

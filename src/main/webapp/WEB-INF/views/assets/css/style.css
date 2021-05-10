@@ -6952,6 +6952,10 @@ button[disabled] {
 	background-color: #bbb;
 	color:#fff;
 }
+#cancelAuto_btn.on {
+    background-color: #bbb;
+    color: #fff;
+}
 
 /*공통*/
 .wrapper {
@@ -6980,6 +6984,10 @@ button[disabled] {
     font-size:16px;
     font-weight: bold;
     line-height: 1.4;
+}
+
+.b {
+	font-weight:bold;
 }
 
 .f_22 {

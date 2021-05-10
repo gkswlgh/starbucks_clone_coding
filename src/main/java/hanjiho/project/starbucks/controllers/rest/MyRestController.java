@@ -69,7 +69,7 @@ public class MyRestController {
 
     	//유효성검사
     	if (!regexHelper.isValue(like_id_list)) {
-			return webHelper.getJsonWarning("좋아요 일련번호가 누락되었습니다.");
+			return webHelper.getJsonWarning("체크된 상품이 없습니다.");
 		}
     	
     	String[] data = like_id_list.split(",");

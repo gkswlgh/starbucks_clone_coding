@@ -1,5 +1,7 @@
 package hanjiho.project.starbucks.service;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.FixMethodOrder;
@@ -175,4 +177,35 @@ public class CardServiceTest {
 //			e.printStackTrace();
 //		}
 //	}
+//	
+//	// 스케쥴러 테스트
+//	@Test
+//	public void testH() {
+//		/* 2) 자동 충전 */
+//		//자동충전기능을 사용중이고 충전일이 오늘인 카드 조회
+//		List<Card> autoList = new ArrayList<Card>();
+//		try {
+//			autoList = cardService.autoList();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		if (autoList != null) {
+//			for (Card input: autoList) {
+//				//충전후 잔액합계
+//				int cash = input.getCash();
+//				int autoCash = input.getCharge_cash();
+//				System.out.println(cash);
+//				System.out.println(autoCash);
+//				input.setCash(cash+autoCash);
+//				System.out.println(input.getCard_id());
+//				System.out.println(input.getCash());
+//				try {
+//					cardService.chargeSchedule(input);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
+	
 }

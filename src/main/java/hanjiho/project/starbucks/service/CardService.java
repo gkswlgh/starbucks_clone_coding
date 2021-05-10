@@ -17,6 +17,19 @@ public interface CardService {
 	 */
 	public Card getCardItem(Card input) throws Exception;
 	/**
+	 * 핀번호 검사
+	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public Card pinCheck(Card input) throws Exception;
+	/**
+	 * 자동 충전을 사용하고 있는 카드 목록 조회
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<Card> autoList() throws Exception;
+	/**
 	 * 카드 데이터 목록 조회
 	 * @return 조회 결과에 대한 컬렉션
 	 * @throws Exception
@@ -70,12 +83,26 @@ public interface CardService {
 	 */
 	public int charge(Card input) throws Exception;
 	/**
-	 * 카드 자동 충전 (잔액 수정)
+	 * 카드 자동 충전 (기능 정의)
 	 * @param Card 수정할 정보를 담고 있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
-	public int chargeAuto(Card input) throws Exception;
+	public int autoCharge(Card input) throws Exception;
+	/**
+	 * 카드 자동 충전 해지 (기능 정의)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int autoChargeCancel(Card input) throws Exception;
+	/**
+	 * 카드 자동 충전 (잔액 수정, 스케쥴러에 의해 실행)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int chargeSchedule(Card input) throws Exception;
 	/**
 	 * 카드 데이터 삭제하기
 	 * @param Card 삭제할 카드의 일련번호를 담고 있는 Beans
@@ -83,11 +110,4 @@ public interface CardService {
 	 * @throws Exception
 	 */
 	public int deleteCard(Card input) throws Exception;
-	/**
-	 * 핀번호 검사
-	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
-	 * @return 조회된 데이터가 저장된 Beans
-	 * @throws Exception
-	 */
-	public Card pinCheck(Card input) throws Exception;
 }

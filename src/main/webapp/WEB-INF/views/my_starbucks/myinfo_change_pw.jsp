@@ -112,7 +112,8 @@
 					console.log(">> 성공!!!! >> " + json);
 					
 					if (json.rt == "OK") {
-			            window.location = ROOT_URL + '/account/find_pw_ok/'+ json.id;
+						alert("비밀번호가 변경되었습니다. 확인 버튼을 누르면 메인페이지로 이동합니다.");
+			            window.location = ROOT_URL + '/';
 					} else {
 						alert("통신 실패. 다시 시도해주세요.");
 						return false;
