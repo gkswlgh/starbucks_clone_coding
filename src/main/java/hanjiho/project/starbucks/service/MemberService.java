@@ -105,5 +105,12 @@ public interface MemberService {
      * @throws Exception
      */
     public void updatePw(Member input) throws Exception;
+
+    /**
+     * 회원 주소 추가
+     * @param input
+     * @throws Exception
+     */
+    public void updateAddress(Member input) throws Exception;
     
 }

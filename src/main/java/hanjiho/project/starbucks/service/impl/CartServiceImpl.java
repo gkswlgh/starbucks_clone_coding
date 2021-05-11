@@ -139,6 +139,28 @@ public class CartServiceImpl implements CartService {
 	}
 
 	/**
+	 * 로그인 시 세션장바구니 회원정보추가
+	 * @param Cart 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int loginCart(Cart input) throws Exception {
+		int result=0;
+		try {
+		    result = sqlSession.update("CartMapper.loginCart", input);
+
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("수정된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 수정에 실패했습니다.");
+		}
+		return result;
+	}
+
+	/**
 	 * 장바구니 데이터 삭제하기
 	 * @param Cart 삭제할 장바구니의 일련번호를 담고 있는 Beans
 	 * @return int

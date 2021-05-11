@@ -120,7 +120,7 @@
                         <div class="product_cart clear">
                             <p>
                                 <strong>총 금액 :&nbsp;
-                                    <span id="ttl_price" class="ttl_price t_006633" value="${output.price}"><fmt:formatNumber value="${output.price}" pattern="#,###" /></span></strong>
+                                    <span id="ttl_price" class="ttl_price t_006633" data-ttl-price="${output.price}"><fmt:formatNumber value="${output.price}" pattern="#,###" /></span></strong>
                                 원
                             </p>
                             <p>
@@ -133,13 +133,13 @@
                             <ul class="product_cart_btns">
                                 <c:choose>
 		                        	<c:when test="${member != null}">
-                                <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" id="pay_now" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
+                                <li class="product_cart_btn1"><a class="pay_now" id="pay_now">바로 주문하기</a></li>
 		                        	</c:when>
 		                        	<c:otherwise>
-                                <li class="product_cart_btn1"><a href="${pageContext.request.contextPath}/" class="pay_now" id="GoLogin" data-price="${output.price}" data-qty="1">바로 주문하기</a></li>
+                                <li class="product_cart_btn1"><a class="pay_now" id="GoLogin">바로 주문하기</a></li>
 		                        	</c:otherwise>
 		                        </c:choose>
-                                <li class="product_cart_btn2"><a href="${pageContext.request.contextPath}/" class="in_cart" id="in_cart" data-price="${output.price}" data-qty="1">장바구니에 담기</a></li>
+                                <li class="product_cart_btn2"><a class="in_cart" id="in_cart" data-price="${output.price}" data-qty="1">장바구니에 담기</a></li>
 		                    </ul>
                         </div>
                     </div>
@@ -159,6 +159,30 @@
         $(document).on("click", "button.plus", qtyPlus); // 수량증가
         $(document).on("click", "button.minus", qtyMinus); // 수량감소
 
+        /*바로구매*/
+        $("#pay_now").on("click", function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+
+        	var menu_id = $("#menu_id").val();
+        	var menu_qty = $("#in_cart").data("qty");
+            
+            //이동 - 이동할 때 상품번호랑 수량 같이
+            $.post(ROOT_URL + '/rest/product/pay_now', {
+            	menu_id: menu_id,
+            	menu_qty: menu_qty
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		var myRedirect = function(redirectUrl, arg, value) {
+            		  var form = $('<form action="' + redirectUrl + '" method="post">' +
+            				  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+            				  $('body').append(form);
+            				  $(form).submit();
+            				};
+            		myRedirect(ROOT_URL + "/my/cart_step2", "cart_id", json.cart_id);
+           		}
+            });
+        });//바로구매끝
 
         /*장바구니*/
         $("#in_cart").on("click", function(e) {
@@ -234,7 +258,7 @@
      * 수량증가
      */
     function qtyPlus() {
-        var price_one = Number($(".pay_now").attr("data-price"));
+        var price_one = Number($(".in_cart").attr("data-price"));
         var qty = Number($("#product_count_result").attr("value"));
         if (qty >= 10) {
             alert("한번에 10개까지만 주문 하실 수 있습니다.");
@@ -242,23 +266,22 @@
         }
 
         //수량 input
-        $(".pay_now").attr("data-qty", qty + 1);
         $(".in_cart").attr("data-qty", qty + 1);
         $("#product_count_result").attr("value", qty + 1);
         qty = qty + 1;
 
         //총금액
         var ttlPrice_tag = document.getElementById("ttl_price");
-        ttlPrice = Number($(".ttl_price").attr("value")) + price_one;
-        ttlPrice_tag.innerHTML = ttlPrice;
-        $(".ttl_price").attr("value", ttlPrice);
+        var ttlPrice = Number($(".ttl_price").attr("data-ttl-price")) + price_one;
+        $(".ttl_price").attr("data-ttl-price", ttlPrice);
+        ttlPrice_tag.innerHTML = ttlPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");//콤마처리
     }
 
     /**
      * 수량감소
      */
     function qtyMinus() {
-        var price_one = Number($(".pay_now").attr("data-price"));
+        var price_one = Number($(".in_cart").attr("data-price"));
         var qty = Number($("#product_count_result").attr("value"));
         if (qty == 1) {
             alert("1개 이상 주문 하셔야 합니다.");
@@ -266,16 +289,15 @@
         }
 
         //수량 input
-        $(".pay_now").attr("data-qty", qty - 1);
         $(".in_cart").attr("data-qty", qty - 1);
         $("#product_count_result").attr("value", qty - 1);
         qty = qty - 1;
 
         //총금액
         var ttlPrice_tag = document.getElementById("ttl_price");
-        ttlPrice = Number($(".ttl_price").attr("value")) - price_one;
-        ttlPrice_tag.innerHTML = ttlPrice;
-        $(".ttl_price").attr("value", ttlPrice);
+        var ttlPrice = Number($(".ttl_price").attr("data-ttl-price")) - price_one;
+        $(".ttl_price").attr("data-ttl-price", ttlPrice);
+        ttlPrice_tag.innerHTML = ttlPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");//콤마처리
     }
     </script>
 </body>

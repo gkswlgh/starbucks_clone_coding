@@ -10,6 +10,7 @@
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
 		<result property="order_menu_id"  column="order_menu_id" />
 		<result property="menu_id"  column="menu_id" />
+		<result property="member_id"  column="member_id" />
 		<result property="order_id"  column="order_id" />
 		<result property="menu_qty"  column="menu_qty" />
 	</resultMap>
@@ -19,7 +20,7 @@
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
 		resultMap="orderMenuListMap">
 		SELECT 
-		order_menu_id, menu_id, order_id, menu_qty 
+		order_menu_id, menu_id, member_id, order_id, menu_qty 
 		FROM order_menu_list 
 		WHERE order_menu_id=#{order_menu_id}
 	</select>
@@ -29,7 +30,7 @@
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
 		resultMap="orderMenuListMap">
 		SELECT 
-		order_menu_id, menu_id, order_id, menu_qty
+		order_menu_id, menu_id, member_id, order_id, menu_qty
 		FROM order_menu_list
 		<where>
 			<if test="menu_id != null and menu_id != ''">
@@ -48,9 +49,9 @@
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
 		useGeneratedKeys="true" keyProperty="order_menu_id">
 		INSERT INTO order_menu_list (
-		menu_id, order_id, menu_qty
+		menu_id, member_id, order_id, menu_qty
 		) VALUES (
-		#{menu_id}, #{order_id}, #{menu_qty}
+		#{menu_id}, #{member_id}, #{order_id}, #{menu_qty}
 		)
 	</insert>
 
@@ -65,6 +66,7 @@
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList">
 		UPDATE order_menu_list SET
 		menu_id=#{menu_id},
+		member_id,=#{member_id},
 		order_id=#{order_id},
 		menu_qty=#{menu_qty}
 		WHERE order_menu_id=#{order_menu_id}

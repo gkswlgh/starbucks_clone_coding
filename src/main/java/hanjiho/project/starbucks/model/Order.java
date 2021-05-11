@@ -6,6 +6,7 @@ import lombok.Data;
 public class Order {
 	private int order_id;
 	private int member_id;
+	private String order_type;
 	private int order_price;
 	private String pay_method;
 	private String receive_complete;

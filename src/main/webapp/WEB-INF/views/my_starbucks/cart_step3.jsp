@@ -70,33 +70,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-unit-price="25000">
+                            <tr>
                                 <td>1</td>
                                 <td class="cart_ttl2">
-                                    <input type="hidden" data-item-name="상품이름" data-item-price="상품가격" data-item-id="상품번호">
                                     <div class="ttl2_wrap clear">
                                         <div class="ttl2_thumb">
-                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2016/04/[9200000000044]_20160415132044486.jpg" alt />
+                                            <img src="${cart.list_img}" alt />
                                         </div>
                                         <div class="ttl2_cell">
-                                            <a href="${pageContext.request.contextPath}/" class="ttl2_name">블렌드 어쩌구</a>
+                                            <a class="ttl2_name">${cart.name}</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="cart_qnt2">
                                     <label for="n0" class="hid">수량</label>
                                     <div class="qnt_box">
-                                        <span>1</span>
+                                        <span>${cart.menu_qty}</span>
                                     </div>
                                 </td>
                                 <td class="cart_price2">
-                                    <span class="num">25,000</span>
+                                    <span class="num"><fmt:formatNumber value="${cart.price}" pattern="#,###" /></span>
                                     <i class="unit">원</i>
                                 </td>
                                 <td class="cart_selling2">
                                     <span class="label">최종금액</span>
                                     <span class="price">
-                                        <b class="num x-row-net">25,000</b>
+                                        <b class="num x-row-net"><fmt:formatNumber value="${order.order_price}" pattern="#,###" /></b>
                                         <i class="unit">원</i>
                                     </span>
                                 </td>
@@ -116,28 +115,59 @@
                             <tbody>
                                 <tr>
                                     <th class="fth">주소지</th>
-                                    <td class="ftd cardName">경기도 광주시 어쩌구</td>
+                                    <td class="ftd cardName">[&nbsp;${order.postcode}&nbsp;] &nbsp; ${order.addr1} &nbsp; ${order.addr2}</td>
                                     <th class="fth">주문한 사람</th>
-                                    <td class="ftd receiverInfo">이름 [전화번호]</td>
+                                    <td class="ftd receiverInfo">${member.user_name} [&nbsp;${member.phone}&nbsp;]</td>
                                 </tr>
                                 <tr>
                                     <th>결제 금액</th>
-                                    <td>10,000원</td>
+                                    <td><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원
+                <c:choose>
+                    <c:when test="${cart.menu_qty * cart.price < 20000}">
+                        (배송비 5000원 포함)
+                    </c:when>
+                    <c:otherwise>
+                        (배송비 무료)
+                    </c:otherwise>
+                </c:choose>
+                                    </td>
                                     <th>결제수단</th>
-                                    <td>신용카드</td>
+                                    <td>
+				<c:choose>
+                    <c:when test="${order.pay_method == 'S' && card != null}">
+                        스타벅스 카드 [&nbsp;${card.card_name}&nbsp;] ,&nbsp;&nbsp; 잔액 : <fmt:formatNumber value="${card.cash}" pattern="#,###" />원
+                    </c:when>
+                    <c:when test="${order.pay_method == 'N'}">
+                        신용카드
+                    </c:when>
+                </c:choose>
+									</td>
                                 </tr>
                                 <tr>
                                     <td class="ltd" colspan="4">
-                                        <p>총 결제금액: <span>10,000원</span></p>
+                                        <p>총 결제금액: <span><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원</span></p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="gift_payment_btns cart">
+                        <form action="${pageContext.request.contextPath}/rest/product/order" method="post" name="order_form" id="order_form">
+                        	<input type="hidden" id="cart_id" name="cart_id" value="${cart.cart_id}" />
+                        	<c:choose>
+							<c:when test="${card != null}">
+                        	<input type="hidden" id="card_id" name="card_id" value="${card.card_id}" />
+                        	</c:when>
+                        	</c:choose>
+                        	<input type="hidden" id="pay_method" name="pay_method" value="${order.pay_method}" />
+                        	<input type="hidden" id="postcode" name="postcode" value="${order.postcode}" />
+                        	<input type="hidden" id="addr1" name="addr1" value="${order.addr1}" />
+                        	<input type="hidden" id="addr2" name="addr2" value="${order.addr2}" />
+                        	<input type="hidden" id="order_price" name="order_price" value="${order.order_price}" />
                             <ul>
-                                <li class="gift_payment_btn3"><a href="${pageContext.request.contextPath}/">결제하기</a></li>
-                                <li class="gift_payment_btn1"><a href="${pageContext.request.contextPath}/">뒤로</a></li>
+                                <li class="gift_payment_btn3"><button type="submit" id="goOrder">결제하기</button></li>
+                                <li class="gift_payment_btn1"><a onclick="history.back(); return false;">뒤로</a></li>
                             </ul>
+						</form>
                         </div>
                     </div>
                 </section>
@@ -146,6 +176,68 @@
         </div>
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
+    <script>
+    $(function() {
+
+        /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
+        $("#order_form").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
+            /*입력검사 규칙*/
+            rules: {
+            	cart_id: "required",
+            	pay_method: "required",
+            	postcode: "required",
+            	addr1: "required",
+            	addr2: "required",
+            	order_price: "required"
+            },
+            messages: {
+            	cart_id: "오류. 처음부터 다시 시도해주세요.",
+            	pay_method: "오류. 처음부터 다시 시도해주세요.",
+            	postcode: "오류. 처음부터 다시 시도해주세요.",
+            	addr1: "오류. 처음부터 다시 시도해주세요.",
+            	addr2: "오류. 처음부터 다시 시도해주세요.",
+            	order_price: "오류. 처음부터 다시 시도해주세요."
+            }
+        }); //end validate()
+
+        $('#order_form').ajaxForm({
+				// submit 전에 호출된다.
+				beforeSubmit: function (arr, form, options) {
+					// 현재 통신중인 대상 페이지를 로그로 출력함
+					console.log(">> Ajax 통신 시작 >> " + this.url);
+					
+					// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+					// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+	        		return $(form).valid();
+					
+				},
+				// 통신 성공시 호출될 함수 (파라미터는 읽어온 내용)
+				success: function(json) {
+					console.log(">> 성공!!!! >> " + json);
+					
+					if (json.rt == "OK") {
+	            		var myRedirect = function(redirectUrl, arg, value) {
+	              		  var form = $('<form action="' + redirectUrl + '" method="post">' +
+	              				  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+	              				  $('body').append(form);
+	              				  $(form).submit();
+	              				};
+	              		myRedirect(ROOT_URL + "/my/cart_step4", "order_id", json.order_id);
+					}
+				}
+		});// end ajax
+    });
+    </script>
 </body>
 
 </html>

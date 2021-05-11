@@ -43,6 +43,13 @@ public interface CartService {
 	 */
 	public int editCart(Cart input) throws Exception;
 	/**
+	 * 로그인 시 세션장바구니 회원정보추가
+	 * @param Cart 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int loginCart(Cart input) throws Exception;
+	/**
 	 * 장바구니 데이터 삭제하기
 	 * @param Cart 삭제할 장바구니의 일련번호를 담고 있는 Beans
 	 * @return int

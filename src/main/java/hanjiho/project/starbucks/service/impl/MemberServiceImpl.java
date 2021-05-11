@@ -362,4 +362,27 @@ public class MemberServiceImpl implements MemberService {
             throw new Exception("비밀번호 갱신에 실패했습니다.");
         }
     }
+
+    /**
+     * 회원 주소 추가
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void updateAddress(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.update("MemberMapper.updateAddress", input);
+            if (result == 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("회원 주소 갱신에 실패했습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("회원 주소 갱신에 실패했습니다.");
+        }
+    }
 }

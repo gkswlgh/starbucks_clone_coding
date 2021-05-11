@@ -115,12 +115,19 @@
                                         <span class="price">
                                             <b class="num x-row-net"><fmt:formatNumber value="${item.menu_qty * item.price}" pattern="#,###" /></b>
                                             <i class="unit">원</i>
-                                        </span>
+                                        </span> 
                                     </td>
                                     <td class="cart_btn2">
                                         <div class="btn2_wrap">
-                                            <a href="${pageContext.request.contextPath}" class="btn btn-em">바로구매</a>
-                                            <button class="btn btn-cart-remove" type="button" data-add-url="${pageContext.request.contextPath}" data-item-name="${item.name}" data-item-id="${item.cart_id}">삭제</button>
+                                        <c:choose>
+						                    <c:when test="${member != null}">
+                                            <a id="payNow" class="btn btn-em">바로구매</a>
+						                    </c:when>
+						                    <c:otherwise>
+                                            <a id="goLogin" class="btn btn-em">바로구매</a>
+						                    </c:otherwise>
+						                </c:choose>
+                                            <button class="btn btn-cart-remove" type="button" data-item-name="${item.name}" data-item-id="${item.cart_id}">삭제</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -167,8 +174,15 @@
                             </div>
                         </div>
                         <div class="btn_order clear">
-                            <button type="submit" id="btn-cart-remove-all" class="btn_order1 btn_delete">선택상품 삭제</button>
+                            <button type="button" id="btn-cart-remove-all" class="btn_order1 btn_delete">선택상품 삭제</button>
+                <c:choose>
+                    <c:when test="${member != null}">
                             <button type="submit" class="btn_order2 btn_order">선택상품 주문</button>
+                    </c:when>
+                    <c:otherwise>
+                            <button type="button" id="goLogin" class="btn_order2">선택상품 주문</button>
+                    </c:otherwise>
+                </c:choose>
                         </div>
                     </form>
                 </section>
@@ -255,7 +269,7 @@
         	var sum = money+del;
         	//콤마
         	money = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        	del = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        	del = del.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         	sum = sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         	
         	$("#all-item-price").html(money);
@@ -337,12 +351,29 @@
 	    }
 	        
 
+	    //선택장바구니
         $("#cart").submit(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
             alert("주문서 입력 화면으로 넘어갑니다.");
         });
-        
+
+	    //바로구매
+        $("#payNow").click(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+            alert("주문서 입력 화면으로 넘어갑니다.");
+        });
+	    
+
+	    //로그인
+        $("#goLogin").click(function(e) {
+            /*기본 동작 수행 방식*/
+            e.preventDefault();
+            if (confirm("로그인 하시면 바로 장바구니의 상품을 구매하실 수 있습니다. 로그인 페이지로 이동하시겠습니까?")) {
+            	window.location = ROOT_URL + "/account/login";
+            }
+        });
 		
     });
     </script>

@@ -45,15 +45,14 @@
                         </div>
                     </div>
                     <div class="gift_card_txt">
-                        <h5 class="m0"><span class="user">회원</span>님의 결제가 정상적으로 완료되었습니다!</h5>
+                        <h5 class="m0"><span class="user">${member.user_name}</span>님의 결제가 정상적으로 완료되었습니다!</h5>
                     </div>
                     <div class="card_gift_payment">
                         <div class="anno">
                             딜리버리 서비스 이용 시 매장 상황에 따라 40분 이상 소요될 수 있습니다.<br>
                             (40분이 지나도 도착하지 않을 시 매장으로 직접 문의 바랍니다.)
                         </div>
-                        <table summary="결제하기" class="payment_tb">
-                            <caption class="hid">결제하기</caption>
+                        <table summary="결제완료" class="payment_tb">
                             <colgroup>
                                 <col width="9.0909%">
                                 <col width="40.9090%">
@@ -63,27 +62,36 @@
                             <tbody>
                                 <tr>
                                     <th class="fth">주소지</th>
-                                    <td class="ftd cardName">경기도 광주시 어쩌구</td>
+                                    <td class="ftd cardName">${order.postcode} ${order.addr1} ${order.addr2}</td>
                                     <th class="fth">주문한 사람</th>
-                                    <td class="ftd receiverInfo">이름 [전화번호]</td>
+                                    <td class="ftd receiverInfo">${member.user_name} [${member.phone}]</td>
                                 </tr>
                                 <tr>
                                     <th>결제 금액</th>
-                                    <td>10,000원</td>
+                                    <td><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원</td>
                                     <th>결제수단</th>
-                                    <td>신용카드</td>
+                                    <td>
+				<c:choose>
+                    <c:when test="${order.pay_method == 'S'}">
+                        스타벅스 카드
+                    </c:when>
+                    <c:when test="${order.pay_method == 'N'}">
+                        신용카드
+                    </c:when>
+                </c:choose>
+									</td>
                                 </tr>
                                 <tr>
                                     <td class="ltd" colspan="4">
-                                        <p>총 결제금액: <span>10,000원</span></p>
+                                        <p>총 결제금액: <span><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원</span></p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="gift_pay_done_btns">
                             <ul>
-                                <li class="gift_pay_done_btn1"><a href="${pageContext.request.contextPath}/">선물 계속하기</a></li>
-                                <li class="gift_pay_done_btn2"><a href="${pageContext.request.contextPath}/">선물 내역 확인하기</a></li>
+                                <li class="gift_pay_done_btn1"><a href="${pageContext.request.contextPath}/product/menu_list">쇼핑 계속하기</a></li>
+                                <li class="gift_pay_done_btn2"><a href="${pageContext.request.contextPath}/my/order_list">결제 내역 확인하기</a></li>
                             </ul>
                         </div>
                     </div>

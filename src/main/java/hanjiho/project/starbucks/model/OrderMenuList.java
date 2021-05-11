@@ -6,6 +6,7 @@ import lombok.Data;
 public class OrderMenuList {
 	private int order_menu_id;
 	private int menu_id;
+	private int member_id;
 	private int order_id;
 	private int menu_qty;
 }

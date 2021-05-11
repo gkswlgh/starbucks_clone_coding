@@ -48,14 +48,8 @@
                         <h5 class="m0">주문서 입력을 해주세요.</h5>
                     </div>
                     <!-- form -->
-                    <form action="" enctype="multipart/form-data" method="post" id="frmUpload">
-                        <input type="hidden" name="b2bYn" value="N">
-                        <input type="hidden" id="egiftImgMngSeq" value="274">
-                        <input type="hidden" id="cardName" value="2021 Happy New Year">
-                        <input type="hidden" id="cardImgUrl" value="https://image.istarbucks.co.kr/cardImg/20201229/007764.png">
-                        <input type="hidden" id="egiftOrderSeq" value>
-                        <input type="hidden" id="receiveDataInfo" value>
-                        <input type="hidden" id="egiftCartSeq" value>
+                    <form action="${pageContext.request.contextPath}/my/cart_step3" method="post" id="frmUpload" name="frmUpload">
+                        <input type="hidden" name="cart_id" value="${output.cart_id}">
                         <fieldset>
                             <legend class="hid">주문서 입력을 해주세요.</legend>
                             <!-- 테이블 -->
@@ -78,12 +72,12 @@
                                                                 <div class="shop-item-inner">
                                                                     <div class="adr-wrap adr_inputbox">
                                                                         <input type="button" class="btn-em btn--narrow" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                                                        <input type="text" name="zip" class="input--wide" id="sample6_postcode" placeholder="우편번호 찾기를 해주세요." data-validation="required" data-validation-error-msg="우편번호 찾기를 해주세요." readonly>
-                                                                        <input type="text" name="address" class="input--wide input_address" id="sample6_address" placeholder="주소지를 입력해주세요." data-validation="required" data-validation-error-msg="주소지를 입력해주세요." readonly>
-                                                                        <input type="text" name="addressDetail" id="sample6_detailAddress" class="input--wide input_address" placeholder="상세주소를 입력해주세요." data-validation="required" data-validation-error-msg="상세주소를 입력해주세요.">
+                                                                        <input type="text" value="${member.postcode}" name="zip" class="input--wide" id="sample6_postcode" placeholder="우편번호 찾기를 해주세요." data-validation="required" data-validation-error-msg="우편번호 찾기를 해주세요." readonly>
+                                                                        <input type="text" value="${member.addr1}" name="address" class="input--wide input_address" id="sample6_address" placeholder="주소지를 입력해주세요." data-validation="required" data-validation-error-msg="주소지를 입력해주세요." readonly>
+                                                                        <input type="text" value="${member.addr2}" name="addressDetail" id="sample6_detailAddress" class="input--wide input_address" placeholder="상세주소를 입력해주세요." data-validation="required" data-validation-error-msg="상세주소를 입력해주세요.">
                                                                     </div>
                                                                     <div class="checkbox clean">
-                                                                        <input id="add_addr" name="add_addr" type="checkbox" /> <label class="c666" for="add_addr">해당 정보를 나의 배송지에 추가 </label>
+                                                                        <input id="add_addr" name="add_addr" type="checkbox" value="Y" checked/> <label class="c666" for="add_addr">해당 정보를 나의 배송지에 추가 </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -93,24 +87,32 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">휴대번호 입력</th>
+                                                    <th scope="row">휴대번호 입력 (회원 정보)</th>
                                                     <td>
                                                         <div class="sel_wrap">
                                                             <p class="phone_sel_wrap">
-                                                                <label for="phone1">010</label> <select id="phone1">
-                                                                    <option value="010">010</option>
-                                                                    <option value="011">011</option>
-                                                                    <option value="016">016</option>
-                                                                    <option value="017">017</option>
-                                                                    <option value="018">018</option>
-                                                                    <option value="109">019</option>
-                                                                </select>
-                                                            </p>
-                                                            <p class="cell_hyphen">-</p>
-                                                            <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num" />
-                                                            <p class="cell_hyphen">-</p>
-                                                            <input type="text" class="cellphone_input" id="phone3" name="phone3" maxlength="4" ref="num" />
-                                                        </div>
+			                                                    <label for="phone1">010</label> <select id="phone1" name="phone1" disabled>
+																<option value="010"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '010'}">selected</c:if>>010</option>
+																<option value="011"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '011'}">selected</c:if>>011</option>
+																<option value="016"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '016'}">selected</c:if>>016</option>
+																<option value="017"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '017'}">selected</c:if>>017</option>
+																<option value="018"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '018'}">selected</c:if>>018</option>
+																<option value="109"
+																	<c:if test="${fn:substringBefore(member.phone, ')') == '019'}">selected</c:if>>019</option>
+															</select>
+			                                                </p>
+			                                                <p class="cell_hyphen">-</p>
+			                                                <input type="text" class="cellphone_input" id="phone2" name="phone2" maxlength="4" ref="num"
+			                                                value="${fn:substringBefore(fn:substringAfter(member.phone, ')'), '-')}" disabled/>
+			                                                <p class="cell_hyphen">-</p>
+			                                                <input type="text" class="cellphone_input" id="phone3" name="phone3" maxlength="4" ref="num" 
+			                                                value="${fn:substringAfter(member.phone, '-')}" disabled/>
+			                                             </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -118,36 +120,53 @@
                                                     <td>
                                                         <div class="sel_wrap tbl_card_radio">
                                                             <span class="radio_wrap radio_wrap_mn">
-                                                                <input type="radio" name="gopaymethod" id="payMethod1" value="onlycard">
+                                                                <input type="radio" name="gopaymethod" id="payMethod1" value="N" checked>
                                                                 <label for="payMethod1">신용카드</label>
-                                                                <input type="radio" name="gopaymethod" id="payMethod2" value="starbuckscard" checked>
-                                                                <label for="payMethod2">스타벅스 카드</label>
-                                                                <div class="card_select">
+                                                	<c:choose>
+							        				<c:when test="${cardList != null && fn:length(cardList) > 0}">
+                                                          <input type="radio" name="gopaymethod" id="payMethod2" value="S" >
+                                                          <label for="payMethod2">스타벅스 카드</label>
+                                                          <div class="card_select">
+                                                          <!-- 드롭박스 -->
                                                                     <div class="sel_wrap">
                                                                         <p class="user_sel_wrap">
-                                                                            <label for="cardNumber_AUTO">2021 Happy New Year</label>
-                                                                            <select id="cardNumber_AUTO" class="cardNumber">
-                                                                                <option selected="selected" value>2021 Happy New Year</option>
+                                                                            <select id="cardNumber_AUTO" name="card_id" class="cardNumber" disabled>
+                                                                                <c:forEach var="item" items="${cardList}" varStatus="status">
+										                                              <option class="trs_card_AUTO"  data-cash="${item.cash}" value="${item.card_id}">${item.card_name}</option>
+															           		 	</c:forEach>
                                                                             </select>
                                                                         </p>
                                                                     </div>
-                                                                    <div class="user_card_wrap clear">
-                                                                        <figure>
-                                                                            <i class="representative_icon">
-                                                                                <a href="${pageContext.request.contextPath}/"></a>
-                                                                            </i>
-                                                                            <img src="https://image.istarbucks.co.kr/cardImg/20201229/007764.png" alt class="cardImgUrl">
-                                                                        </figure>
-                                                                        <p>
-                                                                            <br><br>
-                                                                            최종 사용일 :
-                                                                            <span class="balanceConfirmDate">2021-01-28 21:57:02</span>
-                                                                            <br>
-                                                                            카드 등록일 :
-                                                                            <span class="cardRegDate">2021-01-28 21:57:02</span>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
+                                                          <!-- 드롭박스 끝 -->
+                                                          <!-- 카드정보 -->
+					                                                <c:forEach var="item" items="${cardList}" varStatus="status">
+					                                                <div class="user_card_wrap_AUTO user_card_wrap clear" style="display: none;" data-cash="${item.cash}" data-card-id="${item.card_id}">
+					                                                    <figure>
+					                                                        <img src="https://image.istarbucks.co.kr/cardImg/20210203/007864.png" alt class="cardImgUrl">
+					                                                    </figure>
+					                                                    <p>
+					                                                        <br><br>
+					                                                        최종 사용일 :
+					                                                        <span class="balanceConfirmDate">${item.edit_date}</span>
+					                                                        <br>
+					                                                        카드 등록일 :
+					                                                        <span class="cardRegDate">${item.reg_date}</span>
+					                                                    </p>
+										                                <p class="my_ms_card_detail_price">
+										                                    잔액
+										                                    <strong class="en t_0d5f34"> <fmt:formatNumber value="${item.cash}" pattern="#,###" /></strong>
+										                                    원
+										                                </p>
+					                                                </div>
+					                                                </c:forEach>
+                                                          <!-- 카드정보 끝 -->
+                                                            </div>
+					                            	</c:when>
+					                            	<c:otherwise>
+					                            	<input type="radio" name="gopaymethod" id="payMethod2" value="S" disabled>
+                                                                <label for="payMethod2">스타벅스 카드</label>
+					                            	</c:otherwise>
+										    		</c:choose>
                                                             </span>
                                                         </div>
                                                     </td>
@@ -163,13 +182,6 @@
                                                         </ul>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <div class="agree_checkbox clean">
-                                                            <label class="c666" for="agree1"><input id="agree1" name="agree1" type="checkbox" value="Y" /> 위 상품의 판매조건을 명확히 확인하였으며, 구매 진행에 동의합니다. </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -178,7 +190,7 @@
                             <!-- 테이블 끝 -->
                             <div class="gift_info_send_btns">
                                 <ul>
-                                    <li class="gift_info_send_btn1"><a href="${pageContext.request.contextPath}/">뒤로</a></li>
+                                    <li class="gift_info_send_btn1"><a onclick="history.back(); return false;">뒤로</a></li>
                                     <li class="gift_info_send_btn2"><button type="submit">다음</button></li>
                                 </ul>
                             </div>
@@ -243,59 +255,39 @@
     <!-- 다음 우편번호 찾기 끝 -->
     <script type="text/javascript">
     $(function() {
-        var tel = $("#phone1").val() + $("#phone2").val() + $("#phone3").val();
-
-
-        /*플러그인의 기본 설정 옵션 추가*/
-        jQuery.validator.setDefaults({
-            onkeyup: false, //키보드 입력시 검사 안함
-            onclick: false, //input 태그 클릭시 검사 안함
-            onfocusout: false, //포커스가 빠져나올 때 검사 안함
-            showErrors: function(errorMap, errorList) { //에러 발생시 호출되는 함수 재정의
-                //에러가 있을 때만
-                if (this.numberOfInvalids()) {
-                    //0번째 에러 메시지에 대한 javascript 기본 alert함수 사용
-                    alert(errorList[0].message);
-                    //0번째 에러 발생 항목에 포커스 지정
-                    $(errorList[0].element).focus();
-                }
-            }
-        });
-        //한국식전화번호검사
-        $.validator.addMethod("phone", function(value, element) {
-            return this.optional(element) ||
-                /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i.test(value) ||
-                /^\d{2,3}\d{3,4}\d{4}$/i.test(value);
-        });
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#frmUpload").validate({
+        	// alert 함수로 에러메시지 표시하기 옵션
+			onkeyup: false,
+			onclick: false,
+			onfocusout: false,
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length < 1) {
+					return;
+				}
+				alert(errorList[0].message);
+			},
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
                 zip: "required",
                 address: "required",
                 addressDetail: "required",
-                phone2: { required: true, number: true },
-                phone3: { required: true, number: true }
+                cart_id:"required"
             },
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
-
                 zip: "우편번호 찾기를 해주세요.",
                 address: "주소지를 입력해주세요.",
                 addressDetail: "상세주소를 입력해주세요.",
-                phone2: {
-                    required: "연락처를 입력하세요.",
-                    number: "연락처 형식이 잘못되었습니다."
-                },
-                phone3: {
-                    required: "연락처를 입력하세요.",
-                    number: "연락처 형식이 잘못되었습니다."
-                }
+                cart_id: "상품 정보가 없습니다. 처음부터 다시 시도해주세요."
             }
         }); //end validate()
 
+
+
+        /*결제수단 선택시 */
         $(document).on("click", "[name='gopaymethod']", function() {
             if ($("#payMethod1").prop('checked')) {
                 $("#cardNumber_AUTO").prop('disabled', true);
@@ -305,20 +297,19 @@
                 $(".user_card_wrap").show();
             }
         });
-
-
-        /*필수 동의 체크*/
-        $(document).submit(function(e) {
-            /*기본 동작 수행 방식*/
-            e.preventDefault();
-
-            if ($("#agree1").prop('checked')) {
-                alert("주문서 작성 완료");
-            } else {
-                alert("필수 동의 사항에 체크해 주세요.");
-                return false;
-            }
-        });
+        
+        /*AUTO 카드 선택시 */
+        $(document).on("change", "#cardNumber_AUTO", CardShow_AUTO);
+        $(document).on("change", "#payMethod2", CardShow_AUTO);
+        
+        /*AUTO 카드 정보 보이기 */
+        function CardShow_AUTO() {
+            var nIdx = document.getElementById("cardNumber_AUTO").selectedIndex;
+            $(".user_card_wrap_AUTO").hide();
+			$(".user_card_wrap_AUTO").eq(nIdx).show();
+			var cardName = $(".trs_card_AUTO").eq(nIdx).text();
+        }
+        
     });
     </script>
 </body>

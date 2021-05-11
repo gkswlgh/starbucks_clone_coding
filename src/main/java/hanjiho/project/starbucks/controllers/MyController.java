@@ -26,12 +26,16 @@ import hanjiho.project.starbucks.model.Gift;
 import hanjiho.project.starbucks.model.LikeMenu;
 import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
+import hanjiho.project.starbucks.model.Order;
 import hanjiho.project.starbucks.model.Voc;
 import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.CartService;
 import hanjiho.project.starbucks.service.GiftService;
 import hanjiho.project.starbucks.service.LikeMenuService;
+import hanjiho.project.starbucks.service.MemberService;
 import hanjiho.project.starbucks.service.MenuService;
+import hanjiho.project.starbucks.service.OrderMenuListService;
+import hanjiho.project.starbucks.service.OrderService;
 import hanjiho.project.starbucks.service.VocService;
 
 /**
@@ -46,7 +50,9 @@ public class MyController {
     /** RegexHelper 주입 */
     @Autowired
     RegexHelper regexHelper;
-	
+
+	@Autowired
+	MemberService memberService;
 	@Autowired
 	MenuService menuService;
 	@Autowired
@@ -59,6 +65,10 @@ public class MyController {
 	GiftService giftService;
 	@Autowired
 	CardService cardService;
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	OrderMenuListService orderMenuListService;
 
     /**
      * 선물하기 페이지
@@ -480,7 +490,9 @@ public class MyController {
      * 장바구니 페이지
      */
     @RequestMapping(value = "/my/cart_step1", method = RequestMethod.GET)
-    public ModelAndView cart_step1(HttpSession session, @SessionAttribute(value = "member", required = false) Member member, Model model) {
+    public ModelAndView cart_step1(HttpSession session, 
+    		@SessionAttribute(value = "member", required = false) Member member, 
+    		Model model) {
     	
     	Cart input = new Cart();
     	if (member != null) {
@@ -501,10 +513,59 @@ public class MyController {
     }
     
     /**
-     * 장바구니 2 페이지 - 주문서 입력
+     * [ITEM | 바로구매] 장바구니 2 페이지 - 주문서 입력
      */
-    @RequestMapping(value = "/my/cart_step2", method = RequestMethod.GET)
-    public ModelAndView cart_step2(HttpSession session, @SessionAttribute(value = "member", required = false) Member member, Model model) {
+    @RequestMapping(value = "/my/cart_step2", method = RequestMethod.POST)
+    public ModelAndView cart_step2(HttpSession session, 
+    		@SessionAttribute(value = "member", required = false) Member member, 
+    		Model model,
+            @RequestParam(value = "cart_id", required = false) int cart_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	Cart input = new Cart();
+    	if (member != null) {
+    		input.setMember_id(member.getId());
+    	}
+    	input.setCart_id(cart_id);
+
+    	Cart output = new Cart();
+    	List<Card> cardList = new ArrayList<Card>();
+    	try {
+			output = cartService.getCartItem(input);
+			
+			//보유카드 드롭박스 리스트
+	    	Card tmp = new Card();
+	    	tmp.setMember_id(member.getId());
+    		cardList = cardService.getCardList(tmp);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != output.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+        model.addAttribute("cardList", cardList);
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/cart_step2");
+    }
+    
+
+    /**
+     * [LIST | 선택구매] 장바구니 2 페이지 - 주문서 입력
+     */
+    @RequestMapping(value = "/my/cart_step2_list", method = RequestMethod.POST)
+    public ModelAndView cart_step2_list(HttpSession session, 
+    		@SessionAttribute(value = "member", required = false) Member member, 
+    		Model model,
+            @RequestParam(value = "cart_id_list", required = false) String cart_id_list,
+            @RequestParam(value = "order_price", defaultValue = "0") int order_price) {
 
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
@@ -517,16 +578,144 @@ public class MyController {
     	}
     	
     	List<Cart> output = new ArrayList<Cart>();
+    	List<Card> cardList = new ArrayList<Card>();
     	try {
 			output = cartService.getCartList(input);
+			
+			//보유카드 드롭박스 리스트
+	    	Card tmp = new Card();
+	    	tmp.setMember_id(member.getId());
+    		cardList = cardService.getCardList(tmp);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+    	
+        model.addAttribute("cardList", cardList);
         model.addAttribute("output", output);
-    	return new ModelAndView ("my_starbucks/cart_step1");
+    	return new ModelAndView ("my_starbucks/cart_step2");
     }
     
+    
+    /**
+     * [ITEM | 바로구매] 장바구니 3 페이지 - 결제
+     */
+    @RequestMapping(value = "/my/cart_step3", method = RequestMethod.POST)
+    public ModelAndView cart_step3(HttpSession session, Model model,
+    		@SessionAttribute(value = "member", required = false) Member member, 
+            @RequestParam(value = "cart_id", defaultValue = "0") int cart_id, //장바구니id
+            @RequestParam(value = "card_id", defaultValue = "0") int card_id, //스타벅스카드id (null가능)
+            @RequestParam(value = "gopaymethod", required = false) String pay_method, //결제수단
+            @RequestParam(value = "zip", required = false) String postcode,
+            @RequestParam(value = "address", required = false) String addr1,
+            @RequestParam(value = "addressDetail", required = false) String addr2,
+            @RequestParam(value = "add_addr", required = false) String add_addr//배송지 저장 여부 (안하면 null)
+            ) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	if (cart_id == 0) { return new ModelAndView ("page_none"); }
+    	
+    	//장바구니 id 담은 객체
+    	Cart input = new Cart();
+    	input.setCart_id(cart_id);
+    	
+		//카드 id 담은 객체
+    	Card input2 = new Card();
+    	if (card_id != 0) {
+        	input2.setCard_id(card_id);
+    		try {
+    			input2 = cardService.getCardItem(input2);
+    		} catch (Exception e1) {
+    			e1.printStackTrace();
+    		}
+    	}
+    	
+    	// 메뉴객체
+    	Menu input4 = new Menu();
+    	try {
+    		//cart 조회
+    		input = cartService.getCartItem(input);
+    		//id로 메뉴조회
+    		input4.setId(input.getMenu_id());
+    		input4 = menuService.getMenuItem(input4);
+    		//menu의 필요한 일부정보를 cart객체에 저장
+    		input.setName(input4.getName());
+    		input.setPrice(input4.getPrice());
+    		input.setList_img(input4.getList_img());
+    		//배송지 저장 조건식
+    		if (add_addr != null || add_addr != "") {
+        		Member tmp = new Member();
+        		tmp.setAddr1(addr1);
+        		tmp.setAddr2(addr2);
+        		tmp.setPostcode(postcode);
+        		tmp.setId(member.getId());
+        		memberService.updateAddress(tmp);
+    		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	//주문 객체
+    	Order input3 = new Order();
+    	input3.setMember_id(member.getId());
+    	input3.setPay_method(pay_method);
+    	input3.setPostcode(postcode);
+    	input3.setAddr1(addr1);
+    	input3.setAddr2(addr2);
+    	int order_price = input.getMenu_qty() * input.getPrice();
+    	if (order_price < 20000) {
+    		order_price += 5000; // 배달비용 20000원 미만일때 5000
+    	}
+    	input3.setOrder_price(order_price);
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != input.getMember_id() && member.getId() != input2.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+        model.addAttribute("cart", input); // 조회된cart
+        model.addAttribute("card", input2); // 스타벅스 카드 이용시에만 (신용카드일땐 null)
+        model.addAttribute("order", input3); // 가설정한order
+    	return new ModelAndView ("my_starbucks/cart_step3");
+    }
+    
+
+    /**
+     * [ITEM | 바로구매] 장바구니 4 페이지 - 완료
+     */
+    @RequestMapping(value = "/my/cart_step4", method = RequestMethod.POST)
+    public ModelAndView cart_step4(HttpSession session, 
+    		@SessionAttribute(value = "member", required = false) Member member, 
+    		Model model,
+            @RequestParam(value = "order_id", defaultValue = "0") int order_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	Order input = new Order();
+    	input.setOrder_id(order_id);
+    	try {
+    		input = orderService.getOrderItem(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != input.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+        model.addAttribute("order", input);
+    	return new ModelAndView ("my_starbucks/cart_step4");
+    }
+    
+
+
     /**
      * 주문내역 페이지
      */

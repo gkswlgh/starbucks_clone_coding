@@ -15,6 +15,7 @@
 		<result property="edit_date"  column="e_time" />
 		<result property="member_id"  column="member_id" />
 		<result property="menu_id"  column="menu_id" />
+		<result property="is_direct_order"  column="is_direct_order" />
 		<result property="name"  column="name" />
 		<result property="list_img"  column="list_img" />
 		<result property="price"  column="price" />
@@ -25,7 +26,7 @@
 		parameterType="hanjiho.project.starbucks.model.Cart"
 		resultMap="cartMap">
 		SELECT 
-		cart_id, session_id, menu_qty, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, member_id, menu_id 
+		cart_id, session_id, menu_qty, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, member_id, menu_id, is_direct_order 
 		FROM cart 
 		WHERE cart_id=#{cart_id}
 	</select>
@@ -35,18 +36,23 @@
 		parameterType="hanjiho.project.starbucks.model.Cart"
 		resultMap="cartMap">
 		SELECT 
-		cart_id, session_id, menu_qty, date_format(c.reg_date, '%Y-%m-%d') as r_date, date_format(c.edit_date, '%Y-%m-%d') as e_date, member_id, menu_id
+		cart_id, session_id, menu_qty, date_format(c.reg_date, '%Y-%m-%d') as r_date, date_format(c.edit_date, '%Y-%m-%d') as e_date, member_id, menu_id, is_direct_order
 		,CONVERT(list_img USING utf8) as list_img , name, price
 		FROM cart c
 		INNER JOIN menu m ON c.menu_id = m.id
-		<where>
-			<if test="session_id != null and session_id != ''">
-				session_id LIKE concat('%', #{session_id}, '%')
-			</if>
-			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
-			</if>
-		</where>
+		
+        <where>
+            <choose>
+                <when test="member_id != null">
+                    member_id=#{member_id}
+                </when>
+                <when test="session_id != null">
+                    session_id=#{session_id}
+                </when>
+            </choose>
+            
+            AND is_direct_order = "N"
+        </where>
 
 		ORDER BY cart_id DESC
 	</select>
@@ -56,9 +62,9 @@
 		parameterType="hanjiho.project.starbucks.model.Cart"
 		useGeneratedKeys="true" keyProperty="cart_id">
 		INSERT INTO cart (
-		session_id, menu_qty, reg_date, edit_date, member_id, menu_id
+		session_id, menu_qty, reg_date, edit_date, member_id, menu_id, is_direct_order
 		) VALUES (
-		#{session_id}, #{menu_qty}, now(), now(), #{member_id}, #{menu_id}
+		#{session_id}, #{menu_qty}, now(), now(), #{member_id}, #{menu_id}, #{is_direct_order}
 		)
 	</insert>
 
@@ -70,10 +76,10 @@
         <where>
             <choose>
                 <when test="member_id != null">
-                    AND member_id=#{member_id}
+                    member_id=#{member_id}
                 </when>
                 <when test="session_id != null">
-                    AND session_id=#{session_id}
+                    session_id=#{session_id}
                 </when>
             </choose>
             
@@ -88,8 +94,18 @@
 		session_id=#{session_id},
 		menu_qty=#{menu_qty},
 		edit_date=now(),
-		member_id=#{member_id}
+		member_id=#{member_id},
+		is_direct_order=#{is_direct_order}
 		WHERE cart_id=#{cart_id}
+	</update>
+	
+	<!-- 로그인 시 세션장바구니 회원정보추가 (member_id추가) -->
+	<update id="loginCart"
+		parameterType="hanjiho.project.starbucks.model.Cart">
+		UPDATE cart SET
+		edit_date=now(),
+		member_id=#{member_id}
+		WHERE session_id=#{session_id} AND is_direct_order="N"
 	</update>
 
 	<!-- 데이터 수 조회하기 -->
@@ -101,16 +117,19 @@
 		SELECT COUNT(*) FROM cart
 		<where>
 			<if test="session_id != null and session_id != ''">
-				session_id LIKE concat('%', #{session_id}, '%')
-			</if>
-			<if test="reg_date != null and reg_date != ''">
-				OR reg_date LIKE concat('%', #{reg_date}, '%')
-			</if>
-			<if test="edit_date != null and edit_date != ''">
-				OR edit_date LIKE concat('%', #{edit_date}, '%')
+				session_id = #{session_id}
 			</if>
 			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
+				AND member_id = #{member_id}
+			</if>
+			<if test="is_direct_order != null and is_direct_order != ''">
+				AND is_direct_order = #{is_direct_order}
+			</if>
+			<if test="reg_date != null and reg_date != ''">
+				AND reg_date = #{reg_date}
+			</if>
+			<if test="edit_date != null and edit_date != ''">
+				AND edit_date = #{edit_date}
 			</if>
 		</where>
 	</select>

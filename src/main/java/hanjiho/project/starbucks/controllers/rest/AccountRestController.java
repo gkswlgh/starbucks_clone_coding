@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.Util;
 import hanjiho.project.starbucks.helper.WebHelper;
+import hanjiho.project.starbucks.model.Cart;
 import hanjiho.project.starbucks.model.Member;
+import hanjiho.project.starbucks.service.CartService;
 import hanjiho.project.starbucks.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +47,8 @@ public class AccountRestController {
     /** Service 패턴 구현체 주입 */
     @Autowired
     MemberService memberService;
+    @Autowired
+    CartService cartService;
             
     /** 아이디 중복검사 */
     @RequestMapping(value = "/rest/account/id_unique_check", method = RequestMethod.POST)
@@ -442,7 +448,7 @@ public class AccountRestController {
 
     /** 로그인 */
     @RequestMapping(value = "/rest/account/login", method = RequestMethod.POST)
-    public Map<String, Object> login(
+    public Map<String, Object> login(HttpSession session, 
             @RequestParam(value = "user_id",        required = false) String userId,
             @RequestParam(value = "user_pw",        required = false) String userPw) {
 
@@ -474,6 +480,13 @@ public class AccountRestController {
 			String email = output.getUser_email();
 			output.setEmail1(email.substring(0, email.lastIndexOf("@")));
 			output.setEmail2(email.substring(email.lastIndexOf("@")+1));
+			
+			//세션장바구니 회원정보추가
+			Cart tmp = new Cart();
+			tmp.setMember_id(output.getId());
+			tmp.setSession_id(session.getId());
+			
+			cartService.loginCart(tmp);
 			
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());

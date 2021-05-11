@@ -10,6 +10,7 @@
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
 		<result property="order_id"  column="order_id" />
 		<result property="member_id"  column="member_id" />
+		<result property="order_type"  column="order_type" />
 		<result property="order_price"  column="order_price" />
 		<result property="pay_method"  column="pay_method" />
 		<result property="receive_complete"  column="receive_complete" />
@@ -24,7 +25,7 @@
 		parameterType="hanjiho.project.starbucks.model.Order"
 		resultMap="orderMap">
 		SELECT 
-		order_id, member_id, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d') as r_date, postcode, addr1, addr2 
+		order_id, member_id, order_type, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d') as r_date, postcode, addr1, addr2 
 		FROM `order`
 		WHERE order_id=#{order_id}
 	</select>
@@ -34,17 +35,17 @@
 		parameterType="hanjiho.project.starbucks.model.Order"
 		resultMap="orderMap">
 		SELECT 
-		order_id, member_id, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d') as r_date, postcode, addr1, addr2
+		order_id, member_id, order_type, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d') as r_date, postcode, addr1, addr2
 		FROM `order`
 		<where>
 			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
+				member_id = #{member_id}
 			</if>
 			<if test="reg_date != null and reg_date != ''">
-				OR reg_date LIKE concat('%', #{reg_date}, '%')
+				OR reg_date = #{reg_date}
 			</if>
-			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
+			<if test="order_type != null and order_type != ''">
+				OR order_type = #{order_type}
 			</if>
 		</where>
 
@@ -56,9 +57,9 @@
 		parameterType="hanjiho.project.starbucks.model.Order"
 		useGeneratedKeys="true" keyProperty="order_id">
 		INSERT INTO `order` (
-		member_id, order_price, pay_method, receive_complete, reg_date, postcode, addr1, addr2
+		member_id, order_price, order_type, pay_method, receive_complete, reg_date, postcode, addr1, addr2
 		) VALUES (
-		#{member_id}, #{order_price}, #{pay_method}, #{receive_complete}, now(), #{postcode}, #{addr1}, #{addr2}
+		#{member_id}, #{order_price}, #{order_type}, #{pay_method}, #{receive_complete}, now(), #{postcode}, #{addr1}, #{addr2}
 		)
 	</insert>
 
@@ -74,6 +75,7 @@
 		UPDATE `order` SET
 		member_id=#{member_id},
 		order_price=#{order_price},
+		order_type=#{order_type},
 		pay_method=#{pay_method},
 		receive_complete=#{receive_complete},
 		postcode=#{postcode},
@@ -92,13 +94,13 @@
 
 		<where>
 			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
+				member_id = #{member_id}
 			</if>
 			<if test="reg_date != null and reg_date != ''">
-				OR reg_date LIKE concat('%', #{reg_date}, '%')
+				OR reg_date = #{reg_date}
 			</if>
-			<if test="member_id != null and member_id != ''">
-				OR member_id LIKE concat('%', #{member_id}, '%')
+			<if test="order_type != null and order_type != ''">
+				OR order_type = #{order_type}
 			</if>
 		</where>
 	</select>

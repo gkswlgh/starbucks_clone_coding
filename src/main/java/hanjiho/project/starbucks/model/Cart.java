@@ -13,6 +13,7 @@ public class Cart {
 	private String edit_date;
 	private Integer member_id;
 	private int menu_id;
+	private String is_direct_order;
 
     /** JOIN을 위한 컬럼 추가 */
 	private String name;
