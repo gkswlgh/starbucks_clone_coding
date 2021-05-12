@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -512,56 +513,12 @@ public class MyController {
     	return new ModelAndView ("my_starbucks/cart_step1");
     }
     
-    /**
-     * [ITEM | 바로구매] 장바구니 2 페이지 - 주문서 입력
-     */
-    @RequestMapping(value = "/my/cart_step2", method = RequestMethod.POST)
-    public ModelAndView cart_step2(HttpSession session, 
-    		@SessionAttribute(value = "member", required = false) Member member, 
-    		Model model,
-            @RequestParam(value = "cart_id", required = false) int cart_id) {
-
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member == null) {
-        	return new ModelAndView ("page_none");
-    	}
-    	
-    	Cart input = new Cart();
-    	if (member != null) {
-    		input.setMember_id(member.getId());
-    	}
-    	input.setCart_id(cart_id);
-
-    	Cart output = new Cart();
-    	List<Card> cardList = new ArrayList<Card>();
-    	try {
-			output = cartService.getCartItem(input);
-			
-			//보유카드 드롭박스 리스트
-	    	Card tmp = new Card();
-	    	tmp.setMember_id(member.getId());
-    		cardList = cardService.getCardList(tmp);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    	
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member.getId() != output.getMember_id()) {
-        	return new ModelAndView ("page_none");
-    	}
-    	
-        model.addAttribute("cardList", cardList);
-        model.addAttribute("output", output);
-    	return new ModelAndView ("my_starbucks/cart_step2");
-    }
-    
 
     /**
      * [LIST | 선택구매] 장바구니 2 페이지 - 주문서 입력
      */
-    @RequestMapping(value = "/my/cart_step2_list", method = RequestMethod.POST)
-    public ModelAndView cart_step2_list(HttpSession session, 
+    @RequestMapping(value = "/my/cart_step2", method = RequestMethod.POST)
+    public ModelAndView cart_step2(HttpSession session, 
     		@SessionAttribute(value = "member", required = false) Member member, 
     		Model model,
             @RequestParam(value = "cart_id_list", required = false) String cart_id_list,
@@ -598,10 +555,56 @@ public class MyController {
     
     
     /**
+     * [ITEM | 바로구매] 장바구니 2 페이지 - 주문서 입력
+     */
+    @RequestMapping(value = "/my/pay_step2", method = RequestMethod.POST)
+    public ModelAndView pay_step2(HttpSession session, 
+    		@SessionAttribute(value = "member", required = false) Member member, 
+    		Model model,
+            @RequestParam(value = "cart_id", required = false) int cart_id) {
+
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	Cart input = new Cart();
+    	if (member != null) {
+    		input.setMember_id(member.getId());
+    	}
+    	input.setCart_id(cart_id);
+
+    	Cart output = new Cart();
+    	List<Card> cardList = new ArrayList<Card>();
+    	try {
+			output = cartService.getCartItem(input);
+			
+			//보유카드 드롭박스 리스트
+	    	Card tmp = new Card();
+	    	tmp.setMember_id(member.getId());
+    		cardList = cardService.getCardList(tmp);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member.getId() != output.getMember_id()) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+        model.addAttribute("cardList", cardList);
+        model.addAttribute("output", output);
+    	return new ModelAndView ("my_starbucks/pay_step2");
+    }
+    
+
+    
+    /**
      * [ITEM | 바로구매] 장바구니 3 페이지 - 결제
      */
-    @RequestMapping(value = "/my/cart_step3", method = RequestMethod.POST)
-    public ModelAndView cart_step3(HttpSession session, Model model,
+    @RequestMapping(value = "/my/pay_step3", method = RequestMethod.POST)
+    public ModelAndView pay_step3(HttpSession session, Model model,
     		@SessionAttribute(value = "member", required = false) Member member, 
             @RequestParam(value = "cart_id", defaultValue = "0") int cart_id, //장바구니id
             @RequestParam(value = "card_id", defaultValue = "0") int card_id, //스타벅스카드id (null가능)
@@ -679,15 +682,14 @@ public class MyController {
         model.addAttribute("cart", input); // 조회된cart
         model.addAttribute("card", input2); // 스타벅스 카드 이용시에만 (신용카드일땐 null)
         model.addAttribute("order", input3); // 가설정한order
-    	return new ModelAndView ("my_starbucks/cart_step3");
+    	return new ModelAndView ("my_starbucks/pay_step3");
     }
     
-
     /**
      * [ITEM | 바로구매] 장바구니 4 페이지 - 완료
      */
-    @RequestMapping(value = "/my/cart_step4", method = RequestMethod.POST)
-    public ModelAndView cart_step4(HttpSession session, 
+    @RequestMapping(value = "/my/pay_step4", method = RequestMethod.POST)
+    public ModelAndView pay_step4(HttpSession session, 
     		@SessionAttribute(value = "member", required = false) Member member, 
     		Model model,
             @RequestParam(value = "order_id", defaultValue = "0") int order_id) {
@@ -728,6 +730,35 @@ public class MyController {
         	return new ModelAndView ("page_none");
     	}
     	
+    	Order input = new Order();
+    	input.setMember_id(member.getId());
+    	
+    	List<Order> output = new ArrayList<Order>();
+    	try {
+    		output = orderService.getOrderList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/order_list");
+    }
+    
+
+    /**
+     * 주문내역 상세 페이지
+     */
+    @RequestMapping(value = "/my/order_view/{order_id}", method = RequestMethod.GET)
+    public ModelAndView order_view(Model model,
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "order_id", defaultValue = "0") int order_id
+            ) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/order_view");
     }
 }

@@ -92,10 +92,10 @@
                     <caption class="hid">No, 거래구분, 구분, 매장명, 금액, 날짜, 전자영수증</caption>
                     <colgroup>
                         <col width="56">
-                        <col width="105">
-                        <col width="135">
-                        <col width="132">
-                        <col width="147">
+                        <col width="60">
+                        <col width="125">
+                        <col width="152">
+                        <col width="80">
                         <col width="165">
                         <col width="90">
                     </colgroup>
@@ -103,23 +103,46 @@
                         <tr>
                             <th class="en" scope="col">No</th>
                             <th scope="col">거래구분</th>
-                            <th scope="col">구분</th>
-                            <th scope="col">매장명</th>
+                            <th scope="col">결제수단</th>
+                            <th scope="col">주소</th>
                             <th scope="col">금액</th>
                             <th scope="col">날짜</th>
-                            <th scope="col">전자영수증</th>
+                            <th scope="col">상세보기</th>
                         </tr>
                     </thead>
                     <tbody>
+          <c:choose>
+	        <c:when test="${output != null && fn:length(output) > 0}">
+				<c:forEach var="item" items="${output}" varStatus="status">
                         <tr>
-                            <td>1</td>
-                            <td>충전</td>
-                            <td>스타벅스 카드</td>
-                            <td>온라인</td>
-                            <td>10000</td>
-                            <td>2021-01-28 21:57:02</td>
-                            <td></td>
+                            <td>${status.index}</td>
+                            <td>
+								<c:if test="${item.order_type == '1'}">충전</c:if>
+								<c:if test="${item.order_type == '2'}">주문</c:if>
+							</td>
+                            <td>
+								<c:if test="${item.pay_method == 'S'}">스타벅스 카드</c:if>
+								<c:if test="${item.pay_method == 'N'}">신용카드 결제</c:if>
+							</td>
+                            <td> 
+                            <div style="width:150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" title="${item.addr1} &nbsp; ${item.addr2}">${item.addr1} &nbsp; ${item.addr2}</div>
+                            </td>
+                            <td><fmt:formatNumber value="${item.order_price}" pattern="#,###" /></td>
+                            <td>${item.reg_date}</td>
+                            <td style="padding:0px;position:relative;">
+                            	<p class="btn_pick_date" style="position:absolute;top:10px;left:20px;">
+                                   <a href="${pageContext.request.contextPath}/my/order_view/${item.order_id}">상세</a>
+                                </p>
+                           </td>
                         </tr>
+			  </c:forEach>
+              </c:when>
+              <c:otherwise>
+		              <tr>
+		              	<td colspan="7">주문 내역이 존재하지 않습니다.</td>
+		              </tr>
+              </c:otherwise>
+            </c:choose>
                     </tbody>
                 </table>
                 <!-- 카드내역표 끝 -->

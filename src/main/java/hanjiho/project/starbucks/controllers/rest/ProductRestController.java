@@ -256,8 +256,8 @@ public class ProductRestController {
     }
     
 
-    /** order insert - 주문하기 */
-    @RequestMapping(value = "/rest/product/order", method = RequestMethod.POST)
+    /** [ITEM | 바로구매] order insert - 주문하기 */
+    @RequestMapping(value = "/rest/product/pay_order", method = RequestMethod.POST)
     public Map<String, Object> order_item(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
     		@RequestParam(value = "cart_id", defaultValue = "0") int cart_id, //장바구니id
             @RequestParam(value = "card_id", defaultValue = "0") int card_id, //스타벅스카드id (null?0가능)

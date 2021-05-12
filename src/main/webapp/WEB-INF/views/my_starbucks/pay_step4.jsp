@@ -62,14 +62,13 @@
                             <tbody>
                                 <tr>
                                     <th class="fth">주소지</th>
-                                    <td class="ftd cardName">[&nbsp;${order.postcode}&nbsp;] &nbsp; ${order.addr1} &nbsp; ${order.addr2}</td>
+                                    <td class="ftd cardName">${order.postcode} ${order.addr1} ${order.addr2}</td>
                                     <th class="fth">주문한 사람</th>
-                                    <td class="ftd receiverInfo">${member.user_name} [&nbsp;${member.phone}&nbsp;]</td>
+                                    <td class="ftd receiverInfo">${member.user_name} [${member.phone}]</td>
                                 </tr>
                                 <tr>
                                     <th>결제 금액</th>
-                                    <td><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원
-                					</td>
+                                    <td><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원</td>
                                     <th>결제수단</th>
                                     <td>
 				<c:choose>

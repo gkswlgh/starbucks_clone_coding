@@ -179,7 +179,7 @@
             				  $('body').append(form);
             				  $(form).submit();
             				};
-            		myRedirect(ROOT_URL + "/my/cart_step2", "cart_id", json.cart_id);
+            		myRedirect(ROOT_URL + "/my/pay_step2", "cart_id", json.cart_id);
            		}
             });
         });//바로구매끝

@@ -151,7 +151,7 @@
                             </tbody>
                         </table>
                         <div class="gift_payment_btns cart">
-                        <form action="${pageContext.request.contextPath}/rest/product/order" method="post" name="order_form" id="order_form">
+                        <form action="${pageContext.request.contextPath}/rest/product/pay_order" method="post" name="order_form" id="order_form">
                         	<input type="hidden" id="cart_id" name="cart_id" value="${cart.cart_id}" />
                         	<c:choose>
 							<c:when test="${card != null}">
@@ -164,8 +164,8 @@
                         	<input type="hidden" id="addr2" name="addr2" value="${order.addr2}" />
                         	<input type="hidden" id="order_price" name="order_price" value="${order.order_price}" />
                             <ul>
-                                <li class="gift_payment_btn3"><button type="submit" id="goOrder">결제하기</button></li>
                                 <li class="gift_payment_btn1"><a onclick="history.back(); return false;">뒤로</a></li>
+                                <li class="gift_payment_btn3"><button type="submit" id="goOrder">결제하기</button></li>
                             </ul>
 						</form>
                         </div>
@@ -185,7 +185,7 @@
 			onkeyup: false,
 			onclick: false,
 			onfocusout: false,
-			showErrors: function(errorMap, errorList) {cart_step2.jsp
+			showErrors: function(errorMap, errorList) {
 				if(errorList.length < 1) {
 					return;
 				}
@@ -232,7 +232,7 @@
 	              				  $('body').append(form);
 	              				  $(form).submit();
 	              				};
-	              		myRedirect(ROOT_URL + "/my/cart_step4", "order_id", json.order_id);
+	              		myRedirect(ROOT_URL + "/my/pay_step4", "order_id", json.order_id);
 					}
 				}
 		});// end ajax
