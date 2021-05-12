@@ -16,6 +16,8 @@
 		<result property="member_id"  column="member_id" />
 		<result property="menu_id"  column="menu_id" />
 		<result property="is_direct_order"  column="is_direct_order" />
+		
+		<!-- menu 테이블 - join -->
 		<result property="name"  column="name" />
 		<result property="list_img"  column="list_img" />
 		<result property="price"  column="price" />
@@ -38,8 +40,10 @@
 		parameterType="hanjiho.project.starbucks.model.Cart"
 		resultMap="cartMap">
 		SELECT 
-		cart_id, session_id, menu_qty, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, member_id, menu_id, is_direct_order 
-		FROM cart 
+		cart_id, session_id, menu_qty, date_format(c.reg_date, '%Y-%m-%d') as r_date, date_format(c.edit_date, '%Y-%m-%d') as e_date, member_id, menu_id, is_direct_order
+		,CONVERT(list_img USING utf8) as list_img , name, price
+		FROM cart c
+		INNER JOIN menu m ON c.menu_id = m.id
 		WHERE cart_id=#{cart_id}
 	</select>
 
@@ -55,11 +59,11 @@
 		
         <where>
             <choose>
-                <when test="member_id != 0">
+                <when test="member_id != null and member_id != ''">
                     member_id=#{member_id}
                 </when>
-                <when test="session_id != null">
-                    session_id=#{session_id}
+                <when test="session_id != null and session_id != '' and !session_id.equals('0')">
+                    OR session_id=#{session_id}
                 </when>
             </choose>
             
@@ -91,11 +95,11 @@
 
         <where>
             <choose>
-                <when test="member_id != 0">
+                <when test="member_id != null and member_id != ''">
                     member_id=#{member_id}
                 </when>
-                <when test="session_id != null">
-                    session_id=#{session_id}
+                <when test="session_id != null and session_id != '' and !session_id.equals('0')">
+                    OR session_id=#{session_id}
                 </when>
             </choose>
             
@@ -131,23 +135,19 @@
 		parameterType="hanjiho.project.starbucks.model.Cart"
 		resultType="int">
 		SELECT COUNT(*) FROM cart
-		<where>
-			<if test="session_id != null and session_id != ''">
-				session_id = #{session_id}
-			</if>
-			<if test="member_id != 0">
-				AND member_id = #{member_id}
-			</if>
-			<if test="is_direct_order != null and is_direct_order != ''">
-				AND is_direct_order = #{is_direct_order}
-			</if>
-			<if test="reg_date != null and reg_date != ''">
-				AND reg_date = #{reg_date}
-			</if>
-			<if test="edit_date != null and edit_date != ''">
-				AND edit_date = #{edit_date}
-			</if>
-		</where>
+		
+        <where>
+            <choose>
+                <when test="member_id != null and member_id != ''">
+                    member_id=#{member_id}
+                </when>
+                <when test="session_id != null and session_id != '' and !session_id.equals('0')">
+                    OR session_id=#{session_id}
+                </when>
+            </choose>
+            
+            AND is_direct_order = "N"
+        </where>
 	</select>
 
 </mapper>

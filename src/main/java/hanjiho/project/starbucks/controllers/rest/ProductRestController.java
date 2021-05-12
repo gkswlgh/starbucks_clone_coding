@@ -1,6 +1,7 @@
 package hanjiho.project.starbucks.controllers.rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,51 +97,6 @@ public class ProductRestController {
     }
     
 
-
-    /** cart insert - 바로 주문하기 */
-    @RequestMapping(value = "/rest/product/pay_now", method = RequestMethod.POST)
-    public Map<String, Object> pay_now(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
-            // 메뉴일련번호
-            @RequestParam(value = "menu_id",  defaultValue = "0") int menu_id,
-            // 수량
-            @RequestParam(value = "menu_qty",  defaultValue = "0") int menu_qty) {
-
-    	//유효성검사
-		if (menu_id < 1) {
-			return webHelper.getJsonWarning("선택된 상품이 없습니다.");
-		}
-		if (menu_qty < 1) {
-			return webHelper.getJsonWarning("수량을 입력하세요");
-		}
-		
-    	
-    	// 데이터조회+삭제
-        Cart input = new Cart();
-        
-        if (member != null) {
-            input.setMember_id(member.getId());
-        }
-        
-        // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
-        input.setSession_id(session.getId());
-        
-		input.setMenu_id(menu_id);
-		input.setMenu_qty(menu_qty);
-		//바로구매임 Y
-		input.setIs_direct_order("Y");
-		
-        try {
-        	cartService.addCart(input);
-        } catch (Exception e) {
-            return webHelper.getJsonError(e.getLocalizedMessage());
-        }
-		
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("cart_id", input.getCart_id());
-        return webHelper.getJsonData(map);
-    }
-    
-
     /** cart insert - 장바구니 담기 */
     @RequestMapping(value = "/rest/product/in_cart", method = RequestMethod.POST)
     public Map<String, Object> cart(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
@@ -162,10 +118,11 @@ public class ProductRestController {
         
         if (member != null) {
             input.setMember_id(member.getId());
+            input.setSession_id("0");
+        } else {
+            // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
+            input.setSession_id(session.getId());
         }
-        
-        // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
-        input.setSession_id(session.getId());
         
 		input.setMenu_id(menu_id);
 		input.setMenu_qty(menu_qty);
@@ -173,7 +130,18 @@ public class ProductRestController {
 		input.setIs_direct_order("N");
 		
         try {
-        	cartService.addCart(input);
+        	//장바구니에 담긴 상품 개수 확인
+        	int count = 0;
+        	count = cartService.getCartCount(input);
+        	
+        	if (count <= 20) {
+            	//카트 정보 저장
+            	cartService.addCart(input);
+        	} else {
+        		return webHelper.getJsonWarning("장바구니에는 20개 이상의 상품을 담을 수 없습니다. 미리 담아 둔 상품을 먼저 결제하시거나,"
+        				+ "장바구니를 정리한 후 다시 시도해주세요.");
+        	}
+        	
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
@@ -197,22 +165,17 @@ public class ProductRestController {
 		if (cart_id < 1) {
 			return webHelper.getJsonWarning("선택된 장바구니가 없습니다.");
 		}
+		if (menu_qty < 1) {
+			return webHelper.getJsonWarning("수량에 0개는 저장할 수 없습니다.");
+		}
     	
-    	// 데이터조회+삭제
         Cart input = new Cart();
-        
-        if (member != null) {
-            input.setMember_id(member.getId());
-        }
-        
-        // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
-        input.setSession_id(session.getId());
-        
 		input.setCart_id(cart_id);
 		input.setMenu_qty(menu_qty);
 		//바로구매아님 N
 		input.setIs_direct_order("N");
-		
+
+    	// 데이터조회+수정
         try {
         	cartService.editCart(input);
         } catch (Exception e) {
@@ -233,24 +196,17 @@ public class ProductRestController {
 			return webHelper.getJsonWarning("카트 일련번호가 누락되었습니다.");
 		}
 
-        Cart input = new Cart();
-        
-        // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
-        input.setSession_id(session.getId());
-
-        if (member != null) {
-            input.setMember_id(member.getId());
-        }
-        
+        // cart_id,cart_id... 형식으로 저장된 String을 ',' 기준으로 잘라서 배열로 변환
     	String[] data = cart_id_list.split(",");
 
-    	// 데이터조회+삭제
+    	// 배열에서 cart_id꺼내기 (cart_id로 cart데이터삭제)
 		for (String item: data) {   
 			//형변환 string to int
 			int tmp = Integer.parseInt(item); 
 			// 데이터삭제
-			input.setCart_id(tmp);
 	        try {
+		        Cart input = new Cart();
+				input.setCart_id(tmp);
 	            cartService.deleteCart(input);
 	        } catch (Exception e) {
 	            return webHelper.getJsonError(e.getLocalizedMessage());
@@ -261,6 +217,48 @@ public class ProductRestController {
     }
     
 
+
+
+    /** [ITEM | 바로구매] cart insert - 선택한 상품 1개 카트에 담기 */
+    @RequestMapping(value = "/rest/product/pay_now", method = RequestMethod.POST)
+    public Map<String, Object> pay_now(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
+            // 메뉴일련번호
+            @RequestParam(value = "menu_id",  defaultValue = "0") int menu_id,
+            // 수량
+            @RequestParam(value = "menu_qty",  defaultValue = "0") int menu_qty) {
+
+    	//유효성검사
+		if (menu_id < 1) {
+			return webHelper.getJsonWarning("선택된 상품이 없습니다.");
+		}
+		if (menu_qty < 1) {
+			return webHelper.getJsonWarning("수량을 입력하세요");
+		}
+		if (member == null) {
+			return webHelper.getJsonWarning("로그인 정보가 없습니다.");
+        }
+		
+    	// 데이터조회+삭제
+        Cart input = new Cart();
+        input.setMember_id(member.getId());
+        input.setSession_id("0");
+		input.setMenu_id(menu_id);
+		input.setMenu_qty(menu_qty);
+		//바로구매임 Y
+		input.setIs_direct_order("Y");
+		
+        try {
+        	cartService.addCart(input);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+		
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("cart_id", input.getCart_id());
+        return webHelper.getJsonData(map);
+    }
+    
+    
     /** [ITEM | 바로구매] order insert - 주문하기 */
     @RequestMapping(value = "/rest/product/pay_order", method = RequestMethod.POST)
     public Map<String, Object> order_item(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
@@ -284,8 +282,9 @@ public class ProductRestController {
     	if (!regexHelper.isValue(postcode)) {return webHelper.getJsonWarning("우편번호가 누락되었습니다.");}
     	if (!regexHelper.isValue(addr1)) {return webHelper.getJsonWarning("주소가 누락되었습니다.");}
     	if (!regexHelper.isValue(addr2)) {return webHelper.getJsonWarning("상세 주소가 누락되었습니다.");}
+
     	
-    	// 데이터조회
+    	/** 1) Order 데이터저장 */
         Order input = new Order();
         
         input.setMember_id(member.getId());
@@ -300,8 +299,9 @@ public class ProductRestController {
         try {
         	//order저장
         	orderService.addOrder(input);
+
         	
-        	//cart 조회
+        	/** 2) 카트 조회 - order_menu_list에 저장 */
         	Cart tmp = new Cart();
         	tmp.setCart_id(cart_id);
         	tmp = cartService.getCartItem(tmp);
@@ -313,8 +313,12 @@ public class ProductRestController {
         	tmp2.setMenu_qty(tmp.getMenu_qty());
         	tmp2.setOrder_id(input.getOrder_id());
         	orderMenuListService.addOrderMenuList(tmp2);
+        	
+        	/* 주문이 끝난 장바구니(cart) 삭제 */
+        	cartService.deleteCart(tmp);
 
-        	//card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의)
+
+        	/** 3) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
         	if (card_id != 0) {
         		//조회
             	Card tmp3 = new Card();
@@ -328,13 +332,105 @@ public class ProductRestController {
             	}
             	//수정
             	tmp3.setCash(cash);
-        		cardService.charge(tmp3);
+        		cardService.pay(tmp3);
         	}
         	
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
 		
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("order_id", input.getOrder_id());
+        return webHelper.getJsonData(map);
+    }
+    
+
+    /** [LIST | 장바구니구매] order insert - 주문하기 */
+    @RequestMapping(value = "/rest/product/cart_order", method = RequestMethod.POST)
+    public Map<String, Object> order_list(HttpSession session, @SessionAttribute(value = "member", required = false) Member member,
+    		@RequestParam(value = "cart_id_list", required = false) String cart_id_list, //장바구니id
+            @RequestParam(value = "card_id", defaultValue = "0") int card_id, //스타벅스카드id (null?0가능)
+            @RequestParam(value = "pay_method", required = false) String pay_method, //결제수단
+            @RequestParam(value = "postcode", required = false) String postcode,
+            @RequestParam(value = "addr1", required = false) String addr1,
+            @RequestParam(value = "addr2", required = false) String addr2,
+            @RequestParam(value = "order_price", defaultValue = "0") int order_price // 주문 가격 합계
+            ) {
+
+    	//유효성검사
+		if (cart_id_list == null || cart_id_list == "") {
+			return webHelper.getJsonWarning("선택된 상품이 없습니다.");
+		}
+        if (member == null) {
+        	return webHelper.getJsonWarning("로그인 정보가 없습니다.");
+        }
+    	if (!regexHelper.isValue(pay_method)) {return webHelper.getJsonWarning("결제 수단이 누락되었습니다.");}
+    	if (!regexHelper.isValue(postcode)) {return webHelper.getJsonWarning("우편번호가 누락되었습니다.");}
+    	if (!regexHelper.isValue(addr1)) {return webHelper.getJsonWarning("주소가 누락되었습니다.");}
+    	if (!regexHelper.isValue(addr2)) {return webHelper.getJsonWarning("상세 주소가 누락되었습니다.");}
+    	
+        
+    	/** 1) Order 데이터저장 */
+        Order input = new Order();
+        input.setMember_id(member.getId());
+		input.setOrder_type("2");
+		input.setReceive_complete("N");
+		input.setOrder_price(order_price);
+		input.setPay_method(pay_method);
+    	input.setPostcode(postcode);
+    	input.setAddr1(addr1);
+    	input.setAddr2(addr2);
+        try {
+        	//order저장
+        	orderService.addOrder(input);
+
+        	/** 2) 카트 조회 - order_menu_list에 저장 */
+        	// cart_id,cart_id... 형식으로 저장된 String을 ',' 기준으로 잘라서 배열로 변환
+        	String[] data = cart_id_list.split(",");
+        	
+        	// 배열에서 cart_id꺼내서 cart조회, order_menu_list에 저장을 반복
+    		for (String item: data) {   
+    			// 형변환 (string to int) 해서 cart_id 얻기(tmp)
+    			int tmp = Integer.parseInt(item); 
+    			// cart_id(tmp)로 cart조회 (tmp2)
+    	        Cart tmp2 = new Cart();
+    	        tmp2.setCart_id(tmp);
+    	        tmp2 = cartService.getCartItem(tmp2);
+    	        
+            	//order_menu_list에 insert (tmp3)
+            	OrderMenuList tmp3 = new OrderMenuList();
+            	tmp3.setMember_id(member.getId());
+            	tmp3.setMenu_id(tmp2.getMenu_id());
+            	tmp3.setMenu_qty(tmp2.getMenu_qty());
+            	tmp3.setOrder_id(input.getOrder_id());
+            	orderMenuListService.addOrderMenuList(tmp3);
+            	
+            	/* 주문이 끝난 장바구니(cart) 삭제 */
+            	cartService.deleteCart(tmp2);
+    		}
+
+        	/** 3) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
+        	if (card_id != 0) {
+        		//조회
+            	Card tmp3 = new Card();
+            	tmp3.setCard_id(card_id);
+            	tmp3 = cardService.getCardItem(tmp3);
+            	//잔액계산
+            	int cash = tmp3.getCash();
+            	cash = cash - order_price;
+            	if (cash < 0) {
+            		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
+            	}
+            	//잔액수정
+            	tmp3.setCash(cash);
+        		cardService.pay(tmp3);
+        	}
+        	
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+
+    	/** 4) 결제 결과 확인 페이지를 위해 order_id 넘기기 */
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("order_id", input.getOrder_id());
         return webHelper.getJsonData(map);

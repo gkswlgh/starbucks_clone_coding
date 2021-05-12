@@ -195,15 +195,17 @@
     $(function() {
         $(document).on("click", "button.qnt-up", qtyPlus); // 수량증가
         $(document).on("click", "button.qnt-down", qtyMinus); // 수량감소
+        $(document).on("change", ".cart_id", unitPrice); // 체크박스에 체크
         unitPrice(); //전체합계
         
-        // 체크박스
+        // 체크박스 (전체 체크)
 		$(document).on("change", "#cart_ck_all", function() {
             if ($("#cart_ck_all").prop('checked')) {
                 $(".cart_check2 input").prop('checked', true);
             } else {
                 $(".cart_check2 input").prop('checked', false);
             }
+            unitPrice(); //전체합계
 		});
         
         // 삭제버튼
@@ -250,18 +252,19 @@
 	        }
 	    });
         
-        // 가격 합계 계산
+        // 선택한 상품 전체 가격 합계 계산
         function unitPrice() {
 
-        	var data =  document.getElementsByName("cart-data-input");
         	var money = 0;
         	var del = 5000;
-        	
-        	for (var i=0; i<data.length; i++) {
-        		//push
-        		money += Number(data[i].dataset.unitPrice);
-        	}
 
+			//체크박스 받아서 반복문
+            $('input[name=cart_id]:checked').each(function(index, item){ 
+                var nIdx = $(item).index(this);
+                var data = document.getElementsByName("cart-data-input");
+        		money += Number(data[nIdx].dataset.unitPrice); //각 unit의 price를 money에 합산
+            });
+			
         	if (money >= 20000 || money == 0) {
         		del = 0;
         	}
@@ -355,25 +358,30 @@
         $("#cart").submit(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
+            if ($('input[name=cart_id]:checked').length < 1) {
+            	alert("상품은 최소 1개 이상 주문 하셔야 합니다.");
+	            return;
+            }
+            
 			var input = '';
         	
-        	//체크박스 받아서 반복문
-            $('input[name=drinkShop_view_ck]:checked').each(function(index){ 
+			//체크박스 받아서 반복문
+            $('input[name=cart_id]:checked').each(function(index){ 
             	if (index != 0) {
             		input += ',';
             	}
-            	
             	input += $(this).val();
             });
+			
+			//cart_step2페이지로 post전송 (파라미터 : cart_id_list)
+            var myRedirect = function(redirectUrl, arg, value) {
+        		  var form = $('<form action="' + redirectUrl + '" method="post">' +
+        				  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+        				  $('body').append(form);
+        				  $(form).submit();
+        				};
+        		myRedirect(ROOT_URL + "/my/cart_step2", "cart_id_list", input);
 
-            $.post(ROOT_URL + '/rest/my/', {
-                like_id_list: input
-            }, function(json) {
-            	if (json.rt == "OK") {
-                    alert("주문서 입력 화면으로 넘어갑니다.");
-            		location.reload();
-            	}
-            });
         });
 
         /*바로구매*/

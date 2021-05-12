@@ -5,6 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<% 
+	/* 세션 유효시간 설정 -> 모든 페이지 개별설정*/
+	session.setMaxInactiveInterval(120);
+%>
+
 <!doctype html>
 <html>
 

@@ -45,9 +45,9 @@
 		gift_id, member_id, to_mem_email, to_mem_name, message, gift_price, pay_method, date_format(reg_date, '%Y-%m-%d') as r_date
 		FROM gift
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 			<if test="pickPeriod != 0">
 				AND date_format(reg_date,  '%Y%m%d')
 				BETWEEN date_format(date_add(now(), INTERVAL #{pickPeriod} MONTH), '%Y%m%d') AND date_format(now(), '%Y%m%d')
@@ -99,9 +99,9 @@
 		SELECT COUNT(*) FROM gift
 
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 			<if test="pickPeriod != 0">
 				AND date_format(reg_date,  '%Y%m%d')
 				BETWEEN date_format(date_add(now(), INTERVAL #{pickPeriod} MONTH), '%Y%m%d') AND date_format(now(), '%Y%m%d')

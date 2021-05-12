@@ -84,6 +84,13 @@ public interface CardService {
 	 */
 	public int charge(Card input) throws Exception;
 	/**
+	 * 카드 잔액 사용 (잔액 수정)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int pay(Card input) throws Exception;
+	/**
 	 * 카드 자동 충전 (기능 정의)
 	 * @param Card 수정할 정보를 담고 있는 Beans
 	 * @return int

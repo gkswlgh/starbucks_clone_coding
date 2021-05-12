@@ -56,9 +56,9 @@
 		card_id, card_num, member_id, gift_mem_id, pin_num, cash, card_name, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, charge_auto, charge_schedule, charge_cash
 		FROM card
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 			<if test="gift_mem_id != 0">
 				OR gift_mem_id = #{gift_mem_id}
 			</if>
@@ -178,9 +178,9 @@
 		SELECT COUNT(*) FROM card
 
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 			<if test="gift_mem_id != 0">
 				OR gift_mem_id = #{gift_mem_id}
 			</if>

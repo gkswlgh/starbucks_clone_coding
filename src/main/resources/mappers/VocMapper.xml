@@ -57,7 +57,7 @@
 			<if test="voc_type2 != null and voc_type2 != ''">
 				AND voc_type2 = #{voc_type2}
 			</if>
-			<if test="member_id != 0">
+			<if test="member_id != null and member_id != ''">
 				AND member_id = #{member_id}
 			</if>
 			<if test="re_ok != null and re_ok != ''">
@@ -113,7 +113,7 @@
 			<if test="voc_type2 != null and voc_type2 != ''">
 				AND voc_type2 = #{voc_type2}
 			</if>
-			<if test="member_id != 0">
+			<if test="member_id != null and member_id != ''">
 				AND member_id = #{member_id}
 			</if>
 			<if test="re_ok != null and re_ok != ''">

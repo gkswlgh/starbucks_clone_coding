@@ -276,7 +276,32 @@ public class CardServiceImpl implements CardService {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * 카드 잔액 사용 (잔액 수정)
+	 * @param Card 수정할 정보를 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int pay(Card input) throws Exception {
+		int result=0;
+		try {
+			//잔액 변경
+		    result = sqlSession.update("CardMapper.charge", input);
+
+		    if (result == 0) {
+		        throw new NullPointerException("result=0");
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("수정된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 수정에 실패했습니다.");
+		}
+		return result;
+	}
 
 	/**
 	 * 카드 자동 충전 (기능 정의)

@@ -49,7 +49,7 @@
                     </div>
                     <!-- form -->
                     <form action="${pageContext.request.contextPath}/my/pay_step3" method="post" id="frmUpload" name="frmUpload">
-                        <input type="hidden" name="cart_id" value="${output.cart_id}">
+                        <input type="hidden" name="cart_id" value="${cart_id}">
                         <fieldset>
                             <legend class="hid">주문서 입력을 해주세요.</legend>
                             <!-- 테이블 -->

@@ -47,13 +47,10 @@
 		FROM member
 		<where>
 			<if test="user_id != null and user_id != ''">
-				user_id LIKE concat('%', #{user_id}, '%')
-			</if>
-			<if test="user_name != null and user_name != ''">
-				OR user_name LIKE concat('%', #{user_name}, '%')
+				user_id = #{user_id}
 			</if>
 			<if test="user_email != null and user_email != ''">
-				OR user_email LIKE concat('%', #{user_email}, '%')
+				AND user_email = #{user_email}
 			</if>
 		</where>
 
@@ -137,13 +134,10 @@
 
 		<where>
 			<if test="user_id != null and user_id != ''">
-				user_id LIKE concat('%', #{user_id}, '%')
-			</if>
-			<if test="user_name != null and user_name != ''">
-				OR user_name LIKE concat('%', #{user_name}, '%')
+				user_id = #{user_id}
 			</if>
 			<if test="user_email != null and user_email != ''">
-				OR user_email LIKE concat('%', #{user_email}, '%')
+				AND user_email = #{user_email}
 			</if>
 		</where>
 	</select>
@@ -187,10 +181,10 @@
 		FROM member 
 		<where>
 			<if test="user_id != null and user_id != ''">
-				user_id LIKE concat('%', #{user_id}, '%')
+				user_id = #{user_id}
 			</if>
 			<if test="user_email != null and user_email != ''">
-				AND user_email LIKE concat('%', #{user_email}, '%')
+				AND user_email = #{user_email}
 			</if>
 		</where>
 	</select>

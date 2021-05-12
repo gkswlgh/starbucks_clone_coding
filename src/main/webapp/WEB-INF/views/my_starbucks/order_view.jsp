@@ -55,7 +55,7 @@
 	        <c:when test="${output != null && fn:length(output) > 0}">
 				<c:forEach var="item" items="${output}" varStatus="status">
                             <tr>
-                                <td>1</td>
+                                <td>${status.index +1}</td>
                                 <td class="cart_ttl2">
                                     <div class="ttl2_wrap clear">
                                         <div class="ttl2_thumb">

@@ -40,9 +40,9 @@
 		like_id, member_id, menu_id , date_format(reg_date, '%Y-%m-%d %H:%i:%s') as r_date
 		FROM like_menu
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 		</where>
 		
 		ORDER BY like_id DESC
@@ -88,9 +88,9 @@
 		SELECT COUNT(*) FROM like_menu
 
 		<where>
-			<if test="member_id != 0">
-				member_id = #{member_id}
-			</if>
+            <if test="member_id != null and member_id != ''">
+                member_id=#{member_id}
+            </if>
 		</where>
 	</select>
 	

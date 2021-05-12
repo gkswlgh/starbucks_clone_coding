@@ -48,7 +48,7 @@
 		order_id, member_id, order_type, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d %H:%i:%s') as r_date, postcode, addr1, addr2
 		FROM `order`
 		<where>
-			<if test="member_id != 0">
+			<if test="member_id != null and member_id != ''">
 				member_id = #{member_id}
 			</if>
 			<if test="pick_date01 != null and pick_date01 != ''">
@@ -113,7 +113,7 @@
 		SELECT COUNT(*) FROM `order`
 
 		<where>
-			<if test="member_id != 0">
+			<if test="member_id != null and member_id != ''">
 				member_id = #{member_id}
 			</if>
 			<if test="pick_date01 != null and pick_date01 != ''">

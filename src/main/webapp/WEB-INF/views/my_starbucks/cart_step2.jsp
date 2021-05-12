@@ -49,7 +49,7 @@
                     </div>
                     <!-- form -->
                     <form action="${pageContext.request.contextPath}/my/cart_step3" method="post" id="frmUpload" name="frmUpload">
-                        <input type="hidden" name="cart_id" value="${output.cart_id}">
+                        <input type="hidden" name="cart_id_list" value="${cart_id_list}">
                         <fieldset>
                             <legend class="hid">주문서 입력을 해주세요.</legend>
                             <!-- 테이블 -->
@@ -272,14 +272,14 @@
                 zip: "required",
                 address: "required",
                 addressDetail: "required",
-                cart_id:"required"
+                cart_id_list:"required"
             },
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
                 zip: "우편번호 찾기를 해주세요.",
                 address: "주소지를 입력해주세요.",
                 addressDetail: "상세주소를 입력해주세요.",
-                cart_id: "상품 정보가 없습니다. 처음부터 다시 시도해주세요."
+                cart_id_list: "상품 정보가 없습니다. 처음부터 다시 시도해주세요."
             }
         }); //end validate()
 

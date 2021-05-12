@@ -135,7 +135,7 @@
                                     <td>
 				<c:choose>
                     <c:when test="${order.pay_method == 'S' && card != null}">
-                        스타벅스 카드 [&nbsp;${card.card_name}&nbsp;] ,&nbsp;&nbsp; 잔액 : <fmt:formatNumber value="${card.cash}" pattern="#,###" />원
+                        스타벅스 카드 [&nbsp;${card.card_name}&nbsp;] ,&nbsp;&nbsp; 결제 전 잔액 : <fmt:formatNumber value="${card.cash}" pattern="#,###" />원
                     </c:when>
                     <c:when test="${order.pay_method == 'N'}">
                         신용카드
@@ -232,7 +232,7 @@
 	              				  $('body').append(form);
 	              				  $(form).submit();
 	              				};
-	              		myRedirect(ROOT_URL + "/my/pay_step4", "order_id", json.order_id);
+	              		myRedirect(ROOT_URL + "/my/cart_step4", "order_id", json.order_id);
 					}
 				}
 		});// end ajax

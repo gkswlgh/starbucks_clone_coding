@@ -70,8 +70,12 @@
                             </tr>
                         </thead>
                         <tbody>
+					<!-- 카트 출력 결과 시작 -->
+               		<c:choose>
+			        	<c:when test="${cartList != null && fn:length(cartList) > 0}">
+        					<c:forEach var="cart" items="${cartList}" varStatus="status">
                             <tr>
-                                <td>1</td>
+                                <td>${status.index +1}</td>
                                 <td class="cart_ttl2">
                                     <div class="ttl2_wrap clear">
                                         <div class="ttl2_thumb">
@@ -95,12 +99,16 @@
                                 <td class="cart_selling2">
                                     <span class="label">최종금액</span>
                                     <span class="price">
-                                        <b class="num x-row-net"><fmt:formatNumber value="${order.order_price}" pattern="#,###" /></b>
+                                        <b class="num x-row-net"><fmt:formatNumber value="${cart.menu_qty * cart.price}" pattern="#,###" /></b>
                                         <i class="unit">원</i>
                                     </span>
                                 </td>
                                 <td></td>
                             </tr>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+					<!-- 카트 출력 결과 끝 -->
                         </tbody>
                     </table>
                     <div class="card_gift_payment cart">
@@ -123,7 +131,7 @@
                                     <th>결제 금액</th>
                                     <td><fmt:formatNumber value="${order.order_price}" pattern="#,###" />원
                 <c:choose>
-                    <c:when test="${cart.menu_qty * cart.price < 20000}">
+                    <c:when test="${order_price < 20000}">
                         (배송비 5000원 포함)
                     </c:when>
                     <c:otherwise>
@@ -135,7 +143,7 @@
                                     <td>
 				<c:choose>
                     <c:when test="${order.pay_method == 'S' && card != null}">
-                        스타벅스 카드 [&nbsp;${card.card_name}&nbsp;] ,&nbsp;&nbsp; 잔액 : <fmt:formatNumber value="${card.cash}" pattern="#,###" />원
+                        스타벅스 카드 [&nbsp;${card.card_name}&nbsp;] ,&nbsp;&nbsp; 결제 전 잔액 : <fmt:formatNumber value="${card.cash}" pattern="#,###" />원
                     </c:when>
                     <c:when test="${order.pay_method == 'N'}">
                         신용카드
@@ -151,8 +159,8 @@
                             </tbody>
                         </table>
                         <div class="gift_payment_btns cart">
-                        <form action="${pageContext.request.contextPath}/rest/product/order" method="post" name="order_form" id="order_form">
-                        	<input type="hidden" id="cart_id" name="cart_id" value="${cart.cart_id}" />
+                        <form action="${pageContext.request.contextPath}/rest/product/cart_order" method="post" name="order_form" id="order_form">
+                        	<input type="hidden" id="cart_id" name="cart_id_list" value="${cart_id_list}" />
                         	<c:choose>
 							<c:when test="${card != null}">
                         	<input type="hidden" id="card_id" name="card_id" value="${card.card_id}" />
@@ -185,7 +193,7 @@
 			onkeyup: false,
 			onclick: false,
 			onfocusout: false,
-			showErrors: function(errorMap, errorList) {cart_step2.jsp
+			showErrors: function(errorMap, errorList) {
 				if(errorList.length < 1) {
 					return;
 				}
@@ -193,7 +201,7 @@
 			},
             /*입력검사 규칙*/
             rules: {
-            	cart_id: "required",
+            	cart_id_list: "required",
             	pay_method: "required",
             	postcode: "required",
             	addr1: "required",
@@ -201,7 +209,7 @@
             	order_price: "required"
             },
             messages: {
-            	cart_id: "오류. 처음부터 다시 시도해주세요.",
+            	cart_id_list: "오류. 처음부터 다시 시도해주세요.",
             	pay_method: "오류. 처음부터 다시 시도해주세요.",
             	postcode: "오류. 처음부터 다시 시도해주세요.",
             	addr1: "오류. 처음부터 다시 시도해주세요.",
