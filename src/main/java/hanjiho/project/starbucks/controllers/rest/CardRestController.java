@@ -78,7 +78,7 @@ public class CardRestController {
     		// member_id , card_name 등록
         	output.setMember_id(member.getId());
         	output.setCard_name(card_name);
-    		// editCard (update)
+    		// editCard (update -> pin_num은 null로 / member_id, card_name 등록)
 			cardService.editCard(output);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,6 +141,7 @@ public class CardRestController {
     	//충전
     	int sum = output.getCash() + cash;
     	input.setCash(sum);
+    	input.setOrder_price(cash);
     	try {
     		cardService.charge(input);
 		} catch (Exception e) {

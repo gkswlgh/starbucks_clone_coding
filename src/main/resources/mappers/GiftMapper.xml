@@ -18,6 +18,14 @@
 		<result property="reg_date"  column="r_date" />
 		<result property="pickPeriod"  column="pickPeriod" />
 	</resultMap>
+	
+	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
+	<update id="memberNull"
+		parameterType="hanjiho.project.starbucks.model.Gift">
+		UPDATE gift SET
+		member_id=null
+		WHERE member_id=#{member_id}
+	</update>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
@@ -37,7 +45,7 @@
 		gift_id, member_id, to_mem_email, to_mem_name, message, gift_price, pay_method, date_format(reg_date, '%Y-%m-%d') as r_date
 		FROM gift
 		<where>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				member_id = #{member_id}
 			</if>
 			<if test="pickPeriod != 0">
@@ -47,6 +55,10 @@
 		</where>
 
 		ORDER BY gift_id DESC
+		
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->
@@ -87,11 +99,12 @@
 		SELECT COUNT(*) FROM gift
 
 		<where>
-			<if test="member_id != null and member_id != ''">
-				member_id LIKE concat('%', #{member_id}, '%')
+			<if test="member_id != 0">
+				member_id = #{member_id}
 			</if>
-			<if test="reg_date != null and reg_date != ''">
-				OR reg_date LIKE concat('%', #{reg_date}, '%')
+			<if test="pickPeriod != 0">
+				AND date_format(reg_date,  '%Y%m%d')
+				BETWEEN date_format(date_add(now(), INTERVAL #{pickPeriod} MONTH), '%Y%m%d') AND date_format(now(), '%Y%m%d')
 			</if>
 		</where>
 	</select>

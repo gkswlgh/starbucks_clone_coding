@@ -89,6 +89,25 @@ public class LikeMenuServiceImpl implements LikeMenuService {
 	}
 
 	/**
+	 * 메뉴를 좋아하는 사람 수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int countLike(LikeMenu input) throws Exception {
+		int result=0;
+		
+		try {
+			result = sqlSession.selectOne("LikeMenuMapper.countLike", input);
+			
+		} catch (Exception e) {
+		    log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+	
+	/**
 	 * 좋아요 데이터 등록하기
 	 * @param LikeMenu 저장할 정보를 담고 있는 Beans
 	 * @return int

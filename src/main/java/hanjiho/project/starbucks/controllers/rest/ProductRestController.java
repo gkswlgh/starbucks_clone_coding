@@ -82,7 +82,7 @@ public class ProductRestController {
         input.setMenu_id(menu_id);
         try {
         	int count = 0;
-        	count = likeMenuService.getLikeMenuCount(input);
+        	count = likeMenuService.countLike(input);
         	if (count != 0) {
         		return webHelper.getJsonWarning("이미 좋아하는 메뉴로 등록되어있습니다. My메뉴에서 삭제할 수 있습니다.");
         	}

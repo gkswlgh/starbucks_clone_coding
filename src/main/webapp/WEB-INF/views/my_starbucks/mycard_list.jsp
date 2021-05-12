@@ -37,7 +37,7 @@
                         <header>
                             <h5><strong class="userNameList">${member.user_name}</strong>님의 스타벅스 카드 상세정보</h5>
                             <p class="recent_card totalCntList">
-                                (보유카드 : ${cardCount}장)
+                                (전체 보유카드 : ${cardCount}장)
                             </p>
                         </header>
                         <div class="my_ms_card_list_cont">
@@ -77,6 +77,62 @@
                     </div>
                 </section>
                 <!-- 보유카드 목록 끝 -->
+                <!-- 페이지 번호 구현 -->
+                <div class="egiftCard_tbl_pagination">
+				<ul class="pager">
+				<%-- 이전 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 이전 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.prevPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/mycard_list" var="prevPageUrl">
+							<c:param name="page" value="${pageData.prevPage}" />
+						</c:url>
+						<li class="active"><a href="${prevPageUrl}">이전 &nbsp;|&nbsp;</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">이전 &nbsp;|&nbsp;</li>
+			    	</c:otherwise>
+				</c:choose>
+			
+				<%-- 페이지 번호 (그룹 시작페이지 ~ 끝페이지 를 반복) --%>
+				<c:forEach var="i" begin="${pageData.startPage}"
+					end="${pageData.endPage}" varStatus="status">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/my/mycard_list" var="pageUrl">
+						<c:param name="page" value="${i}" />
+					</c:url>
+			
+					<%-- 페이지 번호 출력 --%>
+					<c:choose>
+						<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+						<c:when test="${pageData.nowPage == i}">
+							<li class="active">${i}</li>
+						</c:when>
+						<%-- 나머지 페이지의 경우 링크 적용함 --%>
+						<c:otherwise>
+							<li class="active"><a href="${pageUrl}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<%-- 다음 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 다음 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.nextPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/mycard_list" var="nextPageUrl">
+							<c:param name="page" value="${pageData.nextPage}" />
+						</c:url>
+						<li class="active"><a href="${nextPageUrl}">&nbsp;| &nbsp;다음</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">&nbsp;| &nbsp;다음</li>
+			    	</c:otherwise>
+				</c:choose>
+				</ul>
+				</div>
+                <!-- 페이지번호구현 끝 -->
             </div>
         </div>
         <!-- 내용 끝 -->

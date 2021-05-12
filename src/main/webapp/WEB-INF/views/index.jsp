@@ -182,9 +182,9 @@
                 </div>
                 <div class="bean_txt_box">
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/2021_cherryblossom_bean_txt.png" alt="스타벅스의 50년이 담긴 애니버서리 블렌드. 스타벅스의 50주년을 기념하여 블렌딩된 깊고 진한 풍미의 애니버서리 블렌드입니다." />
-                    <div class="bean_detail_btn">
+                    <!-- <div class="bean_detail_btn">
                         <a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">가까운 매장 찾기</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -198,9 +198,9 @@
                 <div class="reserve_visual">
                     <img src="${pageContext.request.contextPath}/assets/img/contents/blossom/reserve_costarica_bean_0217.png" />
                 </div>
-                <div class="reserve_detail_btn">
+                <!-- <div class="reserve_detail_btn">
                     <a href="https://www.google.co.kr/maps/search/%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4" target="_blank">가까운 매장 찾기</a>
-                </div>
+                </div> -->
             </div>
         </section>
         <!-- 리저브 끝 -->

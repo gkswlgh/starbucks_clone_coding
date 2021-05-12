@@ -20,7 +20,7 @@
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
                         <li><a href="${pageContext.request.contextPath}/mypage"><span class="en">MyStarbucks</span></a></li>
                         <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow_w.png" class="arrow" alt="하위메뉴" /></li>
-                        <li><a href="${pageContext.request.contextPath}/"><span class="en">전자영수증</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/order_list"><span class="en">전자영수증</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -31,26 +31,20 @@
             <div class="cont_inner">
                 <!-- 기간선택 -->
                 <section class="my_card_pick_period">
-                    <form method="post">
+                    <form action="${pageContext.request.contextPath}/my/order_list" method="get">
                         <fieldset>
-                            <legend>기간 선택 폼</legend>
+                            <legend>검색 조건 선택 폼</legend>
                             <dl class="my_card_pick_bg">
-                                <dt>기간별</dt>
-                                <dd>
-                                    <input type="radio" id="pickPeriod2" name="pickPeriod" checked="checked" value="1_MONTH" />
-                                    <label for="pickPeriod2">1개월</label>
-                                    <input type="radio" id="pickPeriod4" name="pickPeriod" checked="checked" value="1_YEAR" />
-                                    <label for="pickPeriod4">1년</label>
-                                </dd>
+                                <dt style="width:300px;">검색 조건 | <span style="font-size:12px;color:#aaa;">&nbsp;선택 후 검색 버튼을 눌러주세요.</span></dt>
                             </dl>
                             <dl class="my_card_pick_date">
                                 <dt>일자별</dt>
                                 <dd>
-                                    <input type="date" id="pickDate01" name="pickDate" title="원하는 날짜를 선택해 주세요.">
+                                    <input type="date" id="pickDate01" name="pickDate01" title="원하는 날짜를 선택해 주세요.">
                                     <p class="hyphen_bg"></p>
-                                    <input type="date" id="pickDate02" name="pickDate" title="원하는 날짜를 선택해 주세요.">
+                                    <input type="date" id="pickDate02" name="pickDate02" title="원하는 날짜를 선택해 주세요.">
                                     <p class="btn_pick_date">
-                                        <a href="${pageContext.request.contextPath}/">검색</a>
+                                        <button type="submit">검색</button>
                                     </p>
                                 </dd>
                             </dl>
@@ -59,11 +53,10 @@
                                     <dt>결제수단</dt>
                                     <dd>
                                         <div class="select_box">
-                                            <label for="value" for="myinfo_date01">전체보기</label>
-                                            <select id="myinfo_date01">
-                                                <option value="W">전체보기</option>
+                                            <select id="pay_method" name="pay_method">
+                                                <option value="0">전체보기</option>
                                                 <option value="S">스타벅스 카드</option>
-                                                <option value="E">스타벅스 카드 외</option>
+                                                <option value="N">스타벅스 카드 외</option>
                                             </select>
                                         </div>
                                     </dd>
@@ -72,11 +65,10 @@
                                     <dt>거래유형</dt>
                                     <dd>
                                         <div class="select_box">
-                                            <label for="value" for="myinfo_date02">전체보기</label>
-                                            <select id="myinfo_date02">
-                                                <option value="W">전체보기</option>
-                                                <option value="P">결제</option>
-                                                <option value="R">충전</option>
+                                            <select id="order_type" name="order_type">
+                                                <option value="0">전체보기</option>
+                                                <option value="1">충전</option>
+                                                <option value="2">주문</option>
                                             </select>
                                         </div>
                                     </dd>
@@ -115,7 +107,10 @@
 	        <c:when test="${output != null && fn:length(output) > 0}">
 				<c:forEach var="item" items="${output}" varStatus="status">
                         <tr>
-                            <td>${status.index}</td>
+                            <td>
+                        	<c:if test="${status.index+1 < 10}">${pageData.nowPage-1}${status.index+1}</c:if>
+                        	<c:if test="${status.index+1 == 10}">${pageData.nowPage}0</c:if>
+                        	</td>
                             <td>
 								<c:if test="${item.order_type == '1'}">충전</c:if>
 								<c:if test="${item.order_type == '2'}">주문</c:if>
@@ -146,13 +141,63 @@
                     </tbody>
                 </table>
                 <!-- 카드내역표 끝 -->
-                <!-- 페이징 -->
+                
+                <!-- 페이지 번호 구현 -->
                 <div class="egiftCard_tbl_pagination">
-                    <ul class="pager">
-                        <li class="active"><a href="${pageContext.request.contextPath}/">1</a></li>
-                    </ul>
-                </div>
-                <!-- 페이징 끝 -->
+				<ul class="pager">
+				<%-- 이전 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 이전 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.prevPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/order_list" var="prevPageUrl">
+							<c:param name="page" value="${pageData.prevPage}" />
+						</c:url>
+						<li class="active"><a href="${prevPageUrl}">이전 &nbsp;|&nbsp;</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">이전 &nbsp;|&nbsp;</li>
+			    	</c:otherwise>
+				</c:choose>
+			
+				<%-- 페이지 번호 (그룹 시작페이지 ~ 끝페이지 를 반복) --%>
+				<c:forEach var="i" begin="${pageData.startPage}"
+					end="${pageData.endPage}" varStatus="status">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/my/order_list" var="pageUrl">
+						<c:param name="page" value="${i}" />
+					</c:url>
+			
+					<%-- 페이지 번호 출력 --%>
+					<c:choose>
+						<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+						<c:when test="${pageData.nowPage == i}">
+							<li class="active">${i}</li>
+						</c:when>
+						<%-- 나머지 페이지의 경우 링크 적용함 --%>
+						<c:otherwise>
+							<li class="active"><a href="${pageUrl}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<%-- 다음 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 다음 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.nextPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/order_list" var="nextPageUrl">
+							<c:param name="page" value="${pageData.nextPage}" />
+						</c:url>
+						<li class="active"><a href="${nextPageUrl}">&nbsp;| &nbsp;다음</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">&nbsp;| &nbsp;다음</li>
+			    	</c:otherwise>
+				</c:choose>
+				</ul>
+				</div>
+                <!-- 페이지번호구현 끝 -->
             </div>
         </div>
         <!-- 내용 끝 -->

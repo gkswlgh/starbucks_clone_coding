@@ -99,7 +99,7 @@ public class HomeController {
     	List<Card> output = new ArrayList<Card>();
     	int cardCount = 0;
     	try {
-    		cardCount = cardService.cardCount(input);
+    		cardCount = cardService.getCardCount(input);
     		output = cardService.getCardList(input);
 		} catch (Exception e) {
 			e.printStackTrace();

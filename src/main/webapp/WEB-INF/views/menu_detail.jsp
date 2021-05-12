@@ -24,7 +24,7 @@
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
                                 <li><a href="${pageContext.request.contextPath}/product/menu_list"><span class="en c222">음료</span></a></li>
                                 <li><img src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" class="arrow" alt="하위메뉴" /></li>
-                                <li><a href="${pageContext.request.contextPath}/product/menu_detail/${item.id}"><span class="en c222">딸기 요거트 블렌디드</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/menu_detail/${output.id}"><span class="en c222">${output.name}</span></a></li>
                             </ul>
                         </div>
                     </div>

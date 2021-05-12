@@ -153,8 +153,9 @@ public class MemberServiceImpl implements MemberService {
 	public String deleteMember() throws Exception { 
 		int result=0;
 		try {
+		    //회원 삭제
 		    result = sqlSession.delete("MemberMapper.deleteItem");
-
+		    
 		    if (result == 0) {
 		    	return "삭제된 회원이 없습니다>>" + result;
 		    }
@@ -179,6 +180,15 @@ public class MemberServiceImpl implements MemberService {
 		int result=0;
 		try {
 		    result = sqlSession.update("MemberMapper.joinOut", input);
+
+			// 회원 탈퇴 준비 (관련 테이블 계층적으로 삭제 혹은 null설정)
+		    sqlSession.delete("CardMapper.deleteMember", input); //카드(card) 삭제
+		    sqlSession.delete("CartMapper.deleteMember", input); //카트(cart) 삭제
+
+		    sqlSession.update("LikeMenuMapper.memberNull", input); //좋아하는메뉴(likemenu) Member null
+		    sqlSession.update("VocMapper.memberNull", input); //문의(voc) Member null
+		    sqlSession.update("OrderMapper.memberNull", input); //주문(order) Member null
+		    sqlSession.update("GiftMapper.memberNull", input); //선물(gift) Member null
 
 		    if (result == 0) {
 		        throw new NullPointerException("result=0");

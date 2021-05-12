@@ -147,7 +147,7 @@ public class MyRestController {
         	Card tmp = new Card();
         	tmp.setCard_num(cardId);
         	try {
-        		count += cardService.getCardCount(tmp);
+        		count += cardService.pinCheckCount(tmp);
             } catch (Exception e) {
                 return webHelper.getJsonError(e.getLocalizedMessage());
             }
@@ -158,7 +158,7 @@ public class MyRestController {
         	Card tmp2 = new Card();
         	tmp2.setPin_num(pinNum);
         	try {
-        		count += cardService.getCardCount(tmp2);
+        		count += cardService.pinCheckCount(tmp2);
             } catch (Exception e) {
                 return webHelper.getJsonError(e.getLocalizedMessage());
             }

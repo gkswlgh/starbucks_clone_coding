@@ -18,7 +18,17 @@
 		<result property="postcode"  column="postcode" />
 		<result property="addr1"  column="addr1" />
 		<result property="addr2"  column="addr2" />
+		<result property="pick_date01"  column="pick_date01" />
+		<result property="pick_date02"  column="pick_date02" />
 	</resultMap>
+	
+	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
+	<update id="memberNull"
+		parameterType="hanjiho.project.starbucks.model.Order">
+		UPDATE `order` SET
+		member_id=null
+		WHERE member_id=#{member_id}
+	</update>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
@@ -38,18 +48,28 @@
 		order_id, member_id, order_type, order_price, pay_method, receive_complete, date_format(reg_date, '%Y-%m-%d %H:%i:%s') as r_date, postcode, addr1, addr2
 		FROM `order`
 		<where>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				member_id = #{member_id}
 			</if>
-			<if test="reg_date != null and reg_date != ''">
-				OR reg_date = #{reg_date}
+			<if test="pick_date01 != null and pick_date01 != ''">
+				AND reg_date >= #{pick_date01}
+			</if>
+			<if test="pick_date02 != null and pick_date02 != ''">
+				AND reg_date  <![CDATA[ <= ]]> date_add(#{pick_date02}, INTERVAL 1 DAY)
 			</if>
 			<if test="order_type != null and order_type != ''">
-				OR order_type = #{order_type}
+				AND order_type = #{order_type}
+			</if>
+			<if test="pay_method != null and pay_method != ''">
+				AND pay_method = #{pay_method}
 			</if>
 		</where>
 
 		ORDER BY order_id DESC
+		
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->
@@ -93,14 +113,20 @@
 		SELECT COUNT(*) FROM `order`
 
 		<where>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				member_id = #{member_id}
 			</if>
-			<if test="reg_date != null and reg_date != ''">
-				OR reg_date = #{reg_date}
+			<if test="pick_date01 != null and pick_date01 != ''">
+				AND reg_date >= #{pick_date01}
+			</if>
+			<if test="pick_date02 != null and pick_date02 != ''">
+				AND reg_date  <![CDATA[ <= ]]> date_add(#{pick_date02}, INTERVAL 1 DAY)
 			</if>
 			<if test="order_type != null and order_type != ''">
-				OR order_type = #{order_type}
+				AND order_type = #{order_type}
+			</if>
+			<if test="pay_method != null and pay_method != ''">
+				AND pay_method = #{pay_method}
 			</if>
 		</where>
 	</select>

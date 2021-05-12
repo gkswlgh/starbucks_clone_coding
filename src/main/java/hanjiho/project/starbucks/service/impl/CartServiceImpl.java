@@ -185,4 +185,29 @@ public class CartServiceImpl implements CartService {
 		return result;
 	}
 	
+	
+	/**
+	 * 일주일 지난 장바구니 데이터 삭제하기
+	 * @return String
+	 * @throws Exception
+	 */
+	@Override
+	public String deleteWeek() throws Exception {
+		int result=0;
+		try {
+		    result = sqlSession.delete("CartMapper.deleteWeek");
+
+		    if (result == 0) {
+		    	return "삭제된 장바구니가 없습니다>>" + result;
+		    }
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("삭제된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 삭제에 실패했습니다.");
+		}
+		return "삭제된 장바구니 수>>" + result;
+	}
+	
 }

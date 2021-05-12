@@ -34,7 +34,7 @@
                 <!-- 선물내역 -->
                 <!-- 기간선택 -->
                 <section class="my_card_pick_period">
-                    <form action="${pageContext.request.contextPath}/my/egift_card" method="post">
+                    <form action="${pageContext.request.contextPath}/my/egift_card" method="get">
                         <fieldset>
                             <legend>기간 선택 폼</legend>
                             <dl class="my_card_pick_bg">
@@ -133,13 +133,64 @@
                     </ul>
                 </section>
                 <!-- 목록 끝 -->
-                <!-- 페이징 -->
+                <!-- 페이지 번호 구현 -->
                 <div class="egiftCard_tbl_pagination">
-                    <ul class="pager">
-                        <li class="active"><a href="${pageContext.request.contextPath}/">1</a></li>
-                    </ul>
-                </div>
-                <!-- 페이징 끝 -->
+				<ul class="pager">
+				<%-- 이전 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 이전 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.prevPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/egift_card" var="prevPageUrl">
+							<c:param name="page" value="${pageData.prevPage}" />
+							<c:param name="pickPeriod" value="${pickPeriod}" />
+						</c:url>
+						<li class="active"><a href="${prevPageUrl}">이전 &nbsp;|&nbsp;</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">이전 &nbsp;|&nbsp;</li>
+			    	</c:otherwise>
+				</c:choose>
+			
+				<%-- 페이지 번호 (그룹 시작페이지 ~ 끝페이지 를 반복) --%>
+				<c:forEach var="i" begin="${pageData.startPage}"
+					end="${pageData.endPage}" varStatus="status">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/my/egift_card" var="pageUrl">
+						<c:param name="page" value="${i}" />
+						<c:param name="pickPeriod" value="${pickPeriod}" />
+					</c:url>
+					<%-- 페이지 번호 출력 --%>
+					<c:choose>
+						<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+						<c:when test="${pageData.nowPage == i}">
+							<li class="active">${i}</li>
+						</c:when>
+						<%-- 나머지 페이지의 경우 링크 적용함 --%>
+						<c:otherwise>
+							<li class="active"><a href="${pageUrl}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<%-- 다음 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 다음 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.nextPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/egift_card" var="nextPageUrl">
+							<c:param name="page" value="${pageData.nextPage}" />
+							<c:param name="pickPeriod" value="${pickPeriod}" />
+						</c:url>
+						<li class="active"><a href="${nextPageUrl}">&nbsp;| &nbsp;다음</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">&nbsp;| &nbsp;다음</li>
+			    	</c:otherwise>
+				</c:choose>
+				</ul>
+				</div>
+                <!-- 페이지번호구현 끝 -->
                 <!-- 선물내역 끝 -->
             </div>
         </div>

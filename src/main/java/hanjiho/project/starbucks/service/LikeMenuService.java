@@ -29,6 +29,12 @@ public interface LikeMenuService {
 	 */
 	public int getLikeMenuCount(LikeMenu input) throws Exception;
 	/**
+	 * 메뉴를 좋아하는 사람 수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int countLike(LikeMenu input) throws Exception;
+	/**
 	 * 좋아요 데이터 등록하기
 	 * @param LikeMenu 저장할 정보를 담고 있는 Beans
 	 * @return int

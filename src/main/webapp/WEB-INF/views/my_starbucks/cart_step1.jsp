@@ -121,7 +121,7 @@
                                         <div class="btn2_wrap">
                                         <c:choose>
 						                    <c:when test="${member != null}">
-                                            <a id="pay_now" class="btn btn-em" data-id="${item.menu_id}" data-qty="${item.menu_qty}">바로구매</a>
+                                            <a class="pay_now btn btn-em" data-id="${item.menu_id}" data-qty="${item.menu_qty}">바로구매</a>
 						                    </c:when>
 						                    <c:otherwise>
                                             <a id="goLogin" class="btn btn-em">바로구매</a>
@@ -355,11 +355,29 @@
         $("#cart").submit(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
-            alert("주문서 입력 화면으로 넘어갑니다.");
+			var input = '';
+        	
+        	//체크박스 받아서 반복문
+            $('input[name=drinkShop_view_ck]:checked').each(function(index){ 
+            	if (index != 0) {
+            		input += ',';
+            	}
+            	
+            	input += $(this).val();
+            });
+
+            $.post(ROOT_URL + '/rest/my/', {
+                like_id_list: input
+            }, function(json) {
+            	if (json.rt == "OK") {
+                    alert("주문서 입력 화면으로 넘어갑니다.");
+            		location.reload();
+            	}
+            });
         });
 
         /*바로구매*/
-        $("#pay_now").on("click", function(e) {
+        $(".pay_now").on("click", function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
 

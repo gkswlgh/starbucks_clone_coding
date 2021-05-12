@@ -13,6 +13,14 @@
 		<result property="menu_id"  column="menu_id" />
 		<result property="reg_date"  column="r_date" />
 	</resultMap>
+	
+	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
+	<update id="memberNull"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu">
+		UPDATE like_menu SET
+		member_id=null
+		WHERE member_id=#{member_id}
+	</update>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
@@ -35,12 +43,13 @@
 			<if test="member_id != 0">
 				member_id = #{member_id}
 			</if>
-			<if test="menu_id != 0">
-				OR menu_id = #{menu_id}
-			</if>
 		</where>
 		
 		ORDER BY like_id DESC
+		
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->
@@ -82,10 +91,16 @@
 			<if test="member_id != 0">
 				member_id = #{member_id}
 			</if>
-			<if test="menu_id != 0">
-				OR menu_id = #{menu_id}
-			</if>
 		</where>
+	</select>
+	
+	<!-- 메뉴를 좋아하는 사람 수 조회하기 -->
+	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
+		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="countLike"
+		parameterType="hanjiho.project.starbucks.model.LikeMenu"
+		resultType="int">
+		SELECT COUNT(*) FROM like_menu WHERE menu_id = #{menu_id}
 	</select>
 
 </mapper>

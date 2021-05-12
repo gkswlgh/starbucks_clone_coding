@@ -24,6 +24,14 @@
 		<result property="voc_re_txt"  column="voc_re_txt" />
 		<result property="re_reg_date"  column="r_r_date" />
 	</resultMap>
+	
+	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
+	<update id="memberNull"
+		parameterType="hanjiho.project.starbucks.model.Voc">
+		UPDATE voc SET
+		member_id=null
+		WHERE member_id=#{member_id}
+	</update>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
@@ -49,7 +57,7 @@
 			<if test="voc_type2 != null and voc_type2 != ''">
 				AND voc_type2 = #{voc_type2}
 			</if>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				AND member_id = #{member_id}
 			</if>
 			<if test="re_ok != null and re_ok != ''">
@@ -57,6 +65,10 @@
 			</if>
 		</where>
 		ORDER BY voc_id DESC
+		
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->
@@ -101,7 +113,7 @@
 			<if test="voc_type2 != null and voc_type2 != ''">
 				AND voc_type2 = #{voc_type2}
 			</if>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				AND member_id = #{member_id}
 			</if>
 			<if test="re_ok != null and re_ok != ''">

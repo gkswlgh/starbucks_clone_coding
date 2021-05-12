@@ -49,11 +49,12 @@ public interface CardService {
 	 */
 	public int getCardCount(Card input) throws Exception;
 	/**
-	 * 카드 갯수 조회
+	 * 핀번호 검사 - 갯수 조회 (검사)
+	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
-	public int cardCount(Card input) throws Exception;
+	public int pinCheckCount(Card input) throws Exception;
 	/**
 	 * 카드 데이터 등록하기
 	 * @param Card 저장할 정보를 담고 있는 Beans

@@ -56,4 +56,10 @@ public interface CartService {
 	 * @throws Exception
 	 */
 	public int deleteCart(Cart input) throws Exception;
+	/**
+	 * 일주일 지난 장바구니 데이터 삭제하기 (스케줄러)
+	 * @return String
+	 * @throws Exception
+	 */
+	public String deleteWeek() throws Exception;
 }

@@ -21,6 +21,18 @@
 		<result property="price"  column="price" />
 	</resultMap>
 
+	<!-- member 데이터 삭제 서비스계층 -->
+	<delete id="deleteMember"
+		parameterType="hanjiho.project.starbucks.model.Cart">
+		DELETE FROM cart WHERE member_id=#{member_id}
+	</delete>
+	
+	<!-- 일주일 지난 카트 삭제(스케줄러) - edit_date기준 -->
+	<delete id="deleteWeek"
+		parameterType="hanjiho.project.starbucks.model.Cart">
+		DELETE FROM cart WHERE edit_date <![CDATA[ <= ]]> date_add(now(), INTERVAL -7 DAY)
+	</delete>
+	
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
 		parameterType="hanjiho.project.starbucks.model.Cart"
@@ -55,6 +67,10 @@
         </where>
 
 		ORDER BY cart_id DESC
+		
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->

@@ -3,6 +3,8 @@ package hanjiho.project.starbucks.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import hanjiho.project.starbucks.helper.PageData;
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Card;
@@ -165,45 +168,20 @@ public class MyController {
     }
 
     /**
-     * 선물내역 페이지 GET
+     * 선물내역 페이지 GET (페이징)
      */
     @RequestMapping(value = "/my/egift_card", method = RequestMethod.GET)
-    public ModelAndView egift_card(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
-    	
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member == null) {
-        	return new ModelAndView ("page_none");
-    	}
-    	
-    	Gift input = new Gift();
-    	input.setMember_id(member.getId());
-    	
-    	List<Gift> output = new ArrayList<Gift>();
-    	try {
-			output = giftService.getGiftList(input);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-        model.addAttribute("pickPeriod", -1);
-        model.addAttribute("output", output);
-    	return new ModelAndView ("my_starbucks/egift_card");
-    }
-    
-    /**
-     * 선물내역 페이지 POST
-     */
-    @RequestMapping(value = "/my/egift_card", method = RequestMethod.POST)
-    public ModelAndView egift_card(Model model,
+    public ModelAndView egift_card(Model model,HttpServletResponse response, HttpServletRequest request,
             @SessionAttribute(value = "member", required = false) Member member,
-            @RequestParam(value = "pickPeriod", defaultValue = "0") int pickPeriod) {
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage,
+			// 검색할 기간 (-1은 1달전 -12는 1년전)
+            @RequestParam(value = "pickPeriod", defaultValue = "-1") int pickPeriod) {
 
-    	// 검색기간 (-1은 1달전 -12는 1년전)
-    	if (pickPeriod == 0) {
-    		pickPeriod = -1;
-    	}
-    	
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 10; // 한페이지당 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
@@ -214,7 +192,18 @@ public class MyController {
     	input.setPickPeriod(pickPeriod);
     	
     	List<Gift> output = new ArrayList<Gift>();
+		PageData pageData = null;
     	try {
+    		// 전체 게시글 수 조회
+			totalCount = giftService.getGiftCount(input);
+			// 페이지 번호 계산 --> 계산결과를 로그로 출력될 것이다.
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			
+			// SQL의 limit절에서 사용될 값을 Beans의 static변수에 저장
+    		Gift.setOffset(pageData.getOffset());
+    		Gift.setListCount(pageData.getListCount());
+			
+			//데이터조회
 			output = giftService.getGiftList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -222,8 +211,10 @@ public class MyController {
 
         model.addAttribute("pickPeriod", pickPeriod);
         model.addAttribute("output", output);
+		model.addAttribute("pageData", pageData);
     	return new ModelAndView ("my_starbucks/egift_card");
     }
+    
 
     /**
      * 선물내역 상세 페이지
@@ -273,12 +264,18 @@ public class MyController {
     }
     
     /**
-     * 보유카드 페이지
+     * 보유카드 페이지 (페이징)
      */
     @RequestMapping(value = "/my/mycard_list", method = RequestMethod.GET)
-    public ModelAndView mycard_list(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
-    	
+    public ModelAndView mycard_list(Model model, HttpServletResponse response, HttpServletRequest request,
+            @SessionAttribute(value = "member", required = false) Member member,
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 6; // 한페이지당 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
@@ -287,21 +284,32 @@ public class MyController {
     	input.setMember_id(member.getId());
 
     	List<Card> output = new ArrayList<Card>();
-    	int cardCount = 0;
+		PageData pageData = null;
+
     	try {
-    		cardCount = cardService.cardCount(input);
+			// 전체 게시글 수 조회
+			totalCount = cardService.getCardCount(input);
+			// 페이지 번호 계산 --> 계산결과를 로그로 출력될 것이다.
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// SQL의 limit절에서 사용될 값을 Beans의 static변수에 저장
+			Card.setOffset(pageData.getOffset());
+			Card.setListCount(pageData.getListCount());
+
+			// 데이터조회
     		output = cardService.getCardList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	
     	//만약 보유카드가 0장이라면
-    	if (cardCount == 0) {
+    	if (totalCount == 0) {
         	return new ModelAndView ("my_starbucks/mycard_none");
     	}
     	
-        model.addAttribute("cardCount", cardCount);
+        model.addAttribute("cardCount", totalCount);
         model.addAttribute("output", output);
+		model.addAttribute("pageData", pageData);
     	return new ModelAndView ("my_starbucks/mycard_list");
     }
     
@@ -360,7 +368,7 @@ public class MyController {
     	List<Card> cardList = new ArrayList<Card>();
     	int cardCount = 0;
     	try {
-    		cardCount = cardService.cardCount(input);
+    		cardCount = cardService.getCardCount(input);
     		cardList = cardService.getCardList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -375,28 +383,47 @@ public class MyController {
     }
 
     /**
-     * 문의목록 페이지
+     * 문의목록 페이지 (페이징)
      */
     @RequestMapping(value = "/my/voclist", method = RequestMethod.GET)
-    public ModelAndView voclist(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
+    public ModelAndView voclist(Model model, HttpServletResponse response, HttpServletRequest request,
+            @SessionAttribute(value = "member", required = false) Member member,
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 10; // 한페이지당 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
     	
         List<Voc> output = new ArrayList<Voc>();
+		PageData pageData = null;
+		
     	Voc input = new Voc();
     	input.setMember_id(member.getId());
 
         try {
+			// 전체 게시글 수 조회
+			totalCount = vocService.getVocCount(input);
+			// 페이지 번호 계산 --> 계산결과를 로그로 출력될 것이다.
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// SQL의 limit절에서 사용될 값을 Beans의 static변수에 저장
+			Voc.setOffset(pageData.getOffset());
+			Voc.setListCount(pageData.getListCount());
+
+			// 데이터조회
 			output = vocService.getVocList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
         model.addAttribute("vocList", output);
+		model.addAttribute("pageData", pageData);
     	return new ModelAndView ("my_starbucks/voclist");
     }
 
@@ -445,23 +472,40 @@ public class MyController {
     }
     
     /**
-     * 내 메뉴 페이지
+     * 내 메뉴 페이지 (페이징)
      */
     @RequestMapping(value = "/my/my_menu", method = RequestMethod.GET)
-    public ModelAndView my_menu(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
+    public ModelAndView my_menu(Model model, HttpServletResponse response, HttpServletRequest request,
+            @SessionAttribute(value = "member", required = false) Member member,
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+    	
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 10; // 한페이지당 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
 
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
-    	
+    	 
         List<LikeMenu> output = new ArrayList<LikeMenu>();
+		PageData pageData = null;
+		
         LikeMenu input = new LikeMenu();
-        
         input.setMember_id(member.getId());
         
         try {
+			// 전체 게시글 수 조회
+			totalCount = likeMenuService.getLikeMenuCount(input);
+			// 페이지 번호 계산 --> 계산결과를 로그로 출력될 것이다.
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// SQL의 limit절에서 사용될 값을 Beans의 static변수에 저장
+			LikeMenu.setOffset(pageData.getOffset());
+			LikeMenu.setListCount(pageData.getListCount());
+
+			// 데이터조회
             output = likeMenuService.getLikeMenuList(input);
             
             int index = 0;
@@ -485,6 +529,7 @@ public class MyController {
         }
         
         model.addAttribute("menuList", output);
+		model.addAttribute("pageData", pageData);
         return new ModelAndView ("my_starbucks/my_menu");
     }
     
@@ -720,28 +765,59 @@ public class MyController {
 
 
     /**
-     * 주문내역 페이지
+     * 주문내역 페이지 (페이징)
      */
     @RequestMapping(value = "/my/order_list", method = RequestMethod.GET)
-    public ModelAndView order_list(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
-    	
+    public ModelAndView order_list(Model model, HttpServletResponse response, HttpServletRequest request,
+            @SessionAttribute(value = "member", required = false) Member member,
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage,
+            @RequestParam(value = "pickDate01", required = false) String pick_date01,  //시작날짜
+            @RequestParam(value = "pickDate02", required = false) String pick_date02,  //끝날짜
+            @RequestParam(value = "pay_method", required = false) String pay_method,   //결제수단
+            @RequestParam(value = "order_type", required = false) String order_type) { //거래유형
+
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 10; // 한페이지당 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
     	
+    	System.out.println(pay_method +"  "+ order_type);
+    	
     	Order input = new Order();
     	input.setMember_id(member.getId());
+    	if (pay_method != null && order_type != null) {
+        	//검색 조건인 파라미터 값이 "0"(전체검색)일경우 null 처리
+        	if (!pay_method.equals("0")) { input.setPay_method(pay_method); }
+        	if (!order_type.equals("0")) { input.setOrder_type(order_type); }
+    	}
+    	input.setPick_date01(pick_date01);
+    	input.setPick_date02(pick_date02);
     	
     	List<Order> output = new ArrayList<Order>();
+		PageData pageData = null;
     	try {
+			// 전체 게시글 수 조회
+			totalCount = orderService.getOrderCount(input);
+			// 페이지 번호 계산 --> 계산결과를 로그로 출력될 것이다.
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// SQL의 limit절에서 사용될 값을 Beans의 static변수에 저장
+			Order.setOffset(pageData.getOffset());
+			Order.setListCount(pageData.getListCount());
+
+			// 데이터조회
     		output = orderService.getOrderList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	
         model.addAttribute("output", output);
+		model.addAttribute("pageData", pageData);
     	return new ModelAndView ("my_starbucks/order_list");
     }
     

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import org.json.simple.JSONObject;
@@ -18,6 +19,7 @@ import org.json.simple.parser.ParseException;
 
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.LikeMenu;
+import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
 import hanjiho.project.starbucks.model.NutriInfo;
 import hanjiho.project.starbucks.service.LikeMenuService;
@@ -195,7 +197,7 @@ public class ProductController {
         tmp.setMenu_id(productId);
         
         try {
-			count = likeMenuService.getLikeMenuCount(tmp);
+			count = likeMenuService.countLike(tmp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

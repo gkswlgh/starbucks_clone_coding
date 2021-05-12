@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import  hanjiho.project.starbucks.model.Card;
+import hanjiho.project.starbucks.model.Order;
 import  hanjiho.project.starbucks.service.CardService;
 
 
@@ -140,17 +141,19 @@ public class CardServiceImpl implements CardService {
 		return result;
 	}
 
+
 	/**
-	 * 카드 갯수 조회
+	 * 핀번호 검사 - 갯수 조회 (검사)
+	 * @param Card 조회할 카드의 일련번호를 담고있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
 	@Override
-	public int cardCount(Card input) throws Exception {
+	public int pinCheckCount(Card input) throws Exception {
 		int result=0;
 		
 		try {
-			result = sqlSession.selectOne("CardMapper.cardCount", input);
+			result = sqlSession.selectOne("CardMapper.pinCheckCount", input);
 			
 		} catch (Exception e) {
 		    log.error(e.getLocalizedMessage());
@@ -158,7 +161,6 @@ public class CardServiceImpl implements CardService {
 		}
 		return result;
 	}
-
 
 	/**
 	 * 카드 데이터 등록하기
@@ -246,8 +248,22 @@ public class CardServiceImpl implements CardService {
 	public int charge(Card input) throws Exception {
 		int result=0;
 		try {
+			//잔액 변경
 		    result = sqlSession.update("CardMapper.charge", input);
 
+		    //id로 카드 조회해서 member_id받아오기
+		    Card output = new Card();
+		    output = sqlSession.selectOne("CardMapper.selectItem", input);
+		    
+		    //주문테이블에 결제 내역 저장
+		    Order tmp = new Order();
+		    tmp.setMember_id(output.getMember_id());//조회한 객체 output에서 꺼냄
+		    tmp.setOrder_type("1");
+		    tmp.setOrder_price(input.getOrder_price()); //파라미터 객체 input에서 받아옴
+		    tmp.setPay_method("N");
+		    tmp.setReceive_complete("Y");
+		    sqlSession.insert("OrderMapper.insertItem", tmp);
+		    
 		    if (result == 0) {
 		        throw new NullPointerException("result=0");
 		    }
@@ -324,8 +340,22 @@ public class CardServiceImpl implements CardService {
 	public int chargeSchedule(Card input) throws Exception {
 		int result=0;
 		try {
+			//잔액 변경
 		    result = sqlSession.update("CardMapper.chargeSchedule", input);
 
+		    //id로 카드 조회해서 member_id받아오기
+		    Card output = new Card();
+		    output = sqlSession.selectOne("CardMapper.selectItem", input);
+		    
+		    //주문테이블에 결제 내역 저장
+		    Order tmp = new Order();
+		    tmp.setMember_id(output.getMember_id());//조회한 객체 output에서 꺼냄
+		    tmp.setOrder_type("1");
+		    tmp.setOrder_price(output.getCharge_cash()); //조회한 객체 output에서 꺼냄 (자동충전값)
+		    tmp.setPay_method("N");
+		    tmp.setReceive_complete("Y");
+		    sqlSession.insert("OrderMapper.insertItem", tmp);
+		    
 		    if (result == 0) {
 		        throw new NullPointerException("result=0");
 		    }

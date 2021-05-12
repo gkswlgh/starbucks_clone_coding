@@ -43,12 +43,12 @@
                 <section class="my_drinkShop_info">
                     <div class="drinkShop_info">
                         <dl class="content_tabmenu mcontent_tabmenu">
-                            <dt class="stab stab_01 on">
+                            <dt class="stab stab_01">
                                 <h5>
                                     <a>자주 주문하는 메뉴 통계</a>
                                 </h5>
                             </dt>
-                            <dd class="panel on content_panel">
+                            <dd class="panel content_panel">
                                 <p class="tip03">
                                     <span>최근 3개월 기준 자료입니다. <br>매일 자정 갱신됩니다.</span>
                                 </p>
@@ -84,12 +84,12 @@
                                     </tbody>
                                 </table>
                             </dd>
-                            <dt class="stab stab_02">
+                            <dt class="stab on stab_02">
                                 <h5>
                                     <a>좋아하는 메뉴</a>
                                 </h5>
                             </dt>
-                            <dd class="panel content_panel">
+                            <dd class="panel on content_panel">
                                 <p class="tip03">
                                 </p>
                                 <table class="drinkShop_area_info_tbl" summary="My 메뉴 no, 메뉴명, 등록일에 대한 테이블">
@@ -154,15 +154,62 @@
                                     </ul>
                                 </div>
                                 <!-- 버튼 끝 -->
-                                <!-- 페이징 -->
-                                <div class="drinkShop_tbl_pagination">
-                                    <ul class="pager">
-                                        <li class="active">
-                                            <a href="${pageContext.request.contextPath}/">1</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- 페이징 끝 -->
+                <!-- 페이지 번호 구현 -->
+                <div class="egiftCard_tbl_pagination">
+				<ul class="pager">
+				<%-- 이전 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 이전 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.prevPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/my_menu" var="prevPageUrl">
+							<c:param name="page" value="${pageData.prevPage}" />
+						</c:url>
+						<li class="active"><a href="${prevPageUrl}">이전 &nbsp;|&nbsp;</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">이전 &nbsp;|&nbsp;</li>
+			    	</c:otherwise>
+				</c:choose>
+			
+				<%-- 페이지 번호 (그룹 시작페이지 ~ 끝페이지 를 반복) --%>
+				<c:forEach var="i" begin="${pageData.startPage}"
+					end="${pageData.endPage}" varStatus="status">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/my/my_menu" var="pageUrl">
+						<c:param name="page" value="${i}" />
+					</c:url>
+			
+					<%-- 페이지 번호 출력 --%>
+					<c:choose>
+						<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+						<c:when test="${pageData.nowPage == i}">
+							<li class="active">${i}</li>
+						</c:when>
+						<%-- 나머지 페이지의 경우 링크 적용함 --%>
+						<c:otherwise>
+							<li class="active"><a href="${pageUrl}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<%-- 다음 그룹에 대한 링크 --%>
+				<c:choose>
+					<%-- 다음 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.nextPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/my/my_menu" var="nextPageUrl">
+							<c:param name="page" value="${pageData.nextPage}" />
+						</c:url>
+						<li class="active"><a href="${nextPageUrl}">&nbsp;| &nbsp;다음</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="active">&nbsp;| &nbsp;다음</li>
+			    	</c:otherwise>
+				</c:choose>
+				</ul>
+				</div>
+                <!-- 페이지번호구현 끝 -->
                             </dd>
                         </dl>
                     </div>

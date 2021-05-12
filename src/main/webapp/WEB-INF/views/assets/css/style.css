@@ -61,7 +61,7 @@ img {
     position: fixed;
     background: #f6f5ef;
     width: 100%;
-    z-index: 10;
+    z-index: 20;
 }
 
 #header .header_inner {
