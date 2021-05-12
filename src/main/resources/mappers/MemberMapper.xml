@@ -75,7 +75,7 @@
 	<delete id="deleteItem"
 		parameterType="hanjiho.project.starbucks.model.Member">
 		DELETE FROM member 
-		WHERE is_out='Y' AND del_date>=date_add(now(), INTERVAL -3 MONTH)
+		WHERE is_out='Y' AND del_date <![CDATA[ <= ]]> date_add(now(), INTERVAL -3 MONTH)
 	</delete>
 	
 	<!-- 탈퇴시 컬럼 갱신을 위한 기능 정의 -->

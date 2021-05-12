@@ -40,9 +40,9 @@
                             <dl class="my_card_pick_date">
                                 <dt>일자별</dt>
                                 <dd>
-                                    <input type="date" id="pickDate01" name="pickDate01" title="원하는 날짜를 선택해 주세요.">
+                                    <input type="date" id="pickDate01" name="pickDate01" title="원하는 날짜를 선택해 주세요." value="${pick_date01}" >
                                     <p class="hyphen_bg"></p>
-                                    <input type="date" id="pickDate02" name="pickDate02" title="원하는 날짜를 선택해 주세요.">
+                                    <input type="date" id="pickDate02" name="pickDate02" title="원하는 날짜를 선택해 주세요." value="${pick_date02}" >
                                     <p class="btn_pick_date">
                                         <button type="submit">검색</button>
                                     </p>
@@ -55,8 +55,8 @@
                                         <div class="select_box">
                                             <select id="pay_method" name="pay_method">
                                                 <option value="0">전체보기</option>
-                                                <option value="S">스타벅스 카드</option>
-                                                <option value="N">스타벅스 카드 외</option>
+                                                <option value="S" <c:if test="${pay_method == 'S'}">selected</c:if> >스타벅스 카드</option>
+                                                <option value="N" <c:if test="${pay_method == 'N'}">selected</c:if> >스타벅스 카드 외</option>
                                             </select>
                                         </div>
                                     </dd>
@@ -67,8 +67,8 @@
                                         <div class="select_box">
                                             <select id="order_type" name="order_type">
                                                 <option value="0">전체보기</option>
-                                                <option value="1">충전</option>
-                                                <option value="2">주문</option>
+                                                <option value="1" <c:if test="${order_type == '1'}">selected</c:if> >충전</option>
+                                                <option value="2" <c:if test="${order_type == '2'}">selected</c:if> >주문</option>
                                             </select>
                                         </div>
                                     </dd>
@@ -125,9 +125,11 @@
                             <td><fmt:formatNumber value="${item.order_price}" pattern="#,###" /></td>
                             <td>${item.reg_date}</td>
                             <td style="padding:0px;position:relative;">
+                            <c:if test="${item.order_type == '2'}">
                             	<p class="btn_pick_date" style="position:absolute;top:10px;left:20px;">
                                    <a href="${pageContext.request.contextPath}/my/order_view/${item.order_id}">상세</a>
                                 </p>
+                            </c:if>
                            </td>
                         </tr>
 			  </c:forEach>

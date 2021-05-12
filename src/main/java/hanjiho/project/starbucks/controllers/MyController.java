@@ -818,6 +818,10 @@ public class MyController {
     	
         model.addAttribute("output", output);
 		model.addAttribute("pageData", pageData);
+		model.addAttribute("pick_date01", pick_date01);
+		model.addAttribute("pick_date02", pick_date02);
+		model.addAttribute("pay_method", pay_method);
+		model.addAttribute("order_type", order_type);
     	return new ModelAndView ("my_starbucks/order_list");
     }
     
