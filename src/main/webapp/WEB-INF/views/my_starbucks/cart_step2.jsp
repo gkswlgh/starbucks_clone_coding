@@ -81,8 +81,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="shop-item shop-max"></div>
-                                                            <div class="shop-item shop-max"></div>
                                                         </div>
                                                     </td>
                                                 </tr>

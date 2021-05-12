@@ -51,42 +51,48 @@
                             </tr>
                         </thead>
                         <tbody>
+          <c:choose>
+	        <c:when test="${output != null && fn:length(output) > 0}">
+				<c:forEach var="item" items="${output}" varStatus="status">
                             <tr>
                                 <td>1</td>
                                 <td class="cart_ttl2">
                                     <div class="ttl2_wrap clear">
                                         <div class="ttl2_thumb">
-                                            <img src="${cart.list_img}" alt />
+                                            <img src="${item.list_img}" alt />
                                         </div>
                                         <div class="ttl2_cell">
-                                            <a class="ttl2_name">${cart.name}</a>
+                                            <a class="ttl2_name">${item.name}</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="cart_qnt2">
                                     <label for="n0" class="hid">수량</label>
                                     <div class="qnt_box">
-                                        <span>${cart.menu_qty}</span>
+                                        <span>${item.menu_qty}</span>
                                     </div>
                                 </td>
                                 <td class="cart_price2">
-                                    <span class="num"><fmt:formatNumber value="${cart.price}" pattern="#,###" /></span>
+                                    <span class="num"><fmt:formatNumber value="${item.price}" pattern="#,###" /></span>
                                     <i class="unit">원</i>
                                 </td>
                                 <td class="cart_selling2">
                                     <span class="label">최종금액</span>
                                     <span class="price">
-                                        <b class="num x-row-net"><fmt:formatNumber value="${order.order_price}" pattern="#,###" /></b>
+                                        <b class="num x-row-net"><fmt:formatNumber value="${item.price * item.menu_qty}" pattern="#,###" /></b>
                                         <i class="unit">원</i>
                                     </span>
                                 </td>
                                 <td></td>
                             </tr>
+			  </c:forEach>
+              </c:when>
+            </c:choose>
                         </tbody>
                     </table>
                 <div class="suggestion_btnZone" style="height:100px;">
                     <p class="btn_list">
-                        <a href="${pageContext.request.contextPath}/my/order_list">목록</a>
+                        <a href="${pageContext.request.contextPath}/my/order_list">뒤로가기</a>
                     </p>
                 </div>
                 <!-- 내용 끝 -->

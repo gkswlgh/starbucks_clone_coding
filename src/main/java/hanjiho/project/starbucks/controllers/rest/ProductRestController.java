@@ -62,6 +62,7 @@ public class ProductRestController {
     /** likemenu 저장 */
     @RequestMapping(value = "/rest/product/like_menu", method = RequestMethod.POST)
     public Map<String, Object> likemenu(
+    		@SessionAttribute(value = "member", required = false) Member member,
             // 회원일련번호
             @RequestParam(value = "member_id", defaultValue = "0") int member_id,
             // 메뉴일련번호
@@ -79,9 +80,13 @@ public class ProductRestController {
         LikeMenu input = new LikeMenu();
         input.setMember_id(member_id);
         input.setMenu_id(menu_id);
-         
-        // 데이터등록
         try {
+        	int count = 0;
+        	count = likeMenuService.getLikeMenuCount(input);
+        	if (count != 0) {
+        		return webHelper.getJsonWarning("이미 좋아하는 메뉴로 등록되어있습니다. My메뉴에서 삭제할 수 있습니다.");
+        	}
+        	// 데이터등록
         	likeMenuService.addLikeMenu(input);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());

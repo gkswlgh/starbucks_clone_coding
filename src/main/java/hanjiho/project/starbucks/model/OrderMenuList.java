@@ -9,4 +9,9 @@ public class OrderMenuList {
 	private int member_id;
 	private int order_id;
 	private int menu_qty;
+	
+	/*join - menu*/
+	private String list_img;
+	private String name;
+	private int price;
 }

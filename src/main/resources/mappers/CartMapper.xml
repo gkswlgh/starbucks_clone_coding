@@ -43,7 +43,7 @@
 		
         <where>
             <choose>
-                <when test="member_id != null">
+                <when test="member_id != 0">
                     member_id=#{member_id}
                 </when>
                 <when test="session_id != null">
@@ -75,7 +75,7 @@
 
         <where>
             <choose>
-                <when test="member_id != null">
+                <when test="member_id != 0">
                     member_id=#{member_id}
                 </when>
                 <when test="session_id != null">
@@ -119,7 +119,7 @@
 			<if test="session_id != null and session_id != ''">
 				session_id = #{session_id}
 			</if>
-			<if test="member_id != null and member_id != ''">
+			<if test="member_id != 0">
 				AND member_id = #{member_id}
 			</if>
 			<if test="is_direct_order != null and is_direct_order != ''">

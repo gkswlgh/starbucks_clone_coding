@@ -126,7 +126,7 @@
                                                 <span class="n1">${status.index+1}</span>
                                             </td>
                                             <td>
-                                                <a herf="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="btn_show_pop_detail" data-favoriteno="${item.like_id}">${item.menu_name}</a>
+                                                <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="btn_show_pop_detail" data-favoriteno="${item.like_id}">${item.menu_name}</a>
                                                 <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="myFavorite" data-favoriteno="${item.like_id}">
                                                     <img src="//image.istarbucks.co.kr/common/img/store/icon_fav_on.png" alt>
                                                 </a>

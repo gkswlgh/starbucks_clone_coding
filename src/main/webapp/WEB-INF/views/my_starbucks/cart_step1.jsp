@@ -121,7 +121,7 @@
                                         <div class="btn2_wrap">
                                         <c:choose>
 						                    <c:when test="${member != null}">
-                                            <a id="payNow" class="btn btn-em">바로구매</a>
+                                            <a id="pay_now" class="btn btn-em" data-id="${item.menu_id}" data-qty="${item.menu_qty}">바로구매</a>
 						                    </c:when>
 						                    <c:otherwise>
                                             <a id="goLogin" class="btn btn-em">바로구매</a>
@@ -358,12 +358,30 @@
             alert("주문서 입력 화면으로 넘어갑니다.");
         });
 
-	    //바로구매
-        $("#payNow").click(function(e) {
+        /*바로구매*/
+        $("#pay_now").on("click", function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
-            alert("주문서 입력 화면으로 넘어갑니다.");
-        });
+
+        	var menu_id = $(this).data("id");
+        	var menu_qty = $(this).data("qty");
+            
+            //이동 - 이동할 때 상품번호랑 수량 같이
+            $.post(ROOT_URL + '/rest/product/pay_now', {
+            	menu_id: menu_id,
+            	menu_qty: menu_qty
+            }, function(json) {
+            	if (json.rt == "OK") {
+            		var myRedirect = function(redirectUrl, arg, value) {
+            		  var form = $('<form action="' + redirectUrl + '" method="post">' +
+            				  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+            				  $('body').append(form);
+            				  $(form).submit();
+            				};
+            		myRedirect(ROOT_URL + "/my/pay_step2", "cart_id", json.cart_id);
+           		}
+            });
+        });//바로구매끝
 	    
 
 	    //로그인

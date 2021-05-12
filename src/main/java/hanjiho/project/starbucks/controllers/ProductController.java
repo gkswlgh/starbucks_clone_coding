@@ -17,8 +17,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import hanjiho.project.starbucks.helper.WebHelper;
+import hanjiho.project.starbucks.model.LikeMenu;
 import hanjiho.project.starbucks.model.Menu;
 import hanjiho.project.starbucks.model.NutriInfo;
+import hanjiho.project.starbucks.service.LikeMenuService;
 import hanjiho.project.starbucks.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +37,8 @@ public class ProductController {
 	
 	@Autowired
 	MenuService menuService;
+	@Autowired
+	LikeMenuService likeMenuService;
 	
 
     /**
@@ -186,10 +190,20 @@ public class ProductController {
             e.printStackTrace();
        }
         
+        int count = 0;
+        LikeMenu tmp = new LikeMenu();
+        tmp.setMenu_id(productId);
+        
+        try {
+			count = likeMenuService.getLikeMenuCount(tmp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         
         model.addAttribute("nutriInfo", nutriInfo);
         model.addAttribute("output", output);
-        
+        model.addAttribute("count", count);
     	return new ModelAndView ("menu_detail");
     }
 }

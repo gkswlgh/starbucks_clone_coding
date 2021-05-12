@@ -60,6 +60,10 @@
 		                                <div class="myDrink"><a id="likeMenuGoLogin" title="좋아하는 음료 등록">좋아하는 음료로 등록</a></div>
 		                        	</c:otherwise>
 		                        </c:choose>
+		                        <p style="position:absolute;top:40px;right:0;font-size:12px;color:#666;">
+		                        이 메뉴를 좋아한 회원 수 :
+		                        <span style="font-size:20px;font-weight:bold;color:#063;position:relative;top:3px;">${count}</span>
+		                        명</p>
                             </div>
                             <div class="product_view_info">
                                 <div class="product_info_head">
@@ -192,7 +196,6 @@
         	var menu_id = $("#menu_id").val();
         	var menu_qty = $("#in_cart").data("qty");
             
-            
             //이동 - 이동할 때 상품번호랑 수량 같이
             $.post(ROOT_URL + '/rest/product/in_cart', {
             	menu_id: menu_id,
@@ -224,8 +227,10 @@
             	menu_id: menu_id
             }, function(json) {
             	if (json.rt == "OK") {
-					if (confirm('좋아하는 음료로 등록되었습니다. 마이페이지에서 확인하시겠습니까?')) {
+					if (confirm('좋아하는 음료로 등록되었습니다. My메뉴에서 확인하시겠습니까?')) {
 		                window.location = ROOT_URL + "/my/my_menu";
+					} else {
+						window.location.reload();
 					}
             	}
             });

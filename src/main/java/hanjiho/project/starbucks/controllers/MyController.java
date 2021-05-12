@@ -28,6 +28,7 @@ import hanjiho.project.starbucks.model.LikeMenu;
 import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
 import hanjiho.project.starbucks.model.Order;
+import hanjiho.project.starbucks.model.OrderMenuList;
 import hanjiho.project.starbucks.model.Voc;
 import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.CartService;
@@ -751,14 +752,25 @@ public class MyController {
     @RequestMapping(value = "/my/order_view/{order_id}", method = RequestMethod.GET)
     public ModelAndView order_view(Model model,
             @SessionAttribute(value = "member", required = false) Member member,
-            @RequestParam(value = "order_id", defaultValue = "0") int order_id
+            @PathVariable(value = "order_id") int order_id
             ) {
     	
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
+
+    	OrderMenuList input = new OrderMenuList();
+    	input.setOrder_id(order_id);
     	
+    	List<OrderMenuList> output = new ArrayList<OrderMenuList>();
+    	try {
+    		output = orderMenuListService.getOrderMenuListList(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        model.addAttribute("output", output);
     	return new ModelAndView ("my_starbucks/order_view");
     }
 }
