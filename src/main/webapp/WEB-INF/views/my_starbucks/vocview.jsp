@@ -89,7 +89,7 @@
 				</c:choose>
                 <div class="suggestion_btnZone">
                     <p class="btn_list">
-                        <a href="${pageContext.request.contextPath}/my/voclist" onclick="return false;">목록</a>
+                        <a href="${pageContext.request.contextPath}/my/voclist">목록</a>
                     </p>
                 </div>
             </div>

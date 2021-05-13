@@ -11,7 +11,7 @@
         <!-- 내용 -->
         <div class="cont">
             <div class="cont_inner">
-                <form id="join_mem" name="join_mem" class="join_input_frm" method="post" action="${pageContext.request.contextPath}/rest/account/join">
+                <form autocomplete="off" id="join_mem" name="join_mem" class="join_input_frm" method="post" action="${pageContext.request.contextPath}/rest/account/join">
                     <fieldset>
                         <legend>회원가입 입력폼</legend>
                         <!-- 테이블 -->
@@ -42,7 +42,9 @@
                                         <th scope="row">비밀번호 <img src="//image.istarbucks.co.kr/common/img/common/bullet_star_red.gif" alt="필수입력" /></th>
                                         <td>
                                             <div class="sel_wrap">
-                                                <input type="password" class="voc_ttl_input1 w300" id="user_pw" name="user_pw" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
+                                            	<!-- 비번자동입력방지... -->
+												<input type="password" id="temppwd" name="tempwd" style="display:none;">
+                                                <input type="password" autocomplete="new-password"  class="voc_ttl_input1 w300" id="user_pw" name="user_pw" onpaste="fnPaste(); return false;" oncopy="fnCopy(); return false;" />
                                             </div>
                                         </td>
                                     </tr>

@@ -170,6 +170,13 @@ public class ProductRestController {
 		}
     	
         Cart input = new Cart();
+        if (member != null) {
+            input.setMember_id(member.getId());
+            input.setSession_id("0");
+        } else {
+            // 비회원인 경우 클라이언트를 식별하기 위한 JSESSION-ID -> 모든 브라우저마다 고유한 값으로 할당된다.
+            input.setSession_id(session.getId());
+        }
 		input.setCart_id(cart_id);
 		input.setMenu_qty(menu_qty);
 		//바로구매아님 N
@@ -314,8 +321,6 @@ public class ProductRestController {
         	tmp2.setOrder_id(input.getOrder_id());
         	orderMenuListService.addOrderMenuList(tmp2);
         	
-        	/* 주문이 끝난 장바구니(cart) 삭제 */
-        	cartService.deleteCart(tmp);
 
 
         	/** 3) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
@@ -334,6 +339,10 @@ public class ProductRestController {
             	tmp3.setCash(cash);
         		cardService.pay(tmp3);
         	}
+        	
+
+        	/* 주문이 끝난 장바구니(cart) 삭제 */
+        	cartService.deleteCart(tmp);
         	
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
@@ -384,7 +393,24 @@ public class ProductRestController {
         	//order저장
         	orderService.addOrder(input);
 
-        	/** 2) 카트 조회 - order_menu_list에 저장 */
+        	/** 2) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
+        	if (card_id != 0) {
+        		//조회
+            	Card tmp3 = new Card();
+            	tmp3.setCard_id(card_id);
+            	tmp3 = cardService.getCardItem(tmp3);
+            	//잔액계산
+            	int cash = tmp3.getCash();
+            	cash = cash - order_price;
+            	if (cash < 0) {
+            		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
+            	}
+            	//잔액수정
+            	tmp3.setCash(cash);
+        		cardService.pay(tmp3);
+        	}
+        	
+        	/** 3) 카트 조회 - order_menu_list에 저장 */
         	// cart_id,cart_id... 형식으로 저장된 String을 ',' 기준으로 잘라서 배열로 변환
         	String[] data = cart_id_list.split(",");
         	
@@ -406,26 +432,9 @@ public class ProductRestController {
             	orderMenuListService.addOrderMenuList(tmp3);
             	
             	/* 주문이 끝난 장바구니(cart) 삭제 */
-            	cartService.deleteCart(tmp2);
+            	cartService.deleteCart(tmp2); //가장 마지막에 삭제
     		}
 
-        	/** 3) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
-        	if (card_id != 0) {
-        		//조회
-            	Card tmp3 = new Card();
-            	tmp3.setCard_id(card_id);
-            	tmp3 = cardService.getCardItem(tmp3);
-            	//잔액계산
-            	int cash = tmp3.getCash();
-            	cash = cash - order_price;
-            	if (cash < 0) {
-            		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
-            	}
-            	//잔액수정
-            	tmp3.setCash(cash);
-        		cardService.pay(tmp3);
-        	}
-        	
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }

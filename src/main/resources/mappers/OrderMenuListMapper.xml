@@ -17,6 +17,9 @@
 		<result property="list_img"  column="list_img" />
 		<result property="price"  column="price" />
 		<result property="name"  column="name" />
+		<result property="menu_class"  column="menu_class" />
+		<!-- join - member -->
+		<result property="gender"  column="gender" />
 		<!-- 집계함수 sum (가장 많이 이용한 메뉴 10건 조회할 때) -->
 		<result property="sum_order"  column="sum_order" />
 	</resultMap>
@@ -43,7 +46,6 @@
 		ORDER BY order_menu_id DESC
 	</select>
 	
-	
 	<!-- 가장 많이 이용한 메뉴 10건 조회 - menu_id별 데이터 수 조회하기 (조회조건 : member_id) -->
 	<select id="orderOft"
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
@@ -54,6 +56,19 @@
 		WHERE member_id = #{member_id}
 		group by menu_id, name
 		order by sum_order desc limit 0,10
+	</select>
+	
+	<!-- 전체 회원 기준 가장 많이 이용한 메뉴 조회 - (조회조건 : 1년전부터 / menu_class 0 ~ 8지정) -->
+	<select id="orderOftAll"
+		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
+		resultMap="orderMenuListMap">
+		SELECT m.menu_class menu_class, o.menu_id menu_id, name, list_img, SUM(menu_qty) sum_order
+		FROM order_menu_list o
+		INNER JOIN menu m ON o.menu_id = m.id
+		INNER JOIN member b ON o.member_id = b.id
+		WHERE menu_class=#{menu_class} AND b.gender=#{gender}
+		group by menu_id, name, list_img
+		order by sum_order desc limit 0,3
 	</select>
 
 	<!-- 데이터 저장을 위한 기능 정의 -->

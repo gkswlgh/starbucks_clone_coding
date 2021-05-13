@@ -68,7 +68,7 @@
 		)
 	</insert>
 
-	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<!-- 데이터 삭제를 위한 기능 정의 (탈퇴한지 약 3달 지난 데이터 삭제) -->
 	<delete id="deleteItem"
 		parameterType="hanjiho.project.starbucks.model.Member">
 		DELETE FROM member 

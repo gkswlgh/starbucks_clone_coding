@@ -704,11 +704,6 @@ public class MyController {
 	    		order_price += 5000; // 배달비용 20000원 미만일때 5000
 	    	}
     	input3.setOrder_price(order_price);
-
-        // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member.getId() != input2.getMember_id()) {
-        	return new ModelAndView ("page_none");
-    	}
     	
     	
     	// cart_id_list를 또 String 그대로 넘기기 (페이지에서 버튼 조작으로 order할 때 order_menu_list도 insert해야함)
@@ -823,7 +818,7 @@ public class MyController {
     	input3.setOrder_price(order_price);
 
         // 비회원, 다른 회원으로 부터의 접근 제한
-    	if (member.getId() != input.getMember_id() && member.getId() != input2.getMember_id()) {
+    	if (member.getId() != input.getMember_id()) {
         	return new ModelAndView ("page_none");
     	}
     	

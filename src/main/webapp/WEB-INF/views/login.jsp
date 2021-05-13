@@ -11,7 +11,7 @@
     <div class="login_bg_wrap">
         <div class="login_wrap">
             <div class="login_inner">
-                <form id="login" action="${pageContext.request.contextPath}/rest/account/login" method="post">
+                <form id="login" action="${pageContext.request.contextPath}/rest/account/login" method="post" autocomplete="off">
                     <fieldset>
                         <legend class="hid">로그인 폼</legend>
                         <strong class="login_ttl">로그인</strong>
@@ -21,7 +21,9 @@
                             </p>
                             <div class="login_input_box bd_none">
                                 <label for="txt_user_id" class="hid">아이디</label> <input type="text" class="login_id mb10" id="user_id" name="user_id" placeholder="아이디를 입력해주세요." maxlength="20" required="required" /> <label for="txt_user_pw" class="hid">비밀번호</label>
-                                <input type="password" class="login_pw mb10" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해 주세요." maxlength="20" required="required" autocomplete="off" /> <span class="checkWrap"> 
+                                <!-- 비번자동입력방지... -->
+								<input type="password" id="temppwd" name="tempwd" style="display:none;">
+                                <input type="password" autocomplete="new-password" class="login_pw mb10" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해 주세요." maxlength="20" required="required" autocomplete="off" /> <span class="checkWrap"> 
                                 </span>
                                 <p class="btn_mem_login">
                                     <button class="login_btn" type="submit">로그인</button>

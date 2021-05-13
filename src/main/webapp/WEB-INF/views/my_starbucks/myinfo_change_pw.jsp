@@ -10,7 +10,7 @@
 <div id="container"></div>
     <div class="find_mem_wrap">
         <div class="find_mem_inner">
-            <form id="myinfo_change_pw" name="myinfo_change_pw" action="${pageContext.request.contextPath}/rest/account/myinfo_change_pw" method="post">
+            <form  autocomplete="off" id="myinfo_change_pw" name="myinfo_change_pw" action="${pageContext.request.contextPath}/rest/account/myinfo_change_pw" method="post">
                 <fieldset>
                     <legend class="hid">회원 개인정보를 조회하는 폼</legend>
                     <div class="find_mem_ttl">비밀번호 변경</div>
@@ -26,7 +26,9 @@
                             <span class="result_txt_sub"><b>현재 비밀번호</b></span>
                             <label for="txt_change_pw" class="hid">비밀번호</label>
                             <div class="find_mem_input_box bd_none">
-                                <input type="password" class="change_pw mb10" id="txt_change_pw_now" name="txt_change_pw_now" placeholder="비밀번호를 입력해 주세요." maxlength="20" required="required" autocomplete="off" /></div>
+                               	<!-- 비번자동입력방지... -->
+								<input type="password" id="temppwd" name="tempwd" style="display:none;">
+                                <input type="password" autocomplete="new-password" class="change_pw mb10" id="txt_change_pw_now" name="txt_change_pw_now" placeholder="비밀번호를 입력해 주세요." maxlength="20" required="required" autocomplete="off" /></div>
                             <span class="result_txt_sub"><b>새 비밀번호</b></span>
                             <div class="find_mem_input_box bd_none">
                                 <label for="txt_change_pw" class="hid">비밀번호</label>

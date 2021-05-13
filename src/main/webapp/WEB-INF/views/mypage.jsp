@@ -83,7 +83,7 @@
                                         <a class="icon_pencil pencil" data-cardnickname="${item.card_name}">정보수정</a>
                                     </p>
                                     <p class="my_ms_card_detail_id_modify">
-                                        <input type="text" id name class="my_nick_modify_input" data-card-id="${item.card_id}" value="${item.card_name}">
+                                        <input type="text" class="my_nick_modify_input" data-card-id="${item.card_id}" value="${item.card_name}">
                                         <a class="my_nick_modify" data-card-id="${item.card_id}">수정</a>
                                         <a class="my_nick_cancel">취소</a>
                                     </p>
@@ -130,28 +130,31 @@
                 <!-- 보유카드 목록 끝 -->
                 <!-- 인기랭킹 -->
                 <section class="my_ms_rank">
-                    <form action="" method="post" name="edwForm">
+                    <form action="${pageContext.request.contextPath}/mypage" method="get" name="edwForm">
                         <fieldset>
                             <legend>스타벅스 메뉴 순위 폼</legend>
                             <header class="my_ms_rank_head">
                                 <p>스타벅스 코리아를 사랑하는</p>
                                 <div class="my_ms_select">
                                     <label for="my_ms_select" class="a11y">성별</label>
-                                    <select id="my_ms_select" class="rank_select">
-                                        <option value="M">남성</option>
-                                        <option value="F" selected>여성</option>
+                                    <select id="my_ms_select" name="gender" class="rank_select">
+                                        <option value="M" <c:if test="${gender == 'M'}">selected</c:if> >남성</option>
+                                        <option value="F" <c:if test="${gender == 'F'}">selected</c:if> >여성</option>
                                     </select>
                                 </div>
                                 <p>이 즐기는 메뉴가 궁금하시죠?</p>
-                                <a href="${pageContext.request.contextPath}/" role="button" title="메뉴 확인하기" class="my_ms_setBtn">확인</a>
+                                <button type="submit" title="메뉴 확인하기" class="my_ms_setBtn">확인</button>
                             </header>
                             <span class="criteria">
-                                스타벅스
+                                스타벅스 딜리버리
                                 <br>
                                 최근 1년 판매 집계 기준
                             </span>
                             <article class="my_ms_rank_wrap">
-                            
+              <!-- list 리스트 (menu_class 0~8까지) 반복문 -->
+                <c:choose>
+		        <c:when test="${list != null && fn:length(list) > 0}">
+		        <c:forEach var="listItem" items="${list}" varStatus="status">
                                 <div class="my_ms_rank_each my_ms_rank_each3">
                                     <div class="bx-wrapper">
                                         <div class="bx-viewport">
@@ -160,39 +163,77 @@
                                                     <header>
                                                         부문별 음료 판매 순위
                                                         <br>
-                                                        <strong>에스프레소</strong>
+                                                        <strong>
+                                                        <!-- 조건문 -->
+														<c:choose>
+														    <c:when test="${status.index == 0}">콜드 브루 커피</c:when>
+														    <c:when test="${status.index == 1}">브루드 커피</c:when>
+														    <c:when test="${status.index == 2}">에스프레소</c:when>
+														    <c:when test="${status.index == 3}">프라푸치노</c:when>
+														    <c:when test="${status.index == 4}">블렌디드</c:when>
+														    <c:when test="${status.index == 5}">스타벅스 피지오</c:when>
+														    <c:when test="${status.index == 6}">티(티바나)</c:when>
+														    <c:when test="${status.index == 7}">기타 제조 음료</c:when>
+														    <c:when test="${status.index == 8}">스타벅스 주스(병음료)</c:when>
+						                                </c:choose>
+                                                        <!-- 조건문 끝-->
+                                                        </strong>
                                                     </header>
+                                                    
+                            	<!-- list 리스트 안에서 각 menu정보 든 객체 list2 반복문 -->
+	                                <c:choose>
+							        <c:when test="${listItem != null && fn:length(listItem) > 0}">
+							        <c:forEach var="item" items="${listItem}" varStatus="status">
+										        
+										        	<!-- 조건문 -->
+										        	<c:choose>
+													<c:when test="${status.index == 0}">
                                                     <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
+                                                        <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="goDrink">
+                                                            <img src="${item.list_img}">
                                                         </a>
                                                     </figure>
                                                     <p class="first_bev">1위</p>
                                                     <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
+                                                        <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="goDrink">${item.name}</a>
                                                     </p>
+                                                	</c:when>
+                                                	<c:when test="${status.index == 1}">
                                                     <p class="second_rank ">
                                                         <span class="left">
                                                             <strong>2위</strong>
                                                         </span>
                                                         <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
+                                                            <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="goDrink">${item.name}</a>
                                                         </span>
                                                     </p>
+                                                    </c:when>
+                                                    <c:when test="${status.index == 2}">
                                                     <p class="third_rank ">
                                                         <span class="left">
                                                             <strong>3위</strong>
                                                         </span>
                                                         <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
+                                                            <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="goDrink">${item.name}</a>
                                                         </span>
                                                     </p>
+                                                    </c:when>
+                                                  </c:choose>
+                                                  <!-- 조건문 끝 -->
+                                                    
+	                                  </c:forEach>
+	                                  </c:when>
+	                                  </c:choose>
+                            		<!-- list 리스트 안에서 각 menu정보 든 객체 list2 반복문 끝 -->
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                
+                     </c:forEach>
+                     </c:when>
+                     </c:choose>
+              <!-- list 리스트 (menu_class 0~8까지) 반복문 끝 -->
                             </article>
                         </fieldset>
                     </form>

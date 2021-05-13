@@ -63,6 +63,9 @@
 			<if test="pay_method != null and pay_method != ''">
 				AND pay_method = #{pay_method}
 			</if>
+			<if test="true">
+				AND reg_date >= date_add(now(), INTERVAL -5 YEAR)
+			</if>
 		</where>
 
 		ORDER BY order_id DESC
@@ -127,6 +130,9 @@
 			</if>
 			<if test="pay_method != null and pay_method != ''">
 				AND pay_method = #{pay_method}
+			</if>
+			<if test="true">
+				AND reg_date >= date_add(now(), INTERVAL -5 YEAR)
 			</if>
 		</where>
 	</select>

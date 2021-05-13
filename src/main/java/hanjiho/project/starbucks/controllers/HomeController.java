@@ -16,8 +16,10 @@ import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Card;
 import hanjiho.project.starbucks.model.Member;
 import hanjiho.project.starbucks.model.Menu;
+import hanjiho.project.starbucks.model.OrderMenuList;
 import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.MenuService;
+import hanjiho.project.starbucks.service.OrderMenuListService;
 
 /**
  * 홈 컨트롤러
@@ -33,6 +35,8 @@ public class HomeController {
 	MenuService menuService;
 	@Autowired
 	CardService cardService;
+	@Autowired
+	OrderMenuListService orderMenuListService;
 	
 	/**
 	 * 인덱스 컨트롤러
@@ -86,13 +90,15 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public ModelAndView mypage(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
+            @SessionAttribute(value = "member", required = false) Member member,
+			@RequestParam(value = "gender", required=false, defaultValue="F") String gender) {
 
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
     	
+    	/** 카드 리스트 (+ 총개수) */
     	Card input = new Card();
     	input.setMember_id(member.getId());
 
@@ -105,8 +111,27 @@ public class HomeController {
 			e.printStackTrace();
 		}
     	
-        model.addAttribute("cardCount", cardCount);
-        model.addAttribute("output", output);
+    	/** 전체 메뉴 순위 리스트 */
+    	List<List<OrderMenuList>> list2= new ArrayList<List<OrderMenuList>>();
+    	List<OrderMenuList> list =  new ArrayList<OrderMenuList>();
+    	try {
+    		// 데이터 조회
+        	OrderMenuList tmp = new OrderMenuList();
+    		// menu_class 0~ 8 돌림
+    		for (int i=0; i<9; i++) {
+	    		tmp.setMenu_class(i+"");
+	    		tmp.setGender(gender);
+	    		list = orderMenuListService.orderOftAll(tmp);
+	    		list2.add(list);
+    		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        model.addAttribute("gender", gender); //검색조건
+        model.addAttribute("cardCount", cardCount); //카드 총 개수
+        model.addAttribute("output", output); // 카드 리스트
+        model.addAttribute("list", list2); // 전체 메뉴 순위 리스트 (리스트(list2) 안에 리스트(list)임)
     	return new ModelAndView ("mypage");
 	}
 	

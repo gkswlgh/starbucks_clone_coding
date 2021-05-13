@@ -228,7 +228,12 @@
         // 전체삭제버튼
 	    $("#btn-cart-remove-all").click(function(e) {
 	        e.preventDefault();
-                
+
+            if ($('input[name=cart_id]:checked').length < 1) {
+            	alert("상품을 최소 1개 이상 선택 하셔야 합니다.");
+	            return;
+            }
+            
     	    if (confirm('정말 선택한 상품을 전부 삭제하시겠습니까?')) {
 	    	    	
 				var input = '';
@@ -260,7 +265,7 @@
 
 			//체크박스 받아서 반복문
             $('input[name=cart_id]:checked').each(function(index, item){ 
-                var nIdx = $(item).index(this);
+                var nIdx = $('input[name=cart_id]').index(this);
                 var data = document.getElementsByName("cart-data-input");
         		money += Number(data[nIdx].dataset.unitPrice); //각 unit의 price를 money에 합산
             });
@@ -414,7 +419,7 @@
         $("#goLogin").click(function(e) {
             /*기본 동작 수행 방식*/
             e.preventDefault();
-            if (confirm("로그인 하시면 바로 장바구니의 상품을 구매하실 수 있습니다. 로그인 페이지로 이동하시겠습니까?")) {
+            if (confirm("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동하시겠습니까?")) {
             	window.location = ROOT_URL + "/account/login";
             }
         });

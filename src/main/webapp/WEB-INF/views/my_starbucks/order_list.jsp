@@ -154,6 +154,10 @@
 						<%-- 이동할 URL 생성 --%>
 						<c:url value="/my/order_list" var="prevPageUrl">
 							<c:param name="page" value="${pageData.prevPage}" />
+							<c:param name="pick_date01" value="${pick_date01}" />
+							<c:param name="pick_date02" value="${pick_date02}" />
+							<c:param name="pay_method" value="${pay_method}" />
+							<c:param name="order_type" value="${order_type}" />
 						</c:url>
 						<li class="active"><a href="${prevPageUrl}">이전 &nbsp;|&nbsp;</a></li>
 					</c:when>
@@ -168,6 +172,10 @@
 					<%-- 이동할 URL 생성 --%>
 					<c:url value="/my/order_list" var="pageUrl">
 						<c:param name="page" value="${i}" />
+						<c:param name="pick_date01" value="${pick_date01}" />
+						<c:param name="pick_date02" value="${pick_date02}" />
+						<c:param name="pay_method" value="${pay_method}" />
+						<c:param name="order_type" value="${order_type}" />
 					</c:url>
 			
 					<%-- 페이지 번호 출력 --%>
@@ -190,6 +198,10 @@
 						<%-- 이동할 URL 생성 --%>
 						<c:url value="/my/order_list" var="nextPageUrl">
 							<c:param name="page" value="${pageData.nextPage}" />
+							<c:param name="pick_date01" value="${pick_date01}" />
+							<c:param name="pick_date02" value="${pick_date02}" />
+							<c:param name="pay_method" value="${pay_method}" />
+							<c:param name="order_type" value="${order_type}" />
 						</c:url>
 						<li class="active"><a href="${nextPageUrl}">&nbsp;| &nbsp;다음</a></li>
 					</c:when>
