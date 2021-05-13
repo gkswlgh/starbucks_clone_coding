@@ -14,4 +14,7 @@ public class OrderMenuList {
 	private String list_img;
 	private String name;
 	private int price;
+	
+	/*sql 집계함수 - 가장 많이 이용한 메뉴 10건 조회할 때 */
+	private Integer sum_order;
 }

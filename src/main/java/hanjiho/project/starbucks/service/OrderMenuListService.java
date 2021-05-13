@@ -23,6 +23,13 @@ public interface OrderMenuListService {
 	 */
 	public List<OrderMenuList> getOrderMenuListList(OrderMenuList input) throws Exception;
 	/**
+	 * 가장 많이 이용한 메뉴 조회 - menu_id별 데이터 수 조회하기
+	 * @param member_id의 일련번호를 담고있는 Beans
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<OrderMenuList> orderOft(OrderMenuList input) throws Exception;
+	/**
 	 * 주문상세 데이터가 저장되어 있는 갯수 조회
 	 * @return int
 	 * @throws Exception

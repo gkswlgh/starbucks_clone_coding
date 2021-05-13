@@ -50,6 +50,6 @@
 <!-- validate 플러그인 참조 -->
 <script src="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js"></script>
-
-
+<!-- chartjs CSS에 대한 CDN 참조 (차트) -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" />
 <body>

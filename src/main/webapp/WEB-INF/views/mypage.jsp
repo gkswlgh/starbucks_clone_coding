@@ -27,18 +27,35 @@
         <!-- 내용 -->
         <div class="cont">
             <div class="cont_inner">
-                <div class="user_index">
+                <div class="user_index" style="height:40px;">
                     <h5 class="c222">
                         <span class="mem">${member.user_name}</span>
                         님 안녕하세요.
                     </h5>
-                    <div class="user_stat_btns">
+                    <div class="user_stat_btns" style="margin-top:-40px;">
                         <ul>
                             <li class="btn_black"><a href="${pageContext.request.contextPath}/account/myinfo_modify">
                                     개인정보 수정
                                 </a></li>
                             <li class="btn_gray"><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">
                                     비밀번호 변경
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="user_index" style="margin-top:-55px;">
+                    <span style="color:#666;">
+                        <strong style="color:#bb9f65;">My 메뉴</strong>
+                        에서 
+                        <strong style="color:#bb9f65;">내가 자주 이용한 음료 순위</strong>
+                        와 
+                        <strong style="color:#bb9f65;">좋아하는 음료로 등록한 메뉴</strong>
+                        들을 찾아보세요!
+                    </span>
+                    <div class="user_stat_btns" style="margin-top:-35px;">
+                        <ul>
+                            <li class="btn_gray" style="background:#bb9f65;border:1px solid #bb9f65;"><a href="${pageContext.request.contextPath}/my/my_menu">
+                                    My메뉴 바로가기
                                 </a></li>
                         </ul>
                     </div>
@@ -119,20 +136,10 @@
                             <header class="my_ms_rank_head">
                                 <p>스타벅스 코리아를 사랑하는</p>
                                 <div class="my_ms_select">
-                                    <label for="my_ms_age" class="a11y">연령대</label>
-                                    <select id="my_ms_age" class="rank_select">
-                                        <option value="10">10대</option>
-                                        <option value="20" selected="selected">20대</option>
-                                        <option value="30">30대</option>
-                                        <option value="40">40대</option>
-                                        <option value="50">50대</option>
-                                    </select>
-                                </div>
-                                <div class="my_ms_select">
                                     <label for="my_ms_select" class="a11y">성별</label>
                                     <select id="my_ms_select" class="rank_select">
                                         <option value="M">남성</option>
-                                        <option value="F" selected="selected">여성</option>
+                                        <option value="F" selected>여성</option>
                                     </select>
                                 </div>
                                 <p>이 즐기는 메뉴가 궁금하시죠?</p>
@@ -141,89 +148,10 @@
                             <span class="criteria">
                                 스타벅스
                                 <br>
-                                최근 일주일 판매 집계 기준
+                                최근 1년 판매 집계 기준
                             </span>
                             <article class="my_ms_rank_wrap">
-                                <div class="my_ms_rank_each my_ms_rank_each1">
-                                    <div class="bx-wrapper">
-                                        <div class="bx-viewport">
-                                            <ul class="edw1">
-                                                <li>
-                                                    <header>
-                                                        부문별 음료 판매 순위
-                                                        <br>
-                                                        <strong>에스프레소</strong>
-                                                    </header>
-                                                    <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
-                                                        </a>
-                                                    </figure>
-                                                    <p class="first_bev">1위</p>
-                                                    <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
-                                                    </p>
-                                                    <p class="second_rank ">
-                                                        <span class="left">
-                                                            <strong>2위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="third_rank ">
-                                                        <span class="left">
-                                                            <strong>3위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
-                                                        </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="my_ms_rank_each my_ms_rank_each2">
-                                    <div class="bx-wrapper">
-                                        <div class="bx-viewport">
-                                            <ul class="edw1">
-                                                <li>
-                                                    <header>
-                                                        부문별 음료 판매 순위
-                                                        <br>
-                                                        <strong>에스프레소</strong>
-                                                    </header>
-                                                    <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
-                                                        </a>
-                                                    </figure>
-                                                    <p class="first_bev">1위</p>
-                                                    <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
-                                                    </p>
-                                                    <p class="second_rank ">
-                                                        <span class="left">
-                                                            <strong>2위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="third_rank ">
-                                                        <span class="left">
-                                                            <strong>3위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
-                                                        </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                            
                                 <div class="my_ms_rank_each my_ms_rank_each3">
                                     <div class="bx-wrapper">
                                         <div class="bx-viewport">
@@ -264,126 +192,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="my_ms_rank_each my_ms_rank_each1">
-                                    <div class="bx-wrapper">
-                                        <div class="bx-viewport">
-                                            <ul class="edw1">
-                                                <li>
-                                                    <header>
-                                                        부문별 음료 판매 순위
-                                                        <br>
-                                                        <strong>에스프레소</strong>
-                                                    </header>
-                                                    <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
-                                                        </a>
-                                                    </figure>
-                                                    <p class="first_bev">1위</p>
-                                                    <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
-                                                    </p>
-                                                    <p class="second_rank ">
-                                                        <span class="left">
-                                                            <strong>2위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="third_rank ">
-                                                        <span class="left">
-                                                            <strong>3위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
-                                                        </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="my_ms_rank_each my_ms_rank_each2">
-                                    <div class="bx-wrapper">
-                                        <div class="bx-viewport">
-                                            <ul class="edw1">
-                                                <li>
-                                                    <header>
-                                                        부문별 음료 판매 순위
-                                                        <br>
-                                                        <strong>에스프레소</strong>
-                                                    </header>
-                                                    <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
-                                                        </a>
-                                                    </figure>
-                                                    <p class="first_bev">1위</p>
-                                                    <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
-                                                    </p>
-                                                    <p class="second_rank ">
-                                                        <span class="left">
-                                                            <strong>2위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="third_rank ">
-                                                        <span class="left">
-                                                            <strong>3위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
-                                                        </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="my_ms_rank_each my_ms_rank_each3">
-                                    <div class="bx-wrapper">
-                                        <div class="bx-viewport">
-                                            <ul class="edw1">
-                                                <li>
-                                                    <header>
-                                                        부문별 음료 판매 순위
-                                                        <br>
-                                                        <strong>에스프레소</strong>
-                                                    </header>
-                                                    <figure>
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">
-                                                            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt>
-                                                        </a>
-                                                    </figure>
-                                                    <p class="first_bev">1위</p>
-                                                    <p class="coffee_name">
-                                                        <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 카페 아메리카노</a>
-                                                    </p>
-                                                    <p class="second_rank ">
-                                                        <span class="left">
-                                                            <strong>2위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">아이스 슈크림 라떼</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="third_rank ">
-                                                        <span class="left">
-                                                            <strong>3위</strong>
-                                                        </span>
-                                                        <span class="right">
-                                                            <a href="${pageContext.request.contextPath}/" class="goDrink">카페 아메리카노</a>
-                                                        </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </article>
                         </fieldset>
                     </form>

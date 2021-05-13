@@ -68,7 +68,27 @@ public class OrderMenuListServiceImpl implements OrderMenuListService {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * 가장 많이 이용한 메뉴 조회 - menu_id별 데이터 수 조회하기
+	 * @param member_id의 일련번호를 담고있는 Beans
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	@Override
+	public List<OrderMenuList> orderOft(OrderMenuList input) throws Exception {
+		List<OrderMenuList> result= null;
+		
+		try {
+			result = sqlSession.selectList("OrderMenuListMapper.orderOft", input);
+			
+		} catch (Exception e) {
+		    log.error(e.getLocalizedMessage());
+		    throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+	
 	/**
 	 * 주문상세 데이터가 저장되어 있는 갯수 조회
 	 * @return int

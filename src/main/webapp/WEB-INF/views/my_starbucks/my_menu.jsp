@@ -30,13 +30,15 @@
         <div class="cont">
             <div class="cont_inner">
                 <!-- 최근 마신 음료 안내 -->
-                <section class="my_drinkShop_wrap">
-                    <p class="drinkShop_recent">
-                        <strong>${member.user_name}</strong>
-                        님은 가장 최근 2021년 2월 10일에
-                        <strong class="t_0d5f34">(V)차이 티 라떼</strong>
-                        를 마셨습니다.
+                <section class="my_drinkShop_wrap" style="height: 300px; margin-left:-60px;">
+                    <p class="drinkShop_recent" style="display:block;font-size:18px;height:50px;line-height:50px;vertical-align:top;">
+                        <strong class="t_0d5f34">자주 주문하는 메뉴 |</strong>
                     </p>
+                    <!-- 그래프를 표시할 위치 -->
+					<div style="width: 920px; height: 500px; margin-right:-10px;position:relative;">
+						<canvas id="myChart"></canvas>
+						<c:if test="${nameStr == null || sumOrderStr == null}"><div class="t_0d5f34" style="position:absolute;top:230px;left:370px;">아직 주문한 메뉴가 없습니다.</div></c:if>
+					</div>
                 </section>
                 <!-- 최근 마신 음료 안내 끝 -->
                 <!-- 음료/매장 info -->
@@ -45,12 +47,11 @@
                         <dl class="content_tabmenu mcontent_tabmenu">
                             <dt class="stab stab_01">
                                 <h5>
-                                    <a>자주 주문하는 메뉴 통계</a>
+                                    <a style="font-size:14px;">자주 주문하는 메뉴</a>
                                 </h5>
                             </dt>
                             <dd class="panel content_panel">
                                 <p class="tip03">
-                                    <span>최근 3개월 기준 자료입니다. <br>매일 자정 갱신됩니다.</span>
                                 </p>
                                 <table class="drinkShop_area_info_tbl" summary="My 메뉴 순위, 메뉴명, 주문횟수에 대한 테이블">
                                     <caption>My 메뉴 순위, 메뉴명, 주문횟수에 대한 테이블</caption>
@@ -67,26 +68,42 @@
                                         </tr>
                                     </thead>
                                     <tbody id="MyStoreRanking">
+                <!-- 자주 주문하는 메뉴 순위 시작 -->
+                                    <c:choose>
+								        <c:when test="${oftList != null && fn:length(oftList) > 0}">
+								        	<c:forEach var="item" items="${oftList}" varStatus="status">
                                         <tr>
                                             <td>
-                                                <img src="//image.istarbucks.co.kr/common/img/util/reward/icon_drinkShop_01.png" alt="1위">
+                                            <c:if test="${status.index < 1}"><img src="//image.istarbucks.co.kr/common/img/util/reward/icon_drinkShop_01.png" alt="1위"></c:if>
+                                            <c:if test="${status.index >= 1}">${status.index + 1}위</c:if>
                                             </td>
                                             <td>
-                                                <a herf="#" class="btn_show_pop_detail" data-favoriteno="내메뉴번호">차이 티 라떼</a>
-                                                <a href="${pageContext.request.contextPath}/" class="myFavorite" data-favoriteno="내메뉴번호" data-myfavoriteyn="Y">
+                                                <a  style="font-size:14px;" href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="btn_show_pop_detail" data-favoriteno="${item.menu_id}">${item.name}</a>
+                                                <!-- <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="myFavorite" data-favoriteno="${item.menu_id}">
                                                     <img src="//image.istarbucks.co.kr/common/img/store/icon_fav_on.png" alt>
-                                                </a>
+                                                </a> -->
                                             </td>
                                             <td>
-                                                <span class="n1">2</span>
+                                                <span class="n1">${item.sum_order}</span>
                                             </td>
                                         </tr>
+                                        </c:forEach>
+                                        </c:when>
+								        <c:otherwise> 
+								        <tr>
+                                            <td colspan="4">
+                                            	아직 주문한 메뉴가 없습니다. <a href="${pageContext.request.contextPath}/product/menu_list" class="c063">(메뉴 주문하러 가기)</a>
+                                            </td>
+                                        </tr>
+								        </c:otherwise>
+								    </c:choose>
+                <!-- 자주 주문하는 메뉴 순위 끝 -->
                                     </tbody>
                                 </table>
                             </dd>
                             <dt class="stab on stab_02">
                                 <h5>
-                                    <a>좋아하는 메뉴</a>
+                                    <a style="font-size:14px;">좋아하는 메뉴</a>
                                 </h5>
                             </dt>
                             <dd class="panel on content_panel">
@@ -113,6 +130,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                <!-- 좋아하는 메뉴 시작 -->
                                     <c:choose>
 								        <c:when test="${menuList != null && fn:length(menuList) > 0}">
 								        	<c:forEach var="item" items="${menuList}" varStatus="status">
@@ -126,10 +144,10 @@
                                                 <span class="n1">${status.index+1}</span>
                                             </td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="btn_show_pop_detail" data-favoriteno="${item.like_id}">${item.menu_name}</a>
-                                                <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="myFavorite" data-favoriteno="${item.like_id}">
+                                                <a  style="font-size:14px;" href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="btn_show_pop_detail" data-favoriteno="${item.like_id}">${item.menu_name}</a>
+                                                <!-- <a href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}" class="myFavorite" data-favoriteno="${item.like_id}">
                                                     <img src="//image.istarbucks.co.kr/common/img/store/icon_fav_on.png" alt>
-                                                </a>
+                                                </a> -->
                                             </td>
                                             <td>${item.reg_date}</td>
                                         </tr>
@@ -138,11 +156,12 @@
 								        <c:otherwise> 
 								        <tr>
                                             <td colspan="4">
-                                            	아직 좋아하는 메뉴로 등록된 메뉴가 없습니다. <a href="${pageContext.request.contextPath}/product/menu_list" class="c063">(메뉴 등록하러 가기)</a>
+                                            	아직 좋아하는 메뉴로 등록된 음료가 없습니다. <a href="${pageContext.request.contextPath}/product/menu_list" class="c063">(메뉴 등록하러 가기)</a>
                                             </td>
                                         </tr>
 								        </c:otherwise>
 								    </c:choose>
+                <!-- 좋아하는 메뉴 끝 -->
                                     </tbody>
                                 </table>
                                 <!-- 버튼 -->
@@ -220,6 +239,39 @@
         <!-- 내용 끝 -->
     </div>
     <%@ include file="/WEB-INF/views/_inc/bottom.jsp"%>
+	<!-- chartjs cdn 참조 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+	<!-- 데이터 시각화 구현 -->
+	<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: [${nameStr}],			//각각의 bar에 표시할 x축 텍스트들 (메뉴이름)
+	        datasets: [{
+	            label: '주문 횟수',				//범주
+	            data: [${sumOrderStr}],			//각 bar에 대한 y축 좌표 데이터
+	            backgroundColor:
+	                'rgba(0, 120, 60, 0.2)'
+	           ,
+	            borderColor: 
+	                'rgba(0, 120, 60, 1)'
+	            ,
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+	</script>
+	<!-- 사용자 정의 스크립트 -->
     <script type="text/javascript">
     $(function() {
     	

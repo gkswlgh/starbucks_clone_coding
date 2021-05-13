@@ -488,13 +488,15 @@ public class MyController {
     	if (member == null) {
         	return new ModelAndView ("page_none");
     	}
-    	 
-        List<LikeMenu> output = new ArrayList<LikeMenu>();
+
+        /** 1) 결과 저장할 리스트 준비 */
+        List<LikeMenu> output = new ArrayList<LikeMenu>(); //menuList - 내가 좋아하는 메뉴 리스트 
+        List<OrderMenuList> output2 = new ArrayList<OrderMenuList>(); //oftList - 자주 주문한 메뉴 순위 1~10위 리스트 
 		PageData pageData = null;
-		
+
+        /** 2) 좋아하는 메뉴 리스트 조회 */
         LikeMenu input = new LikeMenu();
         input.setMember_id(member.getId());
-        
         try {
 			// 전체 게시글 수 조회
 			totalCount = likeMenuService.getLikeMenuCount(input);
@@ -524,11 +526,37 @@ public class MyController {
 	             
 	            index++;
 	        }
+            
+            /** 3) 가장 많이 이용한 메뉴 10건 조회 */
+            OrderMenuList input2 = new OrderMenuList();
+            input2.setMember_id(member.getId());
+            output2 = orderMenuListService.orderOft(input2);
         } catch (Exception e) {
             return webHelper.redirect(null, e.getLocalizedMessage());
         }
+
         
-        model.addAttribute("menuList", output);
+		/** 4) 그래프 출력을 위한 JS코드에서 사용할 문자열 만들기 */
+		int size = output2.size();					//리스트의 길이 저장
+		String[] name = new String[size];		//메뉴 이름을 저장할 배열
+		String[] sumOrder = new String[size];	//주문 횟수를 저장할 배열
+		
+		for (int i=0; i<size; i++) {						//길이만큼 반복
+			OrderMenuList item = output2.get(i);			//List에서 i번째 항목 추출
+			name[i] = "'"+item.getName()+"'";				//메뉴 이름을 배열에 원소로 저장
+			sumOrder[i] = String.valueOf(item.getSum_order());	//주문 횟수를 배열에 원소로 저장
+		}
+		
+		String nameStr = String.join(",", name);			//메뉴 이름 배열을 콤마(,)를 기준으로 문자열로 연결
+		String sumOrderStr = String.join(",", sumOrder);	//주문 횟수 배열을 콤마(,)를 기준으로 문자열로 연결
+
+		//그래프에 적용할 메뉴 이름 배열
+		model.addAttribute("nameStr", nameStr);		
+		//그래프에 적용할 주문 횟수 배열
+		model.addAttribute("sumOrderStr", sumOrderStr);	
+		
+        model.addAttribute("menuList", output); //menuList - 내가 좋아하는 메뉴 리스트 
+        model.addAttribute("oftList", output2); //oftList - 자주 주문한 메뉴 순위 1~10위 리스트 
 		model.addAttribute("pageData", pageData);
         return new ModelAndView ("my_starbucks/my_menu");
     }
