@@ -186,7 +186,7 @@
                                             <li><a href="${pageContext.request.contextPath}/my/order_list">주문 내역</a></li>
                                         </ul>
                                         <ul>
-                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/my_menu">고객 서비스</a></li>
+                                            <li class="gnb_sub_ttl"><a href="${pageContext.request.contextPath}/my/my_menu">My 메뉴 등</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/my_menu">My 메뉴</a></li>
                                             <li><a href="${pageContext.request.contextPath}/my/voclist">My 고객의 소리</a></li>
                                         </ul>
@@ -202,9 +202,9 @@
                             <div class="gnb_sub_txbg">
                                 <div class="gnb_sub_tx_inner">
                                     <h3>
-                                        <a href="${pageContext.request.contextPath}/mypage">My Starbucks 메인페이지</a>
+                                        <a href="${pageContext.request.contextPath}/mypage">My Starbucks - 마이페이지</a>
                                     </h3>
-                                    <p class="gnb_sub_ex_txt">My Starbucks 메인페이지에서 내 카드를 한눈에 확인하고, 스타벅스 판매 집계도 조회해보세요.</p>
+                                    <p class="gnb_sub_ex_txt">My Starbucks - 마이페이지에서 내 카드를 한눈에 확인하고, 스타벅스 판매 집계도 조회해보세요.</p>
                                 </div>
                             </div>
                         </div>

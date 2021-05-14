@@ -62,13 +62,13 @@
                     </div>
                 </div>
                 <div class="line_notice_bgr">
-                    <a href="${pageContext.request.contextPath}/"> <span class="prom_ttl">스타벅스 프로모션</span> <span class="prom_btn"><span id="prom_btn_toggle" class="open" alt="스타벅스 프로모션 펼쳐보기" role="button"></span></span>
+                    <a style="cursor:Default;"> <span class="prom_ttl">스타벅스 프로모션</span> <span class="prom_btn"><span id="prom_btn_toggle" class="open" style="cursor:pointer;" alt="스타벅스 프로모션 펼쳐보기" role="button"></span></span>
                     </a>
                 </div>
             </div>
         </div>
         <!-- line notice 끝 -->
-        <!-- 프로모션 배너 시작 (덜만듬) -->
+        <!-- 프로모션 배너 시작 -->
         <div class="prom_banner">
             <div class="prom_banner_inner">
                 <div class="prom_slider">

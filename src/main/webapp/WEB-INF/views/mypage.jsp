@@ -143,7 +143,7 @@
                                     </select>
                                 </div>
                                 <p>이 즐기는 메뉴가 궁금하시죠?</p>
-                                <button type="submit" title="메뉴 확인하기" class="my_ms_setBtn">확인</button>
+                                <button type="submit" title="메뉴 확인하기" class="my_ms_setBtn" style="cursor:pointer;">확인</button>
                             </header>
                             <span class="criteria">
                                 스타벅스 딜리버리

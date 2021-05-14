@@ -134,7 +134,7 @@ public class ProductRestController {
         	int count = 0;
         	count = cartService.getCartCount(input);
         	
-        	if (count <= 20) {
+        	if (count < 20) {
             	//카트 정보 저장
             	cartService.addCart(input);
         	} else {

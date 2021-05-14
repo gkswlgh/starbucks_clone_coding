@@ -172,8 +172,8 @@
                         	<input type="hidden" id="addr2" name="addr2" value="${order.addr2}" />
                         	<input type="hidden" id="order_price" name="order_price" value="${order.order_price}" />
                             <ul>
-                                <li class="gift_payment_btn3"><button type="submit" id="goOrder">결제하기</button></li>
                                 <li class="gift_payment_btn1"><a onclick="history.back(); return false;">뒤로</a></li>
+                                <li class="gift_payment_btn3"><button type="submit" id="goOrder">결제하기</button></li>
                             </ul>
 						</form>
                         </div>
