@@ -233,7 +233,7 @@
         $(document).on("click", "a.removeEmail", removeEmailArea); // 이메일 입력창 [삭제]
         */
 
-        $("#amount").on("keyup", changeTotPrice); // 충전금액 입력
+        $(".amountInput").on("keyup", changeTotPrice); // 충전금액 입력
 
         $("#amount").on("click", function() {
             $("#price5").prop("checked", true);
@@ -245,23 +245,20 @@
             }
         });
 
-        // 충전금액 검사2
+        // 충전금액 포커스아웃
         $("#amount").on("focusout", function() {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+            var number = $(this).val();
             if (number < 10000) {
                 alert("1만원 ~ 50만원까지 가능합니다.");
-                number = 0;
-                $(this).val("");
+                number = null;
+          	  	$(this).val("");
             }
            var my_price = $("#amount").val();
            $("#price5").val(my_price);
         });
 
         
-        /*유효성 검사 추가 함수*/
-        //한글검사
-        $.validator.addMethod("kor", function(value, element) {
-            return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
-        });
 
         /*form태그에 부여한 id속성에 대한 유효성 검사 함수 호출*/
         $("#frmUpload").validate({
@@ -278,7 +275,7 @@
             /*입력검사 규칙*/
             rules: {
                 /*name속성 : {required는 필수, 그외 부가 기능}*/
-                name: { required: true, kor: true },
+                name: { required: true },
                 email1: { required: true, alphanumeric: true },
                 email2: "required",
                 price: { required: true, num: true },
@@ -287,8 +284,7 @@
             messages: {
                 /*name속성 : {rules에 맞지 않을 경우 메시지}*/
                 name: {
-                    required: "이름을 입력하세요.",
-                    kor: "이름은 한글만 입력 가능합니다."
+                    required: "이름을 입력하세요."
                 },
                 email1: {
                     required: "이메일 앞자리를 입력하세요.",
@@ -343,13 +339,15 @@
     
 
     // 충전금액 검사
-    function changeTotPrice() {
+    function changeTotPrice(e) {
+    	e.preventDefault();
         $(this).val($(this).val().replace(/[^0-9]/g, ""));
-        number = $(this).val();
+        var number = $(this).val();
         if (number > 500000) {
+        	$(this).blur(); // alert 무한루프 막기
             alert("1만원 ~ 50만원까지 가능합니다.");
-            number = 0;
-            $(this).val("");
+            number = null;
+      	  	$(this).val("");
         }
     }
 

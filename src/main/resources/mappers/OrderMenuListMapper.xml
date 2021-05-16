@@ -58,7 +58,7 @@
 		order by sum_order desc limit 0,10
 	</select>
 	
-	<!-- 전체 회원 기준 가장 많이 이용한 메뉴 조회 - (조회조건 : 1년전부터 / menu_class 0 ~ 8지정) -->
+	<!-- 전체 회원 기준 가장 많이 이용한 메뉴 조회 - (menu_class 0 ~ 8지정) -->
 	<select id="orderOftAll"
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"
 		resultMap="orderMenuListMap">

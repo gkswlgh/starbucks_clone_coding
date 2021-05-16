@@ -140,8 +140,8 @@
                                     <tr>
                                         <td colspan="2">
                                             <div class="agree_checkbox clean">
-                                                <input id="agree1" name="agree1" type="checkbox" /> <label for="agree1">개인 정보 ... 동의<a href="${pageContext.request.contextPath}/" title="개인정보 수집, 이용 동의 보러가기"><span class="cf66">(필수)</span></a></label>
-                                                <input id="agree2" name="agree2" type="checkbox" /> <label for="agree2">뭐시기 동의<a href="${pageContext.request.contextPath}/" title="개인정보 수집, 이용 동의 보러가기"><span class="cf66">(필수)</span></a></label>
+                                                <input id="agree1" name="agree1" type="checkbox" /> <label for="agree1">개인 정보 수집 동의<a href="#none" title="개인정보 수집, 이용 동의 보러가기"><span class="cf66">(필수)</span></a></label>
+                                                <input id="agree2" name="agree2" type="checkbox" /> <label for="agree2">이용 약관 동의<a href="#none" title="개인정보 수집, 이용 동의 보러가기"><span class="cf66">(필수)</span></a></label>
                                             </div>
                                         </td>
                                     </tr>

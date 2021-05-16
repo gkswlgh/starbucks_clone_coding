@@ -105,7 +105,6 @@ public class MyRestController {
 
         //유효성검사
         if (!regexHelper.isValue(name)) { return webHelper.getJsonWarning("이름을 입력해주세요."); }
-        if (!regexHelper.isKor(name)) { return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다."); }
         if (!regexHelper.isValue(email)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
         if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
         if (!regexHelper.isValue(message)) { return webHelper.getJsonWarning("메시지를 입력해주세요."); }
@@ -129,7 +128,7 @@ public class MyRestController {
     	/** 2) 카드 정보 생성할 input2 */
     	Card input2 = new Card();
     	
-    	/** 3) 인증번호 생성 */
+    	/** 3) 카드ID, 인증번호 생성 */
     	String cardId1 = "";
         String cardId2 = "";
         String cardId3 = "";

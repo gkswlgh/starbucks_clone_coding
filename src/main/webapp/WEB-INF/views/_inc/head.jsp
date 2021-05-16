@@ -8,7 +8,7 @@
 
 <% 
 	/* 세션 유효시간 설정 -> 모든 페이지 개별설정*/
-	session.setMaxInactiveInterval(120);
+	session.setMaxInactiveInterval(120 * 60); //단위가 초단위임
 %>
 
 <!doctype html>

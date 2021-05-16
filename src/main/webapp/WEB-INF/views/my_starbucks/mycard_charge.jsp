@@ -38,7 +38,7 @@
                             <a class="on">일반 충전</a>
                         </h5>
                         <article>
-                            <form action="${pageContext.request.contextPath}/" name="frm_NORMAL" id="frm_NORMAL" method="post">
+                            <form name="frm_NORMAL" id="frm_NORMAL" method="post">
                                 <!-- 테이블 -->
                                 <table class="w830 regular_charge gift_info_tbl chargeWh" summary="충전 카드 선택, 충전 금액 선택, 결제 수단 선택, 온라인 충전 시 유의 사항">
                                     <caption>충전 카드 선택, 충전 금액 선택, 결제 수단 선택, 온라인 충전 시 유의 사항에 대한 테이블</caption>
@@ -53,7 +53,7 @@
                                                     <p class="user_sel_wrap">
                                                         <select id="cardNumber" name="cardNumber" class="cardNumber">
                                                             <c:forEach var="item" items="${cardList}" varStatus="status">
-					                                              <option class="trs_card"  data-cash="${item.cash}" value="${item.card_id}">${item.card_name}</option>
+					                                              <option class="trs_card"  data-cash="${item.cash}" value="${item.card_id}" <c:if test="${param_card_id == item.card_id}">selected</c:if> >${item.card_name}</option>
 										           		 	</c:forEach>
                                                         </select>
                                                     </p>
@@ -181,7 +181,7 @@
                                                     <p class="user_sel_wrap">
                                                         <select id="cardNumber_AUTO" name="cardNumber" class="cardNumber">
                                                             <c:forEach var="item" items="${cardList}" varStatus="status">
-					                                              <option class="trs_card_AUTO"  data-cash="${item.cash}" value="${item.card_id}">${item.card_name}</option>
+					                                              <option class="trs_card_AUTO"  data-cash="${item.cash}" value="${item.card_id}" <c:if test="${param_card_id == item.card_id}">selected</c:if> >${item.card_name}</option>
 										           		 	</c:forEach>
                                                         </select>
                                                     </p>

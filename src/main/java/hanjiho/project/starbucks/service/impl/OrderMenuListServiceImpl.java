@@ -91,7 +91,7 @@ public class OrderMenuListServiceImpl implements OrderMenuListService {
 	}
 
 	/**
-	 * 전체 회원 기준 가장 많이 이용한 메뉴 조회 - (조회조건 : 1년전부터 / menu_class 0 ~ 8지정)
+	 * 전체 회원 기준 가장 많이 이용한 메뉴 조회 - ( menu_class 0 ~ 8지정)
 	 * @param null
 	 * @return 조회 결과에 대한 컬렉션
 	 * @throws Exception

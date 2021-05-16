@@ -62,7 +62,9 @@
                     <li>개인정보 책임자 : 참치김밥</li>
                 </ul>
                 <address class="copy_en en">&copy; 2020 Starbucks Coffee
-                    Company. All Rights Reserved.</address>
+                    Company. All Rights Reserved. <br />
+* 취업을 위한 학생용 포트폴리오 사이트 입니다. <br />
+* 한지호 학생 제작</address>
             </div>
         </aside>
     </div>

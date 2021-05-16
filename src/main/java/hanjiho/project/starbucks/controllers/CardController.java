@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 카드 정보 처리 관련 컨트롤러
+ * 카드 소개 페이지 컨트롤러
+ * (카드 정보 처리 관련 페이지는 MyController에)
  */
 @Controller
 public class CardController {

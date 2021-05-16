@@ -1,23 +1,17 @@
 package hanjiho.project.starbucks.controllers.rest;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Card;
@@ -29,7 +23,6 @@ import hanjiho.project.starbucks.model.OrderMenuList;
 import hanjiho.project.starbucks.service.CardService;
 import hanjiho.project.starbucks.service.CartService;
 import hanjiho.project.starbucks.service.LikeMenuService;
-import hanjiho.project.starbucks.service.MenuService;
 import hanjiho.project.starbucks.service.OrderMenuListService;
 import hanjiho.project.starbucks.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -291,24 +284,41 @@ public class ProductRestController {
     	if (!regexHelper.isValue(addr2)) {return webHelper.getJsonWarning("상세 주소가 누락되었습니다.");}
 
     	
-    	/** 1) Order 데이터저장 */
         Order input = new Order();
         
-        input.setMember_id(member.getId());
-		input.setOrder_type("2");
-		input.setReceive_complete("N");
-		input.setOrder_price(order_price);
-		input.setPay_method(pay_method);
-    	input.setPostcode(postcode);
-    	input.setAddr1(addr1);
-    	input.setAddr2(addr2);
 		
         try {
+
+        	/** 1) card 잔액 확인 (결제 후 잔액이 음수가 되면 return ...warning) */
+        	Card tmp3 = new Card();
+        	int cash = 0;
+        	if (card_id != 0) {
+        		// 조회
+            	tmp3.setCard_id(card_id);
+            	tmp3 = cardService.getCardItem(tmp3);
+            	// (잔액 - 결제액) 계산
+            	cash = tmp3.getCash();
+            	cash = cash - order_price;
+            	if (cash < 0) {
+            		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
+            	}
+        	}
+        	
+        	
+        	/** 2) Order 데이터저장 */
+            input.setMember_id(member.getId());
+    		input.setOrder_type("2");
+    		input.setReceive_complete("N");
+    		input.setOrder_price(order_price);
+    		input.setPay_method(pay_method);
+        	input.setPostcode(postcode);
+        	input.setAddr1(addr1);
+        	input.setAddr2(addr2);
         	//order저장
         	orderService.addOrder(input);
 
         	
-        	/** 2) 카트 조회 - order_menu_list에 저장 */
+        	/** 3) 카트 조회 - order_menu_list에 저장 */
         	Cart tmp = new Cart();
         	tmp.setCart_id(cart_id);
         	tmp = cartService.getCartItem(tmp);
@@ -322,24 +332,12 @@ public class ProductRestController {
         	orderMenuListService.addOrderMenuList(tmp2);
         	
 
-
-        	/** 3) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
+        	/** 4) card 잔액 수정  */
         	if (card_id != 0) {
-        		//조회
-            	Card tmp3 = new Card();
-            	tmp3.setCard_id(card_id);
-            	tmp3 = cardService.getCardItem(tmp3);
-            	//잔액계산
-            	int cash = tmp3.getCash();
-            	cash = cash - order_price;
-            	if (cash < 0) {
-            		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
-            	}
             	//수정
             	tmp3.setCash(cash);
         		cardService.pay(tmp3);
         	}
-        	
 
         	/* 주문이 끝난 장바구니(cart) 삭제 */
         	cartService.deleteCart(tmp);
@@ -378,37 +376,39 @@ public class ProductRestController {
     	if (!regexHelper.isValue(addr1)) {return webHelper.getJsonWarning("주소가 누락되었습니다.");}
     	if (!regexHelper.isValue(addr2)) {return webHelper.getJsonWarning("상세 주소가 누락되었습니다.");}
     	
-        
-    	/** 1) Order 데이터저장 */
+        // order 객체생성
         Order input = new Order();
-        input.setMember_id(member.getId());
-		input.setOrder_type("2");
-		input.setReceive_complete("N");
-		input.setOrder_price(order_price);
-		input.setPay_method(pay_method);
-    	input.setPostcode(postcode);
-    	input.setAddr1(addr1);
-    	input.setAddr2(addr2);
+        
         try {
-        	//order저장
-        	orderService.addOrder(input);
-
-        	/** 2) card 잔액 수정 (order_price만큼 빼기 - 음수가 되지 않도록 주의) */
+        	
+        	/** 1) card 잔액 확인 (결제 후 잔액이 음수가 되면 return ...warning) */
+        	Card tmp4 = new Card();
+        	int cash = 0;
         	if (card_id != 0) {
-        		//조회
-            	Card tmp3 = new Card();
-            	tmp3.setCard_id(card_id);
-            	tmp3 = cardService.getCardItem(tmp3);
-            	//잔액계산
-            	int cash = tmp3.getCash();
+        		// 조회
+        		tmp4.setCard_id(card_id);
+        		tmp4 = cardService.getCardItem(tmp4);
+            	// (잔액 - 결제액) 계산
+            	cash = tmp4.getCash();
             	cash = cash - order_price;
             	if (cash < 0) {
             		return webHelper.getJsonWarning("카드 잔액이 부족합니다. 충전 후 다시 시도해주세요.");
             	}
-            	//잔액수정
-            	tmp3.setCash(cash);
-        		cardService.pay(tmp3);
         	}
+        
+
+        	/** 2) Order 데이터저장 */
+            input.setMember_id(member.getId());
+    		input.setOrder_type("2");
+    		input.setReceive_complete("N");
+    		input.setOrder_price(order_price);
+    		input.setPay_method(pay_method);
+        	input.setPostcode(postcode);
+        	input.setAddr1(addr1);
+        	input.setAddr2(addr2);
+        	//order저장
+        	orderService.addOrder(input);
+
         	
         	/** 3) 카트 조회 - order_menu_list에 저장 */
         	// cart_id,cart_id... 형식으로 저장된 String을 ',' 기준으로 잘라서 배열로 변환
@@ -430,6 +430,15 @@ public class ProductRestController {
             	tmp3.setMenu_qty(tmp2.getMenu_qty());
             	tmp3.setOrder_id(input.getOrder_id());
             	orderMenuListService.addOrderMenuList(tmp3);
+            	
+
+            	/** 4) card 잔액 수정  */
+            	if (card_id != 0) {
+                	//수정
+            		tmp4.setCash(cash);
+            		cardService.pay(tmp4);
+            	}
+            	
             	
             	/* 주문이 끝난 장바구니(cart) 삭제 */
             	cartService.deleteCart(tmp2); //가장 마지막에 삭제

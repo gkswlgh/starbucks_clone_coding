@@ -96,7 +96,7 @@
                                             <a href="${pageContext.request.contextPath}/my/mycard_view/${item.card_id}" class="btn_go_charge" data-cardnickname="${item.card_name}" data-card-id="${item.card_id}" >카드 관리</a>
                                         </p>
                                         <p class="my_ms_card_btn2">
-                                            <a href="${pageContext.request.contextPath}/my/mycard_charge" class="btn_go_charge" data-card-id="${item.card_id}" >충전 하기</a>
+                                            <a href="${pageContext.request.contextPath}/my/mycard_charge?param_card_id=${item.card_id}" class="btn_go_charge" data-card-id="${item.card_id}" >충전 하기</a>
                                         </p>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                             <span class="criteria">
                                 스타벅스 딜리버리
                                 <br>
-                                최근 1년 판매 집계 기준
+                                전체 회원 대상 판매 집계 기준
                             </span>
                             <article class="my_ms_rank_wrap">
               <!-- list 리스트 (menu_class 0~8까지) 반복문 -->

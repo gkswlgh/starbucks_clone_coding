@@ -34,7 +34,7 @@
                 <!-- 보유카드 없음 -->
                 <section class="my_card_status">
                     <div class="my_card_status_ttl">
-                        <strong>회원님의 스타벅스 카드</strong>
+                        <strong>${member.user_name}님의 스타벅스 카드</strong>
                         <p>총 보유카드 : 0장</p>
                     </div>
                     <div class="my_card_status_cont">

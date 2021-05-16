@@ -7,13 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import hanjiho.project.starbucks.helper.PageData;
-import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Card;
 import hanjiho.project.starbucks.model.Cart;
@@ -45,16 +40,13 @@ import hanjiho.project.starbucks.service.VocService;
 
 /**
  * 로그인 후 사용가능 컨트롤러
+ * (마이페이지 메인 컨트롤러는 HomeController에)
  */
 @Controller
 public class MyController {
 	
 	@Autowired
 	WebHelper webHelper;
-	
-    /** RegexHelper 주입 */
-    @Autowired
-    RegexHelper regexHelper;
 
 	@Autowired
 	MemberService memberService;
@@ -355,7 +347,10 @@ public class MyController {
      */
     @RequestMapping(value = "/my/mycard_charge", method = RequestMethod.GET)
     public ModelAndView mycard_charge(Model model,
-            @SessionAttribute(value = "member", required = false) Member member) {
+            @SessionAttribute(value = "member", required = false) Member member,
+			// 드롭박스에 selected될 card_id
+			@RequestParam(value = "param_card_id", defaultValue = "0") int param_card_id
+            ) {
     	
         // 비회원, 다른 회원으로 부터의 접근 제한
     	if (member == null) {
@@ -379,6 +374,7 @@ public class MyController {
     	}
 
     	model.addAttribute("cardList", cardList);
+    	model.addAttribute("param_card_id", param_card_id);
     	return new ModelAndView ("my_starbucks/mycard_charge");
     }
 

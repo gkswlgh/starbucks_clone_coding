@@ -1,32 +1,21 @@
 package hanjiho.project.starbucks.controllers.rest;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
 
-import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
 import hanjiho.project.starbucks.helper.WebHelper;
 import hanjiho.project.starbucks.model.Card;
-import hanjiho.project.starbucks.model.LikeMenu;
 import hanjiho.project.starbucks.model.Member;
-import hanjiho.project.starbucks.model.Voc;
 import hanjiho.project.starbucks.service.CardService;
-import hanjiho.project.starbucks.service.LikeMenuService;
-import hanjiho.project.starbucks.service.MenuService;
-import hanjiho.project.starbucks.service.VocService;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -78,10 +67,16 @@ public class CardRestController {
     		// member_id , card_name 등록
         	output.setMember_id(member.getId());
         	output.setCard_name(card_name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return webHelper.getJsonWarning("카드번호 혹은 PIN번호를 다시 한번 확인해주세요.");
+		}
+    	try {
     		// editCard (update -> pin_num은 null로 / member_id, card_name 등록)
 			cardService.editCard(output);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return webHelper.getJsonWarning("카드 등록에 실패했습니다.");
 		}
 
         return webHelper.getJsonData();
@@ -108,7 +103,7 @@ public class CardRestController {
 			cardService.editName(input);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
         return webHelper.getJsonData();
@@ -135,7 +130,7 @@ public class CardRestController {
     	try {
     		output = cardService.getCardItem(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
     	//충전
@@ -145,7 +140,7 @@ public class CardRestController {
     	try {
     		cardService.charge(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
         Map<String, Object> data = new HashMap<String, Object>();
@@ -179,7 +174,7 @@ public class CardRestController {
     	try {
     		cardService.autoCharge(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
         Map<String, Object> data = new HashMap<String, Object>();
@@ -205,7 +200,7 @@ public class CardRestController {
     	try {
     		cardService.autoChargeCancel(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
         Map<String, Object> data = new HashMap<String, Object>();
@@ -245,7 +240,7 @@ public class CardRestController {
     		output = cardService.getCardItem(input2);
     		tmp2 = output.getCash(); 
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
     	//충전
@@ -258,7 +253,7 @@ public class CardRestController {
     		//cash에 0저장
     		cardService.charge(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
     	
         return webHelper.getJsonData();
@@ -286,7 +281,7 @@ public class CardRestController {
 			//삭제
 	    	cardService.deleteCard(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+            return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
         return webHelper.getJsonData();

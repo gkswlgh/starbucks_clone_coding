@@ -63,7 +63,7 @@
                                 </p>
                                 <div class="my_ms_card_btns_top">
                                     <p class="my_ms_card_btn1">
-                                        <a href="${pageContext.request.contextPath}/my/mycard_charge" class="btn_go_charge" data-card-id="${output.card_id}">충전하기</a>
+                                        <a href="${pageContext.request.contextPath}/my/mycard_charge?param_card_id=${output.card_id}" class="btn_go_charge" data-card-id="${output.card_id}">충전하기</a>
                                     </p>
                                     <p class="my_ms_card_btn2 regi_cancel">
                                         <a id="deleteCard" class="btn_cancel_reg btn_cancel_pop" data-card-id="${output.card_id}" data-cardnickname="${output.card_name}">카드등록해지</a>
