@@ -40,6 +40,9 @@
                             <li class="btn_gray"><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">
                                     비밀번호 변경
                                 </a></li>
+                            <li class="btn_gray"><a href="${pageContext.request.contextPath}/account/myinfo_email">
+                                    이메일 수정
+                                </a></li>
                         </ul>
                     </div>
                 </div>

@@ -98,6 +98,13 @@ public interface MemberService {
      * @throws Exception
      */
     public void updateAuNum(Member input) throws Exception;
+    
+    /**
+     * 이메일 갱신
+     * @param input
+     * @throws Exception
+     */
+    public void updateEmail(Member input) throws Exception;
 
     /**
      * 비밀번호 갱신

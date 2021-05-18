@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import hanjiho.project.starbucks.helper.MailHelper;
 import hanjiho.project.starbucks.helper.RegexHelper;
@@ -217,6 +219,8 @@ public class AccountRestController {
 		input.setAddr2(null);
         
         try {
+            memberService.idUniqueCheck(input);
+            memberService.emailUniqueCheck(input);
             memberService.addMember(input);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
@@ -507,7 +511,8 @@ public class AccountRestController {
     
     /** 회원정보수정 */
     @RequestMapping(value = "/rest/account/myinfo_modify", method = RequestMethod.POST)
-    public Map<String, Object> modify(
+    public Map<String, Object> modify(HttpSession session, 
+            @SessionAttribute(value = "member", required = false) Member member,
             @RequestParam(value = "id",        defaultValue = "0") int id,
             @RequestParam(value = "user_name",      required = false) String userName,
 			@RequestParam(value = "phone1", 	required = false) String phone1,
@@ -515,7 +520,7 @@ public class AccountRestController {
 			@RequestParam(value = "phone3", 	required = false) String phone3,
             @RequestParam(value = "birthdate",       required = false) String birthdate, 
             @RequestParam(value = "gender",         required = false) String gender) {
-
+    	
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다. 
@@ -542,7 +547,9 @@ public class AccountRestController {
         
         /** 3) 데이터 저장 */
         Member input = new Member();
-		input.setId(id);
+        if (id == member.getId()) {        	
+        	input.setId(id);
+        }
 		input.setUser_name(userName);
 		input.setPhone(tel);
 		input.setBirthdate(birthdate);
@@ -563,6 +570,43 @@ public class AccountRestController {
         log.debug("세션 저장 완료");
         return webHelper.getJsonData();
     }
+
+    /** 이메일수정 */
+    @RequestMapping(value = "/rest/account/myinfo_email", method = RequestMethod.POST)
+    public Map<String, Object> myinfo_email(HttpSession session, 
+            @SessionAttribute(value = "member", required = false) Member member,
+            @RequestParam(value = "email1",     required = false) String email1,
+            @RequestParam(value = "email2",     required = false) String email2) {
+
+        /** 1) 유효성 검증 */
+        //이메일 조립- 유효성검사
+        String userEmail = email1 + "@" + email2;
+        if (!regexHelper.isValue(email1)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isValue(email2)) { return webHelper.getJsonWarning("이메일을 입력해주세요."); }
+        if (!regexHelper.isEmail(userEmail)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
+        
+    	
+        /** 3) 데이터 저장 */
+        Member input = new Member();
+        input.setId(member.getId());
+        input.setUser_email(userEmail);
+		
+        Member output = new Member();
+        try {
+            memberService.emailUniqueCheck(input);
+            memberService.updateEmail(input);
+            output = memberService.getMemberItem(input);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+
+
+        /** 4) 세션 생성 및 결과 표시 */
+        webHelper.setSession("member", output);
+        log.debug("세션 재저장 완료");
+        return webHelper.getJsonData();
+    }
+    
     
     /** 회원탈퇴 */
     @RequestMapping(value = "/rest/account/join_out", method = RequestMethod.POST)

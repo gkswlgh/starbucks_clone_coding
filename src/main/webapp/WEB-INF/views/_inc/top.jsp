@@ -195,6 +195,7 @@
                                             <li><a href="${pageContext.request.contextPath}/account/myinfo_modify">개인정보 확인 및 수정</a></li>
                                             <li><a href="${pageContext.request.contextPath}/account/join_out">회원 탈퇴</a></li>
                                             <li><a href="${pageContext.request.contextPath}/account/myinfo_change_pw">비밀번호 변경</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/account/myinfo_email">이메일 변경</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -328,6 +328,29 @@ public class MemberServiceImpl implements MemberService {
 	}
 
     /**
+     * 이메일 갱신
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void updateEmail(Member input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.update("MemberMapper.updateEmail", input);
+            if (result == 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이메일 갱신에 실패했습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이메일 갱신에 실패했습니다.");
+        }
+    }
+
+    /**
      * 인증번호 갱신
      * @param input
      * @throws Exception

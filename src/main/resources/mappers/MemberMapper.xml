@@ -124,6 +124,14 @@
 		WHERE id=#{id} AND is_out='N'
 	</update>
 
+	<!-- 이메일 갱신을 위한 기능 정의 -->
+	<update id="updateEmail"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE member SET
+		user_email=#{user_email}
+		WHERE id=#{id} AND is_out='N'
+	</update>
+	
 	<!-- 데이터 수 조회하기 -->
 	<!-- 검색 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. coutn, max, min, sum, avg 함수를 
 		사용한 경우, Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->

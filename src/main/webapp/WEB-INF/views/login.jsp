@@ -30,8 +30,7 @@
                                 </p>
                                 <p class="input_warn_text t_006633">
                                     * 타 사이트와 비밀번호를 동일하게 사용할 경우 도용의 위험이 있으므로, 정기적인 비밀번호 변경을 해주시길
-                                    바랍니다. <br /> * 스타벅스 커피 코리아의 공식 홈페이지는 Internet Explorer 9.0 이상,
-                                    Chrome, Firefox, Safari 브라우저에 최적화 되어있습니다.
+                                    바랍니다. <br /> * 이 스타벅스 홈페이지는 Chrome 브라우저에 최적화 되어있습니다.
                                 </p>
                             </div>
                             <div class="login_btn_wrap">

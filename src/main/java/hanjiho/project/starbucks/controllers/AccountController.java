@@ -170,6 +170,21 @@ public class AccountController {
     	
     	return new ModelAndView ("my_starbucks/myinfo_modify");
     }
+
+    /**
+     * 이메일 수정 페이지
+     */
+    @RequestMapping(value = "/account/myinfo_email", method = RequestMethod.GET)
+    public ModelAndView myinfo_email(Model model,
+            @SessionAttribute(value = "member", required = false) Member member) {
+    	
+        // 비회원, 다른 회원으로 부터의 접근 제한
+    	if (member == null) {
+        	return new ModelAndView ("page_none");
+    	}
+    	
+    	return new ModelAndView ("my_starbucks/myinfo_email");
+    }
     
     /**
      * 탈퇴 페이지
