@@ -46,8 +46,11 @@
 		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2
 		FROM member
 		<where>
+			<if test="true">
+				is_out='N'
+			</if>
 			<if test="user_id != null and user_id != ''">
-				user_id = #{user_id}
+				AND user_id = #{user_id}
 			</if>
 			<if test="user_email != null and user_email != ''">
 				AND user_email = #{user_email}
@@ -141,6 +144,9 @@
 		SELECT COUNT(*) FROM member
 
 		<where>
+			<if test="true">
+				is_out='N'
+			</if>
 			<if test="user_id != null and user_id != ''">
 				user_id = #{user_id}
 			</if>
@@ -188,6 +194,9 @@
 		id, user_id, user_pw, user_name, user_email, phone, date_format(birthday, '%Y-%m-%d') as b_date, gender, is_out, date_format(login_date, '%Y-%m-%d') as l_date, date_format(reg_date, '%Y-%m-%d') as r_date, date_format(edit_date, '%Y-%m-%d') as e_date, postcode, addr1, addr2 
 		FROM member 
 		<where>
+			<if test="true">
+				is_out='N'
+			</if>
 			<if test="user_id != null and user_id != ''">
 				user_id = #{user_id}
 			</if>
