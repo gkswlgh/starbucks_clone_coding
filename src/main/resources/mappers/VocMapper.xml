@@ -27,10 +27,10 @@
 	
 	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
 	<update id="memberNull"
-		parameterType="hanjiho.project.starbucks.model.Voc">
+		parameterType="hanjiho.project.starbucks.model.Member">
 		UPDATE voc SET
 		member_id=null
-		WHERE member_id=#{member_id}
+		WHERE member_id=#{id}
 	</update>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->

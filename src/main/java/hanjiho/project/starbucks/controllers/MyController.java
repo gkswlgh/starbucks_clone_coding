@@ -673,13 +673,16 @@ public class MyController {
     			input2 = cardService.getCardItem(input2);
     			
         		//배송지 저장 (조건식)
-        		if (add_addr != null || add_addr != "") {
+        		if (add_addr != null && add_addr != "") {
             		Member tmp2 = new Member();
             		tmp2.setAddr1(addr1);
             		tmp2.setAddr2(addr2);
             		tmp2.setPostcode(postcode);
             		tmp2.setId(member.getId());
             		memberService.updateAddress(tmp2);
+            		tmp2 = memberService.getMemberItem(tmp2);
+                    // 4) 세션 생성 및 결과 표시
+                    webHelper.setSession("member", tmp2);
         		}
     		} catch (Exception e1) {
     			e1.printStackTrace();
@@ -784,13 +787,16 @@ public class MyController {
 
     	    	/** 2) 배송지 저장 - 파라미터 add_addr존재 여부로 배송지 저장 */
     	    	//배송지 저장 (조건식)
-        		if (add_addr != null || add_addr != "") {
+        		if (add_addr != null && add_addr != "") {
             		Member tmp = new Member();
             		tmp.setAddr1(addr1);
             		tmp.setAddr2(addr2);
             		tmp.setPostcode(postcode);
             		tmp.setId(member.getId());
             		memberService.updateAddress(tmp);
+            		tmp = memberService.getMemberItem(tmp);
+                    // 4) 세션 생성 및 결과 표시
+                    webHelper.setSession("member", tmp);
         		}
     		} catch (Exception e) {
     			e.printStackTrace();
@@ -817,7 +823,8 @@ public class MyController {
     	if (member.getId() != input.getMember_id()) {
         	return new ModelAndView ("page_none");
     	}
-    	
+
+        
         model.addAttribute("cart", input); // 조회된cart
         model.addAttribute("card", input2); // 스타벅스 카드 이용시에만 (신용카드일땐 null)
         model.addAttribute("order", input3); // order정보를 input객체에 미리 저장해서 넘겨줌 (order insert는 페이지에서 버튼 조작시에)

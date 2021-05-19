@@ -22,10 +22,11 @@
 		<result property="charge_cash"  column="charge_cash" />
 	</resultMap>
 	
+	
 	<!-- member 데이터 삭제 서비스계층 -->
 	<delete id="deleteMember"
-		parameterType="hanjiho.project.starbucks.model.Card">
-		DELETE FROM card WHERE member_id=#{member_id}
+		parameterType="hanjiho.project.starbucks.model.Member">
+		DELETE FROM card WHERE member_id=#{id}
 	</delete>
 
 	<!-- 단일행 조회를 위한 기능 정의 -->

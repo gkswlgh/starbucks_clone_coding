@@ -24,6 +24,14 @@
 		<result property="sum_order"  column="sum_order" />
 	</resultMap>
 
+	<!-- member 컬럼 null (회원탈퇴 서비스계층) -->
+	<update id="memberNull"
+		parameterType="hanjiho.project.starbucks.model.Member">
+		UPDATE order_menu_list SET
+		member_id=null
+		WHERE member_id=#{id}
+	</update>
+	
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
 		parameterType="hanjiho.project.starbucks.model.OrderMenuList"

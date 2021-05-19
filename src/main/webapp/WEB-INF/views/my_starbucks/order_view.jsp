@@ -62,7 +62,7 @@
                                             <img src="${item.list_img}" alt />
                                         </div>
                                         <div class="ttl2_cell">
-                                            <a class="ttl2_name">${item.name}</a>
+                                            <a class="ttl2_name" href="${pageContext.request.contextPath}/product/menu_detail/${item.menu_id}">${item.name}</a>
                                         </div>
                                     </div>
                                 </td>
