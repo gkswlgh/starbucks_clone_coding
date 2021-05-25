@@ -98,10 +98,6 @@
 	<!-- RegexHelper 주입 설정 -->
 	<bean id="regexHelper"
 		class="hanjiho.project.starbucks.helper.RegexHelper" />
-
-	<!-- RetrofitHelper 주입 설정 -->
-	<bean id="retrofitHelper"
-		class="hanjiho.project.starbucks.helper.RetrofitHelper" />
 		
 	<!-- Util 주입 설정 -->
 	<bean id="util"
